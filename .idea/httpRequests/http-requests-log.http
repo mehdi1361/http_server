@@ -1,0 +1,24 @@
+GET http://localhost:8000/api/service
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-04T073729.200.json
+
+###
+
+GET http://localhost:8000/api
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-04T073716.200.json
+
+###
+
+GET http://localhost:8000/api/user
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-04T073704.404.html
+
+###
+
