@@ -16,6 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        if 'email' not in validated_data:
+            raise serializers.ValidationError({"id": 400, "message": "email required"})
+
         user = get_user_model().objects.create_user(**validated_data)
         return user
 
