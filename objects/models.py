@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit
-
+from django.utils.encoding import python_2_unicode_compatible
 # from django.db
 
 
 # Create your models here.
 
-
+@python_2_unicode_compatible
 class BenefitBox(Base):
     TYPE = (
         ('GEM', 'gem'),
@@ -29,6 +29,7 @@ class BenefitBox(Base):
         return '{}'.format(self.name)
 
 
+@python_2_unicode_compatible
 class Unit(BaseUnit, Base):
     image_logo = models.ImageField(_('image'), upload_to='unit/logo')
     image = models.ImageField(_('image'), upload_to='unit/image')
@@ -42,6 +43,7 @@ class Unit(BaseUnit, Base):
         return '{}'.format(self.name)
 
 
+@python_2_unicode_compatible
 class Hero(BaseUnit, Base):
     name = models.CharField(_('name'), max_length=50, unique=True)
     image_logo = models.ImageField(_('image'), upload_to='hero/logo')

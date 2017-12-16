@@ -6,10 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 
-
-
 # Create your models here.
-
 
 class Base(models.Model):
     created_date = models.DateTimeField(_('created date'), auto_now_add=True)
@@ -17,6 +14,7 @@ class Base(models.Model):
     params = JSONField(_('params'), null=True, blank=True)
 
     class Meta:
+
         abstract = True
 
 
