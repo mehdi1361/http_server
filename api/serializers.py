@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from objects.models import BenefitBox
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,3 +28,13 @@ class UserSerializer(serializers.ModelSerializer):
             password = validated_data.pop('password')
             instance.set_password(password)
         return super(UserSerializer, self).update(instance, validated_data)
+
+
+class BenefiteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BenefitBox
+        fields = (
+            'name',
+            'box',
+            'quantity'
+        )

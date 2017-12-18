@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit
 from django.utils.encoding import python_2_unicode_compatible
-# from django.db
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -19,6 +19,7 @@ class BenefitBox(Base):
     box = models.CharField(_('box'), max_length=4, choices=TYPE)
     quantity = models.PositiveIntegerField(_('quantity'), default=1)
     flag_api = models.BooleanField(_('show box for user'), default=False)
+    user = models.ManyToManyField(User, through='UserBuy', related_name='user')
 
     class Meta:
         verbose_name = _('benefit_box')
@@ -57,3 +58,27 @@ class Hero(BaseUnit, Base):
     def __str__(self):
         return '{}'.format(self.name)
 
+
+class UserBuy(Base):
+    user = models.ForeignKey(User, related_name='user_buy')
+    benefit = models.ForeignKey(BenefitBox, related_name='user_buy')
+
+    class Meta:
+        verbose_name = _('user_buy')
+        verbose_name_plural = _('user_buy')
+        db_table = 'user_buy'
+
+
+@python_2_unicode_compatible
+class UserChest(Base):
+    user = models.ForeignKey(User, related_name='user_chest')
+    gem_quantity = models.PositiveIntegerField(_('gem quantity'), default=0)
+    coin_quantity = models.PositiveIntegerField(_('coin quantity'), default=0)
+
+    class Meta:
+        verbose_name = _('user_chest')
+        verbose_name_plural = _('user_chest')
+        db_table = 'user_chest'
+
+    def __str__(self):
+        return '{}, gem:{}, coin:{}'.format(self.user, self.gem_quantity, self.coin_quantity)
