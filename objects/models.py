@@ -19,7 +19,7 @@ class BenefitBox(Base):
     box = models.CharField(_('box'), max_length=4, choices=TYPE)
     quantity = models.PositiveIntegerField(_('quantity'), default=1)
     flag_api = models.BooleanField(_('show box for user'), default=False)
-    user = models.ManyToManyField(User, through='UserBuy', related_name='user')
+    user = models.ManyToManyField(User, through='UserBuy', related_name='benefits')
 
     class Meta:
         verbose_name = _('benefit_box')
@@ -34,6 +34,7 @@ class BenefitBox(Base):
 class Unit(BaseUnit, Base):
     image_logo = models.ImageField(_('image'), upload_to='unit/logo')
     image = models.ImageField(_('image'), upload_to='unit/image')
+    user = models.ManyToManyField(User, through='UserUnits', related_name='units')
 
     class Meta:
         verbose_name = _('unit')
@@ -72,8 +73,8 @@ class UserBuy(Base):
 @python_2_unicode_compatible
 class UserChest(Base):
     user = models.ForeignKey(User, related_name='user_chest')
-    gem_quantity = models.PositiveIntegerField(_('gem quantity'), default=0)
-    coin_quantity = models.PositiveIntegerField(_('coin quantity'), default=0)
+    gem = models.PositiveIntegerField(_('gem quantity'), default=0)
+    coin = models.PositiveIntegerField(_('coin quantity'), default=0)
 
     class Meta:
         verbose_name = _('user_chest')
@@ -82,3 +83,17 @@ class UserChest(Base):
 
     def __str__(self):
         return '{}, gem:{}, coin:{}'.format(self.user, self.gem_quantity, self.coin_quantity)
+
+
+class UserUnits(Base):
+    user = models.ForeignKey(User, related_name='user_units')
+    unit = models.ForeignKey(Unit, related_name='user_units')
+
+    class Meta:
+        verbose_name = _('user_unit')
+        verbose_name_plural = _('user_unit')
+        db_table = 'user_unit'
+        unique_together = ('user', 'unit')
+
+    def __str__(self):
+        return 'user:{}, unit:{}'.format(self.user.username, self.unit.name)

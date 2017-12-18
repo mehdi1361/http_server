@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
         return super(UserSerializer, self).update(instance, validated_data)
 
 
-class BenefiteSerializer(serializers.ModelSerializer):
+class BenefitSerializer(serializers.ModelSerializer):
     class Meta:
         model = BenefitBox
         fields = (
