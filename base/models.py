@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import uuid
 from __future__ import unicode_literals
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
@@ -24,7 +24,11 @@ class BaseUnit(models.Model):
         ('LATE', 'late'),
         ('EARLY', 'early')
     )
-    name = models.CharField(_('name'), max_length=50)
+    enable_in_start = models.BooleanField(_('enable in start'), default=False)
+    unique_id = models.UUIDField(_('unique id'), default=uuid.uuid4(), editable=False)
+    moniker = models.CharField(_('moniker'), max_length=50)
+    dexterity = models.CharField(_('dexterity'), max_length=50,  default='MIDDLE', choices=DEXTERITY)
+
     health = models.IntegerField(_('health'), default=100)
     shield = models.IntegerField(_('shield'), default=0)
     attack = models.IntegerField(_('attack'), default=10)
@@ -32,7 +36,6 @@ class BaseUnit(models.Model):
     critical_ratio = models.FloatField(_('critical ratio'), default=0.01)
     miss_chance = models.FloatField(_('miss chance'), default=0.00)
     dodge_chance = models.FloatField(_('dodge chance'), default=0.00)
-    dexterity = models.CharField(_('dexterity'), max_length=50,  default='MIDDLE', choices=DEXTERITY)
 
     class Meta:
         abstract = True

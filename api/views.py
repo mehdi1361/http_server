@@ -3,7 +3,7 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer
-from objects.models import BenefitBox, UserBuy, UserChest, Unit
+from objects.models import BenefitBox, UserBuy, UserChest, Unit, UserUnits
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -53,9 +53,15 @@ class UserViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 {'id': 400, 'message': 'no selected units'}, status=status.HTTP_400_BAD_REQUEST)
 
         units = list(Unit.objects.filter(id__in=request.data.get('units')))
+        for unit in units:
+            UserUnits.objects.get_or_create(user=request.user, unit=unit)
 
         return Response(
             {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # @list_route(methods=['POST'])
+    # def select_units(self, request):
+    #     pass
 
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):

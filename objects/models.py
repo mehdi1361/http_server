@@ -82,12 +82,17 @@ class UserChest(Base):
         db_table = 'user_chest'
 
     def __str__(self):
-        return '{}, gem:{}, coin:{}'.format(self.user, self.gem_quantity, self.coin_quantity)
+        return '{}, gem:{}, coin:{}'.format(self.user, self.gem, self.coin)
 
 
+@python_2_unicode_compatible
 class UserUnits(Base):
     user = models.ForeignKey(User, related_name='user_units')
     unit = models.ForeignKey(Unit, related_name='user_units')
+    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
+    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
+    level = models.PositiveIntegerField(_('level'), default=1)
+    cur_card_count = models.PositiveIntegerField(_('cur card count'), default=1)
 
     class Meta:
         verbose_name = _('user_unit')

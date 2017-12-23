@@ -1,9 +1,19 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from objects.models import BenefitBox
+from objects.models import BenefitBox, UserChest
+from django.contrib.auth.models import User
+
+
+class UserChestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserChest
+        fields = ('gem', 'coin')
 
 
 class UserSerializer(serializers.ModelSerializer):
+    # currency = UserBySerializer(many=True, read_only=True)
+    currency = serializers.SerializerMethodField()
+
     class Meta:
         model = get_user_model()
         fields = (
@@ -11,10 +21,21 @@ class UserSerializer(serializers.ModelSerializer):
             'username',
             'password',
             'email',
+            'currency',
+            'currency'
         )
         extra_kwargs = {
             'password': {'write_only': True},
         }
+
+    def get_currency(self, request):
+        try:
+            currency = UserChest.objects.get(user=self.context['request'].user)
+            serializer = UserChestSerializer(currency)
+            return serializer.data
+
+        except:
+            return None
 
     def create(self, validated_data):
         if 'email' not in validated_data:
