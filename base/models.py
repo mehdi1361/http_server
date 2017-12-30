@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import uuid
 from __future__ import unicode_literals
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+import uuid
 
 
 # Create your models here.
@@ -24,10 +24,16 @@ class BaseUnit(models.Model):
         ('LATE', 'late'),
         ('EARLY', 'early')
     )
+    ATTACK_TYPE = (
+        ('NORMAL', 'normal'),
+        ('SKILLSHOT', 'skillshot'),
+        ('AUTOMATIC', 'automatic')
+    )
     enable_in_start = models.BooleanField(_('enable in start'), default=False)
     unique_id = models.UUIDField(_('unique id'), default=uuid.uuid4(), editable=False)
-    moniker = models.CharField(_('moniker'), max_length=50)
+    moniker = models.CharField(_('moniker'), max_length=50, unique=True)
     dexterity = models.CharField(_('dexterity'), max_length=50,  default='MIDDLE', choices=DEXTERITY)
+    attack_type = models.CharField(_('attack type'), max_length=50, choices=ATTACK_TYPE, default='normal')
 
     health = models.IntegerField(_('health'), default=100)
     shield = models.IntegerField(_('shield'), default=0)
@@ -39,3 +45,5 @@ class BaseUnit(models.Model):
 
     class Meta:
         abstract = True
+
+

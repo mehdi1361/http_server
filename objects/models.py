@@ -32,8 +32,6 @@ class BenefitBox(Base):
 
 @python_2_unicode_compatible
 class Unit(BaseUnit, Base):
-    image_logo = models.ImageField(_('image'), upload_to='unit/logo')
-    image = models.ImageField(_('image'), upload_to='unit/image')
     user = models.ManyToManyField(User, through='UserUnits', related_name='units')
 
     class Meta:
@@ -42,14 +40,19 @@ class Unit(BaseUnit, Base):
         db_table = 'unit'
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{}'.format(self.moniker)
 
 
 @python_2_unicode_compatible
 class Hero(BaseUnit, Base):
-    name = models.CharField(_('name'), max_length=50, unique=True)
-    image_logo = models.ImageField(_('image'), upload_to='hero/logo')
-    image = models.ImageField(_('image'), upload_to='hero/image')
+    chakra_health = models.IntegerField(_('chakra health'), default=100)
+    chakra_shield = models.IntegerField(_('chakra shield'), default=0)
+    chakra_attack = models.IntegerField(_('chakra attack'), default=10)
+    chakra_critical_chance = models.FloatField(_('chakra critical chance'), default=0.01)
+    chakra_critical_ratio = models.FloatField(_('chakra critical ratio'), default=0.01)
+    chakra_miss_chance = models.FloatField(_('chakra miss chance'), default=0.00)
+    chakra_dodge_chance = models.FloatField(_('chakra dodge chance'), default=0.00)
+    unit_list = models.ManyToManyField(Unit, through='HeroUnits', related_name='hero_unit')
 
     class Meta:
         verbose_name = _('hero')
@@ -57,7 +60,7 @@ class Hero(BaseUnit, Base):
         db_table = 'hero'
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{}'.format(self.moniker)
 
 
 class UserBuy(Base):
@@ -102,3 +105,19 @@ class UserUnits(Base):
 
     def __str__(self):
         return 'user:{}, unit:{}'.format(self.user.username, self.unit.name)
+
+
+@python_2_unicode_compatible
+class HeroUnits(Base):
+    hero = models.ForeignKey(Hero, related_name='units_hero')
+    unit = models.ForeignKey(Unit, related_name='unit_heroes')
+    enable_hero = models.BooleanField(_('enable hero'), default=False)
+
+    class Meta:
+        verbose_name = _('hero_unit')
+        verbose_name_plural = _('hero_units')
+        db_table = 'hero_units'
+        unique_together = ('hero', 'unit')
+
+    def __str__(self):
+        return 'hero:{}, unit:{}'.format(self.hero.moniker, self.unit.moniker)

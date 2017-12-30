@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from objects.models import BenefitBox, UserChest
-from django.contrib.auth.models import User
+from objects.models import BenefitBox, UserChest, Hero
+# from django.contrib.auth.models import User
 
 
 class UserChestSerializer(serializers.ModelSerializer):
@@ -10,9 +10,17 @@ class UserChestSerializer(serializers.ModelSerializer):
         fields = ('gem', 'coin')
 
 
+class HeroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hero
+        fields = ('moniker', 'dexterity', 'attack_type', 'health', 'chakra_health', 'shield', 'chakra_shield',
+                  'attack', 'chakra_attack', 'critical_chance', 'chakra_critical_chance', 'chakra_critical_ratio',
+                  'critical_ratio', 'miss_chance', 'chakra_miss_chance', 'chakra_dodge_chance', 'enable_in_start')
+
+
 class UserSerializer(serializers.ModelSerializer):
-    # currency = UserBySerializer(many=True, read_only=True)
     currency = serializers.SerializerMethodField()
+    heroes = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -22,7 +30,8 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'email',
             'currency',
-            'currency'
+            'currency',
+            'heroes'
         )
         extra_kwargs = {
             'password': {'write_only': True},
@@ -36,6 +45,11 @@ class UserSerializer(serializers.ModelSerializer):
 
         except:
             return None
+
+    def get_heroes(self, request):
+        heroes = Hero.objects.all()
+        serializer = HeroSerializer(heroes, many=True)
+        return serializer.data
 
     def create(self, validated_data):
         if 'email' not in validated_data:
