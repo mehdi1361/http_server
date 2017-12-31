@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
+from django.db.models import signals
 
 
 # Create your models here.
@@ -32,7 +33,8 @@ class BenefitBox(Base):
 
 @python_2_unicode_compatible
 class Unit(BaseUnit, Base):
-    user = models.ManyToManyField(User, through='UserUnits', related_name='units')
+    user = models.ManyToManyField(User, through='UserCard', related_name='units')
+    heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
 
     class Meta:
         verbose_name = _('unit')
@@ -52,7 +54,8 @@ class Hero(BaseUnit, Base):
     chakra_critical_ratio = models.FloatField(_('chakra critical ratio'), default=0.01)
     chakra_miss_chance = models.FloatField(_('chakra miss chance'), default=0.00)
     chakra_dodge_chance = models.FloatField(_('chakra dodge chance'), default=0.00)
-    unit_list = models.ManyToManyField(Unit, through='HeroUnits', related_name='hero_unit')
+    units = models.ManyToManyField(Unit, through='HeroUnits', related_name='hero')
+    user = models.ManyToManyField(User, through='UserHero', related_name='hero')
 
     class Meta:
         verbose_name = _('hero')
@@ -88,30 +91,29 @@ class UserChest(Base):
         return '{}, gem:{}, coin:{}'.format(self.user, self.gem, self.coin)
 
 
-@python_2_unicode_compatible
-class UserUnits(Base):
-    user = models.ForeignKey(User, related_name='user_units')
-    unit = models.ForeignKey(Unit, related_name='user_units')
-    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
-    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
-    level = models.PositiveIntegerField(_('level'), default=1)
-    cur_card_count = models.PositiveIntegerField(_('cur card count'), default=1)
-
-    class Meta:
-        verbose_name = _('user_unit')
-        verbose_name_plural = _('user_unit')
-        db_table = 'user_unit'
-        unique_together = ('user', 'unit')
-
-    def __str__(self):
-        return 'user:{}, unit:{}'.format(self.user.username, self.unit.name)
+# @python_2_unicode_compatible
+# class UserUnits(Base):
+#     user = models.ForeignKey(User, related_name='user_units')
+#     unit = models.ForeignKey(Unit, related_name='user_units')
+#     next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
+#     next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
+#     level = models.PositiveIntegerField(_('level'), default=1)
+#     cur_card_count = models.PositiveIntegerField(_('cur card count'), default=1)
+#
+#     class Meta:
+#         verbose_name = _('user_unit')
+#         verbose_name_plural = _('user_unit')
+#         db_table = 'user_unit'
+#         unique_together = ('user', 'unit')
+#
+#     def __str__(self):
+#         return 'user:{}, unit:{}'.format(self.user.username, self.unit.name)
 
 
 @python_2_unicode_compatible
 class HeroUnits(Base):
     hero = models.ForeignKey(Hero, related_name='units_hero')
     unit = models.ForeignKey(Unit, related_name='unit_heroes')
-    enable_hero = models.BooleanField(_('enable hero'), default=False)
 
     class Meta:
         verbose_name = _('hero_unit')
@@ -121,3 +123,47 @@ class HeroUnits(Base):
 
     def __str__(self):
         return 'hero:{}, unit:{}'.format(self.hero.moniker, self.unit.moniker)
+
+
+@python_2_unicode_compatible
+class UserHero(Base):
+    user = models.ForeignKey(User, related_name='user_hero')
+    hero = models.ForeignKey(Hero, related_name='user_hero')
+    enable_hero = models.BooleanField(_('enable hero'), default=False)
+
+    class Meta:
+        verbose_name = _('user_hero')
+        verbose_name_plural = _('user_hero')
+        db_table = 'user_hero'
+        unique_together = ('user', 'hero')
+
+    def __str__(self):
+        return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
+
+
+@python_2_unicode_compatible
+class UserCard(Base):
+    user = models.ForeignKey(User, verbose_name=_('username'), related_name='cards')
+    character = models.ForeignKey(Unit, verbose_name=_('character'), related_name='cards')
+    quantity = models.PositiveIntegerField(_('quantity card'), default=0)
+    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
+    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
+    level = models.PositiveIntegerField(_('level'), default=1)
+
+    class Meta:
+        verbose_name = _('user_card')
+        verbose_name_plural = _('user_cards')
+        db_table = 'user_card'
+        unique_together = ('user', 'character')
+
+    def __str__(self):
+        return '{}'.format(self.quantity)
+
+
+def create_user_cards(sender, instance, created, **kwargs):
+    if created:
+        for unit in Unit.objects.all():
+            UserCard.objects.create(user=instance, character=unit)
+
+
+signals.post_save.connect(create_user_cards, sender=User)

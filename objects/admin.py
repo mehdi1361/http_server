@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import BenefitBox, Unit, Hero, HeroUnits,
+from .models import BenefitBox, Unit, Hero, HeroUnits
 # from django.contrib.auth.models import User
 
 

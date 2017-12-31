@@ -3,7 +3,7 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer
-from objects.models import BenefitBox, UserBuy, UserChest, Unit, UserUnits
+from objects.models import BenefitBox, UserBuy, UserChest, Unit, Hero, UserHero
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -46,22 +46,33 @@ class UserViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         return super(UserViewSet, self).get_permissions()
 
-    @list_route(methods=['POST'])
-    def select_units(self, request):
-        if request.data.get('units') is None:
-            return Response(
-                {'id': 400, 'message': 'no selected units'}, status=status.HTTP_400_BAD_REQUEST)
+    # @list_route(methods=['POST'])
+    # def select_units(self, request):
+    #     if request.data.get('units') is None:
+    #         return Response(
+    #             {'id': 400, 'message': 'no selected units'}, status=status.HTTP_400_BAD_REQUEST)
+    #
+    #     units = list(Unit.objects.filter(id__in=request.data.get('units')))
+    #     for unit in units:
+    #         UserUnits.objects.get_or_create(user=request.user, unit=unit)
+    #
+    #     return Response(
+    #         {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
 
-        units = list(Unit.objects.filter(id__in=request.data.get('units')))
-        for unit in units:
-            UserUnits.objects.get_or_create(user=request.user, unit=unit)
+    @list_route(methods=['POST'])
+    def select_hero(self, request):
+        if request.data.get('hero') is None:
+            return Response(
+                {'id': 400, 'message': 'no selected hero'}, status=status.HTTP_400_BAD_REQUEST)
+
+        hero = get_object_or_404(Hero, id=request.data.get('hero'))
+        user_hero, created = UserHero.objects.get_or_create(user=request.user, hero=hero)
+        UserHero.objects.filter(user=request.user).exclude(id=user_hero.id).update(enable_hero=False)
+        user_hero.enable_hero = True
+        user_hero.save()
 
         return Response(
             {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # @list_route(methods=['POST'])
-    # def select_units(self, request):
-    #     pass
 
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -87,4 +98,5 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
         return Response(
             {'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
         # TODO check payment validation
+
 
