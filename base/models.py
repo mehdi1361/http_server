@@ -30,7 +30,7 @@ class BaseUnit(models.Model):
         ('AUTOMATIC', 'automatic')
     )
     enable_in_start = models.BooleanField(_('enable in start'), default=False)
-    unique_id = models.UUIDField(_('unique id'), default=uuid.uuid4(), editable=False)
+    unique_id = models.UUIDField(_('unique id'), default=uuid.uuid4, editable=False)
     moniker = models.CharField(_('moniker'), max_length=50, unique=True)
     dexterity = models.CharField(_('dexterity'), max_length=50,  default='MIDDLE', choices=DEXTERITY)
     attack_type = models.CharField(_('attack type'), max_length=50, choices=ATTACK_TYPE, default='normal')

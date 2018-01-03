@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer
-from objects.models import BenefitBox, UserBuy, UserChest, Unit, Hero, UserHero
+from .serializers import UserSerializer, BenefitSerializer, LeagueSerializer
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, League
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -46,19 +46,6 @@ class UserViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         return super(UserViewSet, self).get_permissions()
 
-    # @list_route(methods=['POST'])
-    # def select_units(self, request):
-    #     if request.data.get('units') is None:
-    #         return Response(
-    #             {'id': 400, 'message': 'no selected units'}, status=status.HTTP_400_BAD_REQUEST)
-    #
-    #     units = list(Unit.objects.filter(id__in=request.data.get('units')))
-    #     for unit in units:
-    #         UserUnits.objects.get_or_create(user=request.user, unit=unit)
-    #
-    #     return Response(
-    #         {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
-
     @list_route(methods=['POST'])
     def select_hero(self, request):
         if request.data.get('hero') is None:
@@ -85,7 +72,7 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
     def buy(self, request):
         benefit = get_object_or_404(BenefitBox, pk=request.data.get('id'))
         UserBuy.objects.create(user=request.user, benefit=benefit)
-        chest, created = UserChest.objects.get_or_create(defaults={'user': request.user})
+        chest, created = UserCurrency.objects.get_or_create(defaults={'user': request.user})
 
         if benefit.box == 'GEM':
             chest.gem += benefit.quantity
@@ -95,8 +82,11 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
 
         chest.save()
 
-        return Response(
-            {'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
+        return Response({'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
         # TODO check payment validation
 
+
+class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = League.objects.all()
+    serializer_class = LeagueSerializer
 

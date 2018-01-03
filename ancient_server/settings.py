@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'objects',
+    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,16 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DECK_COUNT = {
+    'free': 3,
+    'non-free': 4
+}
+
+
+CRON_CLASSES = [
+    "objects.crons.FreeChestCreatorJob",
+]
+
+CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
+                  'W', 'S', 'W', 'G', 'W', 'W', 'W', 'C', 'W', 'W', 'W', 'S']

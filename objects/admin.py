@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import BenefitBox, Unit, Hero, HeroUnits
+from .models import BenefitBox, Unit, Hero, HeroUnits, League, Chest
 # from django.contrib.auth.models import User
 
 
@@ -13,6 +13,10 @@ from .models import BenefitBox, Unit, Hero, HeroUnits
 
 class HeroUnits(admin.StackedInline):
     model = HeroUnits
+
+
+class ChestInline(admin.StackedInline):
+    model = Chest
 
 
 @admin.register(BenefitBox)
@@ -33,3 +37,8 @@ class HeroAdmin(admin.ModelAdmin):
     list_filter = ('dexterity', )
     inlines = [HeroUnits]
 
+
+@admin.register(League)
+class LeagueAdmin(admin.ModelAdmin):
+    list_display = ('name', 'min_score', 'description', 'created_date', 'updated_date')
+    inlines = (ChestInline, )
