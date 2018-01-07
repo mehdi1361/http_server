@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import BenefitBox, Unit, Hero, HeroUnits, League, Chest
+from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest
 from simple_history.admin import SimpleHistoryAdmin
 # from django.contrib.auth.models import User
 
@@ -41,8 +41,8 @@ class HeroAdmin(SimpleHistoryAdmin):
     inlines = [HeroUnits]
 
 
-@admin.register(League)
-class LeagueAdmin(SimpleHistoryAdmin):
+@admin.register(LeagueInfo)
+class LeagueInfoAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'min_score', 'description', 'created_date', 'updated_date')
     # history_list_display = ['name', 'min_score', 'description', 'created_date', 'updated_date']
     inlines = (ChestInline, )

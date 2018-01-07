@@ -172,16 +172,16 @@ class UserCard(Base):
 
 
 @python_2_unicode_compatible
-class League(Base):
+class LeagueInfo(Base):
     name = models.CharField(_('name'), max_length=150)
     min_score = models.PositiveIntegerField(_('score for enter the league'), default=0)
     description = models.TextField(_('description'), null=True, default='')
     history = HistoricalRecords()
 
     class Meta:
-        verbose_name = _('league')
-        verbose_name_plural = _('leagues')
-        db_table = 'leagues'
+        verbose_name = _('league_info')
+        verbose_name_plural = _('league_infoes')
+        db_table = 'league_infoes'
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -197,7 +197,7 @@ class Chest(Base):
     )
 
     chest_type = models.CharField(_('chest type'), max_length=50, default='W', choices=CHEST_TYPE)
-    league = models.ForeignKey(League, verbose_name=_('chest'), related_name='chests')
+    info = models.ForeignKey(LeagueInfo, verbose_name=_('chest'), related_name='chests')
     min_coin = models.PositiveIntegerField(_('min coin'), default=0)
     max_coin = models.PositiveIntegerField(_('max coin'), default=0)
     min_gem = models.PositiveIntegerField(_('min gem'), default=0)
@@ -212,7 +212,7 @@ class Chest(Base):
         verbose_name = _('chest')
         verbose_name_plural = _('chest')
         db_table = 'chest'
-        unique_together = ('league', 'chest_type')
+        unique_together = ('info', 'chest_type')
 
     def __str__(self):
         return '{}'.format(self.chest_type)

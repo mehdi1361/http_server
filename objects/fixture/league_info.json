@@ -1,0 +1,14 @@
+[
+{
+  "model": "objects.leagueinfo",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-01-02T14:21:42.229Z",
+    "updated_date": "2018-01-02T14:24:07.296Z",
+    "params": null,
+    "name": "league 1",
+    "min_score": 0,
+    "description": "sas"
+  }
+}
+]

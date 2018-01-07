@@ -1,0 +1,74 @@
+[
+{
+  "model": "objects.chest",
+  "pk": 7,
+  "fields": {
+    "created_date": "2018-01-02T14:21:42.231Z",
+    "updated_date": "2018-01-02T14:21:42.231Z",
+    "params": null,
+    "chest_type": "w",
+    "info": 3,
+    "min_coin": 50,
+    "max_coin": 100,
+    "min_gem": 2,
+    "max_gem": 5,
+    "new_card_chance": 1,
+    "hero_card": 0,
+    "unit_card": 3
+  }
+},
+{
+  "model": "objects.chest",
+  "pk": 8,
+  "fields": {
+    "created_date": "2018-01-02T14:24:07.297Z",
+    "updated_date": "2018-01-02T14:24:07.297Z",
+    "params": null,
+    "chest_type": "s",
+    "info": 3,
+    "min_coin": 100,
+    "max_coin": 300,
+    "min_gem": 5,
+    "max_gem": 15,
+    "new_card_chance": 5,
+    "hero_card": 1,
+    "unit_card": 7
+  }
+},
+{
+  "model": "objects.chest",
+  "pk": 9,
+  "fields": {
+    "created_date": "2018-01-02T14:24:07.298Z",
+    "updated_date": "2018-01-02T14:24:07.298Z",
+    "params": null,
+    "chest_type": "g",
+    "info": 3,
+    "min_coin": 300,
+    "max_coin": 1000,
+    "min_gem": 15,
+    "max_gem": 50,
+    "new_card_chance": 25,
+    "hero_card": 4,
+    "unit_card": 12
+  }
+},
+{
+  "model": "objects.chest",
+  "pk": 10,
+  "fields": {
+    "created_date": "2018-01-02T14:24:07.299Z",
+    "updated_date": "2018-01-02T14:24:07.299Z",
+    "params": null,
+    "chest_type": "c",
+    "info": 3,
+    "min_coin": 1000,
+    "max_coin": 5000,
+    "min_gem": 50,
+    "max_gem": 200,
+    "new_card_chance": 100,
+    "hero_card": 10,
+    "unit_card": 25
+  }
+}
+]

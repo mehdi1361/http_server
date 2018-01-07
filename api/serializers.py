@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, League, Chest
+from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, LeagueInfo, Chest
 # from django.contrib.auth.models import User
 
 
@@ -169,11 +169,11 @@ class ChestSerializer(serializers.ModelSerializer):
         )
 
 
-class LeagueSerializer(serializers.ModelSerializer):
+class LeagueInfoSerializer(serializers.ModelSerializer):
     chests = ChestSerializer(many=True, read_only=True)
 
     class Meta:
-        model = League
+        model = LeagueInfo
         fields = (
             'id',
             'name',

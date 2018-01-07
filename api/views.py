@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, League
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -87,6 +87,6 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = League.objects.all()
-    serializer_class = LeagueSerializer
+    queryset = LeagueInfo.objects.all()
+    serializer_class = LeagueInfoSerializer
 
