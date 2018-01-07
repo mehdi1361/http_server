@@ -60,8 +60,7 @@ class UserSerializer(serializers.ModelSerializer):
             'currency',
             'currency',
             'heroes',
-            'general_units',
-            'cards'
+            'general_units'
         )
         extra_kwargs = {
             'password': {'write_only': True},
@@ -128,7 +127,7 @@ class UserSerializer(serializers.ModelSerializer):
             data['level'] = unit.level
             list_unit.append(data)
 
-        return data
+        return list_unit
 
     def create(self, validated_data):
         if 'email' not in validated_data:

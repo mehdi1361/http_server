@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from simple_history.models import HistoricalRecords
 import uuid
 
 

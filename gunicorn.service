@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=mehdi
+Group=nginx
+WorkingDirectory=/home/mehdi/python-project/sac/
+ExecStart=/home/mehdi/python-project/sac/gunicorn_start.bash
+
+[Install]
+WantedBy=multi-user.target
+

@@ -10,9 +10,9 @@ from django.db.models import signals
 from .validators import validate_percent, validate_sequence
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
+from simple_history.models import HistoricalRecords
+from django.utils import timezone
 
-
-# Create your models here.
 
 
 @python_2_unicode_compatible
@@ -26,6 +26,7 @@ class BenefitBox(Base):
     quantity = models.PositiveIntegerField(_('quantity'), default=1)
     flag_api = models.BooleanField(_('show box for user'), default=False)
     user = models.ManyToManyField(User, through='UserBuy', related_name='benefits')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('benefit_box')
@@ -40,6 +41,7 @@ class BenefitBox(Base):
 class Unit(BaseUnit, Base):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('unit')
@@ -61,6 +63,7 @@ class Hero(BaseUnit, Base):
     chakra_dodge_chance = models.FloatField(_('chakra dodge chance'), default=0.00)
     units = models.ManyToManyField(Unit, through='HeroUnits', related_name='hero')
     user = models.ManyToManyField(User, through='UserHero', related_name='hero')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('hero')
@@ -74,6 +77,7 @@ class Hero(BaseUnit, Base):
 class UserBuy(Base):
     user = models.ForeignKey(User, related_name='user_buy')
     benefit = models.ForeignKey(BenefitBox, related_name='user_buy')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('user_buy')
@@ -86,6 +90,7 @@ class UserCurrency(Base):
     user = models.ForeignKey(User, related_name='user_chest')
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('user_chest')
@@ -100,6 +105,7 @@ class UserCurrency(Base):
 class HeroUnits(Base):
     hero = models.ForeignKey(Hero, related_name='units_hero')
     unit = models.ForeignKey(Unit, related_name='unit_heroes')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('hero_unit')
@@ -120,6 +126,7 @@ class UserHero(Base):
     next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
     next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
     level = models.PositiveIntegerField(_('level'), default=1)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('user_hero')
@@ -139,6 +146,8 @@ class UserCard(Base):
     next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
     next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
     level = models.PositiveIntegerField(_('level'), default=1)
+    cool_down = models.DateTimeField(_('cooldown'), null=True)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('user_card')
@@ -149,12 +158,25 @@ class UserCard(Base):
     def __str__(self):
         return '{}'.format(self.quantity)
 
+    @property
+    def is_cool_down(self):
+        cool_down_now_date = timezone.now()
+
+        if cool_down_now_date < (self.cool_down if self.cool_down else cool_down_now_date):
+            return True
+        return False
+
+    @classmethod
+    def cards(cls, user):
+        return cls.objects.filter(user=user).values_list('character')
+
 
 @python_2_unicode_compatible
 class League(Base):
     name = models.CharField(_('name'), max_length=150)
     min_score = models.PositiveIntegerField(_('score for enter the league'), default=0)
     description = models.TextField(_('description'), null=True, default='')
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('league')
@@ -174,7 +196,7 @@ class Chest(Base):
         ('C', 'crystal'),
     )
 
-    chest_type = models.CharField(_('chest type'), max_length=50, default='w', choices=CHEST_TYPE)
+    chest_type = models.CharField(_('chest type'), max_length=50, default='W', choices=CHEST_TYPE)
     league = models.ForeignKey(League, verbose_name=_('chest'), related_name='chests')
     min_coin = models.PositiveIntegerField(_('min coin'), default=0)
     max_coin = models.PositiveIntegerField(_('max coin'), default=0)
@@ -184,6 +206,7 @@ class Chest(Base):
                                                   validators=[validate_percent])
     hero_card = models.PositiveIntegerField(_('hero card count'), default=0)
     unit_card = models.PositiveIntegerField(_('unit card count'), default=3)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _('chest')
@@ -212,6 +235,7 @@ class UserChest(Base):
     status = models.CharField(_('status'), max_length=50, choices=STATUS, default='close')
     sequence_number = models.PositiveIntegerField(_('sequence number'), default=0, validators=[validate_sequence])
     cards = JSONField(verbose_name=_('cards'), default=None, null=True)
+    history = HistoricalRecords()
 
     @classmethod
     def deck_is_open(cls, user, chest_type):

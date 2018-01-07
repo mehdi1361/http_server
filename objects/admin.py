@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, League, Chest
+from simple_history.admin import SimpleHistoryAdmin
 # from django.contrib.auth.models import User
 
 
@@ -20,25 +21,28 @@ class ChestInline(admin.StackedInline):
 
 
 @admin.register(BenefitBox)
-class BenefitBoxAdmin(admin.ModelAdmin):
+class BenefitBoxAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'box', 'quantity', 'flag_api')
     list_filter = ('flag_api', 'box')
+    # history_list_display = ['name', 'box', 'quantity', 'flag_api']
 
 
 @admin.register(Unit)
-class UnitAdmin(admin.ModelAdmin):
+class UnitAdmin(SimpleHistoryAdmin):
     list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start')
+    # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )
 
 
 @admin.register(Hero)
-class HeroAdmin(admin.ModelAdmin):
+class HeroAdmin(SimpleHistoryAdmin):
     list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start')
     list_filter = ('dexterity', )
     inlines = [HeroUnits]
 
 
 @admin.register(League)
-class LeagueAdmin(admin.ModelAdmin):
+class LeagueAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'min_score', 'description', 'created_date', 'updated_date')
+    # history_list_display = ['name', 'min_score', 'description', 'created_date', 'updated_date']
     inlines = (ChestInline, )
