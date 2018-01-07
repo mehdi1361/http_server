@@ -6,8 +6,8 @@ SOCKFILE=/home/mehdi/python-project/Divine_Server_Python/venv/gunicorn.sock  # w
 USER=mehdi                                         # the user to run as
 GROUP=nginx                                        # the group to run as
 NUM_WORKERS=3                                       # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=sac.settings      # which settings file should Django use
-DJANGO_WSGI_MODULE=sac.wsgi              # WSGI module name
+DJANGO_SETTINGS_MODULE=ancient_server.settings      # which settings file should Django use
+DJANGO_WSGI_MODULE=ancient_server.wsgi              # WSGI module name
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
