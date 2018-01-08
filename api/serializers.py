@@ -45,6 +45,18 @@ class HeroSerializer(serializers.ModelSerializer):
                   'critical_ratio', 'miss_chance', 'chakra_miss_chance', 'chakra_dodge_chance', 'enable_in_start')
 
 
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'username',
+            'password'
+        )
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+
 class UserSerializer(serializers.ModelSerializer):
     currency = serializers.SerializerMethodField()
     heroes = serializers.SerializerMethodField()
@@ -58,15 +70,21 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'email',
             'currency',
-            'currency',
             'heroes',
             'general_units'
         )
         extra_kwargs = {
             'password': {'write_only': True},
+            'currency': {'read_only': True},
+            'heroes': {'read_only': True},
+            'general_units': {'read_only': True}
         }
 
     def get_currency(self, request):
+        user = self.context['request'].user
+        if user.is_anonymous:
+            return None
+
         try:
             currency = UserCurrency.objects.get(user=self.context['request'].user)
             serializer = UserCurrencySerializer(currency)
@@ -76,6 +94,10 @@ class UserSerializer(serializers.ModelSerializer):
             return None
 
     def get_heroes(self, request):
+        user = self.context['request'].user
+        if user.is_anonymous:
+            return None
+
         try:
             hero_user = UserHero.objects.get(user=self.context['request'].user, enable_hero=True)
 
@@ -88,15 +110,16 @@ class UserSerializer(serializers.ModelSerializer):
                 serializer = HeroSerializer(hero)
                 data = serializer.data
 
-                if hero.id == hero_user.id:
+                if hero_user and hero.id == hero_user.id:
                     data['selected_hero'] = True
+                    data['quantity'] = hero_user.quantity
+                    data['next_upgrade_coin_cost'] = hero_user.next_upgrade_coin_cost
+                    data['next_upgrade_card_count'] = hero_user.next_upgrade_card_count
 
                 else:
                     data['selected_hero'] = False
 
-                data['quantity'] = hero_user.quantity
-                data['next_upgrade_coin_cost'] = hero_user.next_upgrade_coin_cost
-                data['next_upgrade_card_count'] = hero_user.next_upgrade_card_count
+
 
                 list_unit = []
                 for unit in UserCard.objects.filter(character__heroes=hero):
@@ -113,7 +136,12 @@ class UserSerializer(serializers.ModelSerializer):
 
             return list_serialize
 
+
     def get_general_units(self, requests):
+        user = self.context['request'].user
+        if user.is_anonymous:
+           return None
+
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=False))
         # units = Unit.objects.all().exclude(id__in=hero_units)
 
@@ -130,8 +158,8 @@ class UserSerializer(serializers.ModelSerializer):
         return list_unit
 
     def create(self, validated_data):
-        if 'email' not in validated_data:
-            raise serializers.ValidationError({"id": 400, "message": "email required"})
+        # if 'email' not in validated_data:
+        #     raise serializers.ValidationError({"id": 400, "message": "email required"})
 
         user = get_user_model().objects.create_user(**validated_data)
         return user

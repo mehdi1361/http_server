@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer, UserRegisterSerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -37,7 +38,7 @@ class AuthMixin(object):
     )
 
 
-class UserViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects
     serializer_class = UserSerializer
 
@@ -103,3 +104,14 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create_auth(request):
+    serialized = UserRegisterSerializer(data=request.data)
+    if serialized.is_valid():
+        serialized.save()
+
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
