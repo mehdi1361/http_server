@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route
@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from shopping.models import Shop
 
 
 class DefaultsMixin(object):
@@ -90,3 +91,15 @@ class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.
     queryset = LeagueInfo.objects.all()
     serializer_class = LeagueInfoSerializer
 
+
+class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Shop.objects.all()
+    serializer_class = ShopSerializer
+    # filter_backends = (DjangoFilterBackend,)
+    # filter_fields = ('box', )
+
+    @list_route(methods=['POST'])
+    def store(self, request):
+        shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
+        serializer = self.serializer_class(shop_item)
+        return Response(serializer.data)

@@ -28,8 +28,8 @@
     </role>
     <schema id="6" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-01-02.14:37:15</IntrospectionTimestamp>
-      <IntrospectionStateNumber>854</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-01-08.13:05:47.829</IntrospectionTimestamp>
+      <IntrospectionStateNumber>944</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -48,220 +48,385 @@
     <schema id="11" parent="2" name="information_schema">
       <ObjectId>12153</ObjectId>
     </schema>
-    <sequence id="12" parent="6" name="chest_id_seq">
-      <ObjectId>66010</ObjectId>
-      <StateNumber>854</StateNumber>
+    <sequence id="12" parent="6" name="django_cron_cronjoblog_id_seq">
+      <ObjectId>66099</ObjectId>
+      <StateNumber>882</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="13" parent="6" name="leagues_id_seq">
-      <ObjectId>66028</ObjectId>
-      <StateNumber>854</StateNumber>
+    <sequence id="13" parent="6" name="objects_historicalbenefitbox_history_id_seq">
+      <ObjectId>66130</ObjectId>
+      <StateNumber>901</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="14" parent="6" name="auth_group_id_seq">
+    <sequence id="14" parent="6" name="objects_historicalchest_history_id_seq">
+      <ObjectId>66142</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="15" parent="6" name="objects_historicalhero_history_id_seq">
+      <ObjectId>66160</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="16" parent="6" name="objects_historicalherounits_history_id_seq">
+      <ObjectId>66172</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="17" parent="6" name="objects_historicalleague_history_id_seq">
+      <ObjectId>66183</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="18" parent="6" name="objects_historicalunit_history_id_seq">
+      <ObjectId>66195</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="19" parent="6" name="objects_historicaluserbuy_history_id_seq">
+      <ObjectId>66207</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="20" parent="6" name="objects_historicalusercard_history_id_seq">
+      <ObjectId>66218</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="21" parent="6" name="objects_historicaluserchest_history_id_seq">
+      <ObjectId>66233</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="22" parent="6" name="objects_historicalusercurrency_history_id_seq">
+      <ObjectId>66245</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="23" parent="6" name="objects_historicaluserhero_history_id_seq">
+      <ObjectId>66258</ObjectId>
+      <StateNumber>901</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="24" parent="6" name="shops_id_seq">
+      <ObjectId>74559</ObjectId>
+      <StateNumber>928</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="25" parent="6" name="stores_id_seq">
+      <ObjectId>74570</ObjectId>
+      <StateNumber>928</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="26" parent="6" name="user_chests_id_seq">
+      <ObjectId>66065</ObjectId>
+      <StateNumber>876</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="27" parent="6" name="auth_group_id_seq">
       <ObjectId>16414</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="15" parent="6" name="auth_group_permissions_id_seq">
+    <sequence id="28" parent="6" name="auth_group_permissions_id_seq">
       <ObjectId>16424</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="16" parent="6" name="auth_permission_id_seq">
+    <sequence id="29" parent="6" name="auth_permission_id_seq">
       <ObjectId>16406</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="17" parent="6" name="auth_user_groups_id_seq">
+    <sequence id="30" parent="6" name="auth_user_groups_id_seq">
       <ObjectId>16442</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="18" parent="6" name="auth_user_id_seq">
+    <sequence id="31" parent="6" name="auth_user_id_seq">
       <ObjectId>16432</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="19" parent="6" name="auth_user_user_permissions_id_seq">
+    <sequence id="32" parent="6" name="auth_user_user_permissions_id_seq">
       <ObjectId>16450</ObjectId>
       <StateNumber>594</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="20" parent="6" name="benefit_box_id_seq">
+    <sequence id="33" parent="6" name="benefit_box_id_seq">
       <ObjectId>16541</ObjectId>
       <StateNumber>613</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="21" parent="6" name="django_admin_log_id_seq">
+    <sequence id="34" parent="6" name="chest_id_seq">
+      <ObjectId>66010</ObjectId>
+      <StateNumber>854</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="35" parent="6" name="django_admin_log_id_seq">
       <ObjectId>16510</ObjectId>
       <StateNumber>596</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="22" parent="6" name="django_content_type_id_seq">
+    <sequence id="36" parent="6" name="django_content_type_id_seq">
       <ObjectId>16396</ObjectId>
       <StateNumber>592</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="23" parent="6" name="django_migrations_id_seq">
+    <sequence id="37" parent="6" name="django_migrations_id_seq">
       <ObjectId>16385</ObjectId>
       <StateNumber>591</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="24" parent="6" name="hero_id_seq">
+    <sequence id="38" parent="6" name="hero_id_seq">
       <ObjectId>16553</ObjectId>
       <StateNumber>613</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="25" parent="6" name="hero_units_id_seq">
+    <sequence id="39" parent="6" name="hero_units_id_seq">
       <ObjectId>33065</ObjectId>
       <StateNumber>752</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="26" parent="6" name="objects_userby_id_seq">
+    <sequence id="40" parent="6" name="leagues_id_seq">
+      <ObjectId>66028</ObjectId>
+      <StateNumber>854</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="41" parent="6" name="objects_userby_id_seq">
       <ObjectId>16600</ObjectId>
       <StateNumber>658</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="27" parent="6" name="unit_id_seq">
+    <sequence id="42" parent="6" name="unit_id_seq">
       <ObjectId>16566</ObjectId>
       <StateNumber>613</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="28" parent="6" name="user_card_id_seq">
+    <sequence id="43" parent="6" name="user_card_id_seq">
       <ObjectId>33154</ObjectId>
       <StateNumber>795</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="29" parent="6" name="user_chest_id_seq">
+    <sequence id="44" parent="6" name="user_chest_id_seq">
       <ObjectId>16623</ObjectId>
       <StateNumber>663</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <sequence id="30" parent="6" name="user_hero_id_seq">
+    <sequence id="45" parent="6" name="user_hero_id_seq">
       <ObjectId>33127</ObjectId>
       <StateNumber>770</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <table id="31" parent="6" name="auth_group">
+    <table id="46" parent="6" name="auth_group">
       <ObjectId>16416</ObjectId>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="32" parent="6" name="auth_group_permissions">
+    <table id="47" parent="6" name="auth_group_permissions">
       <ObjectId>16426</ObjectId>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="33" parent="6" name="auth_permission">
+    <table id="48" parent="6" name="auth_permission">
       <ObjectId>16408</ObjectId>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="34" parent="6" name="auth_user">
+    <table id="49" parent="6" name="auth_user">
       <ObjectId>16434</ObjectId>
-      <StateNumber>795</StateNumber>
+      <StateNumber>901</StateNumber>
     </table>
-    <table id="35" parent="6" name="auth_user_groups">
+    <table id="50" parent="6" name="auth_user_groups">
       <ObjectId>16444</ObjectId>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="36" parent="6" name="auth_user_user_permissions">
+    <table id="51" parent="6" name="auth_user_user_permissions">
       <ObjectId>16452</ObjectId>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="37" parent="6" name="benefit_box">
+    <table id="52" parent="6" name="benefit_box">
       <ObjectId>16543</ObjectId>
       <StateNumber>658</StateNumber>
     </table>
-    <table id="38" parent="6" name="chest">
+    <table id="53" parent="6" name="chest">
       <ObjectId>66012</ObjectId>
-      <StateNumber>854</StateNumber>
+      <StateNumber>921</StateNumber>
     </table>
-    <table id="39" parent="6" name="django_admin_log">
+    <table id="54" parent="6" name="django_admin_log">
       <ObjectId>16512</ObjectId>
       <StateNumber>596</StateNumber>
     </table>
-    <table id="40" parent="6" name="django_content_type">
+    <table id="55" parent="6" name="django_content_type">
       <ObjectId>16398</ObjectId>
       <StateNumber>596</StateNumber>
     </table>
-    <table id="41" parent="6" name="django_migrations">
+    <table id="56" parent="6" name="django_cron_cronjoblog">
+      <ObjectId>66101</ObjectId>
+      <StateNumber>882</StateNumber>
+    </table>
+    <table id="57" parent="6" name="django_migrations">
       <ObjectId>16387</ObjectId>
       <StateNumber>591</StateNumber>
     </table>
-    <table id="42" parent="6" name="django_session">
+    <table id="58" parent="6" name="django_session">
       <ObjectId>16581</ObjectId>
       <StateNumber>615</StateNumber>
     </table>
-    <table id="43" parent="6" name="hero">
+    <table id="59" parent="6" name="hero">
       <ObjectId>16555</ObjectId>
       <StateNumber>802</StateNumber>
     </table>
-    <table id="44" parent="6" name="hero_units">
+    <table id="60" parent="6" name="hero_units">
       <ObjectId>33067</ObjectId>
       <StateNumber>764</StateNumber>
     </table>
-    <table id="45" parent="6" name="leagues">
+    <table id="61" parent="6" name="league_infoes">
       <ObjectId>66030</ObjectId>
-      <StateNumber>854</StateNumber>
+      <StateNumber>926</StateNumber>
     </table>
-    <table id="46" parent="6" name="unit">
+    <table id="62" parent="6" name="objects_historicalbenefitbox">
+      <ObjectId>66132</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="63" parent="6" name="objects_historicalchest">
+      <ObjectId>66144</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="64" parent="6" name="objects_historicalhero">
+      <ObjectId>66162</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="65" parent="6" name="objects_historicalherounits">
+      <ObjectId>66174</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="66" parent="6" name="objects_historicalleagueinfo">
+      <ObjectId>66185</ObjectId>
+      <StateNumber>921</StateNumber>
+    </table>
+    <table id="67" parent="6" name="objects_historicalunit">
+      <ObjectId>66197</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="68" parent="6" name="objects_historicaluserbuy">
+      <ObjectId>66209</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="69" parent="6" name="objects_historicalusercard">
+      <ObjectId>66220</ObjectId>
+      <StateNumber>919</StateNumber>
+    </table>
+    <table id="70" parent="6" name="objects_historicaluserchest">
+      <ObjectId>66235</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="71" parent="6" name="objects_historicalusercurrency">
+      <ObjectId>66247</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="72" parent="6" name="objects_historicaluserhero">
+      <ObjectId>66260</ObjectId>
+      <StateNumber>901</StateNumber>
+    </table>
+    <table id="73" parent="6" name="shops">
+      <ObjectId>74561</ObjectId>
+      <StateNumber>944</StateNumber>
+    </table>
+    <table id="74" parent="6" name="stores">
+      <ObjectId>74572</ObjectId>
+      <StateNumber>928</StateNumber>
+    </table>
+    <table id="75" parent="6" name="unit">
       <ObjectId>16568</ObjectId>
       <StateNumber>802</StateNumber>
     </table>
-    <table id="47" parent="6" name="user_buy">
+    <table id="76" parent="6" name="user_buy">
       <ObjectId>16602</ObjectId>
       <StateNumber>663</StateNumber>
     </table>
-    <table id="48" parent="6" name="user_card">
+    <table id="77" parent="6" name="user_card">
       <ObjectId>33156</ObjectId>
-      <StateNumber>807</StateNumber>
+      <StateNumber>919</StateNumber>
     </table>
-    <table id="49" parent="6" name="user_chest">
+    <table id="78" parent="6" name="user_chest">
       <ObjectId>16625</ObjectId>
       <StateNumber>680</StateNumber>
     </table>
-    <table id="50" parent="6" name="user_hero">
+    <table id="79" parent="6" name="user_chests">
+      <ObjectId>66067</ObjectId>
+      <StateNumber>889</StateNumber>
+    </table>
+    <table id="80" parent="6" name="user_hero">
       <ObjectId>33129</ObjectId>
       <StateNumber>809</StateNumber>
     </table>
-    <column id="51" parent="31" name="id">
+    <column id="81" parent="46" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -269,38 +434,38 @@
       <DefaultExpression>nextval(&apos;auth_group_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_group_id_seq</SequenceName>
     </column>
-    <column id="52" parent="31" name="name">
+    <column id="82" parent="46" name="name">
       <Position>2</Position>
       <DataType>varchar(80)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="53" parent="31" name="auth_group_pkey">
+    <index id="83" parent="46" name="auth_group_pkey">
       <ObjectId>16420</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="54" parent="31" name="auth_group_name_key">
+    <index id="84" parent="46" name="auth_group_name_key">
       <ObjectId>16422</ObjectId>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="55" parent="31" name="auth_group_name_a6ea08ec_like">
+    <index id="85" parent="46" name="auth_group_name_a6ea08ec_like">
       <ObjectId>16466</ObjectId>
       <ColNames>name</ColNames>
     </index>
-    <key id="56" parent="31" name="auth_group_pkey">
+    <key id="86" parent="46" name="auth_group_pkey">
       <ObjectId>16421</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_group_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="57" parent="31" name="auth_group_name_key">
+    <key id="87" parent="46" name="auth_group_name_key">
       <ObjectId>16423</ObjectId>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>auth_group_name_key</UnderlyingIndexName>
     </key>
-    <column id="58" parent="32" name="id">
+    <column id="88" parent="47" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -308,50 +473,50 @@
       <DefaultExpression>nextval(&apos;auth_group_permissions_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_group_permissions_id_seq</SequenceName>
     </column>
-    <column id="59" parent="32" name="group_id">
+    <column id="89" parent="47" name="group_id">
       <Position>2</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="60" parent="32" name="permission_id">
+    <column id="90" parent="47" name="permission_id">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="61" parent="32" name="auth_group_permissions_pkey">
+    <index id="91" parent="47" name="auth_group_permissions_pkey">
       <ObjectId>16430</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="62" parent="32" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+    <index id="92" parent="47" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ObjectId>16477</ObjectId>
       <ColNames>group_id
 permission_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="63" parent="32" name="auth_group_permissions_group_id_b120cbf9">
+    <index id="93" parent="47" name="auth_group_permissions_group_id_b120cbf9">
       <ObjectId>16479</ObjectId>
       <ColNames>group_id</ColNames>
     </index>
-    <index id="64" parent="32" name="auth_group_permissions_permission_id_84c5c92e">
+    <index id="94" parent="47" name="auth_group_permissions_permission_id_84c5c92e">
       <ObjectId>16480</ObjectId>
       <ColNames>permission_id</ColNames>
     </index>
-    <key id="65" parent="32" name="auth_group_permissions_pkey">
+    <key id="95" parent="47" name="auth_group_permissions_pkey">
       <ObjectId>16431</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_group_permissions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="66" parent="32" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+    <key id="96" parent="47" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ObjectId>16478</ObjectId>
       <ColNames>group_id
 permission_id</ColNames>
       <UnderlyingIndexName>auth_group_permissions_group_id_permission_id_0cd325b0_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="67" parent="32" name="auth_group_permissions_group_id_b120cbf9_fk_auth_group_id">
+    <foreign-key id="97" parent="47" name="auth_group_permissions_group_id_b120cbf9_fk_auth_group_id">
       <ObjectId>16467</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -362,7 +527,7 @@ permission_id</ColNames>
       <RefKeyName>auth_group_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="68" parent="32" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
+    <foreign-key id="98" parent="47" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
       <ObjectId>16472</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -373,7 +538,7 @@ permission_id</ColNames>
       <RefKeyName>auth_permission_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="69" parent="33" name="id">
+    <column id="99" parent="48" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -381,52 +546,52 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;auth_permission_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_permission_id_seq</SequenceName>
     </column>
-    <column id="70" parent="33" name="name">
+    <column id="100" parent="48" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>602</StateNumber>
     </column>
-    <column id="71" parent="33" name="content_type_id">
+    <column id="101" parent="48" name="content_type_id">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="72" parent="33" name="codename">
+    <column id="102" parent="48" name="codename">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="73" parent="33" name="auth_permission_pkey">
+    <index id="103" parent="48" name="auth_permission_pkey">
       <ObjectId>16412</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="74" parent="33" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+    <index id="104" parent="48" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ObjectId>16463</ObjectId>
       <ColNames>content_type_id
 codename</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="75" parent="33" name="auth_permission_content_type_id_2f476e4b">
+    <index id="105" parent="48" name="auth_permission_content_type_id_2f476e4b">
       <ObjectId>16465</ObjectId>
       <ColNames>content_type_id</ColNames>
     </index>
-    <key id="76" parent="33" name="auth_permission_pkey">
+    <key id="106" parent="48" name="auth_permission_pkey">
       <ObjectId>16413</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_permission_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="77" parent="33" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+    <key id="107" parent="48" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ObjectId>16464</ObjectId>
       <ColNames>content_type_id
 codename</ColNames>
       <UnderlyingIndexName>auth_permission_content_type_id_codename_01ab375a_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="78" parent="33" name="auth_permission_content_type_id_2f476e4b_fk_django_co">
+    <foreign-key id="108" parent="48" name="auth_permission_content_type_id_2f476e4b_fk_django_co">
       <ObjectId>16458</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -437,7 +602,7 @@ codename</ColNames>
       <RefKeyName>django_content_type_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="79" parent="34" name="id">
+    <column id="109" parent="49" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -445,91 +610,91 @@ codename</ColNames>
       <DefaultExpression>nextval(&apos;auth_user_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_user_id_seq</SequenceName>
     </column>
-    <column id="80" parent="34" name="password">
+    <column id="110" parent="49" name="password">
       <Position>2</Position>
       <DataType>varchar(128)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="81" parent="34" name="last_login">
+    <column id="111" parent="49" name="last_login">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <StateNumber>607</StateNumber>
     </column>
-    <column id="82" parent="34" name="is_superuser">
+    <column id="112" parent="49" name="is_superuser">
       <Position>4</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="83" parent="34" name="username">
+    <column id="113" parent="49" name="username">
       <Position>5</Position>
       <DataType>varchar(150)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>611</StateNumber>
     </column>
-    <column id="84" parent="34" name="first_name">
+    <column id="114" parent="49" name="first_name">
       <Position>6</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="85" parent="34" name="last_name">
+    <column id="115" parent="49" name="last_name">
       <Position>7</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="86" parent="34" name="email">
+    <column id="116" parent="49" name="email">
       <Position>8</Position>
       <DataType>varchar(254)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>604</StateNumber>
     </column>
-    <column id="87" parent="34" name="is_staff">
+    <column id="117" parent="49" name="is_staff">
       <Position>9</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="88" parent="34" name="is_active">
+    <column id="118" parent="49" name="is_active">
       <Position>10</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="89" parent="34" name="date_joined">
+    <column id="119" parent="49" name="date_joined">
       <Position>11</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="90" parent="34" name="auth_user_pkey">
+    <index id="120" parent="49" name="auth_user_pkey">
       <ObjectId>16438</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="91" parent="34" name="auth_user_username_key">
+    <index id="121" parent="49" name="auth_user_username_key">
       <ObjectId>16535</ObjectId>
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="92" parent="34" name="auth_user_username_6821ab7c_like">
+    <index id="122" parent="49" name="auth_user_username_6821ab7c_like">
       <ObjectId>16537</ObjectId>
       <ColNames>username</ColNames>
     </index>
-    <key id="93" parent="34" name="auth_user_pkey">
+    <key id="123" parent="49" name="auth_user_pkey">
       <ObjectId>16439</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_user_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="94" parent="34" name="auth_user_username_key">
+    <key id="124" parent="49" name="auth_user_username_key">
       <ObjectId>16536</ObjectId>
       <ColNames>username</ColNames>
       <UnderlyingIndexName>auth_user_username_key</UnderlyingIndexName>
     </key>
-    <column id="95" parent="35" name="id">
+    <column id="125" parent="50" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -537,50 +702,50 @@ codename</ColNames>
       <DefaultExpression>nextval(&apos;auth_user_groups_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_user_groups_id_seq</SequenceName>
     </column>
-    <column id="96" parent="35" name="user_id">
+    <column id="126" parent="50" name="user_id">
       <Position>2</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="97" parent="35" name="group_id">
+    <column id="127" parent="50" name="group_id">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="98" parent="35" name="auth_user_groups_pkey">
+    <index id="128" parent="50" name="auth_user_groups_pkey">
       <ObjectId>16448</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="99" parent="35" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+    <index id="129" parent="50" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ObjectId>16492</ObjectId>
       <ColNames>user_id
 group_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="100" parent="35" name="auth_user_groups_user_id_6a12ed8b">
+    <index id="130" parent="50" name="auth_user_groups_user_id_6a12ed8b">
       <ObjectId>16494</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <index id="101" parent="35" name="auth_user_groups_group_id_97559544">
+    <index id="131" parent="50" name="auth_user_groups_group_id_97559544">
       <ObjectId>16495</ObjectId>
       <ColNames>group_id</ColNames>
     </index>
-    <key id="102" parent="35" name="auth_user_groups_pkey">
+    <key id="132" parent="50" name="auth_user_groups_pkey">
       <ObjectId>16449</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_user_groups_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="103" parent="35" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+    <key id="133" parent="50" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ObjectId>16493</ObjectId>
       <ColNames>user_id
 group_id</ColNames>
       <UnderlyingIndexName>auth_user_groups_user_id_group_id_94350c0c_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="104" parent="35" name="auth_user_groups_user_id_6a12ed8b_fk_auth_user_id">
+    <foreign-key id="134" parent="50" name="auth_user_groups_user_id_6a12ed8b_fk_auth_user_id">
       <ObjectId>16482</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -591,7 +756,7 @@ group_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="105" parent="35" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
+    <foreign-key id="135" parent="50" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
       <ObjectId>16487</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -602,7 +767,7 @@ group_id</ColNames>
       <RefKeyName>auth_group_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="106" parent="36" name="id">
+    <column id="136" parent="51" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -610,50 +775,50 @@ group_id</ColNames>
       <DefaultExpression>nextval(&apos;auth_user_user_permissions_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>auth_user_user_permissions_id_seq</SequenceName>
     </column>
-    <column id="107" parent="36" name="user_id">
+    <column id="137" parent="51" name="user_id">
       <Position>2</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <column id="108" parent="36" name="permission_id">
+    <column id="138" parent="51" name="permission_id">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
     </column>
-    <index id="109" parent="36" name="auth_user_user_permissions_pkey">
+    <index id="139" parent="51" name="auth_user_user_permissions_pkey">
       <ObjectId>16456</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="110" parent="36" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+    <index id="140" parent="51" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ObjectId>16506</ObjectId>
       <ColNames>user_id
 permission_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="111" parent="36" name="auth_user_user_permissions_user_id_a95ead1b">
+    <index id="141" parent="51" name="auth_user_user_permissions_user_id_a95ead1b">
       <ObjectId>16508</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <index id="112" parent="36" name="auth_user_user_permissions_permission_id_1fbb5f2c">
+    <index id="142" parent="51" name="auth_user_user_permissions_permission_id_1fbb5f2c">
       <ObjectId>16509</ObjectId>
       <ColNames>permission_id</ColNames>
     </index>
-    <key id="113" parent="36" name="auth_user_user_permissions_pkey">
+    <key id="143" parent="51" name="auth_user_user_permissions_pkey">
       <ObjectId>16457</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>auth_user_user_permissions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="114" parent="36" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+    <key id="144" parent="51" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ObjectId>16507</ObjectId>
       <ColNames>user_id
 permission_id</ColNames>
       <UnderlyingIndexName>auth_user_user_permissions_user_id_permission_id_14a6b632_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="115" parent="36" name="auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id">
+    <foreign-key id="145" parent="51" name="auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id">
       <ObjectId>16496</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -664,7 +829,7 @@ permission_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="116" parent="36" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
+    <foreign-key id="146" parent="51" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
       <ObjectId>16501</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -675,7 +840,7 @@ permission_id</ColNames>
       <RefKeyName>auth_permission_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="117" parent="37" name="id">
+    <column id="147" parent="52" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -683,64 +848,64 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;benefit_box_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>benefit_box_id_seq</SequenceName>
     </column>
-    <column id="118" parent="37" name="created_date">
+    <column id="148" parent="52" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="119" parent="37" name="updated_date">
+    <column id="149" parent="52" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="120" parent="37" name="params">
+    <column id="150" parent="52" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="121" parent="37" name="name">
+    <column id="151" parent="52" name="name">
       <Position>5</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>641</StateNumber>
     </column>
-    <column id="122" parent="37" name="box">
+    <column id="152" parent="52" name="box">
       <Position>6</Position>
       <DataType>varchar(4)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="123" parent="37" name="quantity">
+    <column id="153" parent="52" name="quantity">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="124" parent="37" name="flag_api">
+    <column id="154" parent="52" name="flag_api">
       <Position>8</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>633</StateNumber>
     </column>
-    <index id="125" parent="37" name="benefit_box_pkey">
+    <index id="155" parent="52" name="benefit_box_pkey">
       <ObjectId>16551</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="126" parent="37" name="benefit_box_pkey">
+    <key id="156" parent="52" name="benefit_box_pkey">
       <ObjectId>16552</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>benefit_box_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <check id="127" parent="37" name="benefit_box_quantity_check">
+    <check id="157" parent="52" name="benefit_box_quantity_check">
       <ObjectId>16547</ObjectId>
       <ColNames>quantity</ColNames>
       <Predicate>quantity &gt;= 0</Predicate>
     </check>
-    <column id="128" parent="38" name="id">
+    <column id="158" parent="53" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -748,133 +913,151 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;chest_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>chest_id_seq</SequenceName>
     </column>
-    <column id="129" parent="38" name="created_date">
+    <column id="159" parent="53" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="130" parent="38" name="updated_date">
+    <column id="160" parent="53" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="131" parent="38" name="params">
+    <column id="161" parent="53" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="132" parent="38" name="min_coin">
+    <column id="162" parent="53" name="min_coin">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="133" parent="38" name="max_coin">
+    <column id="163" parent="53" name="max_coin">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="134" parent="38" name="min_gem">
+    <column id="164" parent="53" name="min_gem">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="135" parent="38" name="max_gem">
+    <column id="165" parent="53" name="max_gem">
       <Position>8</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="136" parent="38" name="new_card_chance">
+    <column id="166" parent="53" name="new_card_chance">
       <Position>9</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="137" parent="38" name="hero_card">
+    <column id="167" parent="53" name="hero_card">
       <Position>10</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="138" parent="38" name="unit_card">
+    <column id="168" parent="53" name="unit_card">
       <Position>11</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="139" parent="38" name="league_id">
+    <column id="169" parent="53" name="info_id">
       <Position>12</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>854</StateNumber>
+      <StateNumber>921</StateNumber>
     </column>
-    <index id="140" parent="38" name="chest_pkey">
+    <column id="170" parent="53" name="chest_type">
+      <Position>13</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>921</StateNumber>
+    </column>
+    <index id="171" parent="53" name="chest_pkey">
       <ObjectId>66026</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="141" parent="38" name="chest_league_id_6d5a50b8">
-      <ObjectId>66042</ObjectId>
-      <ColNames>league_id</ColNames>
+    <index id="172" parent="53" name="chest_league_id_chest_type_2e1a5cb2_uniq">
+      <ObjectId>66058</ObjectId>
+      <ColNames>info_id
+chest_type</ColNames>
+      <Unique>1</Unique>
     </index>
-    <key id="142" parent="38" name="chest_pkey">
+    <index id="173" parent="53" name="chest_league_id_6d5a50b8">
+      <ObjectId>66042</ObjectId>
+      <ColNames>info_id</ColNames>
+    </index>
+    <key id="174" parent="53" name="chest_pkey">
       <ObjectId>66027</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>chest_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="143" parent="38" name="chest_league_id_6d5a50b8_fk_leagues_id">
-      <ObjectId>66043</ObjectId>
+    <key id="175" parent="53" name="chest_league_id_chest_type_2e1a5cb2_uniq">
+      <ObjectId>66059</ObjectId>
+      <ColNames>info_id
+chest_type</ColNames>
+      <UnderlyingIndexName>chest_league_id_chest_type_2e1a5cb2_uniq</UnderlyingIndexName>
+    </key>
+    <foreign-key id="176" parent="53" name="chest_info_id_404c6b9e_fk_leagues_id">
+      <ObjectId>66372</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <ColNames>league_id</ColNames>
+      <ColNames>info_id</ColNames>
       <RefTableId>66030</RefTableId>
       <RefColPositions>1</RefColPositions>
-      <RefTableName>leagues</RefTableName>
+      <RefTableName>league_infoes</RefTableName>
       <RefKeyName>leagues_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="144" parent="38" name="chest_min_coin_check">
+    <check id="177" parent="53" name="chest_min_coin_check">
       <ObjectId>66016</ObjectId>
       <ColNames>min_coin</ColNames>
       <Predicate>min_coin &gt;= 0</Predicate>
     </check>
-    <check id="145" parent="38" name="chest_max_coin_check">
+    <check id="178" parent="53" name="chest_max_coin_check">
       <ObjectId>66017</ObjectId>
       <ColNames>max_coin</ColNames>
       <Predicate>max_coin &gt;= 0</Predicate>
     </check>
-    <check id="146" parent="38" name="chest_min_gem_check">
+    <check id="179" parent="53" name="chest_min_gem_check">
       <ObjectId>66018</ObjectId>
       <ColNames>min_gem</ColNames>
       <Predicate>min_gem &gt;= 0</Predicate>
     </check>
-    <check id="147" parent="38" name="chest_max_gem_check">
+    <check id="180" parent="53" name="chest_max_gem_check">
       <ObjectId>66019</ObjectId>
       <ColNames>max_gem</ColNames>
       <Predicate>max_gem &gt;= 0</Predicate>
     </check>
-    <check id="148" parent="38" name="chest_new_card_chance_check">
+    <check id="181" parent="53" name="chest_new_card_chance_check">
       <ObjectId>66020</ObjectId>
       <ColNames>new_card_chance</ColNames>
       <Predicate>new_card_chance &gt;= 0</Predicate>
     </check>
-    <check id="149" parent="38" name="chest_hero_card_check">
+    <check id="182" parent="53" name="chest_hero_card_check">
       <ObjectId>66021</ObjectId>
       <ColNames>hero_card</ColNames>
       <Predicate>hero_card &gt;= 0</Predicate>
     </check>
-    <check id="150" parent="38" name="chest_unit_card_check">
+    <check id="183" parent="53" name="chest_unit_card_check">
       <ObjectId>66022</ObjectId>
       <ColNames>unit_card</ColNames>
       <Predicate>unit_card &gt;= 0</Predicate>
     </check>
-    <column id="151" parent="39" name="id">
+    <column id="184" parent="54" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -882,66 +1065,66 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;django_admin_log_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>django_admin_log_id_seq</SequenceName>
     </column>
-    <column id="152" parent="39" name="action_time">
+    <column id="185" parent="54" name="action_time">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>598</StateNumber>
     </column>
-    <column id="153" parent="39" name="object_id">
+    <column id="186" parent="54" name="object_id">
       <Position>3</Position>
       <DataType>text|0</DataType>
       <StateNumber>596</StateNumber>
     </column>
-    <column id="154" parent="39" name="object_repr">
+    <column id="187" parent="54" name="object_repr">
       <Position>4</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>596</StateNumber>
     </column>
-    <column id="155" parent="39" name="action_flag">
+    <column id="188" parent="54" name="action_flag">
       <Position>5</Position>
       <DataType>smallint|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>596</StateNumber>
     </column>
-    <column id="156" parent="39" name="change_message">
+    <column id="189" parent="54" name="change_message">
       <Position>6</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>596</StateNumber>
     </column>
-    <column id="157" parent="39" name="content_type_id">
+    <column id="190" parent="54" name="content_type_id">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <StateNumber>596</StateNumber>
     </column>
-    <column id="158" parent="39" name="user_id">
+    <column id="191" parent="54" name="user_id">
       <Position>8</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>596</StateNumber>
     </column>
-    <index id="159" parent="39" name="django_admin_log_pkey">
+    <index id="192" parent="54" name="django_admin_log_pkey">
       <ObjectId>16520</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="160" parent="39" name="django_admin_log_content_type_id_c4bce8eb">
+    <index id="193" parent="54" name="django_admin_log_content_type_id_c4bce8eb">
       <ObjectId>16532</ObjectId>
       <ColNames>content_type_id</ColNames>
     </index>
-    <index id="161" parent="39" name="django_admin_log_user_id_c564eba6">
+    <index id="194" parent="54" name="django_admin_log_user_id_c564eba6">
       <ObjectId>16533</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="162" parent="39" name="django_admin_log_pkey">
+    <key id="195" parent="54" name="django_admin_log_pkey">
       <ObjectId>16521</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>django_admin_log_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="163" parent="39" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+    <foreign-key id="196" parent="54" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
       <ObjectId>16522</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -952,7 +1135,7 @@ permission_id</ColNames>
       <RefKeyName>django_content_type_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="164" parent="39" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+    <foreign-key id="197" parent="54" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
       <ObjectId>16527</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -963,12 +1146,12 @@ permission_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="165" parent="39" name="django_admin_log_action_flag_check">
+    <check id="198" parent="54" name="django_admin_log_action_flag_check">
       <ObjectId>16516</ObjectId>
       <ColNames>action_flag</ColNames>
       <Predicate>action_flag &gt;= 0</Predicate>
     </check>
-    <column id="166" parent="40" name="id">
+    <column id="199" parent="55" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -976,42 +1159,133 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;django_content_type_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>django_content_type_id_seq</SequenceName>
     </column>
-    <column id="167" parent="40" name="app_label">
+    <column id="200" parent="55" name="app_label">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>592</StateNumber>
     </column>
-    <column id="168" parent="40" name="model">
+    <column id="201" parent="55" name="model">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>592</StateNumber>
     </column>
-    <index id="169" parent="40" name="django_content_type_pkey">
+    <index id="202" parent="55" name="django_content_type_pkey">
       <ObjectId>16402</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="170" parent="40" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <index id="203" parent="55" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ObjectId>16404</ObjectId>
       <ColNames>app_label
 model</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="171" parent="40" name="django_content_type_pkey">
+    <key id="204" parent="55" name="django_content_type_pkey">
       <ObjectId>16403</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>django_content_type_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="172" parent="40" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <key id="205" parent="55" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ObjectId>16405</ObjectId>
       <ColNames>app_label
 model</ColNames>
       <UnderlyingIndexName>django_content_type_app_label_model_76bd3d3b_uniq</UnderlyingIndexName>
     </key>
-    <column id="173" parent="41" name="id">
+    <column id="206" parent="56" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+      <DefaultExpression>nextval(&apos;django_cron_cronjoblog_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>django_cron_cronjoblog_id_seq</SequenceName>
+    </column>
+    <column id="207" parent="56" name="code">
+      <Position>2</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+    </column>
+    <column id="208" parent="56" name="start_time">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+    </column>
+    <column id="209" parent="56" name="end_time">
+      <Position>4</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+    </column>
+    <column id="210" parent="56" name="is_success">
+      <Position>5</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+    </column>
+    <column id="211" parent="56" name="message">
+      <Position>6</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>882</StateNumber>
+    </column>
+    <column id="212" parent="56" name="ran_at_time">
+      <Position>7</Position>
+      <DataType>time|0</DataType>
+      <StateNumber>882</StateNumber>
+    </column>
+    <index id="213" parent="56" name="django_cron_cronjoblog_pkey">
+      <ObjectId>66108</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="214" parent="56" name="django_cron_cronjoblog_code_start_time_ran_at_time_8b50b8fa_idx">
+      <ObjectId>66111</ObjectId>
+      <ColNames>code
+start_time
+ran_at_time</ColNames>
+    </index>
+    <index id="215" parent="56" name="django_cron_cronjoblog_code_start_time_4fc78f9d_idx">
+      <ObjectId>66112</ObjectId>
+      <ColNames>code
+start_time</ColNames>
+    </index>
+    <index id="216" parent="56" name="django_cron_cronjoblog_code_is_success_ran_at_time_84da9606_idx">
+      <ObjectId>66110</ObjectId>
+      <ColNames>code
+is_success
+ran_at_time</ColNames>
+    </index>
+    <index id="217" parent="56" name="django_cron_cronjoblog_code_48865653">
+      <ObjectId>66113</ObjectId>
+      <ColNames>code</ColNames>
+    </index>
+    <index id="218" parent="56" name="django_cron_cronjoblog_code_48865653_like">
+      <ObjectId>66114</ObjectId>
+      <ColNames>code</ColNames>
+    </index>
+    <index id="219" parent="56" name="django_cron_cronjoblog_start_time_d68c0dd9">
+      <ObjectId>66115</ObjectId>
+      <ColNames>start_time</ColNames>
+    </index>
+    <index id="220" parent="56" name="django_cron_cronjoblog_end_time_7918602a">
+      <ObjectId>66116</ObjectId>
+      <ColNames>end_time</ColNames>
+    </index>
+    <index id="221" parent="56" name="django_cron_cronjoblog_ran_at_time_7fed2751">
+      <ObjectId>66117</ObjectId>
+      <ColNames>ran_at_time</ColNames>
+    </index>
+    <key id="222" parent="56" name="django_cron_cronjoblog_pkey">
+      <ObjectId>66109</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>django_cron_cronjoblog_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="223" parent="57" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1019,73 +1293,73 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;django_migrations_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>django_migrations_id_seq</SequenceName>
     </column>
-    <column id="174" parent="41" name="app">
+    <column id="224" parent="57" name="app">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>591</StateNumber>
     </column>
-    <column id="175" parent="41" name="name">
+    <column id="225" parent="57" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>591</StateNumber>
     </column>
-    <column id="176" parent="41" name="applied">
+    <column id="226" parent="57" name="applied">
       <Position>4</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>591</StateNumber>
     </column>
-    <index id="177" parent="41" name="django_migrations_pkey">
+    <index id="227" parent="57" name="django_migrations_pkey">
       <ObjectId>16394</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="178" parent="41" name="django_migrations_pkey">
+    <key id="228" parent="57" name="django_migrations_pkey">
       <ObjectId>16395</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>django_migrations_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="179" parent="42" name="session_key">
+    <column id="229" parent="58" name="session_key">
       <Position>1</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>615</StateNumber>
     </column>
-    <column id="180" parent="42" name="session_data">
+    <column id="230" parent="58" name="session_data">
       <Position>2</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>615</StateNumber>
     </column>
-    <column id="181" parent="42" name="expire_date">
+    <column id="231" parent="58" name="expire_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>615</StateNumber>
     </column>
-    <index id="182" parent="42" name="django_session_pkey">
+    <index id="232" parent="58" name="django_session_pkey">
       <ObjectId>16587</ObjectId>
       <ColNames>session_key</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="183" parent="42" name="django_session_session_key_c0390e0f_like">
+    <index id="233" parent="58" name="django_session_session_key_c0390e0f_like">
       <ObjectId>16589</ObjectId>
       <ColNames>session_key</ColNames>
     </index>
-    <index id="184" parent="42" name="django_session_expire_date_a5c62663">
+    <index id="234" parent="58" name="django_session_expire_date_a5c62663">
       <ObjectId>16590</ObjectId>
       <ColNames>expire_date</ColNames>
     </index>
-    <key id="185" parent="42" name="django_session_pkey">
+    <key id="235" parent="58" name="django_session_pkey">
       <ObjectId>16588</ObjectId>
       <ColNames>session_key</ColNames>
       <UnderlyingIndexName>django_session_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="186" parent="43" name="id">
+    <column id="236" parent="59" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1093,174 +1367,174 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;hero_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>hero_id_seq</SequenceName>
     </column>
-    <column id="187" parent="43" name="created_date">
+    <column id="237" parent="59" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="188" parent="43" name="updated_date">
+    <column id="238" parent="59" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="189" parent="43" name="params">
+    <column id="239" parent="59" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="190" parent="43" name="health">
+    <column id="240" parent="59" name="health">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="191" parent="43" name="shield">
+    <column id="241" parent="59" name="shield">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="192" parent="43" name="attack">
+    <column id="242" parent="59" name="attack">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="193" parent="43" name="critical_chance">
+    <column id="243" parent="59" name="critical_chance">
       <Position>8</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="194" parent="43" name="critical_ratio">
+    <column id="244" parent="59" name="critical_ratio">
       <Position>9</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="195" parent="43" name="miss_chance">
+    <column id="245" parent="59" name="miss_chance">
       <Position>10</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="196" parent="43" name="dodge_chance">
+    <column id="246" parent="59" name="dodge_chance">
       <Position>11</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="197" parent="43" name="dexterity">
+    <column id="247" parent="59" name="dexterity">
       <Position>12</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="198" parent="43" name="enable_in_start">
+    <column id="248" parent="59" name="enable_in_start">
       <Position>16</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
     </column>
-    <column id="199" parent="43" name="moniker">
+    <column id="249" parent="59" name="moniker">
       <Position>17</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
     </column>
-    <column id="200" parent="43" name="unique_id">
+    <column id="250" parent="59" name="unique_id">
       <Position>18</Position>
       <DataType>uuid|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="201" parent="43" name="attack_type">
+    <column id="251" parent="59" name="attack_type">
       <Position>19</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>706</StateNumber>
     </column>
-    <column id="202" parent="43" name="chakra_attack">
+    <column id="252" parent="59" name="chakra_attack">
       <Position>20</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="203" parent="43" name="chakra_critical_chance">
+    <column id="253" parent="59" name="chakra_critical_chance">
       <Position>21</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="204" parent="43" name="chakra_critical_ratio">
+    <column id="254" parent="59" name="chakra_critical_ratio">
       <Position>22</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="205" parent="43" name="chakra_dodge_chance">
+    <column id="255" parent="59" name="chakra_dodge_chance">
       <Position>23</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="206" parent="43" name="chakra_health">
+    <column id="256" parent="59" name="chakra_health">
       <Position>24</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="207" parent="43" name="chakra_miss_chance">
+    <column id="257" parent="59" name="chakra_miss_chance">
       <Position>25</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="208" parent="43" name="chakra_shield">
+    <column id="258" parent="59" name="chakra_shield">
       <Position>26</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>719</StateNumber>
     </column>
-    <column id="209" parent="43" name="level">
+    <column id="259" parent="59" name="level">
       <Position>27</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>802</StateNumber>
     </column>
-    <index id="210" parent="43" name="hero_pkey">
+    <index id="260" parent="59" name="hero_pkey">
       <ObjectId>16562</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="211" parent="43" name="hero_moniker_f416fca5_uniq">
+    <index id="261" parent="59" name="hero_moniker_f416fca5_uniq">
       <ObjectId>33055</ObjectId>
       <ColNames>moniker</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="212" parent="43" name="hero_moniker_f416fca5_like">
+    <index id="262" parent="59" name="hero_moniker_f416fca5_like">
       <ObjectId>33057</ObjectId>
       <ColNames>moniker</ColNames>
     </index>
-    <key id="213" parent="43" name="hero_pkey">
+    <key id="263" parent="59" name="hero_pkey">
       <ObjectId>16563</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>hero_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="214" parent="43" name="hero_moniker_f416fca5_uniq">
+    <key id="264" parent="59" name="hero_moniker_f416fca5_uniq">
       <ObjectId>33056</ObjectId>
       <ColNames>moniker</ColNames>
       <UnderlyingIndexName>hero_moniker_f416fca5_uniq</UnderlyingIndexName>
     </key>
-    <check id="215" parent="43" name="hero_level_check">
+    <check id="265" parent="59" name="hero_level_check">
       <ObjectId>41320</ObjectId>
       <ColNames>level</ColNames>
       <Predicate>level &gt;= 0</Predicate>
     </check>
-    <column id="216" parent="44" name="id">
+    <column id="266" parent="60" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1268,67 +1542,67 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;hero_units_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>hero_units_id_seq</SequenceName>
     </column>
-    <column id="217" parent="44" name="created_date">
+    <column id="267" parent="60" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>752</StateNumber>
     </column>
-    <column id="218" parent="44" name="updated_date">
+    <column id="268" parent="60" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>752</StateNumber>
     </column>
-    <column id="219" parent="44" name="params">
+    <column id="269" parent="60" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>752</StateNumber>
     </column>
-    <column id="220" parent="44" name="hero_id">
+    <column id="270" parent="60" name="hero_id">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>752</StateNumber>
     </column>
-    <column id="221" parent="44" name="unit_id">
+    <column id="271" parent="60" name="unit_id">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>752</StateNumber>
     </column>
-    <index id="222" parent="44" name="hero_units_pkey">
+    <index id="272" parent="60" name="hero_units_pkey">
       <ObjectId>33074</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="223" parent="44" name="hero_units_hero_id_unit_id_3fee9375_uniq">
+    <index id="273" parent="60" name="hero_units_hero_id_unit_id_3fee9375_uniq">
       <ObjectId>33078</ObjectId>
       <ColNames>hero_id
 unit_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="224" parent="44" name="hero_units_hero_id_197d172c">
+    <index id="274" parent="60" name="hero_units_hero_id_197d172c">
       <ObjectId>33080</ObjectId>
       <ColNames>hero_id</ColNames>
     </index>
-    <index id="225" parent="44" name="hero_units_unit_id_95f7ed75">
+    <index id="275" parent="60" name="hero_units_unit_id_95f7ed75">
       <ObjectId>33086</ObjectId>
       <ColNames>unit_id</ColNames>
     </index>
-    <key id="226" parent="44" name="hero_units_pkey">
+    <key id="276" parent="60" name="hero_units_pkey">
       <ObjectId>33075</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>hero_units_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="227" parent="44" name="hero_units_hero_id_unit_id_3fee9375_uniq">
+    <key id="277" parent="60" name="hero_units_hero_id_unit_id_3fee9375_uniq">
       <ObjectId>33079</ObjectId>
       <ColNames>hero_id
 unit_id</ColNames>
       <UnderlyingIndexName>hero_units_hero_id_unit_id_3fee9375_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="228" parent="44" name="hero_units_hero_id_197d172c_fk_hero_id">
+    <foreign-key id="278" parent="60" name="hero_units_hero_id_197d172c_fk_hero_id">
       <ObjectId>33112</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1339,7 +1613,7 @@ unit_id</ColNames>
       <RefKeyName>hero_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="229" parent="44" name="hero_units_unit_id_95f7ed75_fk_unit_id">
+    <foreign-key id="279" parent="60" name="hero_units_unit_id_95f7ed75_fk_unit_id">
       <ObjectId>33117</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1350,7 +1624,7 @@ unit_id</ColNames>
       <RefKeyName>unit_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="230" parent="45" name="id">
+    <column id="280" parent="61" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1358,57 +1632,1719 @@ unit_id</ColNames>
       <DefaultExpression>nextval(&apos;leagues_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>leagues_id_seq</SequenceName>
     </column>
-    <column id="231" parent="45" name="created_date">
+    <column id="281" parent="61" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="232" parent="45" name="updated_date">
+    <column id="282" parent="61" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="233" parent="45" name="params">
+    <column id="283" parent="61" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="234" parent="45" name="name">
+    <column id="284" parent="61" name="name">
       <Position>5</Position>
       <DataType>varchar(150)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="235" parent="45" name="min_score">
+    <column id="285" parent="61" name="min_score">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="236" parent="45" name="description">
+    <column id="286" parent="61" name="description">
       <Position>7</Position>
       <DataType>text|0</DataType>
       <StateNumber>854</StateNumber>
     </column>
-    <index id="237" parent="45" name="leagues_pkey">
+    <index id="287" parent="61" name="leagues_pkey">
       <ObjectId>66038</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="238" parent="45" name="leagues_pkey">
+    <key id="288" parent="61" name="leagues_pkey">
       <ObjectId>66039</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>leagues_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <check id="239" parent="45" name="leagues_min_score_check">
+    <check id="289" parent="61" name="leagues_min_score_check">
       <ObjectId>66034</ObjectId>
       <ColNames>min_score</ColNames>
       <Predicate>min_score &gt;= 0</Predicate>
     </check>
-    <column id="240" parent="46" name="id">
+    <column id="290" parent="62" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="291" parent="62" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="292" parent="62" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="293" parent="62" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="294" parent="62" name="name">
+      <Position>5</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="295" parent="62" name="box">
+      <Position>6</Position>
+      <DataType>varchar(4)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="296" parent="62" name="quantity">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="297" parent="62" name="flag_api">
+      <Position>8</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="298" parent="62" name="history_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalbenefitbox_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalbenefitbox_history_id_seq</SequenceName>
+    </column>
+    <column id="299" parent="62" name="history_date">
+      <Position>10</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="300" parent="62" name="history_change_reason">
+      <Position>11</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="301" parent="62" name="history_type">
+      <Position>12</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="302" parent="62" name="history_user_id">
+      <Position>13</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="303" parent="62" name="objects_historicalbenefitbox_pkey">
+      <ObjectId>66140</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="304" parent="62" name="objects_historicalbenefitbox_id_0f6dfbe8">
+      <ObjectId>66278</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="305" parent="62" name="objects_historicalbenefitbox_history_user_id_4d416ce6">
+      <ObjectId>66279</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <key id="306" parent="62" name="objects_historicalbenefitbox_pkey">
+      <ObjectId>66141</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalbenefitbox_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="307" parent="62" name="objects_historicalbe_history_user_id_4d416ce6_fk_auth_user">
+      <ObjectId>66273</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="308" parent="62" name="objects_historicalbenefitbox_quantity_check">
+      <ObjectId>66136</ObjectId>
+      <ColNames>quantity</ColNames>
+      <Predicate>quantity &gt;= 0</Predicate>
+    </check>
+    <column id="309" parent="63" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="310" parent="63" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="311" parent="63" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="312" parent="63" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="313" parent="63" name="chest_type">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>921</StateNumber>
+    </column>
+    <column id="314" parent="63" name="min_coin">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="315" parent="63" name="max_coin">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="316" parent="63" name="min_gem">
+      <Position>8</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="317" parent="63" name="max_gem">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="318" parent="63" name="new_card_chance">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="319" parent="63" name="hero_card">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="320" parent="63" name="unit_card">
+      <Position>12</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="321" parent="63" name="history_id">
+      <Position>13</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalchest_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalchest_history_id_seq</SequenceName>
+    </column>
+    <column id="322" parent="63" name="history_date">
+      <Position>14</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="323" parent="63" name="history_change_reason">
+      <Position>15</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="324" parent="63" name="history_type">
+      <Position>16</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="325" parent="63" name="history_user_id">
+      <Position>17</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="326" parent="63" name="info_id">
+      <Position>18</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>921</StateNumber>
+    </column>
+    <index id="327" parent="63" name="objects_historicalchest_pkey">
+      <ObjectId>66158</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="328" parent="63" name="objects_historicalchest_id_379542df">
+      <ObjectId>66285</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="329" parent="63" name="objects_historicalchest_history_user_id_a14ec7fe">
+      <ObjectId>66286</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="330" parent="63" name="objects_historicalchest_league_id_4cd2fbde">
+      <ObjectId>66287</ObjectId>
+      <ColNames>info_id</ColNames>
+    </index>
+    <key id="331" parent="63" name="objects_historicalchest_pkey">
+      <ObjectId>66159</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalchest_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="332" parent="63" name="objects_historicalch_history_user_id_a14ec7fe_fk_auth_user">
+      <ObjectId>66280</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="333" parent="63" name="objects_historicalchest_min_coin_check">
+      <ObjectId>66148</ObjectId>
+      <ColNames>min_coin</ColNames>
+      <Predicate>min_coin &gt;= 0</Predicate>
+    </check>
+    <check id="334" parent="63" name="objects_historicalchest_max_coin_check">
+      <ObjectId>66149</ObjectId>
+      <ColNames>max_coin</ColNames>
+      <Predicate>max_coin &gt;= 0</Predicate>
+    </check>
+    <check id="335" parent="63" name="objects_historicalchest_min_gem_check">
+      <ObjectId>66150</ObjectId>
+      <ColNames>min_gem</ColNames>
+      <Predicate>min_gem &gt;= 0</Predicate>
+    </check>
+    <check id="336" parent="63" name="objects_historicalchest_max_gem_check">
+      <ObjectId>66151</ObjectId>
+      <ColNames>max_gem</ColNames>
+      <Predicate>max_gem &gt;= 0</Predicate>
+    </check>
+    <check id="337" parent="63" name="objects_historicalchest_new_card_chance_check">
+      <ObjectId>66152</ObjectId>
+      <ColNames>new_card_chance</ColNames>
+      <Predicate>new_card_chance &gt;= 0</Predicate>
+    </check>
+    <check id="338" parent="63" name="objects_historicalchest_hero_card_check">
+      <ObjectId>66153</ObjectId>
+      <ColNames>hero_card</ColNames>
+      <Predicate>hero_card &gt;= 0</Predicate>
+    </check>
+    <check id="339" parent="63" name="objects_historicalchest_unit_card_check">
+      <ObjectId>66154</ObjectId>
+      <ColNames>unit_card</ColNames>
+      <Predicate>unit_card &gt;= 0</Predicate>
+    </check>
+    <column id="340" parent="64" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="341" parent="64" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="342" parent="64" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="343" parent="64" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="344" parent="64" name="enable_in_start">
+      <Position>5</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="345" parent="64" name="unique_id">
+      <Position>6</Position>
+      <DataType>uuid|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="346" parent="64" name="moniker">
+      <Position>7</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="347" parent="64" name="dexterity">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="348" parent="64" name="attack_type">
+      <Position>9</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="349" parent="64" name="health">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="350" parent="64" name="shield">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="351" parent="64" name="attack">
+      <Position>12</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="352" parent="64" name="critical_chance">
+      <Position>13</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="353" parent="64" name="critical_ratio">
+      <Position>14</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="354" parent="64" name="miss_chance">
+      <Position>15</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="355" parent="64" name="dodge_chance">
+      <Position>16</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="356" parent="64" name="level">
+      <Position>17</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="357" parent="64" name="chakra_health">
+      <Position>18</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="358" parent="64" name="chakra_shield">
+      <Position>19</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="359" parent="64" name="chakra_attack">
+      <Position>20</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="360" parent="64" name="chakra_critical_chance">
+      <Position>21</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="361" parent="64" name="chakra_critical_ratio">
+      <Position>22</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="362" parent="64" name="chakra_miss_chance">
+      <Position>23</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="363" parent="64" name="chakra_dodge_chance">
+      <Position>24</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="364" parent="64" name="history_id">
+      <Position>25</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalhero_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalhero_history_id_seq</SequenceName>
+    </column>
+    <column id="365" parent="64" name="history_date">
+      <Position>26</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="366" parent="64" name="history_change_reason">
+      <Position>27</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="367" parent="64" name="history_type">
+      <Position>28</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="368" parent="64" name="history_user_id">
+      <Position>29</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="369" parent="64" name="objects_historicalhero_pkey">
+      <ObjectId>66170</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="370" parent="64" name="objects_historicalhero_id_609b3e15">
+      <ObjectId>66293</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="371" parent="64" name="objects_historicalhero_moniker_48a38ea4">
+      <ObjectId>66294</ObjectId>
+      <ColNames>moniker</ColNames>
+    </index>
+    <index id="372" parent="64" name="objects_historicalhero_moniker_48a38ea4_like">
+      <ObjectId>66295</ObjectId>
+      <ColNames>moniker</ColNames>
+    </index>
+    <index id="373" parent="64" name="objects_historicalhero_history_user_id_b06e9a24">
+      <ObjectId>66296</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <key id="374" parent="64" name="objects_historicalhero_pkey">
+      <ObjectId>66171</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalhero_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="375" parent="64" name="objects_historicalhero_history_user_id_b06e9a24_fk_auth_user_id">
+      <ObjectId>66288</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="376" parent="64" name="objects_historicalhero_level_check">
+      <ObjectId>66166</ObjectId>
+      <ColNames>level</ColNames>
+      <Predicate>level &gt;= 0</Predicate>
+    </check>
+    <column id="377" parent="65" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="378" parent="65" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="379" parent="65" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="380" parent="65" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="381" parent="65" name="history_id">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalherounits_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalherounits_history_id_seq</SequenceName>
+    </column>
+    <column id="382" parent="65" name="history_date">
+      <Position>6</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="383" parent="65" name="history_change_reason">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="384" parent="65" name="history_type">
+      <Position>8</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="385" parent="65" name="hero_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="386" parent="65" name="history_user_id">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="387" parent="65" name="unit_id">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="388" parent="65" name="objects_historicalherounits_pkey">
+      <ObjectId>66181</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="389" parent="65" name="objects_historicalherounits_id_379115cf">
+      <ObjectId>66302</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="390" parent="65" name="objects_historicalherounits_hero_id_a8e5ed20">
+      <ObjectId>66303</ObjectId>
+      <ColNames>hero_id</ColNames>
+    </index>
+    <index id="391" parent="65" name="objects_historicalherounits_history_user_id_d1567a5a">
+      <ObjectId>66304</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="392" parent="65" name="objects_historicalherounits_unit_id_b290498e">
+      <ObjectId>66305</ObjectId>
+      <ColNames>unit_id</ColNames>
+    </index>
+    <key id="393" parent="65" name="objects_historicalherounits_pkey">
+      <ObjectId>66182</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalherounits_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="394" parent="65" name="objects_historicalhe_history_user_id_d1567a5a_fk_auth_user">
+      <ObjectId>66297</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="395" parent="66" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="396" parent="66" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="397" parent="66" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="398" parent="66" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="399" parent="66" name="name">
+      <Position>5</Position>
+      <DataType>varchar(150)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="400" parent="66" name="min_score">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="401" parent="66" name="description">
+      <Position>7</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="402" parent="66" name="history_id">
+      <Position>8</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalleague_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalleague_history_id_seq</SequenceName>
+    </column>
+    <column id="403" parent="66" name="history_date">
+      <Position>9</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="404" parent="66" name="history_change_reason">
+      <Position>10</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="405" parent="66" name="history_type">
+      <Position>11</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="406" parent="66" name="history_user_id">
+      <Position>12</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="407" parent="66" name="objects_historicalleague_pkey">
+      <ObjectId>66193</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="408" parent="66" name="objects_historicalleague_id_2b2a8356">
+      <ObjectId>66311</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="409" parent="66" name="objects_historicalleague_history_user_id_41b2c3cb">
+      <ObjectId>66312</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <key id="410" parent="66" name="objects_historicalleague_pkey">
+      <ObjectId>66194</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalleague_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="411" parent="66" name="objects_historicalle_history_user_id_41b2c3cb_fk_auth_user">
+      <ObjectId>66306</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="412" parent="66" name="objects_historicalleague_min_score_check">
+      <ObjectId>66189</ObjectId>
+      <ColNames>min_score</ColNames>
+      <Predicate>min_score &gt;= 0</Predicate>
+    </check>
+    <column id="413" parent="67" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="414" parent="67" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="415" parent="67" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="416" parent="67" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="417" parent="67" name="enable_in_start">
+      <Position>5</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="418" parent="67" name="unique_id">
+      <Position>6</Position>
+      <DataType>uuid|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="419" parent="67" name="moniker">
+      <Position>7</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="420" parent="67" name="dexterity">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="421" parent="67" name="attack_type">
+      <Position>9</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="422" parent="67" name="health">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="423" parent="67" name="shield">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="424" parent="67" name="attack">
+      <Position>12</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="425" parent="67" name="critical_chance">
+      <Position>13</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="426" parent="67" name="critical_ratio">
+      <Position>14</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="427" parent="67" name="miss_chance">
+      <Position>15</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="428" parent="67" name="dodge_chance">
+      <Position>16</Position>
+      <DataType>double precision|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="429" parent="67" name="level">
+      <Position>17</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="430" parent="67" name="history_id">
+      <Position>18</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalunit_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalunit_history_id_seq</SequenceName>
+    </column>
+    <column id="431" parent="67" name="history_date">
+      <Position>19</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="432" parent="67" name="history_change_reason">
+      <Position>20</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="433" parent="67" name="history_type">
+      <Position>21</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="434" parent="67" name="history_user_id">
+      <Position>22</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="435" parent="67" name="objects_historicalunit_pkey">
+      <ObjectId>66205</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="436" parent="67" name="objects_historicalunit_id_653dac7d">
+      <ObjectId>66318</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="437" parent="67" name="objects_historicalunit_moniker_0747de79">
+      <ObjectId>66319</ObjectId>
+      <ColNames>moniker</ColNames>
+    </index>
+    <index id="438" parent="67" name="objects_historicalunit_moniker_0747de79_like">
+      <ObjectId>66320</ObjectId>
+      <ColNames>moniker</ColNames>
+    </index>
+    <index id="439" parent="67" name="objects_historicalunit_history_user_id_627e2ebb">
+      <ObjectId>66321</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <key id="440" parent="67" name="objects_historicalunit_pkey">
+      <ObjectId>66206</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalunit_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="441" parent="67" name="objects_historicalunit_history_user_id_627e2ebb_fk_auth_user_id">
+      <ObjectId>66313</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="442" parent="67" name="objects_historicalunit_level_check">
+      <ObjectId>66201</ObjectId>
+      <ColNames>level</ColNames>
+      <Predicate>level &gt;= 0</Predicate>
+    </check>
+    <column id="443" parent="68" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="444" parent="68" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="445" parent="68" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="446" parent="68" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="447" parent="68" name="history_id">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicaluserbuy_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicaluserbuy_history_id_seq</SequenceName>
+    </column>
+    <column id="448" parent="68" name="history_date">
+      <Position>6</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="449" parent="68" name="history_change_reason">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="450" parent="68" name="history_type">
+      <Position>8</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="451" parent="68" name="benefit_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="452" parent="68" name="history_user_id">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="453" parent="68" name="user_id">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="454" parent="68" name="objects_historicaluserbuy_pkey">
+      <ObjectId>66216</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="455" parent="68" name="objects_historicaluserbuy_id_f26c2eb0">
+      <ObjectId>66327</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="456" parent="68" name="objects_historicaluserbuy_benefit_id_9a4e8d28">
+      <ObjectId>66328</ObjectId>
+      <ColNames>benefit_id</ColNames>
+    </index>
+    <index id="457" parent="68" name="objects_historicaluserbuy_history_user_id_e48dfda2">
+      <ObjectId>66329</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="458" parent="68" name="objects_historicaluserbuy_user_id_1c1cfa2f">
+      <ObjectId>66330</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="459" parent="68" name="objects_historicaluserbuy_pkey">
+      <ObjectId>66217</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicaluserbuy_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="460" parent="68" name="objects_historicalus_history_user_id_e48dfda2_fk_auth_user">
+      <ObjectId>66322</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="461" parent="69" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="462" parent="69" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="463" parent="69" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="464" parent="69" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="465" parent="69" name="quantity">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="466" parent="69" name="next_upgrade_coin_cost">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="467" parent="69" name="next_upgrade_card_count">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="468" parent="69" name="level">
+      <Position>8</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="469" parent="69" name="history_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalusercard_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalusercard_history_id_seq</SequenceName>
+    </column>
+    <column id="470" parent="69" name="history_date">
+      <Position>10</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="471" parent="69" name="history_change_reason">
+      <Position>11</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="472" parent="69" name="history_type">
+      <Position>12</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="473" parent="69" name="character_id">
+      <Position>13</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="474" parent="69" name="history_user_id">
+      <Position>14</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="475" parent="69" name="user_id">
+      <Position>15</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="476" parent="69" name="cool_down">
+      <Position>16</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <StateNumber>919</StateNumber>
+    </column>
+    <index id="477" parent="69" name="objects_historicalusercard_pkey">
+      <ObjectId>66231</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="478" parent="69" name="objects_historicalusercard_id_0c67c3c0">
+      <ObjectId>66336</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="479" parent="69" name="objects_historicalusercard_character_id_275b5aff">
+      <ObjectId>66337</ObjectId>
+      <ColNames>character_id</ColNames>
+    </index>
+    <index id="480" parent="69" name="objects_historicalusercard_history_user_id_dec3992f">
+      <ObjectId>66338</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="481" parent="69" name="objects_historicalusercard_user_id_fc5c9008">
+      <ObjectId>66339</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="482" parent="69" name="objects_historicalusercard_pkey">
+      <ObjectId>66232</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalusercard_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="483" parent="69" name="objects_historicalus_history_user_id_dec3992f_fk_auth_user">
+      <ObjectId>66331</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="484" parent="69" name="objects_historicalusercard_quantity_check">
+      <ObjectId>66224</ObjectId>
+      <ColNames>quantity</ColNames>
+      <Predicate>quantity &gt;= 0</Predicate>
+    </check>
+    <check id="485" parent="69" name="objects_historicalusercard_next_upgrade_coin_cost_check">
+      <ObjectId>66225</ObjectId>
+      <ColNames>next_upgrade_coin_cost</ColNames>
+      <Predicate>next_upgrade_coin_cost &gt;= 0</Predicate>
+    </check>
+    <check id="486" parent="69" name="objects_historicalusercard_next_upgrade_card_count_check">
+      <ObjectId>66226</ObjectId>
+      <ColNames>next_upgrade_card_count</ColNames>
+      <Predicate>next_upgrade_card_count &gt;= 0</Predicate>
+    </check>
+    <check id="487" parent="69" name="objects_historicalusercard_level_check">
+      <ObjectId>66227</ObjectId>
+      <ColNames>level</ColNames>
+      <Predicate>level &gt;= 0</Predicate>
+    </check>
+    <column id="488" parent="70" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="489" parent="70" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="490" parent="70" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="491" parent="70" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="492" parent="70" name="chest_type">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="493" parent="70" name="status">
+      <Position>6</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="494" parent="70" name="sequence_number">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="495" parent="70" name="cards">
+      <Position>8</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="496" parent="70" name="history_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicaluserchest_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicaluserchest_history_id_seq</SequenceName>
+    </column>
+    <column id="497" parent="70" name="history_date">
+      <Position>10</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="498" parent="70" name="history_change_reason">
+      <Position>11</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="499" parent="70" name="history_type">
+      <Position>12</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="500" parent="70" name="chest_id">
+      <Position>13</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="501" parent="70" name="history_user_id">
+      <Position>14</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="502" parent="70" name="user_id">
+      <Position>15</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="503" parent="70" name="objects_historicaluserchest_pkey">
+      <ObjectId>66243</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="504" parent="70" name="objects_historicaluserchest_id_d3d60a61">
+      <ObjectId>66345</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="505" parent="70" name="objects_historicaluserchest_chest_id_882fbc1d">
+      <ObjectId>66346</ObjectId>
+      <ColNames>chest_id</ColNames>
+    </index>
+    <index id="506" parent="70" name="objects_historicaluserchest_history_user_id_e0da7460">
+      <ObjectId>66347</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="507" parent="70" name="objects_historicaluserchest_user_id_94a42552">
+      <ObjectId>66348</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="508" parent="70" name="objects_historicaluserchest_pkey">
+      <ObjectId>66244</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicaluserchest_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="509" parent="70" name="objects_historicalus_history_user_id_e0da7460_fk_auth_user">
+      <ObjectId>66340</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="510" parent="70" name="objects_historicaluserchest_sequence_number_check">
+      <ObjectId>66239</ObjectId>
+      <ColNames>sequence_number</ColNames>
+      <Predicate>sequence_number &gt;= 0</Predicate>
+    </check>
+    <column id="511" parent="71" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="512" parent="71" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="513" parent="71" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="514" parent="71" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="515" parent="71" name="gem">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="516" parent="71" name="coin">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="517" parent="71" name="history_id">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicalusercurrency_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicalusercurrency_history_id_seq</SequenceName>
+    </column>
+    <column id="518" parent="71" name="history_date">
+      <Position>8</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="519" parent="71" name="history_change_reason">
+      <Position>9</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="520" parent="71" name="history_type">
+      <Position>10</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="521" parent="71" name="history_user_id">
+      <Position>11</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="522" parent="71" name="user_id">
+      <Position>12</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="523" parent="71" name="objects_historicalusercurrency_pkey">
+      <ObjectId>66256</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="524" parent="71" name="objects_historicalusercurrency_id_d64cea2b">
+      <ObjectId>66354</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="525" parent="71" name="objects_historicalusercurrency_history_user_id_e4cac221">
+      <ObjectId>66355</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="526" parent="71" name="objects_historicalusercurrency_user_id_5d942f3f">
+      <ObjectId>66356</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="527" parent="71" name="objects_historicalusercurrency_pkey">
+      <ObjectId>66257</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicalusercurrency_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="528" parent="71" name="objects_historicalus_history_user_id_e4cac221_fk_auth_user">
+      <ObjectId>66349</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="529" parent="71" name="objects_historicalusercurrency_gem_check">
+      <ObjectId>66251</ObjectId>
+      <ColNames>gem</ColNames>
+      <Predicate>gem &gt;= 0</Predicate>
+    </check>
+    <check id="530" parent="71" name="objects_historicalusercurrency_coin_check">
+      <ObjectId>66252</ObjectId>
+      <ColNames>coin</ColNames>
+      <Predicate>coin &gt;= 0</Predicate>
+    </check>
+    <column id="531" parent="72" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="532" parent="72" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="533" parent="72" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="534" parent="72" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="535" parent="72" name="enable_hero">
+      <Position>5</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="536" parent="72" name="quantity">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="537" parent="72" name="next_upgrade_coin_cost">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="538" parent="72" name="next_upgrade_card_count">
+      <Position>8</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="539" parent="72" name="level">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="540" parent="72" name="history_id">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+      <DefaultExpression>nextval(&apos;objects_historicaluserhero_history_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>objects_historicaluserhero_history_id_seq</SequenceName>
+    </column>
+    <column id="541" parent="72" name="history_date">
+      <Position>11</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="542" parent="72" name="history_change_reason">
+      <Position>12</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="543" parent="72" name="history_type">
+      <Position>13</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="544" parent="72" name="hero_id">
+      <Position>14</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="545" parent="72" name="history_user_id">
+      <Position>15</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <column id="546" parent="72" name="user_id">
+      <Position>16</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>901</StateNumber>
+    </column>
+    <index id="547" parent="72" name="objects_historicaluserhero_pkey">
+      <ObjectId>66271</ObjectId>
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="548" parent="72" name="objects_historicaluserhero_id_296531c7">
+      <ObjectId>66362</ObjectId>
+      <ColNames>id</ColNames>
+    </index>
+    <index id="549" parent="72" name="objects_historicaluserhero_hero_id_b0cea2fd">
+      <ObjectId>66363</ObjectId>
+      <ColNames>hero_id</ColNames>
+    </index>
+    <index id="550" parent="72" name="objects_historicaluserhero_history_user_id_e01ed6d4">
+      <ObjectId>66364</ObjectId>
+      <ColNames>history_user_id</ColNames>
+    </index>
+    <index id="551" parent="72" name="objects_historicaluserhero_user_id_cdfeadef">
+      <ObjectId>66365</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="552" parent="72" name="objects_historicaluserhero_pkey">
+      <ObjectId>66272</ObjectId>
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>objects_historicaluserhero_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="553" parent="72" name="objects_historicalus_history_user_id_e01ed6d4_fk_auth_user">
+      <ObjectId>66357</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>history_user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="554" parent="72" name="objects_historicaluserhero_quantity_check">
+      <ObjectId>66264</ObjectId>
+      <ColNames>quantity</ColNames>
+      <Predicate>quantity &gt;= 0</Predicate>
+    </check>
+    <check id="555" parent="72" name="objects_historicaluserhero_next_upgrade_coin_cost_check">
+      <ObjectId>66265</ObjectId>
+      <ColNames>next_upgrade_coin_cost</ColNames>
+      <Predicate>next_upgrade_coin_cost &gt;= 0</Predicate>
+    </check>
+    <check id="556" parent="72" name="objects_historicaluserhero_next_upgrade_card_count_check">
+      <ObjectId>66266</ObjectId>
+      <ColNames>next_upgrade_card_count</ColNames>
+      <Predicate>next_upgrade_card_count &gt;= 0</Predicate>
+    </check>
+    <check id="557" parent="72" name="objects_historicaluserhero_level_check">
+      <ObjectId>66267</ObjectId>
+      <ColNames>level</ColNames>
+      <Predicate>level &gt;= 0</Predicate>
+    </check>
+    <column id="558" parent="73" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+      <DefaultExpression>nextval(&apos;shops_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>shops_id_seq</SequenceName>
+    </column>
+    <column id="559" parent="73" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="560" parent="73" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="561" parent="73" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="562" parent="73" name="name">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="563" parent="73" name="coins">
+      <Position>6</Position>
+      <DataType>jsonb|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="564" parent="73" name="gems">
+      <Position>7</Position>
+      <DataType>jsonb|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="565" parent="73" name="chests">
+      <Position>8</Position>
+      <DataType>jsonb|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="566" parent="73" name="store_id">
+      <Position>9</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="567" parent="73" name="enable">
+      <Position>10</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>940</StateNumber>
+    </column>
+    <column id="568" parent="73" name="special_offer">
+      <Position>11</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>944</StateNumber>
+    </column>
+    <index id="569" parent="73" name="shops_pkey">
+      <ObjectId>74568</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="570" parent="73" name="shops_store_id_e80b2eef">
+      <ObjectId>74581</ObjectId>
+      <ColNames>store_id</ColNames>
+    </index>
+    <key id="571" parent="73" name="shops_pkey">
+      <ObjectId>74569</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>shops_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="572" parent="73" name="shops_store_id_e80b2eef_fk_stores_id">
+      <ObjectId>74582</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>store_id</ColNames>
+      <RefTableId>74572</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>stores</RefTableName>
+      <RefKeyName>stores_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="573" parent="74" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+      <DefaultExpression>nextval(&apos;stores_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>stores_id_seq</SequenceName>
+    </column>
+    <column id="574" parent="74" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="575" parent="74" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="576" parent="74" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>928</StateNumber>
+    </column>
+    <column id="577" parent="74" name="name">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>928</StateNumber>
+    </column>
+    <index id="578" parent="74" name="stores_pkey">
+      <ObjectId>74579</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="579" parent="74" name="stores_pkey">
+      <ObjectId>74580</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>stores_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="580" parent="75" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1416,132 +3352,132 @@ unit_id</ColNames>
       <DefaultExpression>nextval(&apos;unit_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>unit_id_seq</SequenceName>
     </column>
-    <column id="241" parent="46" name="created_date">
+    <column id="581" parent="75" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="242" parent="46" name="updated_date">
+    <column id="582" parent="75" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="243" parent="46" name="params">
+    <column id="583" parent="75" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="244" parent="46" name="health">
+    <column id="584" parent="75" name="health">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="245" parent="46" name="shield">
+    <column id="585" parent="75" name="shield">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="246" parent="46" name="attack">
+    <column id="586" parent="75" name="attack">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="247" parent="46" name="critical_chance">
+    <column id="587" parent="75" name="critical_chance">
       <Position>8</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="248" parent="46" name="critical_ratio">
+    <column id="588" parent="75" name="critical_ratio">
       <Position>9</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="249" parent="46" name="miss_chance">
+    <column id="589" parent="75" name="miss_chance">
       <Position>10</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="250" parent="46" name="dodge_chance">
+    <column id="590" parent="75" name="dodge_chance">
       <Position>11</Position>
       <DataType>double precision|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="251" parent="46" name="dexterity">
+    <column id="591" parent="75" name="dexterity">
       <Position>12</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>613</StateNumber>
     </column>
-    <column id="252" parent="46" name="enable_in_start">
+    <column id="592" parent="75" name="enable_in_start">
       <Position>16</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
     </column>
-    <column id="253" parent="46" name="moniker">
+    <column id="593" parent="75" name="moniker">
       <Position>17</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
     </column>
-    <column id="254" parent="46" name="unique_id">
+    <column id="594" parent="75" name="unique_id">
       <Position>18</Position>
       <DataType>uuid|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>854</StateNumber>
     </column>
-    <column id="255" parent="46" name="attack_type">
+    <column id="595" parent="75" name="attack_type">
       <Position>19</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>706</StateNumber>
     </column>
-    <column id="256" parent="46" name="level">
+    <column id="596" parent="75" name="level">
       <Position>20</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>802</StateNumber>
     </column>
-    <index id="257" parent="46" name="unit_pkey">
+    <index id="597" parent="75" name="unit_pkey">
       <ObjectId>16575</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="258" parent="46" name="unit_moniker_1d2e48a8_uniq">
+    <index id="598" parent="75" name="unit_moniker_1d2e48a8_uniq">
       <ObjectId>33059</ObjectId>
       <ColNames>moniker</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="259" parent="46" name="unit_moniker_1d2e48a8_like">
+    <index id="599" parent="75" name="unit_moniker_1d2e48a8_like">
       <ObjectId>33061</ObjectId>
       <ColNames>moniker</ColNames>
     </index>
-    <key id="260" parent="46" name="unit_pkey">
+    <key id="600" parent="75" name="unit_pkey">
       <ObjectId>16576</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>unit_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="261" parent="46" name="unit_moniker_1d2e48a8_uniq">
+    <key id="601" parent="75" name="unit_moniker_1d2e48a8_uniq">
       <ObjectId>33060</ObjectId>
       <ColNames>moniker</ColNames>
       <UnderlyingIndexName>unit_moniker_1d2e48a8_uniq</UnderlyingIndexName>
     </key>
-    <check id="262" parent="46" name="unit_level_check">
+    <check id="602" parent="75" name="unit_level_check">
       <ObjectId>41331</ObjectId>
       <ColNames>level</ColNames>
       <Predicate>level &gt;= 0</Predicate>
     </check>
-    <column id="263" parent="47" name="id">
+    <column id="603" parent="76" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1549,55 +3485,55 @@ unit_id</ColNames>
       <DefaultExpression>nextval(&apos;objects_userby_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>objects_userby_id_seq</SequenceName>
     </column>
-    <column id="264" parent="47" name="created_date">
+    <column id="604" parent="76" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>658</StateNumber>
     </column>
-    <column id="265" parent="47" name="updated_date">
+    <column id="605" parent="76" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>658</StateNumber>
     </column>
-    <column id="266" parent="47" name="params">
+    <column id="606" parent="76" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>658</StateNumber>
     </column>
-    <column id="267" parent="47" name="benefit_id">
+    <column id="607" parent="76" name="benefit_id">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>658</StateNumber>
     </column>
-    <column id="268" parent="47" name="user_id">
+    <column id="608" parent="76" name="user_id">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>658</StateNumber>
     </column>
-    <index id="269" parent="47" name="objects_userby_pkey">
+    <index id="609" parent="76" name="objects_userby_pkey">
       <ObjectId>16609</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="270" parent="47" name="objects_userby_benefit_id_7df9a72a">
+    <index id="610" parent="76" name="objects_userby_benefit_id_7df9a72a">
       <ObjectId>16621</ObjectId>
       <ColNames>benefit_id</ColNames>
     </index>
-    <index id="271" parent="47" name="objects_userby_user_id_90e38a1b">
+    <index id="611" parent="76" name="objects_userby_user_id_90e38a1b">
       <ObjectId>16622</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="272" parent="47" name="objects_userby_pkey">
+    <key id="612" parent="76" name="objects_userby_pkey">
       <ObjectId>16610</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>objects_userby_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="273" parent="47" name="objects_userby_benefit_id_7df9a72a_fk_benefit_box_id">
+    <foreign-key id="613" parent="76" name="objects_userby_benefit_id_7df9a72a_fk_benefit_box_id">
       <ObjectId>16611</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1608,7 +3544,7 @@ unit_id</ColNames>
       <RefKeyName>benefit_box_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="274" parent="47" name="objects_userby_user_id_90e38a1b_fk_auth_user_id">
+    <foreign-key id="614" parent="76" name="objects_userby_user_id_90e38a1b_fk_auth_user_id">
       <ObjectId>16616</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1619,7 +3555,7 @@ unit_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="275" parent="48" name="id">
+    <column id="615" parent="77" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1627,91 +3563,96 @@ unit_id</ColNames>
       <DefaultExpression>nextval(&apos;user_card_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>user_card_id_seq</SequenceName>
     </column>
-    <column id="276" parent="48" name="created_date">
+    <column id="616" parent="77" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="277" parent="48" name="updated_date">
+    <column id="617" parent="77" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="278" parent="48" name="params">
+    <column id="618" parent="77" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="279" parent="48" name="quantity">
+    <column id="619" parent="77" name="quantity">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="280" parent="48" name="character_id">
+    <column id="620" parent="77" name="character_id">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="281" parent="48" name="user_id">
+    <column id="621" parent="77" name="user_id">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>795</StateNumber>
     </column>
-    <column id="282" parent="48" name="level">
+    <column id="622" parent="77" name="level">
       <Position>8</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>807</StateNumber>
     </column>
-    <column id="283" parent="48" name="next_upgrade_card_count">
+    <column id="623" parent="77" name="next_upgrade_card_count">
       <Position>9</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>807</StateNumber>
     </column>
-    <column id="284" parent="48" name="next_upgrade_coin_cost">
+    <column id="624" parent="77" name="next_upgrade_coin_cost">
       <Position>10</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>807</StateNumber>
     </column>
-    <index id="285" parent="48" name="user_card_pkey">
+    <column id="625" parent="77" name="cool_down">
+      <Position>11</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <StateNumber>919</StateNumber>
+    </column>
+    <index id="626" parent="77" name="user_card_pkey">
       <ObjectId>33164</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="286" parent="48" name="user_card_user_id_character_id_7bab5bbb_uniq">
+    <index id="627" parent="77" name="user_card_user_id_character_id_7bab5bbb_uniq">
       <ObjectId>41317</ObjectId>
       <ColNames>user_id
 character_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="287" parent="48" name="user_card_character_id_39595b18">
+    <index id="628" parent="77" name="user_card_character_id_39595b18">
       <ObjectId>33168</ObjectId>
       <ColNames>character_id</ColNames>
     </index>
-    <index id="288" parent="48" name="user_card_user_id_6d8d92cc">
+    <index id="629" parent="77" name="user_card_user_id_6d8d92cc">
       <ObjectId>33174</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="289" parent="48" name="user_card_pkey">
+    <key id="630" parent="77" name="user_card_pkey">
       <ObjectId>33165</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>user_card_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="290" parent="48" name="user_card_user_id_character_id_7bab5bbb_uniq">
+    <key id="631" parent="77" name="user_card_user_id_character_id_7bab5bbb_uniq">
       <ObjectId>41318</ObjectId>
       <ColNames>user_id
 character_id</ColNames>
       <UnderlyingIndexName>user_card_user_id_character_id_7bab5bbb_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="291" parent="48" name="user_card_character_id_39595b18_fk_unit_id">
+    <foreign-key id="632" parent="77" name="user_card_character_id_39595b18_fk_unit_id">
       <ObjectId>33169</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1722,7 +3663,7 @@ character_id</ColNames>
       <RefKeyName>unit_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="292" parent="48" name="user_card_user_id_6d8d92cc_fk_auth_user_id">
+    <foreign-key id="633" parent="77" name="user_card_user_id_6d8d92cc_fk_auth_user_id">
       <ObjectId>33175</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1733,27 +3674,27 @@ character_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="293" parent="48" name="user_card_quantity_check">
+    <check id="634" parent="77" name="user_card_quantity_check">
       <ObjectId>33160</ObjectId>
       <ColNames>quantity</ColNames>
       <Predicate>quantity &gt;= 0</Predicate>
     </check>
-    <check id="294" parent="48" name="user_card_level_check">
+    <check id="635" parent="77" name="user_card_level_check">
       <ObjectId>49508</ObjectId>
       <ColNames>level</ColNames>
       <Predicate>level &gt;= 0</Predicate>
     </check>
-    <check id="295" parent="48" name="user_card_next_upgrade_card_count_check">
+    <check id="636" parent="77" name="user_card_next_upgrade_card_count_check">
       <ObjectId>49520</ObjectId>
       <ColNames>next_upgrade_card_count</ColNames>
       <Predicate>next_upgrade_card_count &gt;= 0</Predicate>
     </check>
-    <check id="296" parent="48" name="user_card_next_upgrade_coin_cost_check">
+    <check id="637" parent="77" name="user_card_next_upgrade_coin_cost_check">
       <ObjectId>49532</ObjectId>
       <ColNames>next_upgrade_coin_cost</ColNames>
       <Predicate>next_upgrade_coin_cost &gt;= 0</Predicate>
     </check>
-    <column id="297" parent="49" name="id">
+    <column id="638" parent="78" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1761,57 +3702,57 @@ character_id</ColNames>
       <DefaultExpression>nextval(&apos;user_chest_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>user_chest_id_seq</SequenceName>
     </column>
-    <column id="298" parent="49" name="created_date">
+    <column id="639" parent="78" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>663</StateNumber>
     </column>
-    <column id="299" parent="49" name="updated_date">
+    <column id="640" parent="78" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>663</StateNumber>
     </column>
-    <column id="300" parent="49" name="params">
+    <column id="641" parent="78" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>663</StateNumber>
     </column>
-    <column id="301" parent="49" name="gem">
+    <column id="642" parent="78" name="gem">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>680</StateNumber>
     </column>
-    <column id="302" parent="49" name="coin">
+    <column id="643" parent="78" name="coin">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>680</StateNumber>
     </column>
-    <column id="303" parent="49" name="user_id">
+    <column id="644" parent="78" name="user_id">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>663</StateNumber>
     </column>
-    <index id="304" parent="49" name="user_chest_pkey">
+    <index id="645" parent="78" name="user_chest_pkey">
       <ObjectId>16634</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="305" parent="49" name="user_chest_user_id_8753d783">
+    <index id="646" parent="78" name="user_chest_user_id_8753d783">
       <ObjectId>16641</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="306" parent="49" name="user_chest_pkey">
+    <key id="647" parent="78" name="user_chest_pkey">
       <ObjectId>16635</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>user_chest_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="307" parent="49" name="user_chest_user_id_8753d783_fk_auth_user_id">
+    <foreign-key id="648" parent="78" name="user_chest_user_id_8753d783_fk_auth_user_id">
       <ObjectId>16636</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1822,17 +3763,123 @@ character_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="308" parent="49" name="user_chest_gem_605591b2_check">
+    <check id="649" parent="78" name="user_chest_gem_605591b2_check">
       <ObjectId>16645</ObjectId>
       <ColNames>gem</ColNames>
       <Predicate>gem &gt;= 0</Predicate>
     </check>
-    <check id="309" parent="49" name="user_chest_coin_bd16dd33_check">
+    <check id="650" parent="78" name="user_chest_coin_bd16dd33_check">
       <ObjectId>16644</ObjectId>
       <ColNames>coin</ColNames>
       <Predicate>coin &gt;= 0</Predicate>
     </check>
-    <column id="310" parent="50" name="id">
+    <column id="651" parent="79" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>876</StateNumber>
+      <DefaultExpression>nextval(&apos;user_chests_id_seq&apos;::regclass)</DefaultExpression>
+      <SequenceName>user_chests_id_seq</SequenceName>
+    </column>
+    <column id="652" parent="79" name="created_date">
+      <Position>2</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>876</StateNumber>
+    </column>
+    <column id="653" parent="79" name="updated_date">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>876</StateNumber>
+    </column>
+    <column id="654" parent="79" name="params">
+      <Position>4</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>876</StateNumber>
+    </column>
+    <column id="655" parent="79" name="chest_type">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>880</StateNumber>
+    </column>
+    <column id="656" parent="79" name="chest_id">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>876</StateNumber>
+    </column>
+    <column id="657" parent="79" name="user_id">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>876</StateNumber>
+    </column>
+    <column id="658" parent="79" name="status">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>880</StateNumber>
+    </column>
+    <column id="659" parent="79" name="cards">
+      <Position>9</Position>
+      <DataType>jsonb|0</DataType>
+      <StateNumber>891</StateNumber>
+    </column>
+    <column id="660" parent="79" name="sequence_number">
+      <Position>10</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>894</StateNumber>
+    </column>
+    <index id="661" parent="79" name="user_chests_pkey">
+      <ObjectId>66074</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="662" parent="79" name="user_chests_chest_id_7a2ccf62">
+      <ObjectId>66086</ObjectId>
+      <ColNames>chest_id</ColNames>
+    </index>
+    <index id="663" parent="79" name="user_chests_user_id_4a24cbde">
+      <ObjectId>66087</ObjectId>
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="664" parent="79" name="user_chests_pkey">
+      <ObjectId>66075</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>user_chests_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="665" parent="79" name="user_chests_chest_id_7a2ccf62_fk_chest_id">
+      <ObjectId>66076</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>chest_id</ColNames>
+      <RefTableId>66012</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>chest</RefTableName>
+      <RefKeyName>chest_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="666" parent="79" name="user_chests_user_id_4a24cbde_fk_auth_user_id">
+      <ObjectId>66081</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16434</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <check id="667" parent="79" name="user_chests_sequence_number_check">
+      <ObjectId>66119</ObjectId>
+      <ColNames>sequence_number</ColNames>
+      <Predicate>sequence_number &gt;= 0</Predicate>
+    </check>
+    <column id="668" parent="80" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -1840,97 +3887,97 @@ character_id</ColNames>
       <DefaultExpression>nextval(&apos;user_hero_id_seq&apos;::regclass)</DefaultExpression>
       <SequenceName>user_hero_id_seq</SequenceName>
     </column>
-    <column id="311" parent="50" name="created_date">
+    <column id="669" parent="80" name="created_date">
       <Position>2</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="312" parent="50" name="updated_date">
+    <column id="670" parent="80" name="updated_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="313" parent="50" name="params">
+    <column id="671" parent="80" name="params">
       <Position>4</Position>
       <DataType>jsonb|0</DataType>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="314" parent="50" name="enable_hero">
+    <column id="672" parent="80" name="enable_hero">
       <Position>5</Position>
       <DataType>boolean|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="315" parent="50" name="hero_id">
+    <column id="673" parent="80" name="hero_id">
       <Position>6</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="316" parent="50" name="user_id">
+    <column id="674" parent="80" name="user_id">
       <Position>7</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>770</StateNumber>
     </column>
-    <column id="317" parent="50" name="level">
+    <column id="675" parent="80" name="level">
       <Position>8</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>809</StateNumber>
     </column>
-    <column id="318" parent="50" name="next_upgrade_card_count">
+    <column id="676" parent="80" name="next_upgrade_card_count">
       <Position>9</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>809</StateNumber>
     </column>
-    <column id="319" parent="50" name="next_upgrade_coin_cost">
+    <column id="677" parent="80" name="next_upgrade_coin_cost">
       <Position>10</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>809</StateNumber>
     </column>
-    <column id="320" parent="50" name="quantity">
+    <column id="678" parent="80" name="quantity">
       <Position>11</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>809</StateNumber>
     </column>
-    <index id="321" parent="50" name="user_hero_pkey">
+    <index id="679" parent="80" name="user_hero_pkey">
       <ObjectId>33136</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="322" parent="50" name="user_hero_user_id_hero_id_bf3b7bae_uniq">
+    <index id="680" parent="80" name="user_hero_user_id_hero_id_bf3b7bae_uniq">
       <ObjectId>33140</ObjectId>
       <ColNames>user_id
 hero_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="323" parent="50" name="user_hero_hero_id_d88468d0">
+    <index id="681" parent="80" name="user_hero_hero_id_d88468d0">
       <ObjectId>33142</ObjectId>
       <ColNames>hero_id</ColNames>
     </index>
-    <index id="324" parent="50" name="user_hero_user_id_b35495c8">
+    <index id="682" parent="80" name="user_hero_user_id_b35495c8">
       <ObjectId>33148</ObjectId>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="325" parent="50" name="user_hero_pkey">
+    <key id="683" parent="80" name="user_hero_pkey">
       <ObjectId>33137</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>user_hero_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <key id="326" parent="50" name="user_hero_user_id_hero_id_bf3b7bae_uniq">
+    <key id="684" parent="80" name="user_hero_user_id_hero_id_bf3b7bae_uniq">
       <ObjectId>33141</ObjectId>
       <ColNames>user_id
 hero_id</ColNames>
       <UnderlyingIndexName>user_hero_user_id_hero_id_bf3b7bae_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="327" parent="50" name="user_hero_hero_id_d88468d0_fk_hero_id">
+    <foreign-key id="685" parent="80" name="user_hero_hero_id_d88468d0_fk_hero_id">
       <ObjectId>33143</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1941,7 +3988,7 @@ hero_id</ColNames>
       <RefKeyName>hero_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="328" parent="50" name="user_hero_user_id_b35495c8_fk_auth_user_id">
+    <foreign-key id="686" parent="80" name="user_hero_user_id_b35495c8_fk_auth_user_id">
       <ObjectId>33149</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1952,22 +3999,22 @@ hero_id</ColNames>
       <RefKeyName>auth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="329" parent="50" name="user_hero_level_check">
+    <check id="687" parent="80" name="user_hero_level_check">
       <ObjectId>49546</ObjectId>
       <ColNames>level</ColNames>
       <Predicate>level &gt;= 0</Predicate>
     </check>
-    <check id="330" parent="50" name="user_hero_next_upgrade_card_count_check">
+    <check id="688" parent="80" name="user_hero_next_upgrade_card_count_check">
       <ObjectId>49558</ObjectId>
       <ColNames>next_upgrade_card_count</ColNames>
       <Predicate>next_upgrade_card_count &gt;= 0</Predicate>
     </check>
-    <check id="331" parent="50" name="user_hero_next_upgrade_coin_cost_check">
+    <check id="689" parent="80" name="user_hero_next_upgrade_coin_cost_check">
       <ObjectId>49570</ObjectId>
       <ColNames>next_upgrade_coin_cost</ColNames>
       <Predicate>next_upgrade_coin_cost &gt;= 0</Predicate>
     </check>
-    <check id="332" parent="50" name="user_hero_quantity_check">
+    <check id="690" parent="80" name="user_hero_quantity_check">
       <ObjectId>49582</ObjectId>
       <ColNames>quantity</ColNames>
       <Predicate>quantity &gt;= 0</Predicate>

@@ -14,7 +14,6 @@ from simple_history.models import HistoricalRecords
 from django.utils import timezone
 
 
-
 @python_2_unicode_compatible
 class BenefitBox(Base):
     TYPE = (

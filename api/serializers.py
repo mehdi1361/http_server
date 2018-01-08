@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, LeagueInfo, Chest
-# from django.contrib.auth.models import User
+from shopping.models import Shop
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -180,4 +180,18 @@ class LeagueInfoSerializer(serializers.ModelSerializer):
             'min_score',
             'chests',
             'description'
+        )
+
+
+class ShopSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Shop
+        fields = (
+            'id',
+            'name',
+            'coins',
+            'gems',
+            'chests',
+            'special_offer'
         )

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'objects',
     'django_cron',
     'simple_history',
+    'shopping',
 ]
 
 MIDDLEWARE = [
