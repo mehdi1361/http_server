@@ -1,0 +1,150 @@
+[
+{
+  "model": "shopping.shop",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-01-08T07:45:22.851Z",
+    "updated_date": "2018-01-08T09:15:45.884Z",
+    "params": null,
+    "name": "test",
+    "coins": [
+      {
+        "discount": 5,
+        "cost": "gem",
+        "id": 1,
+        "value": 200
+      },
+      {
+        "discount": 5,
+        "cost": "gem",
+        "id": 2,
+        "value": 250
+      },
+      {
+        "discount": 5,
+        "cost": "gem",
+        "id": 3,
+        "value": 265
+      },
+      {
+        "discount": 5,
+        "cost": "gem",
+        "id": 4,
+        "value": 265
+      },
+      {
+        "discount": 5,
+        "cost": "gem",
+        "id": 5,
+        "value": 325
+      },
+      {
+        "discount": 12,
+        "cost": "gem",
+        "id": 6,
+        "value": 410
+      }
+    ],
+    "gems": [
+      {
+        "lable": "None",
+        "cost": "rial",
+        "id": 1,
+        "value": 200,
+        "discount": 5
+      },
+      {
+        "lable": "None",
+        "cost": "rial",
+        "id": 2,
+        "value": 220,
+        "discount": 5
+      },
+      {
+        "lable": "None",
+        "cost": "rial",
+        "id": 3,
+        "value": 240,
+        "discount": 5
+      },
+      {
+        "lable": "best value",
+        "cost": "rial",
+        "id": 4,
+        "value": 260,
+        "discount": 4
+      },
+      {
+        "lable": "most popular",
+        "cost": "rial",
+        "id": 5,
+        "value": 270,
+        "discount": 2
+      },
+      {
+        "lable": "None",
+        "cost": "rial",
+        "id": 6,
+        "value": 300,
+        "discount": 12
+      }
+    ],
+    "chests": [
+      {
+        "discount": 25,
+        "cost": 20,
+        "type": "W"
+      },
+      {
+        "discount": 35,
+        "cost": 30,
+        "type": "S"
+      },
+      {
+        "discount": 85,
+        "cost": 70,
+        "type": "G"
+      },
+      {
+        "discount": 125,
+        "cost": 120,
+        "type": "C"
+      }
+    ],
+    "special_offer": [
+      {
+        "discount": 250,
+        "chest": [
+          {
+            "discount": 25,
+            "cost": 20,
+            "type": "W"
+          },
+          {
+            "discount": 35,
+            "cost": 30,
+            "type": "S"
+          },
+          {
+            "discount": 85,
+            "cost": 70,
+            "type": "G"
+          },
+          {
+            "discount": 125,
+            "cost": 120,
+            "type": "C"
+          }
+        ],
+        "cost": "rial",
+        "time": "",
+        "coin": 200,
+        "id": 1,
+        "gem": 12
+      }
+    ],
+    "store": 3,
+    "enable": true
+  }
+}
+]
