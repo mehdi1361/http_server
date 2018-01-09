@@ -36,8 +36,6 @@ class UnitSerializer(serializers.ModelSerializer):
 
 
 class HeroSerializer(serializers.ModelSerializer):
-    # units = UnitSerializer(many=True, read_only=True)
-
     class Meta:
         model = Hero
         fields = ('moniker', 'dexterity', 'attack_type', 'health', 'level', 'chakra_health', 'shield', 'chakra_shield',
@@ -79,7 +77,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_heroes(self, requests):
         try:
-            hero_user = None
             hero_user = UserHero.objects.get(user=requests, enable_hero=True)
 
         except UserHero.DoesNotExist as e:
@@ -91,7 +88,7 @@ class UserSerializer(serializers.ModelSerializer):
                 serializer = HeroSerializer(hero)
                 data = serializer.data
 
-                if hero.id == hero_user.id if hero_user else 0:
+                if hero.id == hero_user.hero.id if hero_user else 0:
                     data['selected_hero'] = True
 
                 else:
