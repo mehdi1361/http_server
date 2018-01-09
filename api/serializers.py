@@ -117,11 +117,6 @@ class UserSerializer(serializers.ModelSerializer):
             return list_serialize
 
     def get_general_units(self, requests):
-        try:
-            user = self.context['request'].user
-            if user.is_anonymous:
-                return None
-
             hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=False))
             # units = Unit.objects.all().exclude(id__in=hero_units)
 
@@ -136,9 +131,6 @@ class UserSerializer(serializers.ModelSerializer):
                 list_unit.append(data)
 
             return list_unit
-
-        except Exception as e:
-            return None
 
     def create(self, validated_data):
         # if 'email' not in validated_data:
