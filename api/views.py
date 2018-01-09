@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer, UserRegisterSerializer
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
@@ -63,6 +63,12 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(
             {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
 
+    @list_route(methods=['POST'])
+    def player_info(self, request):
+        user = get_object_or_404(User, id=request.user.id)
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
+
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = BenefitBox.objects.all()
@@ -96,22 +102,9 @@ class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.
 class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
-    # filter_backends = (DjangoFilterBackend,)
-    # filter_fields = ('box', )
 
     @list_route(methods=['POST'])
     def store(self, request):
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         return Response(serializer.data)
-
-
-@api_view(['POST'])
-def create_auth(request):
-    serialized = UserRegisterSerializer(data=request.data)
-    if serialized.is_valid():
-        serialized.save()
-
-        return Response(serialized.data, status=status.HTTP_201_CREATED)
-    else:
-        return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
