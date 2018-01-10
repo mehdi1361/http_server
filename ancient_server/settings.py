@@ -151,7 +151,7 @@ STATIC_URL = '/static/'
 
 DECK_COUNT = {
     'free': 3,
-    'non-free': 4
+    'non_free': 4
 }
 
 

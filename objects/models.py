@@ -42,6 +42,10 @@ class Unit(BaseUnit, Base):
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     history = HistoricalRecords()
 
+    @classmethod
+    def count(cls):
+        return cls.objects.all().count()
+
     class Meta:
         verbose_name = _('unit')
         verbose_name_plural = _('units')
@@ -205,7 +209,13 @@ class Chest(Base):
                                                   validators=[validate_percent])
     hero_card = models.PositiveIntegerField(_('hero card count'), default=0)
     unit_card = models.PositiveIntegerField(_('unit card count'), default=3)
+    opening_time = models.PositiveIntegerField(_('opening time'), default=5)
+    time_to_open = models.PositiveIntegerField(_('time to open'), default=2)
     history = HistoricalRecords()
+
+    @classmethod
+    def get(cls, chest_type):
+        return Chest.objects.get(chest_type=chest_type, info__id=3)
 
     class Meta:
         verbose_name = _('chest')
@@ -217,11 +227,18 @@ class Chest(Base):
         return '{}'.format(self.chest_type)
 
 
+class Deck(models.Manager):
+    def get_queryset(self):
+        return super(Deck, self).get_queryset().exclude(status='ready')
+
+
+@python_2_unicode_compatible
 class UserChest(Base):
     TYPE = (
         ('free', 'FREE'),
-        ('non-free', 'NON-FREE')
+        ('non_free', 'NON_FREE')
     )
+
     STATUS = (
         ('close', 'close'),
         ('opening', 'opening'),
@@ -230,15 +247,25 @@ class UserChest(Base):
 
     user = models.ForeignKey(User, verbose_name=_('user'), related_name='chests')
     chest = models.ForeignKey(Chest, verbose_name=_('chest'), related_name='users')
-    chest_type = models.CharField(_('chest type'), max_length=50, choices=TYPE, default='free')
+    chest_type = models.CharField(_('chest type'), max_length=50, choices=TYPE, default='non_free')
     status = models.CharField(_('status'), max_length=50, choices=STATUS, default='close')
     sequence_number = models.PositiveIntegerField(_('sequence number'), default=0, validators=[validate_sequence])
     cards = JSONField(verbose_name=_('cards'), default=None, null=True)
     history = HistoricalRecords()
 
+    objects = models.Manager()
+    deck = Deck()
+
+    @classmethod
+    def reset_sequence(cls, user):
+        cls.objects.filter(user=user).update(sequence_number=0)
+
     @classmethod
     def deck_is_open(cls, user, chest_type):
-        if cls.objects.filter(user=user, chest_type=chest_type).count() >= settings.DECK_COUNT[chest_type]:
+        if cls.objects.filter(
+                user=user,
+                chest_type=chest_type,
+        ).exclude(status='ready').count() >= settings.DECK_COUNT[chest_type]:
             return False
 
         return True
@@ -246,8 +273,31 @@ class UserChest(Base):
     @classmethod
     def get_sequence(cls, user):
         last_chest = cls.objects.filter(user=user).last()
-        return 0 if last_chest is None else last_chest.sequence_number, \
-               settings.CHEST_SEQUENCE[0 if last_chest is None else last_chest.sequence_number]
+
+        if last_chest is None:
+            sequence_number = 0
+            sequence_type = settings.CHEST_SEQUENCE[0]
+
+        elif last_chest.sequence_number > len(settings.CHEST_SEQUENCE) -1:
+            sequence_number = 0
+            sequence_type = settings.CHEST_SEQUENCE[0]
+            cls.reset_sequence(user)
+
+        else:
+            sequence_number = last_chest.sequence_number
+            sequence_type = settings.CHEST_SEQUENCE[last_chest.sequence_number]
+
+        return sequence_number, sequence_type
+
+    @classmethod
+    def next_sequence(cls, user):
+        last_chest = cls.objects.filter(user=user).last()
+
+        if last_chest is None or last_chest.sequence_number > len(settings.CHEST_SEQUENCE) - 1:
+            return 0
+
+        else:
+            return last_chest.sequence_number + 1
 
     class Meta:
         verbose_name = _('user_chest')

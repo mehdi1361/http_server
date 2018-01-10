@@ -1,7 +1,23 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, LeagueInfo, Chest
+from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
+    LeagueInfo, Chest, UserChest
 from shopping.models import Shop
+
+
+class UserChestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserChest
+        fields = (
+            'id',
+            'user',
+            'chest',
+            'chest_type',
+            'status',
+            'sequence_number',
+            'cards'
+        )
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -47,6 +63,7 @@ class UserSerializer(serializers.ModelSerializer):
     currency = serializers.SerializerMethodField()
     heroes = serializers.SerializerMethodField()
     general_units = serializers.SerializerMethodField()
+    deck = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -57,7 +74,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'currency',
             'heroes',
-            'general_units'
+            'general_units',
+            'deck'
         )
         extra_kwargs = {
             'password': {'write_only': True},
@@ -65,6 +83,11 @@ class UserSerializer(serializers.ModelSerializer):
             'heroes': {'read_only': True},
             'general_units': {'read_only': True}
         }
+
+    def get_deck(self, requests):
+        user_deck = UserChest.deck.filter(user=requests)
+        serializer = UserChestSerializer(user_deck, many=True)
+        return serializer.data
 
     def get_currency(self, requests):
         try:
@@ -195,3 +218,5 @@ class ShopSerializer(serializers.ModelSerializer):
             'chests',
             'special_offer'
         )
+
+

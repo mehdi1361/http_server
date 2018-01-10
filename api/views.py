@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer, UserChestSerializer
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo, UserChest
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
@@ -108,3 +108,16 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         return Response(serializer.data)
+
+
+class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                       viewsets.GenericViewSet):
+    queryset = UserChest.objects.all()
+    serializer_class = UserChestSerializer
+
+    @list_route(methods=['POST'])
+    def generate_win_chest(self, request):
+        if not UserChest.deck_is_open(request.user):
+            return Response({'message': 'deck is full'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
