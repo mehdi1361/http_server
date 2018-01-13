@@ -14,6 +14,7 @@ class UserChestSerializer(serializers.ModelSerializer):
             'user',
             'chest',
             'chest_type',
+            'skip_gem',
             'status',
             'sequence_number',
             'cards'

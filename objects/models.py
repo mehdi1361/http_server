@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from datetime import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit
@@ -90,7 +90,7 @@ class UserBuy(Base):
 
 @python_2_unicode_compatible
 class UserCurrency(Base):
-    user = models.ForeignKey(User, related_name='user_chest')
+    user = models.ForeignKey(User, related_name='user_currency')
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)
     history = HistoricalRecords()
@@ -99,6 +99,26 @@ class UserCurrency(Base):
         verbose_name = _('user_chest')
         verbose_name_plural = _('user_chest')
         db_table = 'user_chest'
+
+    @classmethod
+    def hard_currency(cls, user):
+        return cls.objects.get(user=user).gem
+
+    @classmethod
+    def soft_currency(cls, user):
+        return cls.objects.get(user=user).coin
+
+    @classmethod
+    def subtract(cls, user, value, currency_type='COIN'):
+        currency = cls.objects.get(user=user)
+
+        if currency_type == 'GEM':
+            currency.gem -= value
+
+        else:
+            currency.coin -= value
+
+        currency.save()
 
     def __str__(self):
         return '{}, gem:{}, coin:{}'.format(self.user, self.gem, self.coin)
@@ -229,7 +249,7 @@ class Chest(Base):
 
 class Deck(models.Manager):
     def get_queryset(self):
-        return super(Deck, self).get_queryset().exclude(status='ready')
+        return super(Deck, self).get_queryset().exclude(status='used')
 
 
 @python_2_unicode_compatible
@@ -242,7 +262,8 @@ class UserChest(Base):
     STATUS = (
         ('close', 'close'),
         ('opening', 'opening'),
-        ('ready', 'ready')
+        ('ready', 'ready'),
+        ('used', 'used')
     )
 
     user = models.ForeignKey(User, verbose_name=_('user'), related_name='chests')
@@ -251,6 +272,7 @@ class UserChest(Base):
     status = models.CharField(_('status'), max_length=50, choices=STATUS, default='close')
     sequence_number = models.PositiveIntegerField(_('sequence number'), default=0, validators=[validate_sequence])
     cards = JSONField(verbose_name=_('cards'), default=None, null=True)
+    chest_opening_date = models.DateTimeField(_('chest opening time'), null=True, default=None)
     history = HistoricalRecords()
 
     objects = models.Manager()
@@ -265,10 +287,33 @@ class UserChest(Base):
         if cls.objects.filter(
                 user=user,
                 chest_type=chest_type,
-        ).exclude(status='ready').count() >= settings.DECK_COUNT[chest_type]:
+        ).exclude(status='used').count() >= settings.DECK_COUNT[chest_type]:
             return False
 
         return True
+
+    @property
+    def skip_gem(self):
+        if self.status == 'ready':
+            return 0
+
+        if not self.chest_opening_date:
+            return 0
+
+        current_time = timezone.now()
+
+        if (self.chest_opening_date - timezone.now()).seconds >= 0:
+            return (self.chest_opening_date - current_time).seconds / 60
+
+
+
+    @property
+    def chest_status(self):
+        return self.status
+
+    @chest_status.setter
+    def chest_status(self, value):
+        self.status = value
 
     @classmethod
     def get_sequence(cls, user):

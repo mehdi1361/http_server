@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
@@ -14,7 +15,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
-
+from django.conf import  settings
 
 class DefaultsMixin(object):
     paginate_by = 25
@@ -68,6 +69,37 @@ class UserViewSet(viewsets.ModelViewSet):
         user = get_object_or_404(User, id=request.user.id)
         serializer = self.serializer_class(user)
         return Response(serializer.data)
+
+    @list_route(methods=['POST'])
+    def open_chest(self, request):
+        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='close')
+
+        if UserChest.deck.filter(user=request.user, status='opening').count() >= 1:
+            return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
+
+        chest.chest_opening_date = datetime.now() + timedelta(hours=5)
+        chest.chest_status = 'opening'
+        chest.save()
+
+        return Response({'id': 201, 'message': 'chest change status opening'}, status=status.HTTP_202_ACCEPTED)
+
+    @list_route(methods=['POST'])
+    def use_skip_gem(self, request):
+        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='opening')
+
+        if chest.skip_gem > UserCurrency.hard_currency(request.user):
+            return Response({'id': 400, 'message': 'gem not enough'}, status=status.HTTP_400_BAD_REQUEST)
+
+        UserCurrency.subtract(request.user, chest.skip_gem, 'GEM')
+
+        chest.chest_status = 'ready'
+        chest.save()
+
+        return Response({'id': 201, 'message': 'chest change status ready'}, status=status.HTTP_202_ACCEPTED)
+
+    @list_route(methods=['POST'])
+    def open_chest(self, request):
+        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
 
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):

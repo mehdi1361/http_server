@@ -69,15 +69,15 @@ class ChestGenerate:
                 break
 
         data = {
-            'user': self.user,
-            'chest': chest,
-            'sequence_number': UserChest.next_sequence(self.user),
-            'cards': json.dumps(
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "cards":
                 {
-                    'gems': random.randint(chest.min_gem, chest.max_gem),
-                    'coins': random.randint(chest.min_coin, chest.max_coin),
-                    'units': lst_unit
-                })
+                    "gems": random.randint(chest.min_gem, chest.max_gem),
+                    "coins": random.randint(chest.min_coin, chest.max_coin),
+                    "units": lst_unit
+                }
         }
         print(data)
         UserChest.objects.create(**data)
