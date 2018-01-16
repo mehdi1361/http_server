@@ -1,7 +1,6 @@
 from __future__ import print_function
-import json
 import random
-from objects.models import UserChest, Chest, Unit, UserCard
+from objects.models import UserChest, Chest, Unit, Item
 
 
 class ClassPropertyDescriptor(object):
@@ -79,7 +78,6 @@ class ChestGenerate:
                     "units": lst_unit
                 }
         }
-        print(data)
         UserChest.objects.create(**data)
         return {"status": True, "message": "chest created"}
 

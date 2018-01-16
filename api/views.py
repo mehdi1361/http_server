@@ -5,7 +5,7 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer, UserChestSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo, UserChest
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo, UserChest, UserCard, Unit
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
@@ -16,6 +16,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import  settings
+
 
 class DefaultsMixin(object):
     paginate_by = 25
@@ -100,6 +101,18 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def open_chest(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
+        UserCurrency.update_currency(request.user, chest.cards['gems'], chest.cards['coins'])
+        for unit in chest.cards['units']:
+            character = Unit.objects.get(moniker=unit['unit'])
+            UserCard.upgrade_character(request.user, character, unit['count'])
+
+        # TODO add hero card
+        # TODO add item card
+
+        chest.status = 'used'
+        chest.save()
+
+        return Response({'id': 201, 'message': 'chest change status used'}, status=status.HTTP_202_ACCEPTED)
 
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):

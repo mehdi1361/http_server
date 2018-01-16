@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_cron',
     'simple_history',
     'shopping',
+    'message',
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,10 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 STATIC_URL = '/static/'
+
+
+ITEM_UPDATE = {
+    1: {'item_cards': 1, 'coins': 0, 'increase': 0.2},
+    2: {'item_cards': 5, 'coins': 250, 'increase': 0.2},
+    3: {'item_cards': 15, 'coins': 1000, 'increase': 0.2}
+}

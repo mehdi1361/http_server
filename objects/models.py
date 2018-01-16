@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit
@@ -9,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models import signals
 from .validators import validate_percent, validate_sequence
 from django.conf import settings
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
 
@@ -120,6 +119,18 @@ class UserCurrency(Base):
 
         currency.save()
 
+    @classmethod
+    def update_currency(cls, user, gems=0, coins=0):
+        selected_user = cls.objects.get(user=user)
+
+        if gems > 0:
+            selected_user.gem += gems
+
+        if coins > 0:
+            selected_user.coin += coins
+
+        selected_user.save()
+
     def __str__(self):
         return '{}, gem:{}, coin:{}'.format(self.user, self.gem, self.coin)
 
@@ -149,6 +160,7 @@ class UserHero(Base):
     next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
     next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
     level = models.PositiveIntegerField(_('level'), default=1)
+    selected_item = JSONField(_('selected item'), null=True)
     history = HistoricalRecords()
 
     class Meta:
@@ -156,6 +168,16 @@ class UserHero(Base):
         verbose_name_plural = _('user_hero')
         db_table = 'user_hero'
         unique_together = ('user', 'hero')
+
+    @classmethod
+    def get_selected_item(cls, user, hero):
+        lst_item = []
+        user_hero = cls.objects.get(user=user, hero=hero)
+
+        for item in user_hero.selected_item:
+            lst_item.append(item['id'])
+
+        return lst_item
 
     def __str__(self):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
@@ -192,6 +214,12 @@ class UserCard(Base):
     @classmethod
     def cards(cls, user):
         return cls.objects.filter(user=user).values_list('character')
+
+    @classmethod
+    def upgrade_character(cls, user, character, value):
+        user_character = cls.objects.get(user=user, character=character)
+        user_character.quantity += value
+        user_character.save()
 
 
 @python_2_unicode_compatible
@@ -353,10 +381,72 @@ class UserChest(Base):
         return '{}-{}'.format(self.user.username, self.chest.chest_type)
 
 
-def create_user_cards(sender, instance, created, **kwargs):
+@python_2_unicode_compatible
+class Item(Base):
+    TYPE = (
+        ('helmet', 'helmet'),
+        ('weapon', 'weapon'),
+        ('Armor', 'Armor')
+    )
+    NAME = (
+        ('Biker', 'Biker'),
+        ('Dimetry', 'Dimetry'),
+        ('Lion', 'Lion'),
+        ('Guerrilla', 'Guerrilla'),
+        ('Knight', 'Knight'),
+        ('Horn', 'Horn'),
+        ('Mexican', 'Mexican'),
+        ('Naga', 'Naga'),
+        ('Duff', 'Duff')
+    )
+    name = models.CharField(_('name'), max_length=50, choices=NAME, default='Biker')
+    damage = models.IntegerField(_('damage'), default=0)
+    shield = models.IntegerField(_('shield'), default=0)
+    health = models.IntegerField(_('health'), default=0)
+    critical_ratio = models.FloatField(_('critical ratio'), default=0)
+    critical_chance = models.FloatField(_('critical chance'), default=0)
+    dodge_chance = models.FloatField(_('dodge chance'), default=0)
+    item_type = models.CharField(_('item type'), max_length=50, null=True, default='helmet', choices=TYPE)
+    level = models.PositiveIntegerField(_('level'), default=0)
+    hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='items')
+
+    class Meta:
+        verbose_name = _('item')
+        verbose_name_plural = _('items')
+        unique_together = ('name', 'hero', 'item_type')
+        db_table = 'items'
+
+    def __str__(self):
+        return '{}-{}-{}'.format(self.hero.moniker, self.name, self.item_type)
+
+
+@python_2_unicode_compatible
+class UserItem(Base):
+    user = models.ForeignKey(User, verbose_name=_('username'), related_name='items')
+    item = models.ForeignKey(Item, verbose_name=_('item'), related_name='items')
+    quantity = models.PositiveIntegerField(_('quantity card'), default=0)
+    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
+    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
+    level = models.PositiveIntegerField(_('level'), default=0)
+    history = HistoricalRecords()
+
+    class Meta:
+        verbose_name = _('user_item')
+        verbose_name_plural = _('user_item')
+        db_table = 'user_item'
+        unique_together = ('user', 'item')
+
+    def __str__(self):
+        return '{}'.format(self.quantity)
+
+
+def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
             UserCard.objects.create(user=instance, character=unit)
 
+        for item in Item.objects.all():
+            UserItem.objects.create(item=item, user=instance)
 
-signals.post_save.connect(create_user_cards, sender=User)
+
+signals.post_save.connect(create_user_dependency, sender=User)

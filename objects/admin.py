@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest
+from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero
 from simple_history.admin import SimpleHistoryAdmin
 # from django.contrib.auth.models import User
 
@@ -12,8 +12,12 @@ from simple_history.admin import SimpleHistoryAdmin
 #     list_filter = ('is_staff', 'is_superuser')
 
 
-class HeroUnits(admin.StackedInline):
+class HeroUnitsAdmin(admin.StackedInline):
     model = HeroUnits
+
+
+class ItemInline(admin.StackedInline):
+    model = Item
 
 
 class ChestInline(admin.StackedInline):
@@ -38,7 +42,7 @@ class UnitAdmin(SimpleHistoryAdmin):
 class HeroAdmin(SimpleHistoryAdmin):
     list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start')
     list_filter = ('dexterity', )
-    inlines = [HeroUnits]
+    inlines = (HeroUnitsAdmin, ItemInline)
 
 
 @admin.register(LeagueInfo)
@@ -46,3 +50,35 @@ class LeagueInfoAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'min_score', 'description', 'created_date', 'updated_date')
     # history_list_display = ['name', 'min_score', 'description', 'created_date', 'updated_date']
     inlines = (ChestInline, )
+
+
+@admin.register(Item)
+class ItemAdmin(SimpleHistoryAdmin):
+    list_display = (
+        'name',
+        'hero',
+        'item_type',
+        'damage',
+        'shield',
+        'health',
+        'critical_ratio',
+        'critical_chance',
+        'dodge_chance',
+        'created_date',
+        'updated_date'
+    )
+    readonly_fields = ('level', )
+
+
+@admin.register(UserHero)
+class UserHeroAdmin(SimpleHistoryAdmin):
+    list_display = (
+        'user',
+        'hero',
+        'enable_hero',
+        'quantity',
+        'next_upgrade_coin_cost',
+        'next_upgrade_card_count',
+        'level',
+        'selected_item'
+    )

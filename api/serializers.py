@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest
+    LeagueInfo, Chest, UserChest, Item, UserItem
 from shopping.models import Shop
 
 
@@ -18,6 +18,23 @@ class UserChestSerializer(serializers.ModelSerializer):
             'status',
             'sequence_number',
             'cards'
+        )
+
+
+class ItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Item
+        fields = (
+            'id',
+            'name',
+            'damage',
+            'shield',
+            'health',
+            'critical_ratio',
+            'critical_chance',
+            'dodge_chance',
+            'item_type',
         )
 
 
@@ -53,6 +70,7 @@ class UnitSerializer(serializers.ModelSerializer):
 
 
 class HeroSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Hero
         fields = ('moniker', 'dexterity', 'attack_type', 'health', 'level', 'chakra_health', 'shield', 'chakra_shield',
@@ -123,23 +141,42 @@ class UserSerializer(serializers.ModelSerializer):
                 data['next_upgrade_card_count'] = hero_user.next_upgrade_card_count if hero_user else 0
 
                 list_unit = []
-                for unit in UserCard.objects.filter(character__heroes=hero):
+                for unit in UserCard.objects.filter(character__heroes=hero, user=requests):
                     unit_serializer = UnitSerializer(unit.character)
                     unit_data = unit_serializer.data
                     unit_data['quantity'] = unit.quantity
                     unit_data['next_upgrade_coin_cost'] = unit.next_upgrade_coin_cost
                     unit_data['next_upgrade_card_count'] = unit.next_upgrade_card_count
                     unit_data['level'] = unit.level
+                    unit_data['cool_down'] = unit.is_cool_down
                     list_unit.append(unit_data)
 
                 data['units'] = list_unit
+
+                list_item = []
+                for item in UserItem.objects.filter(item__hero=hero, user=requests):
+                    item_serializer = ItemSerializer(item.item)
+                    item_data = item_serializer.data
+                    item_data['quantity'] = item.quantity
+                    item_data['next_upgrade_coin_cost'] = item.next_upgrade_coin_cost
+                    item_data['next_upgrade_card_count'] = item.next_upgrade_card_count
+                    item_data['level'] = item.level
+
+                    if data['selected_hero']:
+                        item_data['selected_item'] = item.id in UserHero.get_selected_item(requests, hero)
+                    else:
+                        item_data['selected_item'] = False
+
+                    list_item.append(item_data)
+
+                data['items'] = list_item
+
                 list_serialize.append(data)
 
             return list_serialize
 
     def get_general_units(self, requests):
             hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=False))
-            # units = Unit.objects.all().exclude(id__in=hero_units)
 
             list_unit = []
             for unit in UserCard.objects.exclude(character_id__in=hero_units):
