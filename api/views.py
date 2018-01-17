@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, ShopSerializer, UserChestSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, LeagueInfo, UserChest, UserCard, Unit
+from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
+    ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero,\
+    LeagueInfo, UserChest, UserCard, Unit, UserItem
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
@@ -15,8 +17,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
-from django.conf import  settings
-
+from django.conf import settings
 
 class DefaultsMixin(object):
     paginate_by = 25
@@ -166,3 +167,91 @@ class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixi
             return Response({'message': 'deck is full'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
+class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+    queryset = UserCard.objects.all()
+    serializer_class = UserCardSerializer
+
+    @list_route(methods=['POST'])
+    def level_up(self, request):
+        unit_id = request.data.get('unit_id')
+        user_card = get_object_or_404(UserCard, user=request.user, character_id=unit_id)
+        user_currency = get_object_or_404(UserCurrency, user=request.user)
+
+        next_level = settings.UNIT_UPDATE[user_card.level + 1]
+
+        if user_card.quantity < next_level['unit_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        user_currency.coin -= next_level['coins']
+        user_currency.save()
+
+        user_card.quantity -= next_level['unit_cards']
+        user_card.save()
+
+        user_card.level += 1
+        user_card.save()
+
+        return Response({'message': 'character updated'}, status=status.HTTP_200_OK)
+
+
+class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+    queryset = UserHero.objects.all()
+    serializer_class = UserHeroSerializer
+
+    @list_route(methods=['POST'])
+    def level_up(self, request):
+        hero_id = request.data.get('hero_id')
+        user_hero = get_object_or_404(UserHero, user=request.user, character_id=hero_id)
+        user_currency = get_object_or_404(UserCurrency, user=request.user)
+
+        next_level = settings.HERO_UPDATE[user_hero.level + 1]
+
+        if user_hero.quantity < next_level['hero_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        user_currency.coin -= next_level['coins']
+        user_currency.save()
+
+        user_hero.quantity -= next_level['unit_cards']
+        user_hero.save()
+
+        user_hero.level += 1
+        user_hero.save()
+
+        return Response({'message': 'hero updated'}, status=status.HTTP_200_OK)
+
+
+class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+    queryset = UserItem.objects.all()
+    serializer_class = ItemSerializer
+
+    @list_route(methods=['POST'])
+    def level_up(self, request):
+        item_id = request.data.get('item_id')
+        user_item = get_object_or_404(UserItem, user=request.user, item_id=item_id)
+        user_currency = get_object_or_404(UserCurrency, user=request.user)
+
+        next_level = settings.ITEM_UPDATE[user_item.level + 1]
+
+        if user_item.quantity < next_level['item_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        user_currency.coin -= next_level['coins']
+        user_currency.save()
+
+        user_item.quantity -= next_level['unit_cards']
+        user_item.save()
+
+        user_item.level += 1
+        user_item.save()
+
+        return Response({'message': 'item updated'}, status=status.HTTP_200_OK)

@@ -43,7 +43,7 @@ class BaseUnit(models.Model):
     critical_ratio = models.FloatField(_('critical ratio'), default=0.01)
     miss_chance = models.FloatField(_('miss chance'), default=0.00)
     dodge_chance = models.FloatField(_('dodge chance'), default=0.00)
-    level = models.PositiveIntegerField(_('level'), default=0)
+    # level = models.PositiveIntegerField(_('level'), default=0)
 
     class Meta:
         abstract = True

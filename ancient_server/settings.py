@@ -175,3 +175,18 @@ ITEM_UPDATE = {
     2: {'item_cards': 5, 'coins': 250, 'increase': 0.2},
     3: {'item_cards': 15, 'coins': 1000, 'increase': 0.2}
 }
+
+UNIT_UPDATE = {
+    1: {'unit_cards': 1, 'coins': 0, 'increase': 0.2},
+    2: {'unit_cards': 5, 'coins': 250, 'increase': 0.2},
+    3: {'unit_cards': 15, 'coins': 1000, 'increase': 0.2},
+    4: {'unit_cards': 30, 'coins': 5000, 'increase': 0.2},
+    5: {'unit_cards': 100, 'coins': 20000, 'increase': 0.2},
+}
+
+HERO_UPDATE = {
+    1: {'hero_cards': 1, 'coins': 0, 'increase': 0.2},
+    2: {'hero_cards': 5, 'coins': 250, 'increase': 0.2},
+    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.2}
+}
+

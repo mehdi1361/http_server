@@ -3,10 +3,24 @@ from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
     LeagueInfo, Chest, UserChest, Item, UserItem
 from shopping.models import Shop
+from message.models import NewsLetter, Inbox
+from django.conf import settings
+
+
+class NewsLetterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsLetter
+        fields = (
+            'id',
+            'subject',
+            'body',
+            'created_date',
+            'updated_date',
+            'expire_date'
+        )
 
 
 class UserChestSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = UserChest
         fields = (
@@ -22,7 +36,6 @@ class UserChestSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Item
         fields = (
@@ -39,7 +52,6 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class CardSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = UserCard
         fields = ('name', 'quantity')
@@ -57,25 +69,51 @@ class UserCurrencySerializer(serializers.ModelSerializer):
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unit
-        fields = ('moniker',
-                  'dexterity',
-                  'attack_type',
-                  'attack',
-                  'critical_chance',
-                  'critical_ratio',
-                  'level',
-                  'miss_chance',
-                  'enable_in_start'
-                  )
+        fields = (
+            'id',
+            'moniker',
+            'dexterity',
+            'attack_type',
+            'attack',
+            'critical_chance',
+            'critical_ratio',
+            'miss_chance',
+            'enable_in_start'
+        )
 
 
 class HeroSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Hero
-        fields = ('moniker', 'dexterity', 'attack_type', 'health', 'level', 'chakra_health', 'shield', 'chakra_shield',
-                  'attack', 'chakra_attack', 'critical_chance', 'chakra_critical_chance', 'chakra_critical_ratio',
-                  'critical_ratio', 'miss_chance', 'chakra_miss_chance', 'chakra_dodge_chance', 'enable_in_start')
+        fields = ('id', 'moniker', 'dexterity', 'attack_type', 'health', 'chakra_health', 'shield',
+                  'chakra_shield', 'attack', 'chakra_attack', 'critical_chance',
+                  'chakra_critical_chance', 'chakra_critical_ratio',
+                  'critical_ratio', 'miss_chance', 'chakra_miss_chance',
+                  'chakra_dodge_chance', 'enable_in_start'
+                  )
+
+
+class UserCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'user',
+            'character',
+            'quantity',
+            'level',
+            'cool_down'
+        )
+
+
+class UserHeroSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'user',
+            'hero',
+            'enable_hero',
+            'quantity',
+            'level',
+            'selected_item'
+        )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -83,6 +121,7 @@ class UserSerializer(serializers.ModelSerializer):
     heroes = serializers.SerializerMethodField()
     general_units = serializers.SerializerMethodField()
     deck = serializers.SerializerMethodField()
+    newsletter = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -94,7 +133,8 @@ class UserSerializer(serializers.ModelSerializer):
             'currency',
             'heroes',
             'general_units',
-            'deck'
+            'deck',
+            'newsletter'
         )
         extra_kwargs = {
             'password': {'write_only': True},
@@ -118,6 +158,7 @@ class UserSerializer(serializers.ModelSerializer):
             return None
 
     def get_heroes(self, requests):
+        global hero_user
         try:
             hero_user = UserHero.objects.get(user=requests, enable_hero=True)
 
@@ -137,16 +178,17 @@ class UserSerializer(serializers.ModelSerializer):
                     data['selected_hero'] = False
 
                 data['quantity'] = hero_user.quantity if hero_user else 0
-                data['next_upgrade_coin_cost'] = hero_user.next_upgrade_coin_cost if hero_user else 0
-                data['next_upgrade_card_count'] = hero_user.next_upgrade_card_count if hero_user else 0
+                data['next_upgrade_coin_cost'] = settings.HERO_UPDATE[hero_user.level + 1]['coins']if hero_user else 0
+                data['next_upgrade_card_count'] = settings.HERO_UPDATE[hero_user.level + 1]['hero_cards']if hero_user else 0
+                data['level'] = hero_user.level if hero else 0
 
                 list_unit = []
                 for unit in UserCard.objects.filter(character__heroes=hero, user=requests):
                     unit_serializer = UnitSerializer(unit.character)
                     unit_data = unit_serializer.data
                     unit_data['quantity'] = unit.quantity
-                    unit_data['next_upgrade_coin_cost'] = unit.next_upgrade_coin_cost
-                    unit_data['next_upgrade_card_count'] = unit.next_upgrade_card_count
+                    unit_data['next_upgrade_coin_cost'] = settings.UNIT_UPDATE[unit.level + 1]['coins']
+                    unit_data['next_upgrade_card_count'] = settings.UNIT_UPDATE[unit.level + 1]['unit_cards']
                     unit_data['level'] = unit.level
                     unit_data['cool_down'] = unit.is_cool_down
                     list_unit.append(unit_data)
@@ -158,8 +200,8 @@ class UserSerializer(serializers.ModelSerializer):
                     item_serializer = ItemSerializer(item.item)
                     item_data = item_serializer.data
                     item_data['quantity'] = item.quantity
-                    item_data['next_upgrade_coin_cost'] = item.next_upgrade_coin_cost
-                    item_data['next_upgrade_card_count'] = item.next_upgrade_card_count
+                    item_data['next_upgrade_coin_cost'] = settings.ITEM_UPDATE[item.level + 1]['coins']
+                    item_data['next_upgrade_card_count'] = settings.ITEM_UPDATE[item.level + 1]['item_cards']
                     item_data['level'] = item.level
 
                     if data['selected_hero']:
@@ -183,8 +225,8 @@ class UserSerializer(serializers.ModelSerializer):
                 serializer = UnitSerializer(unit.character)
                 data = serializer.data
                 data['quantity'] = unit.quantity
-                data['next_upgrade_coin_cost'] = unit.next_upgrade_coin_cost
-                data['next_upgrade_card_count'] = unit.next_upgrade_card_count
+                data['next_upgrade_coin_cost'] = settings.UNIT_UPDATE[unit.level + 1]['coins']
+                data['next_upgrade_card_count'] = settings.UNIT_UPDATE[unit.level + 1]['unit_cards']
                 data['level'] = unit.level
                 list_unit.append(data)
 
@@ -203,6 +245,17 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super(UserSerializer, self).update(instance, validated_data)
+
+    def get_newsletter(self, requests):
+        lst_news = []
+
+        for inbox in Inbox.user_inbox.filter(user=requests):
+            serializer = NewsLetterSerializer(inbox.news)
+            data = serializer.data
+            data['status'] = inbox.message_type
+            lst_news.append(data)
+
+        return lst_news
 
 
 class BenefitSerializer(serializers.ModelSerializer):

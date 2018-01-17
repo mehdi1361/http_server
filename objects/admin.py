@@ -77,8 +77,6 @@ class UserHeroAdmin(SimpleHistoryAdmin):
         'hero',
         'enable_hero',
         'quantity',
-        'next_upgrade_coin_cost',
-        'next_upgrade_card_count',
         'level',
         'selected_item'
     )

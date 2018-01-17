@@ -89,15 +89,15 @@ class UserBuy(Base):
 
 @python_2_unicode_compatible
 class UserCurrency(Base):
-    user = models.ForeignKey(User, related_name='user_currency')
+    user = models.OneToOneField(User, related_name='user_currency')
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)
     history = HistoricalRecords()
 
     class Meta:
-        verbose_name = _('user_chest')
-        verbose_name_plural = _('user_chest')
-        db_table = 'user_chest'
+        verbose_name = _('profile')
+        verbose_name_plural = _('profile')
+        db_table = 'profiles'
 
     @classmethod
     def hard_currency(cls, user):
@@ -157,10 +157,8 @@ class UserHero(Base):
     hero = models.ForeignKey(Hero, related_name='user_hero')
     enable_hero = models.BooleanField(_('enable hero'), default=False)
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
-    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
-    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
-    level = models.PositiveIntegerField(_('level'), default=1)
-    selected_item = JSONField(_('selected item'), null=True)
+    level = models.PositiveIntegerField(_('level'), default=0)
+    selected_item = JSONField(_('selected item'), null=True, default=None)
     history = HistoricalRecords()
 
     class Meta:
@@ -188,8 +186,6 @@ class UserCard(Base):
     user = models.ForeignKey(User, verbose_name=_('username'), related_name='cards')
     character = models.ForeignKey(Unit, verbose_name=_('character'), related_name='cards')
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
-    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
-    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
     level = models.PositiveIntegerField(_('level'), default=1)
     cool_down = models.DateTimeField(_('cooldown'), null=True)
     history = HistoricalRecords()
@@ -333,8 +329,6 @@ class UserChest(Base):
         if (self.chest_opening_date - timezone.now()).seconds >= 0:
             return (self.chest_opening_date - current_time).seconds / 60
 
-
-
     @property
     def chest_status(self):
         return self.status
@@ -425,8 +419,6 @@ class UserItem(Base):
     user = models.ForeignKey(User, verbose_name=_('username'), related_name='items')
     item = models.ForeignKey(Item, verbose_name=_('item'), related_name='items')
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
-    next_upgrade_coin_cost = models.PositiveIntegerField(_('next Upgrade Coin Cost'), default=0)
-    next_upgrade_card_count = models.PositiveIntegerField(_('next upgrade card count'), default=0)
     level = models.PositiveIntegerField(_('level'), default=0)
     history = HistoricalRecords()
 
@@ -447,6 +439,8 @@ def create_user_dependency(sender, instance, created, **kwargs):
 
         for item in Item.objects.all():
             UserItem.objects.create(item=item, user=instance)
+
+        UserCurrency.objects.create(user=instance)
 
 
 signals.post_save.connect(create_user_dependency, sender=User)
