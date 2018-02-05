@@ -11,6 +11,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 
 @python_2_unicode_compatible
@@ -430,6 +431,78 @@ class UserItem(Base):
 
     def __str__(self):
         return '{}'.format(self.quantity)
+
+
+@python_2_unicode_compatible
+class Spell(Base):
+    SPELL_TYPE = (
+        ('CriticalAttack', 'CriticalAttack'),
+        ('Magic', 'Magic'),
+        ('Secret', 'Secret'),
+        ('Chakra', 'Chakra'),
+        ('DamageReturn', 'DamageReturn'),
+    )
+
+    SPELL_IMPACT_TYPE = (
+        ('None', 'None'),
+        ('Low', 'Low'),
+        ('High', 'High')
+    )
+
+    DAMAGE_TYPE = (
+        ('Low', 'Low'),
+        ('High', 'High'),
+    )
+
+    char_spells_index = models.IntegerField(_('char spells index'), default=0)
+    cost = models.IntegerField(_('cost'), default=0)
+    is_instant = models.BooleanField(_('is_instant'), default=True)
+    need_target_to_come_near = models.BooleanField(_('need target to come near'), default=True)
+    spell_name = models.CharField(_('spell name'), max_length=100, default='')
+    spell_type = models.CharField(_('spell type'), max_length=50, choices=SPELL_TYPE, default='Magic')
+    spell_impact = models.CharField(_('damage type'), max_length=20, choices=SPELL_IMPACT_TYPE, default='Low')
+    damage_type = models.CharField(_('spell_impact'), max_length=20, choices=DAMAGE_TYPE, default='Low')
+    generated_action_point = models.IntegerField(_('generated action point'), default=0)
+
+    class Meta:
+        verbose_name = _('spell')
+        verbose_name_plural = _('spells')
+        db_table = 'spells'
+
+    def __str__(self):
+        return '{}'.format(self.spell_name)
+
+
+@python_2_unicode_compatible
+class SpellEffect(Base):
+    SPELL_EFFECT_ON_CHAR = (
+        ('None', 'None'),
+        ('Appear', 'Appear'),
+        ('NormalDamage', 'NormalDamage'),
+        ('SeriousDamage', 'SeriousDamage'),
+        ('Nerf', 'Nerf'),
+        ('Buff', 'Buff'),
+        ('Miss', 'Miss'),
+        ('Dodge', 'Dodge'),
+        ('Burn', 'Burn'),
+        ('Fear', 'Fear'),
+        ('Taunt', 'Taunt'),
+        ('Revive', 'Revive'),
+        ('Prepare', 'Prepare'),
+        ('Protect', 'Protect'),
+    )
+    is_multi_part = models.BooleanField(_('is multi part'), default=False)
+    target_character_id = models.FloatField(_('target character id'), default=0)
+    effect_on_character = MultiSelectField(choices=SPELL_EFFECT_ON_CHAR)
+    spell = models.ForeignKey(Spell, verbose_name=_('spell'), related_name='effects')
+
+    class Meta:
+        verbose_name = _('spell_effect')
+        verbose_name_plural = _('spell_effects')
+        db_table = 'spell_effects'
+
+    def __str__(self):
+        return '{}'.format(self.spell_name)
 
 
 def create_user_dependency(sender, instance, created, **kwargs):

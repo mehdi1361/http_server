@@ -80,3 +80,4 @@ class UserHeroAdmin(SimpleHistoryAdmin):
         'level',
         'selected_item'
     )
+
