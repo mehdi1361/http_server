@@ -5,51 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/ancient_server/settings.py" line="155" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ancient_server.iml" afterPath="$PROJECT_DIR$/.idea/ancient_server.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/activate" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/activate.csh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/activate.fish" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/activate_this.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/django-admin" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/django-admin.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/easy_install" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/easy_install-3.6" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/enhancer.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/explode.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/gifmaker.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/gunicorn" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/gunicorn_paster" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/iptest" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/iptest3" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/ipython" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/ipython3" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/markdown_py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/painter.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pilconvert.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pildriver.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pilfile.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pilfont.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pilprint.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pip3" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pip3.6" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/player.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pygmentize" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/pyjwt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/python" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/python-config" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/python3" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/python3.6" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/thresholder.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/viewer.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/bin/wheel" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/include/python3.6m" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/pip-selfcheck.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/py36venv/share/man/man1/ipython.1.gz" afterPath="" />
-    </list>
+    <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -144,8 +100,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="70" column="18" lean-forward="true" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+            <state relative-caret-position="-300">
+              <caret line="70" column="18" lean-forward="false" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -535,14 +491,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="2562" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49761337" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5023866" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45766345" sideWeight="0.4984089" order="7" side_tool="false" content_ui="tabs" x="-4" y="49" width="2568" height="1036" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42550912" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42550912" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15354018" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1300716" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1028,8 +983,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="70" column="18" lean-forward="true" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+        <state relative-caret-position="-300">
+          <caret line="70" column="18" lean-forward="false" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
           <folding />
         </state>
       </provider>
