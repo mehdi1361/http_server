@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
-from multiselectfield import MultiSelectField
+# from multiselectfield import MultiSelectField
 
 
 @python_2_unicode_compatible
@@ -93,6 +93,7 @@ class UserCurrency(Base):
     user = models.OneToOneField(User, related_name='user_currency')
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)
+    trophy = models.PositiveIntegerField(_('trophy quantity'), default=0)
     history = HistoricalRecords()
 
     class Meta:
@@ -493,7 +494,7 @@ class SpellEffect(Base):
     )
     is_multi_part = models.BooleanField(_('is multi part'), default=False)
     target_character_id = models.FloatField(_('target character id'), default=0)
-    effect_on_character = MultiSelectField(choices=SPELL_EFFECT_ON_CHAR)
+    # effect_on_character = MultiSelectField(choices=SPELL_EFFECT_ON_CHAR)
     spell = models.ForeignKey(Spell, verbose_name=_('spell'), related_name='effects')
 
     class Meta:
