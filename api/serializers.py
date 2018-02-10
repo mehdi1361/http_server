@@ -180,7 +180,7 @@ class UserSerializer(serializers.ModelSerializer):
                 data['quantity'] = hero_user.quantity if hero_user else 0
                 data['next_upgrade_coin_cost'] = settings.HERO_UPDATE[hero_user.level + 1]['coins']if hero_user else 0
                 data['next_upgrade_card_count'] = settings.HERO_UPDATE[hero_user.level + 1]['hero_cards']if hero_user else 0
-                data['level'] = hero_user.level if hero else 0
+                data['level'] = hero_user.level if hero and hero_user else 0
 
                 list_unit = []
                 for unit in UserCard.objects.filter(character__heroes=hero, user=requests):
