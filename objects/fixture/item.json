@@ -1,0 +1,477 @@
+[
+{
+  "model": "objects.item",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-01-15T12:21:35.653Z",
+    "updated_date": "2018-01-15T12:25:59.156Z",
+    "params": null,
+    "name": "Biker",
+    "damage": 10,
+    "shield": -20,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-01-15T12:22:37.287Z",
+    "updated_date": "2018-01-15T12:25:51.780Z",
+    "params": null,
+    "name": "Dimetry",
+    "damage": 5,
+    "shield": 10,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -0.5,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-01-15T12:24:02.111Z",
+    "updated_date": "2018-01-15T12:25:45.345Z",
+    "params": null,
+    "name": "Lion",
+    "damage": -7,
+    "shield": 0,
+    "health": 20,
+    "critical_ratio": 0.25,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 4,
+  "fields": {
+    "created_date": "2018-01-16T08:26:33.932Z",
+    "updated_date": "2018-01-16T08:26:33.932Z",
+    "params": null,
+    "name": "Biker",
+    "damage": 5,
+    "shield": -10,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 5,
+  "fields": {
+    "created_date": "2018-01-16T08:27:46.432Z",
+    "updated_date": "2018-01-16T08:27:46.432Z",
+    "params": null,
+    "name": "Dimetry",
+    "damage": 3,
+    "shield": 30,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -1.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 6,
+  "fields": {
+    "created_date": "2018-01-16T08:42:45.047Z",
+    "updated_date": "2018-01-16T08:42:45.048Z",
+    "params": null,
+    "name": "Lion",
+    "damage": -3,
+    "shield": 0,
+    "health": 60,
+    "critical_ratio": 0.5,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 7,
+  "fields": {
+    "created_date": "2018-01-16T08:44:45.334Z",
+    "updated_date": "2018-01-16T08:44:45.334Z",
+    "params": null,
+    "name": "Biker",
+    "damage": 5,
+    "shield": -15,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 8,
+  "fields": {
+    "created_date": "2018-01-16T08:45:06.783Z",
+    "updated_date": "2018-01-16T08:45:06.783Z",
+    "params": null,
+    "name": "Dimetry",
+    "damage": 3,
+    "shield": 30,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -1.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 2
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 9,
+  "fields": {
+    "created_date": "2018-01-16T08:55:30.745Z",
+    "updated_date": "2018-01-16T08:56:02.715Z",
+    "params": null,
+    "name": "Knight",
+    "damage": -7,
+    "shield": 10,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 1.0,
+    "dodge_chance": 0.0,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 10,
+  "fields": {
+    "created_date": "2018-01-16T08:57:20.202Z",
+    "updated_date": "2018-01-16T08:57:20.202Z",
+    "params": null,
+    "name": "Horn",
+    "damage": 0,
+    "shield": 0,
+    "health": 25,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -1.0,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 11,
+  "fields": {
+    "created_date": "2018-01-16T09:00:49.307Z",
+    "updated_date": "2018-01-16T09:00:49.307Z",
+    "params": null,
+    "name": "Guerrilla",
+    "damage": 5,
+    "shield": 0,
+    "health": 0,
+    "critical_ratio": -0.25,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 12,
+  "fields": {
+    "created_date": "2018-01-16T09:22:27.897Z",
+    "updated_date": "2018-01-16T09:22:27.897Z",
+    "params": null,
+    "name": "Knight",
+    "damage": -3,
+    "shield": 10,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 1.0,
+    "dodge_chance": 0.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 13,
+  "fields": {
+    "created_date": "2018-01-16T09:23:40.374Z",
+    "updated_date": "2018-01-16T09:23:40.374Z",
+    "params": null,
+    "name": "Horn",
+    "damage": 0,
+    "shield": 0,
+    "health": 25,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -1.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 14,
+  "fields": {
+    "created_date": "2018-01-16T09:24:45.296Z",
+    "updated_date": "2018-01-16T09:24:45.296Z",
+    "params": null,
+    "name": "Guerrilla",
+    "damage": 5,
+    "shield": 0,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": -2.0,
+    "dodge_chance": 0.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 15,
+  "fields": {
+    "created_date": "2018-01-16T09:25:48.242Z",
+    "updated_date": "2018-01-16T09:25:48.243Z",
+    "params": null,
+    "name": "Knight",
+    "damage": -5,
+    "shield": 30,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 2.0,
+    "dodge_chance": 0.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 16,
+  "fields": {
+    "created_date": "2018-01-16T09:27:01.386Z",
+    "updated_date": "2018-01-16T09:27:01.386Z",
+    "params": null,
+    "name": "Horn",
+    "damage": 0,
+    "shield": 0,
+    "health": 70,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": -2.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 1
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 17,
+  "fields": {
+    "created_date": "2018-01-16T09:29:21.723Z",
+    "updated_date": "2018-01-16T09:29:21.723Z",
+    "params": null,
+    "name": "Mexican",
+    "damage": 10,
+    "shield": 0,
+    "health": 0,
+    "critical_ratio": -0.25,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 18,
+  "fields": {
+    "created_date": "2018-01-16T09:30:14.688Z",
+    "updated_date": "2018-01-16T09:30:14.688Z",
+    "params": null,
+    "name": "Naga",
+    "damage": 0,
+    "shield": 10,
+    "health": 0,
+    "critical_ratio": 0.25,
+    "critical_chance": 0.0,
+    "dodge_chance": -0.5,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 19,
+  "fields": {
+    "created_date": "2018-01-16T09:32:54.903Z",
+    "updated_date": "2018-01-16T09:32:54.903Z",
+    "params": null,
+    "name": "Duff",
+    "damage": -5,
+    "shield": 0,
+    "health": 20,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.75,
+    "item_type": "weapon",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 20,
+  "fields": {
+    "created_date": "2018-01-16T09:34:19.282Z",
+    "updated_date": "2018-01-16T09:34:19.282Z",
+    "params": null,
+    "name": "Mexican",
+    "damage": 4,
+    "shield": 0,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": -1.0,
+    "dodge_chance": 0.0,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 21,
+  "fields": {
+    "created_date": "2018-01-16T09:35:22.227Z",
+    "updated_date": "2018-01-16T09:35:22.227Z",
+    "params": null,
+    "name": "Naga",
+    "damage": 0,
+    "shield": 10,
+    "health": 0,
+    "critical_ratio": 0.25,
+    "critical_chance": 0.0,
+    "dodge_chance": -0.5,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 22,
+  "fields": {
+    "created_date": "2018-01-16T09:36:03.936Z",
+    "updated_date": "2018-01-16T09:36:03.936Z",
+    "params": null,
+    "name": "Duff",
+    "damage": -2,
+    "shield": 0,
+    "health": 20,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.75,
+    "item_type": "helmet",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 23,
+  "fields": {
+    "created_date": "2018-01-16T09:38:47.422Z",
+    "updated_date": "2018-01-16T09:38:47.422Z",
+    "params": null,
+    "name": "Mexican",
+    "damage": 4,
+    "shield": -20,
+    "health": 0,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 0.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 24,
+  "fields": {
+    "created_date": "2018-01-16T09:39:40.595Z",
+    "updated_date": "2018-01-16T09:39:40.595Z",
+    "params": null,
+    "name": "Naga",
+    "damage": 0,
+    "shield": 30,
+    "health": 0,
+    "critical_ratio": 0.5,
+    "critical_chance": 0.0,
+    "dodge_chance": -1.0,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 3
+  }
+},
+{
+  "model": "objects.item",
+  "pk": 25,
+  "fields": {
+    "created_date": "2018-01-16T09:41:28.103Z",
+    "updated_date": "2018-01-16T09:41:28.103Z",
+    "params": null,
+    "name": "Duff",
+    "damage": -3,
+    "shield": 0,
+    "health": 60,
+    "critical_ratio": 0.0,
+    "critical_chance": 0.0,
+    "dodge_chance": 1.5,
+    "item_type": "Armor",
+    "level": 0,
+    "hero": 3
+  }
+}
+]
