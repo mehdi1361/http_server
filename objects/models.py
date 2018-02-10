@@ -172,12 +172,16 @@ class UserHero(Base):
     @classmethod
     def get_selected_item(cls, user, hero):
         lst_item = []
-        user_hero = cls.objects.get(user=user, hero=hero)
+        try:
+            user_hero = cls.objects.get(user=user, hero=hero)
 
-        for item in user_hero.selected_item:
-            lst_item.append(item['id'])
+            for item in user_hero.selected_item:
+                lst_item.append(item['id'])
 
-        return lst_item
+            return lst_item
+
+        except:
+            return lst_item
 
     def __str__(self):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
