@@ -64,7 +64,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user_hero.save()
 
         return Response(
-            {'id': 200, 'message': 'ok'}, status=status.HTTP_400_BAD_REQUEST)
+            {'id': 200, 'message': 'ok'}, status=status.HTTP_200_OK)
 
     @list_route(methods=['POST'])
     def player_info(self, request):
