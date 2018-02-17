@@ -336,6 +336,13 @@ class UserChest(Base):
             return (self.chest_opening_date - current_time).seconds / 60
 
     @property
+    def remain_time(self):
+        current_time = timezone.now()
+        if self.chest_opening_date:
+            return (self.chest_opening_date - current_time).seconds
+        return None
+
+    @property
     def chest_status(self):
         return self.status
 
