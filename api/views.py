@@ -18,6 +18,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
+from common.utils import ChestGenerate
+
 
 class DefaultsMixin(object):
     paginate_by = 25
@@ -100,8 +102,9 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response({'id': 201, 'message': 'chest change status ready'}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
-    def open_chest(self, request):
+    def chest_ready(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
+        serializer = UserChestSerializer(chest)
         UserCurrency.update_currency(request.user, chest.cards['gems'], chest.cards['coins'])
         for unit in chest.cards['units']:
             character = Unit.objects.get(moniker=unit['unit'])
@@ -113,7 +116,7 @@ class UserViewSet(viewsets.ModelViewSet):
         chest.status = 'used'
         chest.save()
 
-        return Response({'id': 201, 'message': 'chest change status used'}, status=status.HTTP_202_ACCEPTED)
+        return Response({'id': 201, 'chest': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -126,7 +129,7 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
     def buy(self, request):
         benefit = get_object_or_404(BenefitBox, pk=request.data.get('id'))
         UserBuy.objects.create(user=request.user, benefit=benefit)
-        chest, created = UserCurrency.objects.get_or_create(defaults={'user': request.user})
+        chest= UserCurrency.objects.get(user=request.user)
 
         if benefit.box == 'GEM':
             chest.gem += benefit.quantity
@@ -163,8 +166,12 @@ class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixi
 
     @list_route(methods=['POST'])
     def generate_win_chest(self, request):
-        if not UserChest.deck_is_open(request.user):
+        if not UserChest.deck_is_open(request.user, 'non_free'):
             return Response({'message': 'deck is full'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        chest_gen = ChestGenerate(request.user)
+        chest_gen.generate_winner_chest()
+        return Response({'message': 'chest generated'}, status=status.HTTP_200_OK)
 
 
 class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
@@ -210,7 +217,7 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         next_level = settings.HERO_UPDATE[user_hero.level + 1]
 
         if user_hero.quantity < next_level['hero_cards']:
-            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            return Response({'message': 'card not enough'}, status=status.HTTP_200_OK)
 
         if user_currency.coin < next_level['coins']:
             return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
