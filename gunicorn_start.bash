@@ -3,6 +3,7 @@
 NAME="django_app"                                   # Name of the application
 DJANGODIR=/home/mehdi/python-project/Divine_Server_Python               # Django project directory
 SOCKFILE=/home/mehdi/python-project/Divine_Server_Python/venv/gunicorn.sock  # we will communicte using this unix socket
+LOGFILE=/home/mehdi/python-project/Divine_Server_Python/divine.log
 USER=mehdi                                         # the user to run as
 GROUP=nginx                                        # the group to run as
 NUM_WORKERS=3                                       # how many worker processes should Gunicorn spawn
@@ -31,5 +32,5 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
-  --log-file=-
+  --log-file=$LOGFILE
 
