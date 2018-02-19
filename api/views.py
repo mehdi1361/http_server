@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -52,6 +53,11 @@ class UserViewSet(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
 
         return super(UserViewSet, self).get_permissions()
+
+    def create(self, request, *args, **kwargs):
+        player_id = str(uuid.uuid1().int >> 32)
+        User.objects.create(username=player_id, password=player_id)
+        return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
