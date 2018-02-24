@@ -302,7 +302,7 @@ class UserChest(Base):
 
     user = models.ForeignKey(User, verbose_name=_('user'), related_name='chests')
     chest = models.ForeignKey(Chest, verbose_name=_('chest'), related_name='users')
-    chest_type = models.CharField(_('chest type'), max_length=50, choices=TYPE, default='non_free')
+    chest_monetaryType = models.CharField(_('chest type'), max_length=50, choices=TYPE, default='non_free')
     status = models.CharField(_('status'), max_length=50, choices=STATUS, default='close')
     sequence_number = models.PositiveIntegerField(_('sequence number'), default=0, validators=[validate_sequence])
     cards = JSONField(verbose_name=_('cards'), default=None, null=True)

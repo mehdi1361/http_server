@@ -27,7 +27,7 @@ class UserChestSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'chest',
-            'chest_type',
+            'chest_monetaryType',
             'skip_gem',
             'remain_time',
             'status',
@@ -97,12 +97,20 @@ class UnitSerializer(serializers.ModelSerializer):
 class HeroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hero
-        fields = ('id', 'moniker', 'dexterity', 'attack_type', 'health', 'chakra_health', 'shield',
-                  'chakra_shield', 'attack', 'chakra_attack', 'critical_chance',
-                  'chakra_critical_chance', 'chakra_critical_ratio',
-                  'critical_ratio', 'miss_chance', 'chakra_miss_chance',
-                  'chakra_dodge_chance', 'enable_in_start', 'max_health', 'max_shield'
-                  )
+        fields = (
+              'id',
+              'moniker',
+              'dexterity',
+              'attack_type',
+              'health',
+              'shield',
+              'critical_chance',
+              'critical_ratio',
+              'miss_chance',
+              'enable_in_start',
+              'max_health',
+              'max_shield'
+        )
 
 
 class UserCardSerializer(serializers.ModelSerializer):
@@ -191,8 +199,9 @@ class UserSerializer(serializers.ModelSerializer):
                     data['selected_hero'] = False
 
                 data['quantity'] = hero_user.quantity if hero_user else 0
-                data['next_upgrade_card_cost'] = settings.HERO_UPDATE[hero_user.level + 1]['coins']if hero_user else 0
-                data['next_upgrade_card_count'] = settings.HERO_UPDATE[hero_user.level + 1]['hero_cards']if hero_user else 0
+                data['next_upgrade_card_cost'] = settings.HERO_UPDATE[hero_user.level + 1]['coins'] if hero_user else 0
+                data['next_upgrade_card_count'] = settings.HERO_UPDATE[hero_user.level + 1][
+                    'hero_cards'] if hero_user else 0
                 data['level'] = hero_user.level if hero and hero_user else 0
 
                 list_unit = []
@@ -227,25 +236,34 @@ class UserSerializer(serializers.ModelSerializer):
                     list_item.append(item_data)
 
                 data['items'] = list_item
+                data['chakra'] = {
+                    'chakra_health': hero.chakra_health,
+                    'chakra_shield': hero.chakra_shield,
+                    'chakra_attack': hero.chakra_attack,
+                    'chakra_critical_chance': hero.chakra_critical_chance,
+                    'chakra_critical_ratio': hero.chakra_critical_ratio,
+                    'chakra_miss_chance': hero.chakra_miss_chance,
+                    'chakra_dodge_chance': hero.chakra_dodge_chance
+                }
 
                 list_serialize.append(data)
 
             return list_serialize
 
     def get_general_units(self, requests):
-            hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=False))
+        hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))
 
-            list_unit = []
-            for unit in UserCard.objects.exclude(character_id__in=hero_units):
-                serializer = UnitSerializer(unit.character)
-                data = serializer.data
-                data['quantity'] = unit.quantity
-                data['next_upgrade_card_cost'] = settings.UNIT_UPDATE[unit.level + 1]['coins']
-                data['next_upgrade_card_count'] = settings.UNIT_UPDATE[unit.level + 1]['unit_cards']
-                data['level'] = unit.level
-                list_unit.append(data)
+        list_unit = []
+        for unit in UserCard.objects.filter(user=requests).exclude(character_id__in=hero_units):
+            serializer = UnitSerializer(unit.character)
+            data = serializer.data
+            data['quantity'] = unit.quantity
+            data['next_upgrade_card_cost'] = settings.UNIT_UPDATE[unit.level + 1]['coins']
+            data['next_upgrade_card_count'] = settings.UNIT_UPDATE[unit.level + 1]['unit_cards']
+            data['level'] = unit.level
+            list_unit.append(data)
 
-            return list_unit
+        return list_unit
 
     # def create(self, validated_data):
     #     # if 'email' not in validated_data:
@@ -313,7 +331,6 @@ class LeagueInfoSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Shop
         fields = (
@@ -324,5 +341,3 @@ class ShopSerializer(serializers.ModelSerializer):
             'chests',
             'special_offer'
         )
-
-

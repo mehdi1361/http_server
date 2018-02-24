@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="212" />
+    <bookmark url="file://$PROJECT_DIR$/api/serializers.py" line="238" />
+    <bookmark url="file://$PROJECT_DIR$/api/serializers.py" line="96" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="" />
+    <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" afterPath="$PROJECT_DIR$/api/serializers.py" />
+      <change beforePath="$PROJECT_DIR$/objects/models.py" afterPath="$PROJECT_DIR$/objects/models.py" />
+    </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -67,8 +71,8 @@
       <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="115" column="40" lean-forward="false" selection-start-line="115" selection-start-column="40" selection-end-line="115" selection-end-column="40" />
+            <state relative-caret-position="440">
+              <caret line="256" column="57" lean-forward="false" selection-start-line="256" selection-start-column="57" selection-end-line="256" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -89,13 +93,13 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="199" column="11" lean-forward="false" selection-start-line="199" selection-start-column="4" selection-end-line="199" selection-end-column="31" />
+            <state relative-caret-position="294">
+              <caret line="193" column="6" lean-forward="false" selection-start-line="193" selection-start-column="6" selection-end-line="193" selection-end-column="6" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
-                <marker date="1519471716228" expanded="true" signature="6406:7508" ph="..." />
-                <marker date="1519471716228" expanded="true" signature="16640:17414" ph="..." />
-                <marker date="1519471716228" expanded="true" signature="17097:17115" ph="..." />
+                <marker date="1519477036303" expanded="true" signature="6406:7508" ph="..." />
+                <marker date="1519477036303" expanded="true" signature="16648:17422" ph="..." />
+                <marker date="1519477036303" expanded="true" signature="17105:17123" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,27 +111,6 @@
             <state relative-caret-position="649">
               <caret line="46" column="44" lean-forward="false" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profiles" pinned="false" current-in-tab="false">
-        <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.profiles">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-              <column-attributes>
-                <column name="params" languageId="JSON" />
-              </column-attributes>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="chest" pinned="false" current-in-tab="false">
-        <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.chest">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -145,8 +128,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="86" column="72" lean-forward="false" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
+            <state relative-caret-position="115">
+              <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -187,7 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UserHer</find>
       <find>UserCurr</find>
       <find>Spell</find>
       <find>hero</find>
@@ -217,6 +199,7 @@
       <find>next_upgrade_coin_cost</find>
       <find>UserCa</find>
       <find>cool_down</find>
+      <find>player_inf</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -507,13 +490,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="2562" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49761337" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.50278443" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4972156" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290461" sideWeight="0.4972156" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45766345" sideWeight="0.4984089" order="7" side_tool="false" content_ui="tabs" x="-4" y="49" width="2568" height="1036" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3697749" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3697749" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1690533" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1300716" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -586,7 +570,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/serializers.py</url>
-          <line>192</line>
+          <line>200</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -634,6 +618,11 @@
           <line>58</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/serializers.py</url>
+          <line>256</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -642,7 +631,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="75" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1013,8 +1002,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="86" column="72" lean-forward="false" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
+        <state relative-caret-position="115">
+          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -1023,21 +1012,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="199" column="11" lean-forward="false" selection-start-line="199" selection-start-column="4" selection-end-line="199" selection-end-column="31" />
+        <state relative-caret-position="294">
+          <caret line="193" column="6" lean-forward="false" selection-start-line="193" selection-start-column="6" selection-end-line="193" selection-end-column="6" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
-            <marker date="1519471716228" expanded="true" signature="6406:7508" ph="..." />
-            <marker date="1519471716228" expanded="true" signature="16640:17414" ph="..." />
-            <marker date="1519471716228" expanded="true" signature="17097:17115" ph="..." />
+            <marker date="1519477036303" expanded="true" signature="6406:7508" ph="..." />
+            <marker date="1519477036303" expanded="true" signature="16648:17422" ph="..." />
+            <marker date="1519477036303" expanded="true" signature="17105:17123" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="115" column="40" lean-forward="false" selection-start-line="115" selection-start-column="40" selection-end-line="115" selection-end-column="40" />
+        <state relative-caret-position="440">
+          <caret line="256" column="57" lean-forward="false" selection-start-line="256" selection-start-column="57" selection-end-line="256" selection-end-column="57" />
           <folding />
         </state>
       </provider>
