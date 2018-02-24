@@ -93,7 +93,7 @@ class ChestGenerate:
         find_match = False
 
         for item in lst_unit:
-            if item["unit"] == unit:
+            if item["moniker"] == unit:
                 find_match = True
                 item["count"] += count
 
