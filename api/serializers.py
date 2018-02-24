@@ -32,7 +32,6 @@ class UserChestSerializer(serializers.ModelSerializer):
             'skip_gem',
             'remain_time',
             'status',
-            'sequence_number',
             'cards'
         )
 
