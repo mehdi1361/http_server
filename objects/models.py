@@ -94,6 +94,9 @@ class UserCurrency(Base):
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)
     trophy = models.PositiveIntegerField(_('trophy quantity'), default=0)
+    session_count = models.PositiveIntegerField(_('session count'), default=0)
+    need_comeback = models.BooleanField(_('nee comeback'), default=False)
+    next_session_remaining_seconds = models.PositiveIntegerField(_('next session remaining seconds'), default=0)
     history = HistoricalRecords()
 
     class Meta:
@@ -194,6 +197,7 @@ class UserCard(Base):
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
     level = models.PositiveIntegerField(_('level'), default=1)
     cool_down = models.DateTimeField(_('cooldown'), null=True)
+    cool_down_remaining_seconds = models.PositiveIntegerField(_('cool down remaining seconds'), default=0)
     history = HistoricalRecords()
 
     class Meta:
