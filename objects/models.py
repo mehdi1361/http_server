@@ -344,7 +344,7 @@ class UserChest(Base):
         current_time = timezone.now()
         if self.chest_opening_date:
             return (self.chest_opening_date - current_time).seconds
-        return None
+        return -1
 
     @property
     def chest_status(self):
