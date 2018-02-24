@@ -21,12 +21,13 @@ class NewsLetterSerializer(serializers.ModelSerializer):
 
 
 class UserChestSerializer(serializers.ModelSerializer):
+    chest_type = serializers.SerializerMethodField()
+
     class Meta:
         model = UserChest
         fields = (
             'id',
-            'user',
-            'chest',
+            'chest_type',
             'chest_monetaryType',
             'skip_gem',
             'remain_time',
@@ -34,6 +35,9 @@ class UserChestSerializer(serializers.ModelSerializer):
             'sequence_number',
             'cards'
         )
+
+    def get_chest_type(self, obj):
+        return obj.chest.get_chest_type_display()
 
 
 class ItemSerializer(serializers.ModelSerializer):
