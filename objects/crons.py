@@ -1,6 +1,9 @@
+import os
+from django.core import management
 from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
 from objects.models import UserChest
+from datetime import datetime
 
 
 class FreeChestCreatorJob(CronJobBase):
@@ -11,7 +14,22 @@ class FreeChestCreatorJob(CronJobBase):
 
     @staticmethod
     def do():
-        print('test cron')
+        # print('test cron')
         for user in User.objects.all():
             if UserChest.deck_is_open(user, 'free'):
                 pass
+
+
+class Backup(CronJobBase):
+    RUN_AT_TIMES = ['23:50']
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    code = 'objects.Backup'
+
+    def do(self):
+        file_name = '{}{}{}.gz'.format(
+            datetime.now().year,
+            datetime.now().month
+            if datetime.now().month > 10 else '0{}'.format(datetime.now().month),
+            datetime.now().day
+        )
+        management.call_command('dbbackup', '-z', '-o {}'.format(file_name))

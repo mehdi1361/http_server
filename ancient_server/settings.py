@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'simple_history',
     'shopping',
     'message',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
@@ -169,6 +170,7 @@ OPENING_TIME_INDEX = 4
 
 CRON_CLASSES = [
     "objects.crons.FreeChestCreatorJob",
+    "objects.crons.Backup",
 ]
 
 CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
@@ -211,3 +213,6 @@ JWT_AUTH = {
 #         'django.template.loaders.app_directories.Loader',
 #     )),
 # )
+
+# DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/home/mehdi/backups'}
