@@ -57,6 +57,7 @@ class Unit(BaseUnit, Base):
 
 @python_2_unicode_compatible
 class Hero(BaseUnit, Base):
+    chakra_moniker = models.CharField(_('chakra moniker'), max_length=50)
     chakra_health = models.IntegerField(_('chakra health'), default=100)
     chakra_shield = models.IntegerField(_('chakra shield'), default=0)
     chakra_attack = models.IntegerField(_('chakra attack'), default=10)
@@ -64,6 +65,9 @@ class Hero(BaseUnit, Base):
     chakra_critical_ratio = models.FloatField(_('chakra critical ratio'), default=0.01)
     chakra_miss_chance = models.FloatField(_('chakra miss chance'), default=0.00)
     chakra_dodge_chance = models.FloatField(_('chakra dodge chance'), default=0.00)
+    chakra_max_health = models.IntegerField(_('chakra max health'), default=100)
+    chakra_max_shield = models.IntegerField(_('chakra max shield'), default=0)
+
     units = models.ManyToManyField(Unit, through='HeroUnits', related_name='hero')
     user = models.ManyToManyField(User, through='UserHero', related_name='hero')
     history = HistoricalRecords()
@@ -349,6 +353,10 @@ class UserChest(Base):
     @property
     def chest_status(self):
         return self.status
+    
+    @property
+    def initial_time(self):
+        return settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]
 
     @chest_status.setter
     def chest_status(self, value):

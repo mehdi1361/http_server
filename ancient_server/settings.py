@@ -175,6 +175,14 @@ CRON_CLASSES = [
 
 CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
                   'W', 'S', 'W', 'G', 'W', 'W', 'W', 'C', 'W', 'W', 'W', 'S']
+
+CHEST_SEQUENCE_TIME = {
+    'W': 5,
+    'S': 8,
+    'G': 12,
+    'C': 24
+}
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 

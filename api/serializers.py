@@ -31,6 +31,7 @@ class UserChestSerializer(serializers.ModelSerializer):
             'chest_monetaryType',
             'skip_gem',
             'remain_time',
+            'initial_time',
             'status',
             'cards'
         )
@@ -240,13 +241,16 @@ class UserSerializer(serializers.ModelSerializer):
 
                 data['items'] = list_item
                 data['chakra'] = {
+                    'chakra_moniker': hero.chakra_moniker,
                     'chakra_health': hero.chakra_health,
                     'chakra_shield': hero.chakra_shield,
                     'chakra_attack': hero.chakra_attack,
                     'chakra_critical_chance': hero.chakra_critical_chance,
                     'chakra_critical_ratio': hero.chakra_critical_ratio,
                     'chakra_miss_chance': hero.chakra_miss_chance,
-                    'chakra_dodge_chance': hero.chakra_dodge_chance
+                    'chakra_dodge_chance': hero.chakra_dodge_chance,
+                    'chakra_max_health': hero.chakra_max_health,
+                    'chakra_max_shield': hero.chakra_max_shield
                 }
 
                 list_serialize.append(data)
