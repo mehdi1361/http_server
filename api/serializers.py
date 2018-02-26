@@ -108,6 +108,7 @@ class HeroSerializer(serializers.ModelSerializer):
               'attack_type',
               'health',
               'shield',
+              'attack',
               'critical_chance',
               'critical_ratio',
               'miss_chance',
