@@ -94,6 +94,7 @@ class UserBuy(Base):
 
 @python_2_unicode_compatible
 class UserCurrency(Base):
+    name = models.CharField(_('name'), max_length=200, null=True)
     user = models.OneToOneField(User, related_name='user_currency')
     gem = models.PositiveIntegerField(_('gem quantity'), default=0)
     coin = models.PositiveIntegerField(_('coin quantity'), default=0)

@@ -126,6 +126,23 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 201, 'chest': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
+    @list_route(methods=['POST'])
+    def set_player_name(self, request):
+        try:
+            name = request.data.get('name')
+            profile = UserCurrency.objects.get(name=name)
+            name = '{}{}'.format(name, str(uuid.uuid1().int >> 64))
+
+        except:
+            name = request.data.get('name')
+
+        finally:
+            profile = UserCurrency.objects.get(user=request.user)
+            profile.name = name
+            profile.save()
+
+        return Response({'id': 201, 'user_name': name}, status=status.HTTP_202_ACCEPTED)
+
 
 class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = BenefitBox.objects.all()
@@ -137,7 +154,7 @@ class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins
     def buy(self, request):
         benefit = get_object_or_404(BenefitBox, pk=request.data.get('id'))
         UserBuy.objects.create(user=request.user, benefit=benefit)
-        chest= UserCurrency.objects.get(user=request.user)
+        chest = UserCurrency.objects.get(user=request.user)
 
         if benefit.box == 'GEM':
             chest.gem += benefit.quantity
