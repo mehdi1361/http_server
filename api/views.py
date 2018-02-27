@@ -131,7 +131,7 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             name = request.data.get('name')
             profile = UserCurrency.objects.get(name=name)
-            name = '{}{}'.format(name, str(uuid.uuid1().int >> 10))
+            name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))
 
         except:
             name = request.data.get('name')
