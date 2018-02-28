@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero
+from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
+    UnitSpell, UnitSpellEffect
 from simple_history.admin import SimpleHistoryAdmin
 # from django.contrib.auth.models import User
 
@@ -22,6 +23,14 @@ class ItemInline(admin.StackedInline):
 
 class ChestInline(admin.StackedInline):
     model = Chest
+
+
+class HeroSpellEffectInline(admin.TabularInline):
+    model = HeroSpellEffect
+
+
+class UnitSpellEffectInline(admin.TabularInline):
+    model = UnitSpellEffect
 
 
 @admin.register(BenefitBox)
@@ -81,3 +90,34 @@ class UserHeroAdmin(SimpleHistoryAdmin):
         'selected_item'
     )
 
+
+@admin.register(HeroSpell)
+class HeroSpellAdmin(SimpleHistoryAdmin):
+    list_display = (
+        'char_spells_index',
+        'cost',
+        'spell_name',
+        'spell_type',
+        'generated_action_point',
+        'duration',
+        'need_action_point',
+        'cool_down_duration'
+    )
+
+    inlines = (HeroSpellEffectInline, )
+
+
+@admin.register(UnitSpell)
+class UnitSpellAdmin(SimpleHistoryAdmin):
+    list_display = (
+        'char_spells_index',
+        'cost',
+        'spell_name',
+        'spell_type',
+        'generated_action_point',
+        'duration',
+        'need_action_point',
+        'cool_down_duration'
+    )
+
+    inlines = (UnitSpellEffectInline, )

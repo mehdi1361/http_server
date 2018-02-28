@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from multiselectfield.db.fields import MultiSelectField
 from simple_history.models import HistoricalRecords
 import uuid
 
@@ -51,3 +52,47 @@ class BaseUnit(models.Model):
         abstract = True
 
 
+class Spell(models.Model):
+    SPELL_TYPE = (
+        ('Magic', 'Magic'),
+        ('Secret', 'Secret'),
+        ('Chakra', 'Chakra'),
+        ('DamageReturn', 'DamageReturn'),
+    )
+
+    char_spells_index = models.IntegerField(_('char spells index'), default=0)
+    cost = models.IntegerField(_('cost'), default=0)
+    spell_name = models.CharField(_('spell name'), max_length=100, default='')
+    spell_type = models.CharField(_('spell type'), max_length=50, choices=SPELL_TYPE, default='Magic')
+    generated_action_point = models.IntegerField(_('generated action point'), default=0)
+    duration = models.PositiveIntegerField(_('duration turn'), default=0)
+    need_action_point = models.PositiveIntegerField(_('need action point'), default=0)
+    cool_down_duration = models.PositiveIntegerField(_('cool down duration'), default=0)
+
+    class Meta:
+        abstract = True
+
+
+class SpellEffect(models.Model):
+    SPELL_EFFECT_ON_CHAR = (
+        ('None', 'None'),
+        ('Appear', 'Appear'),
+        ('NormalDamage', 'NormalDamage'),
+        ('SeriousDamage', 'SeriousDamage'),
+        ('Nerf', 'Nerf'),
+        ('Buff', 'Buff'),
+        ('Miss', 'Miss'),
+        ('Dodge', 'Dodge'),
+        ('Burn', 'Burn'),
+        ('Fear', 'Fear'),
+        ('Taunt', 'Taunt'),
+        ('Revive', 'Revive'),
+        ('Prepare', 'Prepare'),
+        ('Protect', 'Protect'),
+    )
+    is_multi_part = models.BooleanField(_('is multi part'), default=False)
+    target_character_id = models.FloatField(_('target character id'), default=0)
+    effect_on_character = MultiSelectField(choices=SPELL_EFFECT_ON_CHAR, null=True)
+
+    class Meta:
+        abstract = True
