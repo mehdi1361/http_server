@@ -6,7 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/mehdi.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mehdi.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/storage_v2/_src_/database/anc_db.h5_Cqw/schema/public.abK9xQ.meta" afterPath="$PROJECT_DIR$/.idea/dataSources/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/storage_v2/_src_/database/anc_db.h5_Cqw/schema/public.abK9xQ.meta" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/base/models.py" afterPath="$PROJECT_DIR$/base/models.py" />
       <change beforePath="$PROJECT_DIR$/objects/admin.py" afterPath="$PROJECT_DIR$/objects/admin.py" />
@@ -70,188 +71,106 @@
     <favorites_list name="Divine_Server_Python" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5258552">
-      <split-first>
-        <splitter split-orientation="vertical" split-proportion="0.5">
-          <split-first>
-            <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-              <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/api/serializers.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="1638">
-                      <caret line="97" column="9" lean-forward="false" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-288">
-                      <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
-                      <folding>
-                        <element signature="e#316#325#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="crons.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/objects/crons.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="540">
-                      <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-                      <folding>
-                        <element signature="e#0#9#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/venv/local/lib/python2.7/site-packages/django/core/management/__init__.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="774">
-                      <caret line="61" column="21" lean-forward="false" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/objects/models.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="19">
-                      <caret line="490" column="4" lean-forward="false" selection-start-line="490" selection-start-column="4" selection-end-line="490" selection-end-column="4" />
-                      <folding>
-                        <element signature="e#24#63#0" expanded="true" />
-                        <marker date="1519819583541" expanded="true" signature="6784:7886" ph="..." />
-                        <marker date="1519819583541" expanded="true" signature="15734:16020" ph="..." />
-                        <marker date="1519819583541" expanded="true" signature="16440:16445" ph="..." />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/objects/admin.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="86">
-                      <caret line="110" column="10" lean-forward="false" selection-start-line="110" selection-start-column="10" selection-end-line="110" selection-end-column="10" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/base/models.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="401">
-                      <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/api/views.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="216">
-                      <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="spells" pinned="false" current-in-tab="false">
-                <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.spells">
-                  <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                    <state>
-                      <filtering enabled="true" />
-                      <column-attributes>
-                        <column name="params" languageId="JSON" />
-                      </column-attributes>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/common/utils.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="1674">
-                      <caret line="95" column="28" lean-forward="false" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="28" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/base/models.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-66">
-                      <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="22" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/objects/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="469">
-                  <caret line="485" column="43" lean-forward="true" selection-start-line="485" selection-start-column="43" selection-end-line="485" selection-end-column="43" />
-                  <folding>
-                    <element signature="e#24#63#0" expanded="true" />
-                    <marker date="1519819583541" expanded="true" signature="6784:7886" ph="..." />
-                    <marker date="1519819583541" expanded="true" signature="16440:16445" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="0008_auto_20180227_1036.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/objects/migrations/0008_auto_20180227_1036.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="django_migrations" pinned="false" current-in-tab="false">
-            <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.django_migrations">
-              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                <state>
-                  <filtering enabled="true" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="0007_auto_20180225_1239.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/objects/migrations/0007_auto_20180225_1239.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="27" column="69" lean-forward="false" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/serializers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1008">
+              <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+              <folding>
+                <element signature="e#316#325#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crons.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/objects/crons.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/objects/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2059">
+              <caret line="469" column="24" lean-forward="false" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+                <marker date="1520074089486" expanded="true" signature="6784:7886" ph="..." />
+                <marker date="1520074089486" expanded="true" signature="16804:16809" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/objects/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="775">
+              <caret line="136" column="38" lean-forward="false" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="django_migrations" pinned="false" current-in-tab="false">
+        <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.django_migrations">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="864">
+              <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spells" pinned="false" current-in-tab="false">
+        <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.spells">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -262,9 +181,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>buy</find>
-      <find>TE</find>
-      <find>register</find>
       <find>username</find>
       <find>def create</find>
       <find>uui</find>
@@ -292,6 +208,9 @@
       <find>UserItem</find>
       <find>effect_on_character</find>
       <find>Spell</find>
+      <find>player_in</find>
+      <find>hero_spells</find>
+      <find>chakra_spells</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -325,11 +244,11 @@
         <option value="$PROJECT_DIR$/common/utils.py" />
         <option value="$PROJECT_DIR$/objects/crons.py" />
         <option value="$PROJECT_DIR$/objects/migrations/0007_auto_20180225_1239.py" />
-        <option value="$PROJECT_DIR$/api/serializers.py" />
         <option value="$PROJECT_DIR$/api/views.py" />
+        <option value="$PROJECT_DIR$/ancient_server/settings.py" />
+        <option value="$PROJECT_DIR$/api/serializers.py" />
         <option value="$PROJECT_DIR$/base/models.py" />
         <option value="$PROJECT_DIR$/objects/models.py" />
-        <option value="$PROJECT_DIR$/ancient_server/settings.py" />
         <option value="$PROJECT_DIR$/objects/admin.py" />
       </list>
     </option>
@@ -420,7 +339,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
-    <property name="SearchEverywhereHistoryKey" value="Spel&#9;null&#9;null&#10;Hero&#9;null&#9;null&#10;remain_time&#9;null&#9;null&#10;fixtures&#9;FILE&#9;file:///home/mehdi/python-project/Divine_Server_Python/shopping/fixtures&#10;skip_gem&#9;null&#9;null&#10;generate_winner_chest&#9;null&#9;null&#10;get_sequence&#9;null&#9;null&#10;Spell&#9;null&#9;null&#10;Unit&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="HeroSp&#9;null&#9;null&#10;Spell&#9;null&#9;null&#10;Spel&#9;null&#9;null&#10;Hero&#9;null&#9;null&#10;remain_time&#9;null&#9;null&#10;fixtures&#9;FILE&#9;file:///home/mehdi/python-project/Divine_Server_Python/shopping/fixtures&#10;skip_gem&#9;null&#9;null&#10;generate_winner_chest&#9;null&#9;null&#10;get_sequence&#9;null&#9;null&#10;Unit&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -571,18 +490,17 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49761337" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.50278443" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290461" sideWeight="0.4972156" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45766345" sideWeight="0.4984089" order="7" side_tool="false" content_ui="tabs" x="-4" y="49" width="2568" height="1036" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290461" sideWeight="0.4972156" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3687031" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1443914" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14677805" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1300716" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18377088" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980111" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13046937" sideWeight="0.51594204" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39871383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13046937" sideWeight="0.51594204" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -591,6 +509,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33226153" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
@@ -647,7 +566,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/serializers.py</url>
-          <line>205</line>
+          <line>206</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -697,7 +616,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/serializers.py</url>
-          <line>264</line>
+          <line>265</line>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
@@ -739,7 +658,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/objects/migrations/0050_auto_20180113_1051.py" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/contrib/admin/checks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1136">
@@ -974,9 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1023,14 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1638">
-          <caret line="97" column="9" lean-forward="false" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.items">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1041,37 +948,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.spells">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-          <column-attributes>
-            <column name="params" languageId="JSON" />
-          </column-attributes>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/migrations/0011_auto_20180228_1040.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/migrations/0011_auto_20180228_1040.py" />
     <entry file="file://$PROJECT_DIR$/objects/migrations/0008_auto_20180227_1036.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,6 +967,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="27" column="69" lean-forward="false" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+          <folding>
+            <element signature="e#316#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/migrations/0012_auto_20180303_1046.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1090,41 +1021,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/base/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-288">
-          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
-          <folding>
-            <element signature="e#316#325#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/objects/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="490" column="4" lean-forward="false" selection-start-line="490" selection-start-column="4" selection-end-line="490" selection-end-column="4" />
+        <state relative-caret-position="2059">
+          <caret line="469" column="24" lean-forward="false" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
-            <marker date="1519819583541" expanded="true" signature="6784:7886" ph="..." />
-            <marker date="1519819583541" expanded="true" signature="15734:16020" ph="..." />
-            <marker date="1519819583541" expanded="true" signature="16440:16445" ph="..." />
+            <marker date="1520074089486" expanded="true" signature="6784:7886" ph="..." />
+            <marker date="1520074089486" expanded="true" signature="16804:16809" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="110" column="10" lean-forward="false" selection-start-line="110" selection-start-column="10" selection-end-line="110" selection-end-column="10" />
+        <state relative-caret-position="775">
+          <caret line="136" column="38" lean-forward="false" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
           <folding />
         </state>
       </provider>

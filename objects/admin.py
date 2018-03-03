@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
-    UnitSpell, UnitSpellEffect
+    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect
 from simple_history.admin import SimpleHistoryAdmin
 # from django.contrib.auth.models import User
 
@@ -31,6 +31,10 @@ class HeroSpellEffectInline(admin.TabularInline):
 
 class UnitSpellEffectInline(admin.TabularInline):
     model = UnitSpellEffect
+
+
+class ChakraSpellEffectInline(admin.TabularInline):
+    model = ChakraSpellEffect
 
 
 @admin.register(BenefitBox)
@@ -95,11 +99,9 @@ class UserHeroAdmin(SimpleHistoryAdmin):
 class HeroSpellAdmin(SimpleHistoryAdmin):
     list_display = (
         'char_spells_index',
-        'cost',
         'spell_name',
         'spell_type',
         'generated_action_point',
-        'duration',
         'need_action_point',
         'cool_down_duration'
     )
@@ -111,13 +113,25 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
 class UnitSpellAdmin(SimpleHistoryAdmin):
     list_display = (
         'char_spells_index',
-        'cost',
         'spell_name',
         'spell_type',
         'generated_action_point',
-        'duration',
         'need_action_point',
         'cool_down_duration'
     )
 
     inlines = (UnitSpellEffectInline, )
+
+
+@admin.register(ChakraSpell)
+class ChakraSpellAdmin(SimpleHistoryAdmin):
+    list_display = (
+        'char_spells_index',
+        'spell_name',
+        'spell_type',
+        'generated_action_point',
+        'need_action_point',
+        'cool_down_duration'
+    )
+
+    inlines = (ChakraSpellEffectInline, )

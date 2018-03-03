@@ -465,9 +465,22 @@ class HeroSpell(Base, Spell):
     hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='spells')
 
     class Meta:
-        verbose_name = _('hero_spell')
+        verbose_name = _('chakra_spell')
         verbose_name_plural = _('hero_spells')
         db_table = 'hero_spells'
+
+    def __str__(self):
+        return '{}'.format(self.spell_name)
+
+
+@python_2_unicode_compatible
+class ChakraSpell(Base, Spell):
+    hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='chakra_spells')
+
+    class Meta:
+        verbose_name = _('chakra_spell')
+        verbose_name_plural = _('chakra_spells')
+        db_table = 'chakra_spells'
 
     def __str__(self):
         return '{}'.format(self.spell_name)
@@ -494,6 +507,19 @@ class HeroSpellEffect(Base, SpellEffect):
         verbose_name = _('hero_spell_effect')
         verbose_name_plural = _('hero_spell_effects')
         db_table = 'hero_spell_effects'
+
+    def __str__(self):
+        return '{}'.format(self.target_character_id)
+
+
+@python_2_unicode_compatible
+class ChakraSpellEffect(Base, SpellEffect):
+    effect = models.ForeignKey(ChakraSpell, verbose_name=_('effect'), related_name='chakra_effects')
+
+    class Meta:
+        verbose_name = _('chakra_spell_effect')
+        verbose_name_plural = _('chakra_spell_effects')
+        db_table = 'chakra_spell_effects'
 
     def __str__(self):
         return '{}'.format(self.target_character_id)
