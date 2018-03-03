@@ -1,0 +1,44 @@
+[
+{
+  "model": "objects.chakraspelleffect",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-03-03T10:59:09.768Z",
+    "updated_date": "2018-03-03T10:59:09.768Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Fear",
+    "duration": 3,
+    "effect": 1
+  }
+},
+{
+  "model": "objects.chakraspelleffect",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-03-03T11:18:14.170Z",
+    "updated_date": "2018-03-03T11:18:14.170Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Burn",
+    "duration": 3,
+    "effect": 7
+  }
+},
+{
+  "model": "objects.chakraspelleffect",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-03-03T11:19:37.553Z",
+    "updated_date": "2018-03-03T11:19:37.553Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Burn",
+    "duration": 3,
+    "effect": 9
+  }
+}
+]

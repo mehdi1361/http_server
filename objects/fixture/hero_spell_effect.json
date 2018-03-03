@@ -1,0 +1,86 @@
+[
+{
+  "model": "objects.herospelleffect",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-03-03T08:16:59.911Z",
+    "updated_date": "2018-03-03T11:35:09.297Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Fear",
+    "duration": 3,
+    "effect": 1
+  }
+},
+{
+  "model": "objects.herospelleffect",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-03-03T10:24:52.354Z",
+    "updated_date": "2018-03-03T11:33:38.789Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Burn",
+    "duration": 3,
+    "effect": 11
+  }
+},
+{
+  "model": "objects.herospelleffect",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-03-03T10:25:26.901Z",
+    "updated_date": "2018-03-03T11:34:07.628Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Fear",
+    "duration": 5,
+    "effect": 12
+  }
+},
+{
+  "model": "objects.herospelleffect",
+  "pk": 4,
+  "fields": {
+    "created_date": "2018-03-03T10:26:11.844Z",
+    "updated_date": "2018-03-03T11:34:17.873Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Taunt",
+    "duration": 3,
+    "effect": 13
+  }
+},
+{
+  "model": "objects.herospelleffect",
+  "pk": 5,
+  "fields": {
+    "created_date": "2018-03-03T11:34:40.635Z",
+    "updated_date": "2018-03-03T11:34:40.635Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "Protect",
+    "duration": 5,
+    "effect": 8
+  }
+},
+{
+  "model": "objects.herospelleffect",
+  "pk": 6,
+  "fields": {
+    "created_date": "2018-03-03T11:34:59.616Z",
+    "updated_date": "2018-03-03T11:34:59.616Z",
+    "params": null,
+    "is_multi_part": false,
+    "target_character_id": 0.0,
+    "effect_on_character": "shout",
+    "duration": 5,
+    "effect": 3
+  }
+}
+]

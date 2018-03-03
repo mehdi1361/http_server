@@ -1,0 +1,257 @@
+[
+{
+  "model": "objects.herospell",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-03-03T08:16:59.897Z",
+    "updated_date": "2018-03-03T11:35:09.296Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Warrior_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 2
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-03-03T09:05:53.639Z",
+    "updated_date": "2018-03-03T09:05:53.639Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Warrior_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 2
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-03-03T09:07:34.153Z",
+    "updated_date": "2018-03-03T11:34:59.615Z",
+    "params": null,
+    "char_spells_index": 2,
+    "spell_name": "Warrior_spell_C",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 7,
+    "action_type": "Normal",
+    "hero": 2
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 4,
+  "fields": {
+    "created_date": "2018-03-03T09:09:53.543Z",
+    "updated_date": "2018-03-03T09:09:53.543Z",
+    "params": null,
+    "char_spells_index": 3,
+    "spell_name": "Warrior_spell_D",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 4,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 2
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 5,
+  "fields": {
+    "created_date": "2018-03-03T09:10:26.799Z",
+    "updated_date": "2018-03-03T10:22:12.028Z",
+    "params": null,
+    "char_spells_index": 4,
+    "spell_name": "Warrior_chakra",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 5,
+    "cool_down_duration": 23,
+    "action_type": "Normal",
+    "hero": 2
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 6,
+  "fields": {
+    "created_date": "2018-03-03T10:16:28.847Z",
+    "updated_date": "2018-03-03T10:16:28.847Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Cleric_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 1
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 7,
+  "fields": {
+    "created_date": "2018-03-03T10:17:04.514Z",
+    "updated_date": "2018-03-03T10:19:45.985Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Cleric_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 1
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 8,
+  "fields": {
+    "created_date": "2018-03-03T10:17:38.486Z",
+    "updated_date": "2018-03-03T11:34:40.634Z",
+    "params": null,
+    "char_spells_index": 2,
+    "spell_name": "Cleric_spell_C",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 7,
+    "action_type": "Normal",
+    "hero": 1
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 9,
+  "fields": {
+    "created_date": "2018-03-03T10:18:23.757Z",
+    "updated_date": "2018-03-03T10:20:16.123Z",
+    "params": null,
+    "char_spells_index": 3,
+    "spell_name": "Cleric_spell_D",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 1
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 10,
+  "fields": {
+    "created_date": "2018-03-03T10:18:54.186Z",
+    "updated_date": "2018-03-03T10:22:03.752Z",
+    "params": null,
+    "char_spells_index": 4,
+    "spell_name": "Cleric_chakra",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 5,
+    "cool_down_duration": 23,
+    "action_type": "Normal",
+    "hero": 1
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 11,
+  "fields": {
+    "created_date": "2018-03-03T10:24:52.353Z",
+    "updated_date": "2018-03-03T11:33:38.788Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Wizard_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 3
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 12,
+  "fields": {
+    "created_date": "2018-03-03T10:25:26.900Z",
+    "updated_date": "2018-03-03T11:34:07.627Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Wizard_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 3
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 13,
+  "fields": {
+    "created_date": "2018-03-03T10:26:11.843Z",
+    "updated_date": "2018-03-03T11:34:17.873Z",
+    "params": null,
+    "char_spells_index": 2,
+    "spell_name": "Wizard_spell_C",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 5,
+    "action_type": "Normal",
+    "hero": 3
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 14,
+  "fields": {
+    "created_date": "2018-03-03T10:26:46.260Z",
+    "updated_date": "2018-03-03T10:26:46.260Z",
+    "params": null,
+    "char_spells_index": 3,
+    "spell_name": "Wizard_spell_D",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "hero": 3
+  }
+},
+{
+  "model": "objects.herospell",
+  "pk": 15,
+  "fields": {
+    "created_date": "2018-03-03T10:27:27.949Z",
+    "updated_date": "2018-03-03T10:27:27.949Z",
+    "params": null,
+    "char_spells_index": 4,
+    "spell_name": "Wizard_chakra",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 23,
+    "action_type": "Normal",
+    "hero": 3
+  }
+}
+]
