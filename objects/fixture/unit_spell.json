@@ -1,0 +1,733 @@
+[
+{
+  "model": "objects.unitspell",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-03-03T11:35:59.290Z",
+    "updated_date": "2018-03-03T11:35:59.290Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Tiny_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 1
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-03-03T11:36:22.489Z",
+    "updated_date": "2018-03-03T11:36:22.489Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Tiny_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 6,
+    "action_type": "Normal",
+    "unit": 1
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-03-03T11:36:50.470Z",
+    "updated_date": "2018-03-03T11:36:50.470Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Sagittarius_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 3
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 4,
+  "fields": {
+    "created_date": "2018-03-03T11:37:22.606Z",
+    "updated_date": "2018-03-03T11:37:22.606Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Ent_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 4
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 5,
+  "fields": {
+    "created_date": "2018-03-03T11:37:40.520Z",
+    "updated_date": "2018-03-03T11:37:40.520Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Ent_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 4
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 6,
+  "fields": {
+    "created_date": "2018-03-03T11:38:13.561Z",
+    "updated_date": "2018-03-03T11:38:13.561Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Orc_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 17
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 7,
+  "fields": {
+    "created_date": "2018-03-03T11:38:52.079Z",
+    "updated_date": "2018-03-03T11:38:52.079Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Orc_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 17
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 8,
+  "fields": {
+    "created_date": "2018-03-03T11:41:27.920Z",
+    "updated_date": "2018-03-03T11:41:27.920Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "BloodElf_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 5
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 9,
+  "fields": {
+    "created_date": "2018-03-03T11:41:44.950Z",
+    "updated_date": "2018-03-03T11:41:44.950Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "BloodElf_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 3,
+    "action_type": "Normal",
+    "unit": 5
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 10,
+  "fields": {
+    "created_date": "2018-03-03T11:42:12.209Z",
+    "updated_date": "2018-03-03T11:42:12.209Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "HeadRock_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 6
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 11,
+  "fields": {
+    "created_date": "2018-03-03T11:42:29.965Z",
+    "updated_date": "2018-03-03T11:42:29.965Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "HeadRock_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 6
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 12,
+  "fields": {
+    "created_date": "2018-03-03T11:42:54.210Z",
+    "updated_date": "2018-03-03T11:42:54.210Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "HeadRock_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 7
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 13,
+  "fields": {
+    "created_date": "2018-03-03T11:43:28.949Z",
+    "updated_date": "2018-03-03T11:43:28.949Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "HeadRock_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 7
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 14,
+  "fields": {
+    "created_date": "2018-03-03T11:44:12.764Z",
+    "updated_date": "2018-03-03T11:44:12.764Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Abbot_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 20
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 15,
+  "fields": {
+    "created_date": "2018-03-03T11:44:52.297Z",
+    "updated_date": "2018-03-03T11:44:52.297Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Blind_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 9
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 16,
+  "fields": {
+    "created_date": "2018-03-03T11:45:12.613Z",
+    "updated_date": "2018-03-03T11:45:12.613Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Blind_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 1,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 9
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 17,
+  "fields": {
+    "created_date": "2018-03-03T11:46:29.794Z",
+    "updated_date": "2018-03-03T11:46:29.794Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Hedgehog_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 10
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 18,
+  "fields": {
+    "created_date": "2018-03-03T11:46:52.843Z",
+    "updated_date": "2018-03-03T11:46:52.843Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Hedgehog_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 3,
+    "action_type": "Normal",
+    "unit": 10
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 19,
+  "fields": {
+    "created_date": "2018-03-03T11:47:49.228Z",
+    "updated_date": "2018-03-03T11:47:49.228Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "JellyMage_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 11
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 20,
+  "fields": {
+    "created_date": "2018-03-03T11:48:09.357Z",
+    "updated_date": "2018-03-03T11:48:09.357Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "JellyMage_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 2,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 11
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 21,
+  "fields": {
+    "created_date": "2018-03-03T11:48:34.366Z",
+    "updated_date": "2018-03-03T11:48:34.366Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Ghost_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 21
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 22,
+  "fields": {
+    "created_date": "2018-03-03T11:49:14.377Z",
+    "updated_date": "2018-03-03T11:49:14.377Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Ghost_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 21
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 23,
+  "fields": {
+    "created_date": "2018-03-03T11:49:39.275Z",
+    "updated_date": "2018-03-03T11:49:39.275Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "SkyGirl_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 12
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 24,
+  "fields": {
+    "created_date": "2018-03-03T11:49:56.306Z",
+    "updated_date": "2018-03-03T11:49:56.306Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "SkyGirl_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 12
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 25,
+  "fields": {
+    "created_date": "2018-03-03T11:50:33.570Z",
+    "updated_date": "2018-03-03T11:50:33.570Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "HToD_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 14
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 26,
+  "fields": {
+    "created_date": "2018-03-03T11:50:49.471Z",
+    "updated_date": "2018-03-03T11:50:49.471Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "HToD_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 14
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 27,
+  "fields": {
+    "created_date": "2018-03-03T11:51:28.189Z",
+    "updated_date": "2018-03-03T11:51:28.189Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Scarecrow_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 15
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 28,
+  "fields": {
+    "created_date": "2018-03-03T11:51:59.628Z",
+    "updated_date": "2018-03-03T11:51:59.628Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Healer_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 16
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 29,
+  "fields": {
+    "created_date": "2018-03-03T11:52:18.488Z",
+    "updated_date": "2018-03-03T11:52:18.488Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Healer_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 1,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 16
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 30,
+  "fields": {
+    "created_date": "2018-03-03T11:53:31.487Z",
+    "updated_date": "2018-03-03T12:02:18.425Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Abbot_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Automatic",
+    "unit": 2
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 31,
+  "fields": {
+    "created_date": "2018-03-03T11:54:18.525Z",
+    "updated_date": "2018-03-03T11:54:18.525Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "HealerAll_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 18
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 32,
+  "fields": {
+    "created_date": "2018-03-03T11:54:34.932Z",
+    "updated_date": "2018-03-03T11:54:34.932Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "HealerAll_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 18
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 33,
+  "fields": {
+    "created_date": "2018-03-03T11:54:55.907Z",
+    "updated_date": "2018-03-03T11:54:55.907Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Sumo_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 22
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 34,
+  "fields": {
+    "created_date": "2018-03-03T11:58:10.419Z",
+    "updated_date": "2018-03-03T11:58:10.419Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Sumo_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 6,
+    "action_type": "Normal",
+    "unit": 22
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 35,
+  "fields": {
+    "created_date": "2018-03-03T11:58:34.980Z",
+    "updated_date": "2018-03-03T11:58:34.980Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Linker_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 23
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 36,
+  "fields": {
+    "created_date": "2018-03-03T11:58:57.017Z",
+    "updated_date": "2018-03-03T11:58:57.017Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Linker_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 1,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 23
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 37,
+  "fields": {
+    "created_date": "2018-03-03T12:01:31.397Z",
+    "updated_date": "2018-03-03T12:01:31.397Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "FireSpirit_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 13
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 38,
+  "fields": {
+    "created_date": "2018-03-03T12:02:07.150Z",
+    "updated_date": "2018-03-03T12:02:07.150Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Hanzo_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 8
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 39,
+  "fields": {
+    "created_date": "2018-03-03T12:02:35.791Z",
+    "updated_date": "2018-03-03T12:02:35.791Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Hanzo_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 3,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 8
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 40,
+  "fields": {
+    "created_date": "2018-03-03T12:03:11.566Z",
+    "updated_date": "2018-03-03T12:03:11.566Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Archer_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 19
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 41,
+  "fields": {
+    "created_date": "2018-03-03T12:03:30.946Z",
+    "updated_date": "2018-03-03T12:03:30.946Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Archer_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 2,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 19
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 42,
+  "fields": {
+    "created_date": "2018-03-03T12:05:06.435Z",
+    "updated_date": "2018-03-03T12:05:43.329Z",
+    "params": null,
+    "char_spells_index": 0,
+    "spell_name": "Wildling_spell_A",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 24
+  }
+},
+{
+  "model": "objects.unitspell",
+  "pk": 43,
+  "fields": {
+    "created_date": "2018-03-03T12:05:34.699Z",
+    "updated_date": "2018-03-03T12:05:34.699Z",
+    "params": null,
+    "char_spells_index": 1,
+    "spell_name": "Wildling_spell_B",
+    "spell_type": "Magic",
+    "generated_action_point": 0,
+    "need_action_point": 0,
+    "cool_down_duration": 0,
+    "action_type": "Normal",
+    "unit": 24
+  }
+}
+]
