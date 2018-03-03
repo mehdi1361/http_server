@@ -101,10 +101,10 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
         'spell_name',
         'hero',
         'spell_type',
-        'generated_action_point',
         'need_action_point',
         'cool_down_duration',
         'char_spells_index',
+        'generated_action_point',
     )
 
     inlines = (HeroSpellEffectInline, )
@@ -116,10 +116,10 @@ class UnitSpellAdmin(SimpleHistoryAdmin):
         'spell_name',
         'unit',
         'spell_type',
-        'generated_action_point',
         'need_action_point',
         'cool_down_duration',
         'char_spells_index',
+        'generated_action_point',
     )
 
     inlines = (UnitSpellEffectInline, )
@@ -131,10 +131,10 @@ class ChakraSpellAdmin(SimpleHistoryAdmin):
         'spell_name',
         'hero',
         'spell_type',
-        'generated_action_point',
         'need_action_point',
         'cool_down_duration',
         'char_spells_index',
+        'generated_action_point',
     )
 
     inlines = (ChakraSpellEffectInline, )
