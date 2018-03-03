@@ -98,12 +98,13 @@ class UserHeroAdmin(SimpleHistoryAdmin):
 @admin.register(HeroSpell)
 class HeroSpellAdmin(SimpleHistoryAdmin):
     list_display = (
-        'char_spells_index',
         'spell_name',
+        'hero',
         'spell_type',
         'generated_action_point',
         'need_action_point',
-        'cool_down_duration'
+        'cool_down_duration',
+        'char_spells_index',
     )
 
     inlines = (HeroSpellEffectInline, )
@@ -112,12 +113,13 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
 @admin.register(UnitSpell)
 class UnitSpellAdmin(SimpleHistoryAdmin):
     list_display = (
-        'char_spells_index',
         'spell_name',
+        'hero',
         'spell_type',
         'generated_action_point',
         'need_action_point',
-        'cool_down_duration'
+        'cool_down_duration',
+        'char_spells_index',
     )
 
     inlines = (UnitSpellEffectInline, )
@@ -126,12 +128,13 @@ class UnitSpellAdmin(SimpleHistoryAdmin):
 @admin.register(ChakraSpell)
 class ChakraSpellAdmin(SimpleHistoryAdmin):
     list_display = (
-        'char_spells_index',
         'spell_name',
+        'hero',
         'spell_type',
         'generated_action_point',
         'need_action_point',
-        'cool_down_duration'
+        'cool_down_duration',
+        'char_spells_index',
     )
 
     inlines = (ChakraSpellEffectInline, )
