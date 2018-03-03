@@ -58,12 +58,18 @@ class Spell(models.Model):
         ('Secret', 'Secret'),
     )
 
+    SPELL_ACTION_TYPE = (
+        ('Normal', 'Normal'),
+        ('Automatic', 'Automatic'),
+    )
+
     char_spells_index = models.IntegerField(_('char spells index'), default=0)
     spell_name = models.CharField(_('spell name'), max_length=100, default='')
     spell_type = models.CharField(_('spell type'), max_length=50, choices=SPELL_TYPE, default='Magic')
     generated_action_point = models.IntegerField(_('generated action point'), default=0)
     need_action_point = models.PositiveIntegerField(_('need action point'), default=0)
     cool_down_duration = models.PositiveIntegerField(_('cool down duration'), default=0)
+    action_type = models.CharField(_('action type'), max_length=20, choices=SPELL_ACTION_TYPE, default='Normal')
 
     class Meta:
         abstract = True

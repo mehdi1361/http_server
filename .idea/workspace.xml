@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/base/models.py" afterPath="$PROJECT_DIR$/base/models.py" />
       <change beforePath="$PROJECT_DIR$/objects/admin.py" afterPath="$PROJECT_DIR$/objects/admin.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
@@ -104,8 +105,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="709">
-              <caret line="469" column="24" lean-forward="false" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
+            <state relative-caret-position="223">
+              <caret line="502" column="31" lean-forward="false" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
                 <marker date="1520074089486" expanded="true" signature="6784:7886" ph="..." />
@@ -118,8 +119,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/objects/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="139" column="41" lean-forward="true" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+            <state relative-caret-position="179">
+              <caret line="103" column="23" lean-forward="false" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -137,8 +138,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/base/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+            <state relative-caret-position="413">
+              <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -242,8 +243,8 @@
         <option value="$PROJECT_DIR$/api/views.py" />
         <option value="$PROJECT_DIR$/ancient_server/settings.py" />
         <option value="$PROJECT_DIR$/api/serializers.py" />
-        <option value="$PROJECT_DIR$/base/models.py" />
         <option value="$PROJECT_DIR$/objects/models.py" />
+        <option value="$PROJECT_DIR$/base/models.py" />
         <option value="$PROJECT_DIR$/objects/admin.py" />
       </list>
     </option>
@@ -983,14 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/base/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/objects/migrations/0012_auto_20180303_1046.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1018,8 +1011,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="709">
-          <caret line="469" column="24" lean-forward="false" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
+        <state relative-caret-position="223">
+          <caret line="502" column="31" lean-forward="false" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
             <marker date="1520074089486" expanded="true" signature="6784:7886" ph="..." />
@@ -1028,10 +1021,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/base/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/objects/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="139" column="41" lean-forward="true" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+        <state relative-caret-position="179">
+          <caret line="103" column="23" lean-forward="false" selection-start-line="103" selection-start-column="23" selection-end-line="103" selection-end-column="23" />
           <folding />
         </state>
       </provider>
