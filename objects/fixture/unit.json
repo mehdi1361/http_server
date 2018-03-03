@@ -17,7 +17,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
-    "dodge_chance": 0.01
+    "dodge_chance": 0.01,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -38,7 +40,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.5,
     "miss_chance": 0.05,
-    "dodge_chance": 0.02
+    "dodge_chance": 0.02,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -59,7 +63,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.01,
-    "dodge_chance": 0.02
+    "dodge_chance": 0.02,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -80,7 +86,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.5,
     "miss_chance": 0.3,
-    "dodge_chance": 0.0
+    "dodge_chance": 0.0,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -88,11 +96,11 @@
   "pk": 5,
   "fields": {
     "created_date": "2017-12-30T11:07:53.452Z",
-    "updated_date": "2017-12-30T12:41:16.278Z",
+    "updated_date": "2018-02-14T08:31:52.708Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Blood Elf",
+    "moniker": "BloodElf",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 40,
@@ -101,7 +109,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.0,
-    "dodge_chance": 0.02
+    "dodge_chance": 0.02,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -109,11 +119,11 @@
   "pk": 6,
   "fields": {
     "created_date": "2017-12-30T11:09:41.290Z",
-    "updated_date": "2017-12-30T11:09:41.290Z",
+    "updated_date": "2018-02-14T06:42:09.686Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Head Rock",
+    "moniker": "HeadRock",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 60,
@@ -122,7 +132,9 @@
     "critical_chance": 0.13,
     "critical_ratio": 2.0,
     "miss_chance": 0.02,
-    "dodge_chance": 0.0
+    "dodge_chance": 0.0,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -143,7 +155,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 2.0,
     "miss_chance": 0.0,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -164,7 +178,9 @@
     "critical_chance": 0.25,
     "critical_ratio": 2.5,
     "miss_chance": 0.02,
-    "dodge_chance": 0.04
+    "dodge_chance": 0.04,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -185,7 +201,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.06,
-    "dodge_chance": 0.06
+    "dodge_chance": 0.06,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -193,11 +211,11 @@
   "pk": 10,
   "fields": {
     "created_date": "2017-12-30T11:22:04.267Z",
-    "updated_date": "2017-12-30T11:22:04.267Z",
+    "updated_date": "2018-02-14T08:31:01.258Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Hedgehog",
+    "moniker": "Kharback",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 55,
@@ -206,7 +224,9 @@
     "critical_chance": 0.13,
     "critical_ratio": 2.0,
     "miss_chance": 0.0,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -214,11 +234,11 @@
   "pk": 11,
   "fields": {
     "created_date": "2017-12-30T11:31:11.435Z",
-    "updated_date": "2017-12-30T11:31:11.435Z",
+    "updated_date": "2018-02-14T08:30:23.931Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Jelly Mage",
+    "moniker": "JellyMage",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 55,
@@ -227,7 +247,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.75,
     "miss_chance": 0.03,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -235,11 +257,11 @@
   "pk": 12,
   "fields": {
     "created_date": "2017-12-30T11:33:08.592Z",
-    "updated_date": "2017-12-30T11:33:08.592Z",
+    "updated_date": "2018-02-14T08:30:15.873Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Sky Girl",
+    "moniker": "SkyGirl",
     "dexterity": "LATE",
     "attack_type": "NORMAL",
     "health": 55,
@@ -248,7 +270,9 @@
     "critical_chance": 0.1,
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
-    "dodge_chance": 0.05
+    "dodge_chance": 0.05,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -256,11 +280,11 @@
   "pk": 13,
   "fields": {
     "created_date": "2017-12-30T11:35:49.747Z",
-    "updated_date": "2017-12-30T11:35:49.747Z",
+    "updated_date": "2018-02-14T08:29:53.724Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "Fire Spirit",
+    "moniker": "FireSpirit",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 60,
@@ -269,7 +293,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 2.0,
     "miss_chance": 0.04,
-    "dodge_chance": 0.02
+    "dodge_chance": 0.02,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -277,11 +303,11 @@
   "pk": 14,
   "fields": {
     "created_date": "2017-12-30T11:46:04.132Z",
-    "updated_date": "2017-12-30T11:46:04.132Z",
+    "updated_date": "2018-02-14T08:29:47.858Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "5ab1ccb0-a707-4383-83a1-65e6fe50e4b8",
-    "moniker": "H to D",
+    "moniker": "HToD",
     "dexterity": "MIDDLE",
     "attack_type": "NORMAL",
     "health": 40,
@@ -290,7 +316,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 2.0,
     "miss_chance": 0.03,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -298,11 +326,11 @@
   "pk": 15,
   "fields": {
     "created_date": "2017-12-30T12:04:39.717Z",
-    "updated_date": "2017-12-30T12:04:39.717Z",
+    "updated_date": "2018-02-14T08:29:16.525Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
-    "moniker": "ScareCrow",
+    "moniker": "Scarecrow",
     "dexterity": "LATE",
     "attack_type": "NORMAL",
     "health": 75,
@@ -311,7 +339,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.75,
     "miss_chance": 0.0,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -332,7 +362,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.75,
     "miss_chance": 0.03,
-    "dodge_chance": 0.04
+    "dodge_chance": 0.04,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -340,9 +372,9 @@
   "pk": 17,
   "fields": {
     "created_date": "2017-12-30T12:10:02.375Z",
-    "updated_date": "2017-12-30T12:10:02.375Z",
+    "updated_date": "2018-02-19T15:08:01.156Z",
     "params": null,
-    "enable_in_start": false,
+    "enable_in_start": true,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
     "moniker": "Orc",
     "dexterity": "MIDDLE",
@@ -353,7 +385,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -361,11 +395,11 @@
   "pk": 18,
   "fields": {
     "created_date": "2017-12-30T12:11:05.158Z",
-    "updated_date": "2017-12-30T12:11:05.158Z",
+    "updated_date": "2018-02-14T08:27:13.419Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
-    "moniker": "Healer All",
+    "moniker": "HealerAll",
     "dexterity": "LATE",
     "attack_type": "NORMAL",
     "health": 75,
@@ -374,7 +408,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
-    "dodge_chance": 0.04
+    "dodge_chance": 0.04,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -382,9 +418,9 @@
   "pk": 19,
   "fields": {
     "created_date": "2017-12-30T12:12:46.668Z",
-    "updated_date": "2017-12-30T12:12:46.668Z",
+    "updated_date": "2018-02-19T15:07:45.409Z",
     "params": null,
-    "enable_in_start": false,
+    "enable_in_start": true,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
     "moniker": "Archer",
     "dexterity": "MIDDLE",
@@ -395,7 +431,9 @@
     "critical_chance": 0.05,
     "critical_ratio": 1.5,
     "miss_chance": 0.02,
-    "dodge_chance": 0.04
+    "dodge_chance": 0.04,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -416,7 +454,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
-    "dodge_chance": 0.04
+    "dodge_chance": 0.04,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -437,7 +477,9 @@
     "critical_chance": 0.08,
     "critical_ratio": 1.5,
     "miss_chance": 0.02,
-    "dodge_chance": 0.12
+    "dodge_chance": 0.12,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -445,20 +487,22 @@
   "pk": 22,
   "fields": {
     "created_date": "2017-12-30T12:16:58.411Z",
-    "updated_date": "2017-12-30T12:16:58.411Z",
+    "updated_date": "2018-02-14T08:34:09.563Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
     "moniker": "Sumo",
     "dexterity": "LATE",
     "attack_type": "NORMAL",
-    "health": 8,
+    "health": 80,
     "shield": 0,
     "attack": 6,
     "critical_chance": 0.08,
     "critical_ratio": 2.5,
     "miss_chance": 0.01,
-    "dodge_chance": 0.0
+    "dodge_chance": 0.0,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -479,7 +523,9 @@
     "critical_chance": 0.1,
     "critical_ratio": 1.75,
     "miss_chance": 0.04,
-    "dodge_chance": 0.03
+    "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0
   }
 },
 {
@@ -487,11 +533,11 @@
   "pk": 24,
   "fields": {
     "created_date": "2017-12-30T12:19:48.336Z",
-    "updated_date": "2017-12-30T12:19:48.336Z",
+    "updated_date": "2018-02-14T08:26:39.315Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "27abca75-65ad-48a7-86d6-5ba7e51f6e73",
-    "moniker": "wildling",
+    "moniker": "Goolakh",
     "dexterity": "LATE",
     "attack_type": "NORMAL",
     "health": 70,
@@ -500,7 +546,9 @@
     "critical_chance": 0.1,
     "critical_ratio": 2.0,
     "miss_chance": 0.04,
-    "dodge_chance": 0.01
+    "dodge_chance": 0.01,
+    "max_health": 100,
+    "max_shield": 0
   }
 }
 ]

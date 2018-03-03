@@ -4,140 +4,182 @@
   "pk": 1,
   "fields": {
     "created_date": "2018-01-08T07:45:22.851Z",
-    "updated_date": "2018-01-08T09:15:45.884Z",
+    "updated_date": "2018-02-25T09:37:28.145Z",
     "params": null,
     "name": "test",
     "coins": [
       {
+        "price_type": "gem",
+        "price": 1000,
         "discount": 5,
-        "cost": "gem",
-        "id": 1,
-        "value": 200
+        "amount": 200,
+        "key": "coin_0",
+        "id": 1
       },
       {
+        "price_type": "gem",
+        "price": 2000,
         "discount": 5,
-        "cost": "gem",
-        "id": 2,
-        "value": 250
+        "amount": 250,
+        "key": "coin_1",
+        "id": 2
       },
       {
+        "price_type": "gem",
+        "price": 3000,
         "discount": 5,
-        "cost": "gem",
-        "id": 3,
-        "value": 265
+        "amount": 265,
+        "key": "coin_2",
+        "id": 3
       },
       {
+        "price_type": "gem",
+        "price": 4000,
         "discount": 5,
-        "cost": "gem",
-        "id": 4,
-        "value": 265
+        "amount": 285,
+        "key": "coin_3",
+        "id": 4
       },
       {
+        "price_type": "gem",
+        "price": 5000,
         "discount": 5,
-        "cost": "gem",
-        "id": 5,
-        "value": 325
+        "amount": 325,
+        "key": "coin_4",
+        "id": 5
       },
       {
+        "price_type": "gem",
+        "price": 6000,
         "discount": 12,
-        "cost": "gem",
-        "id": 6,
-        "value": 410
+        "amount": 410,
+        "key": "coin_5",
+        "id": 6
       }
     ],
     "gems": [
       {
         "lable": "None",
-        "cost": "rial",
-        "id": 1,
-        "value": 200,
-        "discount": 5
+        "price_type": "rial",
+        "price": 1000,
+        "discount": 5,
+        "amount": 200,
+        "key": "gem_0",
+        "id": 1
       },
       {
         "lable": "None",
-        "cost": "rial",
-        "id": 2,
-        "value": 220,
-        "discount": 5
+        "price_type": "rial",
+        "price": 2000,
+        "discount": 5,
+        "amount": 220,
+        "key": "gem_1",
+        "id": 2
       },
       {
         "lable": "None",
-        "cost": "rial",
-        "id": 3,
-        "value": 240,
-        "discount": 5
+        "price_type": "rial",
+        "price": 3000,
+        "discount": 5,
+        "amount": 240,
+        "key": "gem_2",
+        "id": 3
       },
       {
-        "lable": "best value",
-        "cost": "rial",
-        "id": 4,
-        "value": 260,
-        "discount": 4
+        "lable": "best_value",
+        "price_type": "rial",
+        "price": 4000,
+        "discount": 4,
+        "amount": 260,
+        "key": "gem_3",
+        "id": 4
       },
       {
         "lable": "most popular",
-        "cost": "rial",
-        "id": 5,
-        "value": 270,
-        "discount": 2
+        "price_type": "rial",
+        "price": 5000,
+        "discount": 2,
+        "amount": 270,
+        "key": "gem_4",
+        "id": 5
       },
       {
         "lable": "None",
-        "cost": "rial",
-        "id": 6,
-        "value": 300,
-        "discount": 12
+        "price_type": "rial",
+        "price": 6000,
+        "discount": 12,
+        "amount": 300,
+        "key": "gem_5",
+        "id": 6
       }
     ],
     "chests": [
       {
+        "price_type": "rial",
         "discount": 25,
-        "cost": 20,
-        "type": "W"
+        "price": 20,
+        "type": "wooden",
+        "id": 1
       },
       {
+        "price_type": "rial",
         "discount": 35,
-        "cost": 30,
-        "type": "S"
+        "price": 30,
+        "type": "silver",
+        "id": 2
       },
       {
+        "price_type": "rial",
         "discount": 85,
-        "cost": 70,
-        "type": "G"
+        "price": 70,
+        "type": "gold",
+        "id": 3
       },
       {
+        "price_type": "rial",
         "discount": 125,
-        "cost": 120,
-        "type": "C"
+        "price": 120,
+        "type": "crystal",
+        "id": 4
       }
     ],
     "special_offer": [
       {
+        "title": "sale",
+        "price_type": "rial",
+        "price": 1000,
         "discount": 250,
         "chest": [
           {
+            "price_type": "rial",
             "discount": 25,
-            "cost": 20,
-            "type": "W"
+            "price": 20,
+            "type": "wooden",
+            "id": 1
           },
           {
+            "price_type": "rial",
             "discount": 35,
-            "cost": 30,
-            "type": "S"
+            "price": 30,
+            "type": "silver",
+            "id": 2
           },
           {
+            "price_type": "rial",
             "discount": 85,
-            "cost": 70,
-            "type": "G"
+            "price": 70,
+            "type": "gold",
+            "id": 3
           },
           {
+            "price_type": "rial",
             "discount": 125,
-            "cost": 120,
-            "type": "C"
+            "price": 120,
+            "type": "crystal",
+            "id": 4
           }
         ],
-        "cost": "rial",
-        "time": "",
+        "time_remaining": 100,
         "coin": 200,
         "id": 1,
         "gem": 12
