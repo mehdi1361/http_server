@@ -69,6 +69,7 @@ class UserCurrencySerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCurrency
         fields = (
+            'name',
             'gem',
             'coin',
             'trophy',
