@@ -114,7 +114,7 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
 class UnitSpellAdmin(SimpleHistoryAdmin):
     list_display = (
         'spell_name',
-        'hero',
+        'unit',
         'spell_type',
         'generated_action_point',
         'need_action_point',
