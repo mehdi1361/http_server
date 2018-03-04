@@ -4,12 +4,12 @@
   "pk": 1,
   "fields": {
     "created_date": "2017-12-18T12:54:35.943Z",
-    "updated_date": "2017-12-31T12:38:57.154Z",
+    "updated_date": "2018-02-25T13:18:31.181Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "6109907b-9dcd-405f-85f9-d4c4e86a1a46",
     "moniker": "Cleric",
-    "dexterity": "LATE",
+    "dexterity": "EARLY",
     "attack_type": "NORMAL",
     "health": 70,
     "shield": 36,
@@ -18,13 +18,18 @@
     "critical_ratio": 2.0,
     "miss_chance": 0.02,
     "dodge_chance": 0.08,
+    "max_health": 100,
+    "max_shield": 0,
+    "chakra_moniker": "ClericChakra",
     "chakra_health": 100,
     "chakra_shield": 0,
     "chakra_attack": 10,
     "chakra_critical_chance": 0.01,
     "chakra_critical_ratio": 0.01,
     "chakra_miss_chance": 0.0,
-    "chakra_dodge_chance": 0.0
+    "chakra_dodge_chance": 0.0,
+    "chakra_max_health": 100,
+    "chakra_max_shield": 0
   }
 },
 {
@@ -32,7 +37,7 @@
   "pk": 2,
   "fields": {
     "created_date": "2017-12-18T12:55:31.251Z",
-    "updated_date": "2017-12-31T12:38:48.191Z",
+    "updated_date": "2018-02-25T13:18:01.619Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "6109907b-9dcd-405f-85f9-d4c4e86a1a46",
@@ -46,13 +51,18 @@
     "critical_ratio": 1.5,
     "miss_chance": 0.03,
     "dodge_chance": 0.02,
+    "max_health": 100,
+    "max_shield": 0,
+    "chakra_moniker": "WarriorChakra",
     "chakra_health": 100,
     "chakra_shield": 0,
     "chakra_attack": 10,
     "chakra_critical_chance": 0.01,
     "chakra_critical_ratio": 0.01,
     "chakra_miss_chance": 0.0,
-    "chakra_dodge_chance": 0.0
+    "chakra_dodge_chance": 0.0,
+    "chakra_max_health": 100,
+    "chakra_max_shield": 0
   }
 },
 {
@@ -60,7 +70,7 @@
   "pk": 3,
   "fields": {
     "created_date": "2017-12-30T08:20:23.191Z",
-    "updated_date": "2018-01-06T07:11:04.644Z",
+    "updated_date": "2018-02-25T13:17:45.295Z",
     "params": null,
     "enable_in_start": false,
     "unique_id": "f66593de-7ab0-4282-b6a1-96f23c1e6334",
@@ -74,13 +84,18 @@
     "critical_ratio": 1.75,
     "miss_chance": 0.03,
     "dodge_chance": 0.03,
+    "max_health": 100,
+    "max_shield": 0,
+    "chakra_moniker": "WizardChakra",
     "chakra_health": 120,
     "chakra_shield": 0,
     "chakra_attack": 17,
     "chakra_critical_chance": 0.13,
     "chakra_critical_ratio": 2.5,
     "chakra_miss_chance": 0.0,
-    "chakra_dodge_chance": 0.0
+    "chakra_dodge_chance": 0.0,
+    "chakra_max_health": 100,
+    "chakra_max_shield": 0
   }
 }
 ]
