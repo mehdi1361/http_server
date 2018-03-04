@@ -53,6 +53,7 @@ class ItemSerializer(serializers.ModelSerializer):
             'critical_chance',
             'dodge_chance',
             'item_type',
+            'default'
         )
 
 

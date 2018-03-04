@@ -431,6 +431,7 @@ class Item(Base):
     item_type = models.CharField(_('item type'), max_length=50, null=True, default='helmet', choices=TYPE)
     level = models.PositiveIntegerField(_('level'), default=0)
     hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='items')
+    default = models.BooleanField(_('default'), default=False)
 
     class Meta:
         verbose_name = _('item')
