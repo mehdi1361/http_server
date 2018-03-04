@@ -327,7 +327,7 @@ class UserChest(Base):
     def deck_is_open(cls, user, chest_type):
         if cls.objects.filter(
                 user=user,
-                chest_type=chest_type,
+                chest_monetaryType=chest_type,
         ).exclude(status='used').count() >= settings.DECK_COUNT[chest_type]:
             return False
 
