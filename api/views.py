@@ -7,8 +7,8 @@ from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero,\
-    LeagueInfo, UserChest, UserCard, Unit, UserItem
+from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, \
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
@@ -257,6 +257,29 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_hero.save()
 
         return Response({'message': 'hero updated'}, status=status.HTTP_200_OK)
+
+    @list_route(methods=['POST'])
+    def selected_items(self, request):
+        list_items = request.data.get('list_items')
+        user_hero = get_object_or_404(UserHero, user=request.user, enable_hero=True)
+
+        selected_items = []
+
+        for lst_itm in list_items:
+            item = Item.objects.get(pk=lst_itm)
+
+            if item.hero == user_hero.hero:
+                serializer = ItemSerializer(item)
+                selected_items.append(serializer.data)
+
+            else:
+                return Response({'id': 404, 'message': 'hero selected item not found'},
+                                status=status.HTTP_404_NOT_FOUND)
+
+        user_hero.selected_item = selected_items
+        user_hero.save()
+
+        return Response({'id': 200, 'message': 'hero selected item updated'}, status=status.HTTP_200_OK)
 
 
 class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
