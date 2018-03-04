@@ -421,7 +421,7 @@ class Item(Base):
         ('Naga', 'Naga'),
         ('Duff', 'Duff')
     )
-    name = models.CharField(_('name'), max_length=50, choices=NAME, default='Biker')
+    name = models.CharField(_('name'), max_length=50)
     damage = models.IntegerField(_('damage'), default=0)
     shield = models.IntegerField(_('shield'), default=0)
     health = models.IntegerField(_('health'), default=0)
@@ -439,7 +439,7 @@ class Item(Base):
         db_table = 'items'
 
     def __str__(self):
-        return '{}-{}-{}'.format(self.hero.moniker, self.name, self.item_type)
+        return '{}'.format(self.name)
 
 
 @python_2_unicode_compatible
