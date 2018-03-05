@@ -352,7 +352,9 @@ class UserChest(Base):
         current_time = timezone.now()
         if self.chest_opening_date:
             return (self.chest_opening_date - current_time).seconds
-        return -1
+
+        init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
+        return (init_time - datetime.now()).seconds
 
     @property
     def chest_status(self):
