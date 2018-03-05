@@ -361,7 +361,7 @@ class UserChest(Base):
     @property
     def initial_time(self):
         init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
-        return (datetime.now() - init_time).seconds
+        return (init_time - datetime.now()).seconds
 
     @chest_status.setter
     def chest_status(self, value):
