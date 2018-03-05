@@ -82,7 +82,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def open_chest(self, request):
-        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='close')
+        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
 
         if UserChest.deck.filter(user=request.user, status='opening').count() >= 1:
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
