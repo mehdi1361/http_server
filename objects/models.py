@@ -13,6 +13,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
+from datetime import datetime, timedelta
 # from multiselectfield import MultiSelectField
 
 
@@ -359,7 +360,8 @@ class UserChest(Base):
     
     @property
     def initial_time(self):
-        return settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]
+        init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
+        return (datetime.now() - init_time).seconds
 
     @chest_status.setter
     def chest_status(self, value):
