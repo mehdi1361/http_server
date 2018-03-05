@@ -104,19 +104,19 @@ class HeroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hero
         fields = (
-              'id',
-              'moniker',
-              'dexterity',
-              'attack_type',
-              'health',
-              'shield',
-              'attack',
-              'critical_chance',
-              'critical_ratio',
-              'miss_chance',
-              'enable_in_start',
-              'max_health',
-              'max_shield'
+            'id',
+            'moniker',
+            'dexterity',
+            'attack_type',
+            'health',
+            'shield',
+            'attack',
+            'critical_chance',
+            'critical_ratio',
+            'miss_chance',
+            'enable_in_start',
+            'max_health',
+            'max_shield'
         )
 
 
@@ -236,7 +236,8 @@ class UserSerializer(serializers.ModelSerializer):
                     item_data['level'] = item.level
 
                     if data['selected_hero']:
-                        item_data['selected_item'] = item.id in UserHero.get_selected_item(requests, hero)
+                        item_data['selected_item'] = True if item.item.id in \
+                                                             UserHero.get_selected_item(requests, hero) else False
                     else:
                         item_data['selected_item'] = False
 
