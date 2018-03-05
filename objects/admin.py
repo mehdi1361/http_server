@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
-    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect
+    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency
 from simple_history.admin import SimpleHistoryAdmin
+from django.contrib.auth.models import User
 # from django.contrib.auth.models import User
 
 
@@ -11,6 +12,14 @@ from simple_history.admin import SimpleHistoryAdmin
 # class UserAdmin(admin.ModelAdmin):
 #     list_display = ('username', 'email', 'first_name', 'last_name')
 #     list_filter = ('is_staff', 'is_superuser')
+
+admin.site.unregister(User)
+
+
+class UserCurrencyInline(admin.StackedInline):
+    model = UserCurrency
+    max_num = 1
+    can_delete = False
 
 
 class HeroUnitsAdmin(admin.StackedInline):
@@ -35,6 +44,11 @@ class UnitSpellEffectInline(admin.TabularInline):
 
 class ChakraSpellEffectInline(admin.TabularInline):
     model = ChakraSpellEffect
+
+
+@admin.register(User)
+class AccountsUserAdmin(admin.ModelAdmin):
+    inlines = [UserCurrencyInline]
 
 
 @admin.register(BenefitBox)
