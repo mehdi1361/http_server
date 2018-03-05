@@ -48,6 +48,8 @@ class ChakraSpellEffectInline(admin.TabularInline):
 
 @admin.register(User)
 class AccountsUserAdmin(admin.ModelAdmin):
+    search_fields = ['username']
+    list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
 
 
