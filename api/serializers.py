@@ -306,6 +306,7 @@ class BenefitSerializer(serializers.ModelSerializer):
     class Meta:
         model = BenefitBox
         fields = (
+            'id',
             'name',
             'box',
             'quantity'

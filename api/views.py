@@ -143,29 +143,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 201, 'user_name': name}, status=status.HTTP_202_ACCEPTED)
 
-
-class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = BenefitBox.objects.all()
-    serializer_class = BenefitSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('box', )
-
-    @list_route(methods=['POST'])
-    def buy(self, request):
-        benefit = get_object_or_404(BenefitBox, pk=request.data.get('id'))
-        UserBuy.objects.create(user=request.user, benefit=benefit)
-        chest = UserCurrency.objects.get(user=request.user)
-
-        if benefit.box == 'GEM':
-            chest.gem += benefit.quantity
-
-        if benefit.box == 'COIN':
-            chest.coin += benefit.quantity
-
-        chest.save()
-
-        return Response({'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
-        # TODO check payment validation
+# class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+#     queryset = BenefitBox.objects.all()
+#     serializer_class = BenefitSerializer
+#     filter_backends = (DjangoFilterBackend,)
+#     filter_fields = ('box', )
+#
+#     @list_route(methods=['POST'])
+#     def buy_gem(self, request):
+#         shop = get_object_or_404(Shop, pk=request.data.get('store_id'))
+#
+#         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
+#
+#         return Response({'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
+#         # TODO check payment validation
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -182,6 +173,17 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         return Response(serializer.data)
+
+    @list_route(methods=['POST'])
+    def buy(self, request):
+        shop = get_object_or_404(Shop, pk=request.data.get('store_id'))
+
+        store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
+        # TODO check store api
+        request.user.user_currency.gem += store['amount']
+        request.user.user_currency.save()
+
+        return Response({'id': 201, 'message': 'buy success'}, status=status.HTTP_202_ACCEPTED)
 
 
 class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,

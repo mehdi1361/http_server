@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "created_date": "2018-01-08T07:45:22.851Z",
-    "updated_date": "2018-02-25T09:37:28.145Z",
+    "updated_date": "2018-03-06T07:57:41.761Z",
     "params": null,
     "name": "test",
     "coins": [
@@ -86,7 +86,7 @@
         "id": 3
       },
       {
-        "lable": "best_value",
+        "lable": "bestValue",
         "price_type": "rial",
         "price": 4000,
         "discount": 4,
@@ -95,7 +95,7 @@
         "id": 4
       },
       {
-        "lable": "most popular",
+        "lable": "mostPopular",
         "price_type": "rial",
         "price": 5000,
         "discount": 2,
@@ -115,28 +115,28 @@
     ],
     "chests": [
       {
-        "price_type": "rial",
+        "price_type": "gem",
         "discount": 25,
         "price": 20,
         "type": "wooden",
         "id": 1
       },
       {
-        "price_type": "rial",
+        "price_type": "gem",
         "discount": 35,
         "price": 30,
         "type": "silver",
         "id": 2
       },
       {
-        "price_type": "rial",
+        "price_type": "gem",
         "discount": 85,
         "price": 70,
         "type": "gold",
         "id": 3
       },
       {
-        "price_type": "rial",
+        "price_type": "gem",
         "discount": 125,
         "price": 120,
         "type": "crystal",
@@ -148,37 +148,17 @@
         "title": "sale",
         "price_type": "rial",
         "price": 1000,
-        "discount": 250,
-        "chest": [
+        "old_price": 2000,
+        "chests": [
           {
             "price_type": "rial",
             "discount": 25,
             "price": 20,
             "type": "wooden",
             "id": 1
-          },
-          {
-            "price_type": "rial",
-            "discount": 35,
-            "price": 30,
-            "type": "silver",
-            "id": 2
-          },
-          {
-            "price_type": "rial",
-            "discount": 85,
-            "price": 70,
-            "type": "gold",
-            "id": 3
-          },
-          {
-            "price_type": "rial",
-            "discount": 125,
-            "price": 120,
-            "type": "crystal",
-            "id": 4
           }
         ],
+        "discount": 50,
         "time_remaining": 100,
         "coin": 200,
         "id": 1,
