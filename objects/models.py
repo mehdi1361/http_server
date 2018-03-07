@@ -313,7 +313,7 @@ class UserChest(Base):
     chest_monetaryType = models.CharField(_('chest type'), max_length=50, choices=TYPE, default='non_free')
     status = models.CharField(_('status'), max_length=50, choices=STATUS, default='close')
     sequence_number = models.PositiveIntegerField(_('sequence number'), default=0, validators=[validate_sequence])
-    cards = JSONField(verbose_name=_('cards'), default=None, null=True)
+    reward_data = JSONField(verbose_name=_('cards'), default=None, null=True)
     chest_opening_date = models.DateTimeField(_('chest opening time'), null=True, default=None)
     history = HistoricalRecords()
 

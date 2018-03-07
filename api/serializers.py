@@ -33,7 +33,7 @@ class UserChestSerializer(serializers.ModelSerializer):
             'remain_time',
             'initial_time',
             'status',
-            'cards'
+            'reward_data'
         )
 
     def get_chest_type(self, obj):

@@ -77,7 +77,7 @@ class ChestGenerate:
             "user": self.user,
             "chest": chest,
             "sequence_number": UserChest.next_sequence(self.user),
-            "cards":
+            "reward_data":
                 {
                     "gems": random.randint(chest.min_gem, chest.max_gem),
                     "coins": random.randint(chest.min_coin, chest.max_coin),
@@ -89,7 +89,7 @@ class ChestGenerate:
             UserChest.objects.create(**data)
             return {"status": True, "message": "chest created"}
 
-        return data["cards"]
+        return data["reward_data"]
 
     def _get_card(self, count, lst_unit):
         unit_index = random.randint(1, Unit.count())
