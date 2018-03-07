@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'shopping',
     'message',
     'dbbackup',
+    'logs',
 ]
 
 MIDDLEWARE = [

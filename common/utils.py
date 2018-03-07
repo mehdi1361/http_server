@@ -36,18 +36,24 @@ def classproperty(func):
 
 class ChestGenerate:
 
-    def __init__(self, user):
+    def __init__(self, user, chest_type_index=None):
         self.user = user
+        self.chest_type_index = chest_type_index
 
-    def generate_winner_chest(self):
+    def generate_chest(self):
         cards_type = 4
         lst_unit = []
 
         if not UserChest.deck_is_open(self.user, 'non_free'):
             return {"status": False, "message": "deck is full"}
 
-        index, chest_type = UserChest.get_sequence(self.user)
-        chest = Chest.get(chest_type)
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type_index)
+
         max_unit_card_count = chest.unit_card
 
         if chest.hero_card > 0:
@@ -78,8 +84,12 @@ class ChestGenerate:
                     "units": lst_unit
                 }
         }
-        UserChest.objects.create(**data)
-        return {"status": True, "message": "chest created"}
+
+        if self.chest_type_index is None:
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["cards"]
 
     def _get_card(self, count, lst_unit):
         unit_index = random.randint(1, Unit.count())

@@ -21,6 +21,11 @@ class Store(Base):
         return '{}'.format(self.name)
 
 
+class EnableShop(models.Manager):
+    def get_queryset(self):
+        return super(Shop, self).get_queryset().exclude(enable=True)
+
+
 @python_2_unicode_compatible
 class Shop(Base):
     name = models.CharField(_('shop name'), max_length=50)
@@ -29,7 +34,10 @@ class Shop(Base):
     chests = JSONField(_('chests'))
     special_offer = JSONField(_('special offer'), null=True, default=None)
     store = models.ForeignKey(Store, verbose_name=_('store'))
-    enable = models.BooleanField(_('enable shop item'), default=True)
+    enable = models.BooleanField(_('enable shop item'), default=False)
+
+    objects = models.Manager()
+    enable_shop = EnableShop()
 
     class Meta:
         verbose_name = _('shop')
