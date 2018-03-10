@@ -145,7 +145,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def change_player_name(self, request):
-        if request.user.profile.can_change_name:
+        if request.user.user_currency.can_change_name:
             try:
                 name = request.data.get('name')
                 profile = UserCurrency.objects.get(name=name)
