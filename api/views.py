@@ -154,6 +154,7 @@ class UserViewSet(viewsets.ModelViewSet):
             except:
                 profile = UserCurrency.objects.get(user=request.user)
                 profile.name = name
+                profile.can_change_name = False
                 profile.save()
 
             return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
