@@ -225,6 +225,41 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         return Response({'id': 400, 'message': 'gems are not enough'}, status=status.HTTP_400_BAD_REQUEST)
 
+    @list_route(methods=['POST'])
+    def buy_special_offer(self, request):
+        chest_type = {
+            'wooden': 'W',
+            'silver': 'S',
+            'gold': 'G',
+            'crystal': 'C'
+        }
+        shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
+
+        store = (item for item in shop.special_offer if item['id'] == request.data.get('id')).next()
+        # TODO check store api
+        chst_lst = []
+
+        for offer_chest in store['chests']:
+            chest = ChestGenerate(request.user, chest_type[offer_chest['type']])
+            chest_value = chest.generate_chest()
+            UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
+
+            for unit in chest_value['units']:
+                character = Unit.objects.get(moniker=unit['unit'])
+                UserCard.upgrade_character(request.user, character, unit['count'])
+
+            chst_lst.append({"{}".format(offer_chest['type']): chest_value})
+
+        UserCurrency.update_currency(request.user, store['gem'], store['coin'])
+
+        result = {
+            'gems': store['gem'],
+            'coins': store['coin'],
+            'chests': chst_lst
+        }
+
+        return Response({'id': 200, 'result': result})
+
 
 class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
                        viewsets.GenericViewSet):
