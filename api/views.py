@@ -159,7 +159,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
 
-        return Response({'id': 400, 'message': 'user used change name'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'id': 400, 'message': 'cant change name'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
