@@ -76,6 +76,7 @@ class UserCurrencySerializer(serializers.ModelSerializer):
             'trophy',
             'session_count',
             'need_comeback',
+            'can_change_name',
             'next_session_remaining_seconds'
         )
 
