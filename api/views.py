@@ -143,20 +143,19 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 201, 'user_name': name}, status=status.HTTP_202_ACCEPTED)
 
-# class BenefitViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-#     queryset = BenefitBox.objects.all()
-#     serializer_class = BenefitSerializer
-#     filter_backends = (DjangoFilterBackend,)
-#     filter_fields = ('box', )
-#
-#     @list_route(methods=['POST'])
-#     def buy_gem(self, request):
-#         shop = get_object_or_404(Shop, pk=request.data.get('store_id'))
-#
-#         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
-#
-#         return Response({'id': 201, 'message': 'buy request created'}, status=status.HTTP_202_ACCEPTED)
-#         # TODO check payment validation
+    @list_route(methods=['POST'])
+    def change_player_name(self, request):
+        try:
+            name = request.data.get('name')
+            profile = UserCurrency.objects.get(name=name)
+            return Response({'id': 400, 'message': 'name already exists', 'name': profile.name}, status=status.HTTP_400_BAD_REQUEST)
+
+        except:
+            profile = UserCurrency.objects.get(user=request.user)
+            profile.name = name
+            profile.save()
+
+        return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
