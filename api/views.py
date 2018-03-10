@@ -242,6 +242,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         store = (item for item in shop.special_offer if item['id'] == request.data.get('id')).next()
         # TODO check store api
         chst_lst = []
+        chst_item = []
 
         for offer_chest in store['chests']:
             chest = ChestGenerate(request.user, chest_type[offer_chest['type']])
@@ -252,8 +253,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 character = Unit.objects.get(moniker=unit['unit'])
                 UserCard.upgrade_character(request.user, character, unit['count'])
 
-            chest_value['chest_type'] = offer_chest['type']
-            chst_lst.append(chest_value)
+            chest_item = {'chest_type': offer_chest['type'], 'chest_reward': chest_value}
+            chst_lst.append(chest_item)
 
         UserCurrency.update_currency(request.user, store['gem'], store['coin'])
 
