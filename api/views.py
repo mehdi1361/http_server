@@ -145,17 +145,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def change_player_name(self, request):
-        try:
-            name = request.data.get('name')
-            profile = UserCurrency.objects.get(name=name)
-            return Response({'id': 400, 'message': 'name already exists', 'name': profile.name}, status=status.HTTP_400_BAD_REQUEST)
+        if request.user.profile.can_change_name:
+            try:
+                name = request.data.get('name')
+                profile = UserCurrency.objects.get(name=name)
+                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name}, status=status.HTTP_400_BAD_REQUEST)
 
-        except:
-            profile = UserCurrency.objects.get(user=request.user)
-            profile.name = name
-            profile.save()
+            except:
+                profile = UserCurrency.objects.get(user=request.user)
+                profile.name = name
+                profile.save()
 
-        return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
+            return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
+
+        return Response({'id': 400, 'message': 'user used change name'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
