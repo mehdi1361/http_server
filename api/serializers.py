@@ -93,6 +93,7 @@ class UnitSerializer(serializers.ModelSerializer):
             'critical_chance',
             'critical_ratio',
             'miss_chance',
+            'dodge_chance',
             'enable_in_start',
             'health',
             'max_health',
@@ -115,6 +116,7 @@ class HeroSerializer(serializers.ModelSerializer):
             'critical_chance',
             'critical_ratio',
             'miss_chance',
+            'dodge_chance',
             'enable_in_start',
             'max_health',
             'max_shield'
