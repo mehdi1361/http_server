@@ -206,8 +206,8 @@ UNIT_UPDATE = {
 
 HERO_UPDATE = {
     1: {'hero_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'hero_cards': 5, 'coins': 250, 'increase': 0.2},
-    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.2}
+    2: {'hero_cards': 5, 'coins': 250, 'increase': 0.4},
+    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.8}
 }
 
 JWT_AUTH = {

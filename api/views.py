@@ -264,7 +264,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             'chests': chst_lst
         }
 
-        return Response({'id': 200, 'result': result})
+        return Response(result)
 
 
 class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
