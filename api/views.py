@@ -186,7 +186,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
-        return Response({'id': 201, 'message': 'buy success'}, status=status.HTTP_202_ACCEPTED)
+        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
@@ -200,7 +200,14 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
             return Response({'id': 201, 'message': 'buy success'}, status=status.HTTP_202_ACCEPTED)
 
-        return Response({'id': 400, 'message': 'gems are not enough'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'buy_coin': store['amount'],
+            'user_coin': request.user.user_currency.coin,
+            'used_gem': store['price'],
+            'user_gem': request.user.user_currency.gem
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     @list_route(methods=['POST'])
     def buy_chest(self, request):
