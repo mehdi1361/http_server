@@ -186,8 +186,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
-        serializer = UserCurrencySerializer(request.user.user_currency)
-        return Response({'buy_gem': store['amount'], 'user_gem': serializer.data}, status=status.HTTP_202_ACCEPTED)
+        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency.gem}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
