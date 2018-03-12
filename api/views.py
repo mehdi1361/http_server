@@ -6,7 +6,7 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
-    ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer
+    ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item
 from django_filters.rest_framework import DjangoFilterBackend
@@ -186,7 +186,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
-        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency}, status=status.HTTP_202_ACCEPTED)
+        serializer = UserCurrencySerializer(request.user.user_currency)
+        return Response({'buy_gem': store['amount'], 'user_gem': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
@@ -198,16 +199,15 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             request.user.user_currency.coin += store['amount']
             request.user.user_currency.save()
 
-            return Response({'id': 201, 'message': 'buy success'}, status=status.HTTP_202_ACCEPTED)
-
-        return Response({
-            'buy_coin': store['amount'],
-            'user_coin': request.user.user_currency.coin,
-            'used_gem': store['price'],
-            'user_gem': request.user.user_currency.gem
-            },
-            status=status.HTTP_400_BAD_REQUEST
-        )
+            return Response({
+                'buy_coin': store['amount'],
+                'user_coin': request.user.user_currency.coin,
+                'used_gem': store['price'],
+                'user_gem': request.user.user_currency.gem
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        return Response({'id': 400, 'message': 'gem not enough'}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def buy_chest(self, request):
