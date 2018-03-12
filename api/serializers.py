@@ -190,190 +190,180 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_heroes(self, requests):
         global hero_user
-        try:
-            hero_user = UserHero.objects.get(user=requests, enable_hero=True)
+        list_serialize = []
+        for hero in Hero.objects.all():
+            serializer = HeroSerializer(hero)
+            data = serializer.data
 
-        except UserHero.DoesNotExist as e:
-            hero_user = None
+            hero_user = UserHero.objects.get(user=requests, hero=hero)
 
-        finally:
-            list_serialize = []
-            for hero in Hero.objects.all():
-                serializer = HeroSerializer(hero)
-                data = serializer.data
+            data['selected_hero'] = True if hero_user.enable_hero else False
+            data['health'] = data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['health']
+            data['shield'] = data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['shield']
+            data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['attack']
+            data['critical_chance'] = data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['critical_chance']
 
-                if hero.id == hero_user.hero.id if hero_user else 0:
-                    data['selected_hero'] = True
-
-                else:
-                    data['selected_hero'] = False
-
-                data['health'] = data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['health']
-                data['shield'] = data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['shield']
-                data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['attack']
-                data['critical_chance'] = data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['critical_chance']
-
-                data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio'] * \
-                                          settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['critical_ratio']
-
-                data['miss_chance'] = data['miss_chance'] + data['miss_chance'] * \
-                                         settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['miss_chance']
-
-                data['dodge_chance'] = data['dodge_chance'] + data['dodge_chance'] * \
+            data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio'] * \
                                       settings.HERO_UPDATE[hero_user.level]['increase'] \
-                    if hero_user.level in settings.HERO_UPDATE.keys() else data['dodge_chance']
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['critical_ratio']
 
-                data['quantity'] = hero_user.quantity if hero_user else 0
+            data['miss_chance'] = data['miss_chance'] + data['miss_chance'] * \
+                                     settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['miss_chance']
 
-                data['next_upgrade_stats'] = {
-                    'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'] if hero_user else 0,
+            data['dodge_chance'] = data['dodge_chance'] + data['dodge_chance'] * \
+                                  settings.HERO_UPDATE[hero_user.level]['increase'] \
+                if hero_user.level in settings.HERO_UPDATE.keys() else data['dodge_chance']
 
-                    'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'] if hero_user else 0,
+            data['quantity'] = hero_user.quantity if hero_user else 0
 
-                    'attack': data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+            data['next_upgrade_stats'] = {
+                'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'] if hero_user else 0,
 
-                    'health': data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'] if hero_user else 0,
 
-                    'shield': data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                'attack': data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
 
-                    'critical_chance': data['critical_chance'] + data['critical_chance'] *
-                                       settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                'health': data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
 
-                    'critical_ratio': data['critical_ratio'] + data['critical_ratio'] *
-                                      settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                'shield': data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
 
-                    'miss_chance': data['miss_chance'] + data['miss_chance'] *
+                'critical_chance': data['critical_chance'] + data['critical_chance'] *
                                    settings.HERO_UPDATE[hero_user.level + 1]['increase'],
 
-                    'dodge_chance': data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase']
+                'critical_ratio': data['critical_ratio'] + data['critical_ratio'] *
+                                  settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+
+                'miss_chance': data['miss_chance'] + data['miss_chance'] *
+                               settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+
+                'dodge_chance': data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase']
 
 
-                }
+            }
 
-                data['level'] = hero_user.level if hero and hero_user else 0
+            data['level'] = hero_user.level if hero and hero_user else 0
 
-                list_unit = []
-                for unit in UserCard.objects.filter(character__heroes=hero, user=requests):
-                    unit_serializer = UnitSerializer(unit.character)
-                    unit_data = unit_serializer.data
+            list_unit = []
+            for unit in UserCard.objects.filter(character__heroes=hero, user=requests):
+                unit_serializer = UnitSerializer(unit.character)
+                unit_data = unit_serializer.data
 
-                    unit_data['health'] = unit_data['health'] + unit_data['health'] * settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['health']
+                unit_data['health'] = unit_data['health'] + unit_data['health'] * settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['health']
 
-                    unit_data['shield'] = unit_data['shield'] + unit_data['shield'] * settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if hero_user.level in settings.UNIT_UPDATE.keys() else unit_data['shield']
+                unit_data['shield'] = unit_data['shield'] + unit_data['shield'] * settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if hero_user.level in settings.UNIT_UPDATE.keys() else unit_data['shield']
 
-                    unit_data['attack'] = unit_data['attack'] + unit_data['attack'] * settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['attack']
+                unit_data['attack'] = unit_data['attack'] + unit_data['attack'] * settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['attack']
 
-                    unit_data['critical_chance'] = unit_data['critical_chance'] + unit_data['critical_chance'] * \
-                                              settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['critical_chance']
-
-                    unit_data['critical_ratio'] = unit_data['critical_ratio'] + unit_data['critical_ratio'] * \
-                                             settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['critical_ratio']
-
-                    unit_data['miss_chance'] = unit_data['miss_chance'] + unit_data['miss_chance'] * \
+                unit_data['critical_chance'] = unit_data['critical_chance'] + unit_data['critical_chance'] * \
                                           settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['miss_chance']
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['critical_chance']
 
-                    unit_data['dodge_chance'] = unit_data['dodge_chance'] + unit_data['dodge_chance'] * \
-                                           settings.UNIT_UPDATE[unit.level]['increase'] \
-                        if unit.level in settings.UNIT_UPDATE.keys() else unit_data['dodge_chance']
+                unit_data['critical_ratio'] = unit_data['critical_ratio'] + unit_data['critical_ratio'] * \
+                                         settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['critical_ratio']
 
-                    unit_data['quantity'] = unit.quantity
+                unit_data['miss_chance'] = unit_data['miss_chance'] + unit_data['miss_chance'] * \
+                                      settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['miss_chance']
 
-                    unit_data['next_upgrade_stats'] = {
-                        'card_cost': settings.UNIT_UPDATE[unit.level + 1]['coins'],
-                        'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
-                        'attack': unit_data['attack'] + unit_data['attack'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'health': unit_data['health'] + unit_data['health'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'shield': unit_data['shield'] + unit_data['shield'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'critical_chance': unit_data['critical_chance'] + unit_data['critical_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'critical_ratio': unit_data['critical_ratio'] + unit_data['critical_ratio'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'miss_chance': unit_data['miss_chance'] + unit_data['miss_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
-                        'dodge_chance': unit_data['dodge_chance'] + unit_data['dodge_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase']
-                    }
+                unit_data['dodge_chance'] = unit_data['dodge_chance'] + unit_data['dodge_chance'] * \
+                                       settings.UNIT_UPDATE[unit.level]['increase'] \
+                    if unit.level in settings.UNIT_UPDATE.keys() else unit_data['dodge_chance']
 
-                    unit_data['level'] = unit.level
-                    unit_data['cool_down'] = unit.is_cool_down
-                    unit_data['cool_down_remaining_seconds'] = 0
-                    # TODO set cooldown remaining
-                    list_unit.append(unit_data)
+                unit_data['quantity'] = unit.quantity
 
-                data['units'] = list_unit
+                unit_data['next_upgrade_stats'] = {
+                    'card_cost': settings.UNIT_UPDATE[unit.level + 1]['coins'],
+                    'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
+                    'attack': unit_data['attack'] + unit_data['attack'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'health': unit_data['health'] + unit_data['health'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'shield': unit_data['shield'] + unit_data['shield'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'critical_chance': unit_data['critical_chance'] + unit_data['critical_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'critical_ratio': unit_data['critical_ratio'] + unit_data['critical_ratio'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'miss_chance': unit_data['miss_chance'] + unit_data['miss_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                    'dodge_chance': unit_data['dodge_chance'] + unit_data['dodge_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase']
+                }
 
-                list_item = []
-                for item in UserItem.objects.filter(item__hero=hero, user=requests):
-                    item_serializer = ItemSerializer(item.item)
-                    item_data = item_serializer.data
+                unit_data['level'] = unit.level
+                unit_data['cool_down'] = unit.is_cool_down
+                unit_data['cool_down_remaining_seconds'] = 0
+                # TODO set cooldown remaining
+                list_unit.append(unit_data)
 
-                    item_data['next_upgrade_stats'] = {
-                        'card_cost': settings.ITEM_UPDATE[item.level + 1]['coins'],
-                        'card_count': settings.ITEM_UPDATE[item.level + 1]['item_cards'],
-                        'damage': item_data['damage'] + item_data['damage'] * settings.ITEM_UPDATE[item.level + 1][
-                            'increase'],
-                        'health': item_data['health'] + item_data['health'] * settings.ITEM_UPDATE[item.level + 1][
-                            'increase'],
-                        'shield': item_data['shield'] + item_data['shield'] * settings.ITEM_UPDATE[item.level + 1][
-                            'increase'],
-                        'critical_chance': item_data['critical_chance'] + item_data['critical_chance'] *
-                                           settings.ITEM_UPDATE[item.level + 1]['increase'],
-                        'critical_ratio': item_data['critical_ratio'] + item_data['critical_ratio'] *
-                                          settings.ITEM_UPDATE[item.level + 1]['increase']
-                    }
-                    
-                    item_data['quantity'] = item.quantity
-                    item_data['next_upgrade_card_cost'] = settings.ITEM_UPDATE[item.level + 1]['coins']
-                    item_data['next_upgrade_card_count'] = settings.ITEM_UPDATE[item.level + 1]['item_cards']
-                    item_data['level'] = item.level
+            data['units'] = list_unit
 
-                    if data['selected_hero']:
-                        item_data['selected_item'] = True if item.item.id in \
-                                                             UserHero.get_selected_item(requests, hero) else False
-                    else:
-                        item_data['selected_item'] = False
+            list_item = []
+            for item in UserItem.objects.filter(item__hero=hero, user=requests):
+                item_serializer = ItemSerializer(item.item)
+                item_data = item_serializer.data
 
-                    list_item.append(item_data)
+                item_data['next_upgrade_stats'] = {
+                    'card_cost': settings.ITEM_UPDATE[item.level + 1]['coins'],
+                    'card_count': settings.ITEM_UPDATE[item.level + 1]['item_cards'],
+                    'damage': item_data['damage'] + item_data['damage'] * settings.ITEM_UPDATE[item.level + 1][
+                        'increase'],
+                    'health': item_data['health'] + item_data['health'] * settings.ITEM_UPDATE[item.level + 1][
+                        'increase'],
+                    'shield': item_data['shield'] + item_data['shield'] * settings.ITEM_UPDATE[item.level + 1][
+                        'increase'],
+                    'critical_chance': item_data['critical_chance'] + item_data['critical_chance'] *
+                                       settings.ITEM_UPDATE[item.level + 1]['increase'],
+                    'critical_ratio': item_data['critical_ratio'] + item_data['critical_ratio'] *
+                                      settings.ITEM_UPDATE[item.level + 1]['increase']
+                }
 
-                data['items'] = list_item
-                data['chakra'] = {
-                    'chakra_moniker': hero.chakra_moniker,
-                    'chakra_health': hero.chakra_health,
-                    'chakra_shield': hero.chakra_shield,
-                    'chakra_attack': hero.chakra_attack,
-                    'chakra_critical_chance': hero.chakra_critical_chance,
-                    'chakra_critical_ratio': hero.chakra_critical_ratio,
-                    'chakra_miss_chance': hero.chakra_miss_chance,
-                    'chakra_dodge_chance': hero.chakra_dodge_chance,
-                    'chakra_max_health': hero.chakra_max_health,
-                    'chakra_max_shield': hero.chakra_max_shield,
-                    'next_upgrade_stats': {
-                        'attack': hero.chakra_attack + hero.chakra_attack * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'health': hero.chakra_health + hero.chakra_health * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'shield': hero.chakra_shield + hero.chakra_shield * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'critical_chance': hero.chakra_critical_chance + hero.chakra_critical_chance *
-                                       settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'critical_ratio': hero.chakra_critical_ratio + hero.chakra_critical_ratio *
-                                      settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'miss_chance': hero.chakra_miss_chance + hero.chakra_miss_chance *
+                item_data['quantity'] = item.quantity
+                item_data['next_upgrade_card_cost'] = settings.ITEM_UPDATE[item.level + 1]['coins']
+                item_data['next_upgrade_card_count'] = settings.ITEM_UPDATE[item.level + 1]['item_cards']
+                item_data['level'] = item.level
+
+                if data['selected_hero']:
+                    item_data['selected_item'] = True if item.item.id in \
+                                                         UserHero.get_selected_item(requests, hero) else False
+                else:
+                    item_data['selected_item'] = False
+
+                list_item.append(item_data)
+
+            data['items'] = list_item
+            data['chakra'] = {
+                'chakra_moniker': hero.chakra_moniker,
+                'chakra_health': hero.chakra_health,
+                'chakra_shield': hero.chakra_shield,
+                'chakra_attack': hero.chakra_attack,
+                'chakra_critical_chance': hero.chakra_critical_chance,
+                'chakra_critical_ratio': hero.chakra_critical_ratio,
+                'chakra_miss_chance': hero.chakra_miss_chance,
+                'chakra_dodge_chance': hero.chakra_dodge_chance,
+                'chakra_max_health': hero.chakra_max_health,
+                'chakra_max_shield': hero.chakra_max_shield,
+                'next_upgrade_stats': {
+                    'attack': hero.chakra_attack + hero.chakra_attack * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                    'health': hero.chakra_health + hero.chakra_health * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                    'shield': hero.chakra_shield + hero.chakra_shield * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                    'critical_chance': hero.chakra_critical_chance + hero.chakra_critical_chance *
                                    settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                        'dodge_chance': hero.chakra_dodge_chance + hero.chakra_dodge_chance * settings.HERO_UPDATE[hero_user.level + 1]['increase']
+                    'critical_ratio': hero.chakra_critical_ratio + hero.chakra_critical_ratio *
+                                  settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                    'miss_chance': hero.chakra_miss_chance + hero.chakra_miss_chance *
+                               settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+                    'dodge_chance': hero.chakra_dodge_chance + hero.chakra_dodge_chance * settings.HERO_UPDATE[hero_user.level + 1]['increase']
 
 
-                }
-                }
+            }
+            }
 
-                list_serialize.append(data)
+            list_serialize.append(data)
 
-            return list_serialize
+        return list_serialize
 
     def get_general_units(self, requests):
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))

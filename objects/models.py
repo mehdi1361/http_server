@@ -552,6 +552,9 @@ def create_user_dependency(sender, instance, created, **kwargs):
         for item in Item.objects.all():
             UserItem.objects.create(item=item, user=instance)
 
+        for hero in Hero.objects.all():
+            UserHero.objects.get_or_create(user=instance, hero=hero)
+
         UserCurrency.objects.create(user=instance)
 
 

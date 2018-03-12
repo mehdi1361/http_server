@@ -79,6 +79,7 @@ class ChestGenerate:
             "sequence_number": UserChest.next_sequence(self.user),
             "reward_data":
                 {
+                    "chest_type": chest.get_chest_type_display(),
                     "gems": random.randint(chest.min_gem, chest.max_gem),
                     "coins": random.randint(chest.min_coin, chest.max_coin),
                     "units": lst_unit

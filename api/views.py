@@ -260,7 +260,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 character = Unit.objects.get(moniker=unit['unit'])
                 UserCard.upgrade_character(request.user, character, unit['count'])
 
-            chest_item = {'chest_type': offer_chest['type'], 'chest_reward': chest_value}
+            chest_item = {'chest_reward': chest_value}
             chst_lst.append(chest_item)
 
         UserCurrency.update_currency(request.user, store['gem'], store['coin'])
