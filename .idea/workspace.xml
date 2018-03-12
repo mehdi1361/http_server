@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="212" />
-    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="239" />
-    <bookmark url="file://$PROJECT_DIR$/api/serializers.py" line="200" />
+    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="211" />
+    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="238" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/api/serializers.py" afterPath="$PROJECT_DIR$/api/serializers.py" />
-      <change beforePath="$PROJECT_DIR$/api/views.py" afterPath="$PROJECT_DIR$/api/views.py" />
-      <change beforePath="$PROJECT_DIR$/common/utils.py" afterPath="$PROJECT_DIR$/common/utils.py" />
       <change beforePath="$PROJECT_DIR$/objects/models.py" afterPath="$PROJECT_DIR$/objects/models.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
@@ -75,8 +72,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="199" column="19" lean-forward="false" selection-start-line="199" selection-start-column="9" selection-end-line="199" selection-end-column="19" />
+            <state relative-caret-position="180">
+              <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
               <folding>
                 <element signature="e#316#325#0" expanded="true" />
               </folding>
@@ -87,8 +84,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="261" column="0" lean-forward="true" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+            <state relative-caret-position="-17">
+              <caret line="189" column="0" lean-forward="true" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -99,9 +96,13 @@
       <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="197" column="69" lean-forward="false" selection-start-line="197" selection-start-column="69" selection-end-line="197" selection-end-column="69" />
-              <folding />
+            <state relative-caret-position="458">
+              <caret line="354" column="118" lean-forward="true" selection-start-line="354" selection-start-column="118" selection-end-line="354" selection-end-column="118" />
+              <folding>
+                <element signature="e#5107#6057#0" expanded="false" />
+                <element signature="e#6171#7328#0" expanded="false" />
+                <element signature="e#7555#10284#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,10 +145,10 @@
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="256" column="6" lean-forward="false" selection-start-line="256" selection-start-column="6" selection-end-line="256" selection-end-column="6" />
+              <caret line="451" column="6" lean-forward="false" selection-start-line="451" selection-start-column="6" selection-end-line="451" selection-end-column="6" />
               <folding>
-                <marker date="1520840525975" expanded="true" signature="6903:8005" ph="..." />
-                <marker date="1520840525975" expanded="true" signature="17169:17174" ph="..." />
+                <marker date="1520845801001" expanded="true" signature="6918:8020" ph="..." />
+                <marker date="1520845801001" expanded="true" signature="17184:17189" ph="..." />
               </folding>
             </state>
           </provider>
@@ -197,9 +198,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UserCh</find>
-      <find>chest</find>
-      <find>o</find>
       <find>init</find>
       <find>Shop</find>
       <find>request.us</find>
@@ -219,7 +217,6 @@
       <find>hero_cards</find>
       <find>unit.</find>
       <find>unit_data[</find>
-      <find>hero</find>
       <find>buy_gem</find>
       <find>spe</find>
       <find>player_info</find>
@@ -227,6 +224,10 @@
       <find>speci</find>
       <find>specia</find>
       <find>get_her</find>
+      <find>hero</find>
+      <find>UserHero.get_selected_item(requests, hero)</find>
+      <find>level</find>
+      <find>buy_ge</find>
     </findStrings>
     <replaceStrings>
       <replace>unit</replace>
@@ -271,9 +272,9 @@
         <option value="$PROJECT_DIR$/logs/models.py" />
         <option value="$PROJECT_DIR$/logs/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/ancient_server/settings.py" />
+        <option value="$PROJECT_DIR$/common/utils.py" />
         <option value="$PROJECT_DIR$/objects/models.py" />
         <option value="$PROJECT_DIR$/api/views.py" />
-        <option value="$PROJECT_DIR$/common/utils.py" />
         <option value="$PROJECT_DIR$/api/serializers.py" />
       </list>
     </option>
@@ -589,13 +590,8 @@
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/serializers.py</url>
-          <line>202</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/views.py</url>
-          <line>248</line>
+          <line>247</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
@@ -609,7 +605,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="103" />
+      <option name="time" value="104" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -993,16 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="199" column="19" lean-forward="false" selection-start-line="199" selection-start-column="9" selection-end-line="199" selection-end-column="19" />
-          <folding>
-            <element signature="e#316#325#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shopping/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1032,27 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="256" column="6" lean-forward="false" selection-start-line="256" selection-start-column="6" selection-end-line="256" selection-end-column="6" />
-          <folding>
-            <marker date="1520840525975" expanded="true" signature="6903:8005" ph="..." />
-            <marker date="1520840525975" expanded="true" signature="17169:17174" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="261" column="0" lean-forward="true" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1061,11 +1026,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+          <folding>
+            <element signature="e#316#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="189" column="0" lean-forward="true" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="451" column="6" lean-forward="false" selection-start-line="451" selection-start-column="6" selection-end-line="451" selection-end-column="6" />
+          <folding>
+            <marker date="1520845801001" expanded="true" signature="6918:8020" ph="..." />
+            <marker date="1520845801001" expanded="true" signature="17184:17189" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="197" column="69" lean-forward="false" selection-start-line="197" selection-start-column="69" selection-end-line="197" selection-end-column="69" />
-          <folding />
+        <state relative-caret-position="458">
+          <caret line="354" column="118" lean-forward="true" selection-start-line="354" selection-start-column="118" selection-end-line="354" selection-end-column="118" />
+          <folding>
+            <element signature="e#5107#6057#0" expanded="false" />
+            <element signature="e#6171#7328#0" expanded="false" />
+            <element signature="e#7555#10284#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

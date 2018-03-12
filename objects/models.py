@@ -167,7 +167,7 @@ class HeroUnits(Base):
 
 @python_2_unicode_compatible
 class UserHero(Base):
-    user = models.ForeignKey(User, related_name='user_hero')
+    user = models.ForeignKey(User, related_name='user_hero', db_index=True)
     hero = models.ForeignKey(Hero, related_name='user_hero')
     enable_hero = models.BooleanField(_('enable hero'), default=False)
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
