@@ -329,7 +329,7 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
     @list_route(methods=['POST'])
     def level_up(self, request):
         hero_id = request.data.get('hero_id')
-        user_hero = get_object_or_404(UserHero, user=request.user, character_id=hero_id)
+        user_hero = get_object_or_404(UserHero, user=request.user, hero_id=hero_id)
         user_currency = get_object_or_404(UserCurrency, user=request.user)
 
         next_level = settings.HERO_UPDATE[user_hero.level + 1]
