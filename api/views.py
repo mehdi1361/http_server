@@ -343,7 +343,7 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_currency.coin -= next_level['coins']
         user_currency.save()
 
-        user_hero.quantity -= next_level['unit_cards']
+        user_hero.quantity -= next_level['hero_cards']
         user_hero.save()
 
         user_hero.level += 1
