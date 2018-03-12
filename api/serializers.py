@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest, Item, UserItem
+    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig
 from shopping.models import Shop
 from message.models import NewsLetter, Inbox
 from django.conf import settings
@@ -309,3 +309,9 @@ class ShopSerializer(serializers.ModelSerializer):
             'chests',
             'special_offer'
         )
+
+
+class AppConfigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AppConfig
+        fields = ('app_data', )

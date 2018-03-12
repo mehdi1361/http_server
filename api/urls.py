@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 from .views import UserViewSet, LeagueViewSet, \
-    ShopViewSet, UserCardViewSet, UserHeroViewSet, UserItemViewset, UserChestViewSet
+    ShopViewSet, UserCardViewSet, UserHeroViewSet, UserItemViewset, UserChestViewSet, AppConfigViewSet
 
 router = DefaultRouter()
 router.register(r'user', UserViewSet)
@@ -11,6 +11,7 @@ router.register(r'troop', UserCardViewSet)
 router.register(r'hero', UserHeroViewSet)
 router.register(r'item', UserItemViewset)
 router.register(r'chest', UserChestViewSet)
+router.register(r'config', AppConfigViewSet)
 
 
 

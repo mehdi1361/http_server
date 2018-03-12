@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
-    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency
+    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 # from django.contrib.auth.models import User
@@ -157,3 +157,11 @@ class ChakraSpellAdmin(SimpleHistoryAdmin):
     )
 
     inlines = (ChakraSpellEffectInline, )
+
+
+@admin.register(AppConfig)
+class AppConfig(admin.ModelAdmin):
+    list_display = (
+        'app_data',
+        'enable'
+    )

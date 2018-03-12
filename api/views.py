@@ -7,9 +7,9 @@ from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
-    UnitSerializer, HeroSerializer
+    UnitSerializer, HeroSerializer, AppConfigSerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
@@ -399,7 +399,7 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_currency.coin -= next_level['coins']
         user_currency.save()
 
-        user_item.quantity -= next_level['item_cards']
+        user_item.quantity -= next_level['item_cards  ']
         user_item.save()
 
         user_item.level += 1
@@ -409,3 +409,8 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         data = item_normalize_data((user_item, serializer.data))
 
         return Response(data, status=status.HTTP_200_OK)
+
+
+class AppConfigViewSet(viewsets.ModelViewSet):
+    queryset = AppConfig.objects.all()
+    serializer_class = AppConfigSerializer

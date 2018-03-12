@@ -544,6 +544,20 @@ class UnitSpellEffect(Base, SpellEffect):
         return '{}'.format(self.target_character_id)
 
 
+@python_2_unicode_compatible
+class AppConfig(Base):
+    app_data = JSONField(_('app config'), null=True, default=None)
+    enable = models.BooleanField(_('enable'), default=False)
+
+    class Meta:
+        verbose_name = _('app_config')
+        verbose_name_plural = _('app_configs')
+        db_table = 'app_configs'
+
+    def __str__(self):
+        return '{}'.format(self.app_data)
+
+
 def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
