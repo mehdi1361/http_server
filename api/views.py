@@ -6,7 +6,8 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
-    ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer
+    ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
+    UnitSerializer, HeroSerializer
 from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item
 from django_filters.rest_framework import DjangoFilterBackend
@@ -19,7 +20,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
-from common.utils import ChestGenerate
+from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
 
 
 class DefaultsMixin(object):
@@ -315,7 +316,10 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_card.level += 1
         user_card.save()
 
-        return Response({'message': 'character updated'}, status=status.HTTP_200_OK)
+        serializer = UnitSerializer(user_card.character)
+        data = unit_normalize_data(user_card, serializer.data)
+
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
@@ -345,7 +349,10 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_hero.level += 1
         user_hero.save()
 
-        return Response({'message': 'hero updated'}, status=status.HTTP_200_OK)
+        serializer = HeroSerializer(user_hero.hero)
+        data = hero_normalize_data(user_hero, serializer.data)
+
+        return Response(data, status=status.HTTP_200_OK)
 
     @list_route(methods=['POST'])
     def selected_items(self, request):
@@ -398,4 +405,7 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_item.level += 1
         user_item.save()
 
-        return Response({'message': 'item updated'}, status=status.HTTP_200_OK)
+        serializer = ItemSerializer(user_item.item)
+        data = item_normalize_data((user_item, serializer.data))
+
+        return Response(data, status=status.HTTP_200_OK)

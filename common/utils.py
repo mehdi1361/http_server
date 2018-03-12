@@ -1,6 +1,7 @@
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item
+from objects.models import UserChest, Chest, Unit, Item, UserHero
+from django.conf import settings
 
 
 class ClassPropertyDescriptor(object):
@@ -112,3 +113,148 @@ class ChestGenerate:
             lst_unit.append(data)
 
         return lst_unit
+
+
+def hero_normalize_data(hero_user, data):
+    data['selected_hero'] = True if hero_user.enable_hero else False
+    if hero_user.level in settings.HERO_UPDATE.keys():
+        data['health'] = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+        data['shield'] = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+        data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase']
+        data['critical_chance'] = round(
+            data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
+        data['critical_ratio'] = round(
+            data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
+        data['miss_chance'] = round(
+            data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
+        data['dodge_chance'] = round(
+            data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
+
+    data['quantity'] = hero_user.quantity if hero_user else 0
+
+    data['next_upgrade_stats'] = {
+        'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'],
+
+        'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'],
+
+        'attack': int(round(data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'health': int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'critical_chance': round(
+            data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+            2),
+
+        'critical_ratio': round(
+            data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+
+        'miss_chance': round(
+            data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+
+        'dodge_chance': round(
+            data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
+
+    }
+
+    data['level'] = hero_user.level if hero_user.hero and hero_user else 0
+
+    data['chakra'] = {
+        'chakra_moniker': hero_user.hero.chakra_moniker,
+        'chakra_health': hero_user.hero.chakra_health,
+        'chakra_shield': hero_user.hero.chakra_shield,
+        'chakra_attack': hero_user.hero.chakra_attack,
+        'chakra_critical_chance': hero_user.hero.chakra_critical_chance,
+        'chakra_critical_ratio': hero_user.hero.chakra_critical_ratio,
+        'chakra_miss_chance': hero_user.hero.chakra_miss_chance,
+        'chakra_dodge_chance': hero_user.hero.chakra_dodge_chance,
+        'chakra_max_health': hero_user.hero.chakra_max_health,
+        'chakra_max_shield': hero_user.hero.chakra_max_shield,
+        'next_upgrade_stats': {
+            'attack': int(round(
+                hero_user.hero.chakra_attack + hero_user.hero.chakra_attack * settings.HERO_UPDATE[hero_user.level + 1][
+                    'increase'])),
+            'health': int(round(
+                hero_user.hero.chakra_health + hero_user.hero.chakra_health * settings.HERO_UPDATE[hero_user.level + 1][
+                    'increase'])),
+            'shield': int(round(
+                hero_user.hero.chakra_shield + hero_user.hero.chakra_shield * settings.HERO_UPDATE[hero_user.level + 1][
+                    'increase'])),
+            'critical_chance': round(hero_user.hero.chakra_critical_chance + hero_user.hero.chakra_critical_chance *
+                                     settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+            'critical_ratio': round(hero_user.hero.chakra_critical_ratio + hero_user.hero.chakra_critical_ratio *
+                                    settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+            'miss_chance': round(hero_user.hero.chakra_miss_chance + hero_user.hero.chakra_miss_chance *
+                                 settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+            'dodge_chance': round(hero_user.hero.chakra_dodge_chance + hero_user.hero.chakra_dodge_chance *
+                                  settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
+
+        }
+    }
+    return data
+
+
+def unit_normalize_data(unit, data):
+    if unit.level in settings.UNIT_UPDATE.keys():
+        data['health'] = int(
+            round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        data['shield'] = int(
+            round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        data['attack'] = int(
+            round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        data['critical_chance'] = round(
+            data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+
+        data['critical_ratio'] = round(
+            data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level]['increase'])
+
+        data['miss_chance'] = round(
+            data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+
+        data['dodge_chance'] = round(
+            data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+
+    data['quantity'] = unit.quantity
+
+    data['next_upgrade_stats'] = {
+        'card_cost': settings.UNIT_UPDATE[unit.level + 1]['coins'],
+        'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
+        'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
+        'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
+        'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
+        'critical_chance': round(data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2),
+        'critical_ratio': round(data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2),
+        'miss_chance': round(data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2),
+        'dodge_chance': round(data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2)
+    }
+
+    data['level'] = unit.level
+    data['cool_down'] = unit.is_cool_down
+    data['cool_down_remaining_seconds'] = 0
+
+    return data
+
+
+def item_normalize_data(item, data):
+    data['next_upgrade_stats'] = {
+        'card_cost': settings.ITEM_UPDATE[item.level + 1]['coins'],
+        'card_count': settings.ITEM_UPDATE[item.level + 1]['item_cards'],
+        'damage': int(round(
+            data['damage'] + data['damage'] * settings.ITEM_UPDATE[item.level + 1]['increase'])),
+        'health': int(round(
+            data['health'] + data['health'] * settings.ITEM_UPDATE[item.level + 1]['increase'])),
+        'shield': int(round(
+            data['shield'] + data['shield'] * settings.ITEM_UPDATE[item.level + 1]['increase'])),
+        'critical_chance': round(data['critical_chance'] + data['critical_chance'] *
+                                 settings.ITEM_UPDATE[item.level + 1]['increase']),
+        'critical_ratio': round(data['critical_ratio'] + data['critical_ratio'] *
+                                settings.ITEM_UPDATE[item.level + 1]['increase'])
+    }
+
+    data['quantity'] = item.quantity
+    data['next_upgrade_card_cost'] = settings.ITEM_UPDATE[item.level + 1]['coins']
+    data['next_upgrade_card_count'] = settings.ITEM_UPDATE[item.level + 1]['item_cards']
+    data['level'] = item.level
+
+    return data
