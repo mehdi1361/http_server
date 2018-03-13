@@ -165,7 +165,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def leader_board(self, request):
         lst_board = []
-        for user_board in UserCurrency.objects.all().order_by('-trophy')[:50]:
+        for user_board in UserCurrency.objects.filter(user__is_staff=False).order_by('-trophy')[:50]:
             lst_board.append({
                 'player_id': user_board.user.username,
                 'player_name': user_board.name,
