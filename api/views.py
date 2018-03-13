@@ -162,6 +162,18 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 400, 'message': 'cant change name'}, status=status.HTTP_400_BAD_REQUEST)
 
+    @list_route(methods=['POST'])
+    def leader_board(self, request):
+        lst_board = []
+        for user_board in UserCurrency.objects.all().order_by('-trophy')[:50]:
+            lst_board.append({
+                'player_id': user_board.user.username,
+                'player_name': user_board.name,
+                'trophy': user_board.trophy
+            })
+
+        return Response(lst_board)
+
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = LeagueInfo.objects.all()
