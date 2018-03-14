@@ -413,7 +413,8 @@ class Item(Base):
     TYPE = (
         ('helmet', 'helmet'),
         ('weapon', 'weapon'),
-        ('Armor', 'Armor')
+        ('Armor', 'Armor'),
+        ('Accessory', 'Accessory')
     )
     NAME = (
         ('Biker', 'Biker'),
