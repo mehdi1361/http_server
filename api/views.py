@@ -217,7 +217,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 'used_gem': store['price'],
                 'user_gem': request.user.user_currency.gem
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_202_ACCEPTED
             )
         return Response({'id': 400, 'message': 'gem not enough'}, status=status.HTTP_400_BAD_REQUEST)
 
