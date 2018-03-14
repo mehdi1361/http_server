@@ -28,6 +28,18 @@ class HeroUnitsAdmin(admin.StackedInline):
 
 class ItemInline(admin.StackedInline):
     model = Item
+    fields = (
+        'name',
+        'damage' ,
+        'shield',
+        'health',
+        'critical_ratio',
+        'dodge_chance',
+        'item_type',
+        'level',
+        'hero',
+        'default_item'
+    )
 
 
 class ChestInline(admin.StackedInline):
@@ -84,6 +96,7 @@ class LeagueInfoAdmin(SimpleHistoryAdmin):
 @admin.register(Item)
 class ItemAdmin(SimpleHistoryAdmin):
     list_display = (
+        'id',
         'name',
         'hero',
         'item_type',
@@ -97,6 +110,7 @@ class ItemAdmin(SimpleHistoryAdmin):
         'updated_date'
     )
     readonly_fields = ('level', )
+    ordering = ('id', )
 
 
 @admin.register(UserHero)
