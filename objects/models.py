@@ -573,4 +573,12 @@ def create_user_dependency(sender, instance, created, **kwargs):
         UserCurrency.objects.create(user=instance)
 
 
+def assigned_new_card_to_user(sender, instance, created, **kwargs):
+    if created:
+        for user in User.objects.all():
+            UserItem.objects.create(user=user, item=instance)
+
+
 signals.post_save.connect(create_user_dependency, sender=User)
+
+signals.post_save.connect(assigned_new_card_to_user, sender=Item)
