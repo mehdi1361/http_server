@@ -166,9 +166,9 @@ class UserViewSet(viewsets.ModelViewSet):
     def leader_board(self, request):
         lst_board = []
         lst_q = list(UserCurrency.objects.filter(user__is_staff=False).order_by('-trophy')[:50])
-        for i in range(1, len(lst_q)):
+        for i in range(len(lst_q)):
             lst_board.append({
-                'rank': i,
+                'rank': i + 1,
                 'player_id': lst_q[i].user.username,
                 'player_name': lst_q[i].name,
                 'trophy': lst_q[i].trophy
