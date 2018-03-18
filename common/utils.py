@@ -118,8 +118,12 @@ class ChestGenerate:
 def hero_normalize_data(hero_user, data):
     data['selected_hero'] = True if hero_user.enable_hero else False
     if hero_user.level in settings.HERO_UPDATE.keys():
-        data['health'] = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
-        data['shield'] = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+        health = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+        shield = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+        data['health'] = health
+        data['max_health'] = health
+        data['shield'] = shield
+        data['max_shield'] = shield
         data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase']
         data['critical_chance'] = round(
             data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
@@ -130,6 +134,8 @@ def hero_normalize_data(hero_user, data):
         data['dodge_chance'] = round(
             data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
 
+    data['max_health'] = data['health']
+    data['shield'] = data['shield']
     data['quantity'] = hero_user.quantity if hero_user else 0
 
     data['next_upgrade_stats'] = {
@@ -197,10 +203,14 @@ def hero_normalize_data(hero_user, data):
 
 def unit_normalize_data(unit, data):
     if unit.level in settings.UNIT_UPDATE.keys():
-        data['health'] = int(
-            round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level]['increase']))
-        data['shield'] = int(
-            round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        health = int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        shield = int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
+
+        data['health'] = health
+        data['max_health'] = health
+        data['shield'] = shield
+        data['max_shield'] = shield
+
         data['attack'] = int(
             round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
         data['critical_chance'] = round(
@@ -216,6 +226,8 @@ def unit_normalize_data(unit, data):
             data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
 
     data['quantity'] = unit.quantity
+    data['max_health'] = data['health']
+    data['max_shield'] = data['shield']
 
     data['next_upgrade_stats'] = {
         'card_cost': settings.UNIT_UPDATE[unit.level + 1]['coins'],

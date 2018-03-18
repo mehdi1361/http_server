@@ -97,9 +97,9 @@ class UnitSerializer(serializers.ModelSerializer):
             'dodge_chance',
             'enable_in_start',
             'health',
-            'max_health',
+            # 'max_health',
             'shield',
-            'max_shield'
+            # 'max_shield'
         )
 
 
@@ -119,8 +119,8 @@ class HeroSerializer(serializers.ModelSerializer):
             'miss_chance',
             'dodge_chance',
             'enable_in_start',
-            'max_health',
-            'max_shield'
+            # 'max_health',
+            # 'max_shield'
         )
 
 

@@ -78,6 +78,12 @@ class UnitAdmin(SimpleHistoryAdmin):
     # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )
 
+    def get_form(self, request, obj=None, **kwargs):
+
+        self.exclude = ("max_health", "max_shield")
+        form = super(UnitAdmin, self).get_form(request, obj, **kwargs)
+        return form
+
 
 @admin.register(Hero)
 class HeroAdmin(SimpleHistoryAdmin):
