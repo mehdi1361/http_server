@@ -192,22 +192,22 @@ STATIC_URL = '/static/'
 
 ITEM_UPDATE = {
     1: {'item_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'item_cards': 5, 'coins': 250, 'increase': 0.2},
-    3: {'item_cards': 15, 'coins': 1000, 'increase': 0.2}
+    2: {'item_cards': 5, 'coins': 250, 'increase': 0.4},
+    3: {'item_cards': 15, 'coins': 1000, 'increase': 0.6}
 }
 
 UNIT_UPDATE = {
     1: {'unit_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'unit_cards': 5, 'coins': 250, 'increase': 0.2},
-    3: {'unit_cards': 15, 'coins': 1000, 'increase': 0.2},
-    4: {'unit_cards': 30, 'coins': 5000, 'increase': 0.2},
-    5: {'unit_cards': 100, 'coins': 20000, 'increase': 0.2},
+    2: {'unit_cards': 5, 'coins': 250, 'increase': 0.4},
+    3: {'unit_cards': 15, 'coins': 1000, 'increase': 0.6},
+    4: {'unit_cards': 30, 'coins': 5000, 'increase': 0.8},
+    5: {'unit_cards': 100, 'coins': 20000, 'increase': 1},
 }
 
 HERO_UPDATE = {
     1: {'hero_cards': 1, 'coins': 0, 'increase': 0.2},
     2: {'hero_cards': 5, 'coins': 250, 'increase': 0.4},
-    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.8}
+    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.6}
 }
 
 JWT_AUTH = {
