@@ -118,37 +118,6 @@ class ChestGenerate:
 def hero_normalize_data(hero_user, data):
     data['selected_hero'] = True if hero_user.enable_hero else False
     if hero_user.level in settings.HERO_UPDATE.keys():
-        data['next_upgrade_stats'] = {
-            'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'],
-
-            'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'],
-
-            'attack': int(
-                round(data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
-
-            'health': int(
-                round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
-
-            'shield': int(
-                round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
-
-            'critical_chance': round(
-                data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level + 1][
-                    'increase'],
-                2),
-
-            'critical_ratio': round(
-                data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-                2),
-
-            'miss_chance': round(
-                data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-
-            'dodge_chance': round(
-                data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
-
-        }
-
         health = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
         shield = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
         data['health'] = health
@@ -168,6 +137,32 @@ def hero_normalize_data(hero_user, data):
     data['max_health'] = data['health']
     data['shield'] = data['shield']
     data['quantity'] = hero_user.quantity if hero_user else 0
+
+    data['next_upgrade_stats'] = {
+        'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'],
+
+        'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'],
+
+        'attack': int(round(data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'health': int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+
+        'critical_chance': round(
+            data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
+            2),
+
+        'critical_ratio': round(
+            data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+
+        'miss_chance': round(
+            data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
+
+        'dodge_chance': round(
+            data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
+
+    }
 
     data['level'] = hero_user.level if hero_user.hero and hero_user else 0
 
