@@ -330,6 +330,7 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_card.save()
 
         serializer = UnitSerializer(user_card.character)
+        serializer = UnitSerializer(user_card.character)
         data = unit_normalize_data(user_card, serializer.data)
 
         return Response(data, status=status.HTTP_200_OK)
