@@ -414,7 +414,9 @@ class Item(Base):
         ('helmet', 'helmet'),
         ('weapon', 'weapon'),
         ('Armor', 'Armor'),
-        ('Accessory', 'Accessory')
+        ('Accessory_1', 'Accessory_1'),
+        ('Accessory_2', 'Accessory_2'),
+        ('Accessory_3', 'Accessory_3')
     )
     NAME = (
         ('Biker', 'Biker'),
