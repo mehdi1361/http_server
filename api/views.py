@@ -324,12 +324,9 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_currency.save()
 
         user_card.quantity -= next_level['unit_cards']
-        user_card.save()
-
         user_card.level += 1
         user_card.save()
 
-        serializer = UnitSerializer(user_card.character)
         serializer = UnitSerializer(user_card.character)
         data = unit_normalize_data(user_card, serializer.data)
 

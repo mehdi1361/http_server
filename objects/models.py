@@ -234,6 +234,11 @@ class UserCard(Base):
     def upgrade_character(cls, user, character, value):
         user_character = cls.objects.get(user=user, character=character)
         user_character.quantity += value
+        if user_character.level == 0:
+            next_level = settings.UNIT_UPDATE[user_character.level + 1]
+            user_character.quantity -= next_level['unit_cards']
+            user_character.level += 1
+
         user_character.save()
 
 
