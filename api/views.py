@@ -417,7 +417,7 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_item.save()
 
         serializer = ItemSerializer(user_item.item)
-        data = item_normalize_data((user_item, serializer.data))
+        data = item_normalize_data(user_item, serializer.data)
 
         return Response(data, status=status.HTTP_200_OK)
 
