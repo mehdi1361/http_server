@@ -410,7 +410,7 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         user_currency.coin -= next_level['coins']
         user_currency.save()
 
-        user_item.quantity -= next_level['item_cards  ']
+        user_item.quantity -= next_level['item_cards']
         user_item.save()
 
         user_item.level += 1
