@@ -114,7 +114,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def chest_ready(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
         serializer = UserChestSerializer(chest)
-        UserCurrency.update_currency(request.user, chest.cards['gems'], chest.cards['coins'])
+        UserCurrency.update_currency(request.user, chest.reward_data['gems'], chest.reward_data['coins'])
         for unit in chest.reward_data['units']:
             character = Unit.objects.get(moniker=unit['unit'])
             UserCard.upgrade_character(request.user, character, unit['count'])
