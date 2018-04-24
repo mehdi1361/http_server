@@ -357,6 +357,9 @@ class UserChest(Base):
     def remain_time(self):
         current_time = timezone.now()
         if self.chest_opening_date:
+            if current_time > self.chest_opening_date:
+                return 0
+
             return (self.chest_opening_date - current_time).seconds
 
         init_time = (datetime.now() + timedelta(seconds=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
