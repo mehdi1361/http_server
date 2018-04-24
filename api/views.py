@@ -114,6 +114,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def chest_ready(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
         if chest.status != 'ready':
+            print(chest.remain_time)
             if chest.remain_time <= 0:
                 chest.status = 'ready'
                 chest.save()
