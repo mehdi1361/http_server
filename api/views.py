@@ -112,7 +112,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
-        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='ready')
+        chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
+        if chest.status != 'ready':
+            if chest.remain_time < datetime.now():
+                chest.status = 'ready'
+                chest.save()
+            else:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
         serializer = UserChestSerializer(chest)
         UserCurrency.update_currency(request.user, chest.reward_data['gems'], chest.reward_data['coins'])
         for unit in chest.reward_data['units']:
