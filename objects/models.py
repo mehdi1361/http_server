@@ -389,7 +389,7 @@ class UserChest(Base):
         elif last_chest.sequence_number > len(settings.CHEST_SEQUENCE) -1:
             sequence_number = 0
             sequence_type = settings.CHEST_SEQUENCE[0]
-            cls.reset_sequence(user)
+            # cls.reset_sequence(user)
 
         else:
             sequence_number = last_chest.sequence_number

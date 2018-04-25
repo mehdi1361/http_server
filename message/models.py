@@ -21,8 +21,8 @@ class NewsLetter(Base):
         verbose_name_plural = _('newsletter')
         db_table = 'newsletter'
 
-    def __str__(self):
-        return '{}'.format(self.subject)
+    def __unicode__(self):
+        return unicode('{}'.format(self.subject))
 
 
 class InboxManager(models.Manager):
@@ -51,8 +51,8 @@ class Inbox(Base):
         verbose_name_plural = _('inbox')
         db_table = 'inbox'
 
-    def __str__(self):
-        return '{}'.format(self.message_type)
+    def __unicode__(self):
+        return unicode('{}'.format(self.message_type))
 
 
 def create_inbox(sender, instance, created, **kwargs):
