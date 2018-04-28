@@ -55,6 +55,7 @@ class BaseUnit(models.Model):
 class Spell(models.Model):
     SPELL_TYPE = (
         ('Magic', 'Magic'),
+        ('Chakra', 'Chakra'),
         ('Secret', 'Secret'),
     )
 
