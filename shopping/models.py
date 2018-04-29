@@ -32,7 +32,7 @@ class Shop(Base):
     coins = JSONField(_('coins'))
     gems = JSONField(_('gems'))
     chests = JSONField(_('chests'))
-    special_offer = JSONField(_('special offer'), null=True, default=None)
+    special_offer = JSONField(_('special offer'), null=True, default=None, blank=True)
     store = models.ForeignKey(Store, verbose_name=_('store'))
     enable = models.BooleanField(_('enable shop item'), default=False)
 
