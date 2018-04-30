@@ -351,7 +351,7 @@ class UserChest(Base):
         current_time = timezone.now()
 
         if (self.chest_opening_date - timezone.now()).seconds >= 0:
-            return (self.chest_opening_date - current_time).seconds / 60
+            return (self.chest_opening_date - current_time).seconds / 300
 
     @property
     def remain_time(self):
@@ -362,7 +362,7 @@ class UserChest(Base):
 
             return (self.chest_opening_date - current_time).seconds
 
-        init_time = (datetime.now() + timedelta(seconds=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
+        init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
         return (init_time - datetime.now()).seconds
 
     @property
@@ -371,7 +371,7 @@ class UserChest(Base):
     
     @property
     def initial_time(self):
-        init_time = (datetime.now() + timedelta(seconds=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
+        init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
         return (init_time - datetime.now()).seconds
 
     @chest_status.setter

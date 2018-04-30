@@ -89,7 +89,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         chest.chest_opening_date = datetime.now() + timedelta(
-            seconds=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
+            hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
 
         chest.chest_status = 'opening'
         chest.save()
