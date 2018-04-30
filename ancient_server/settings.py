@@ -178,7 +178,7 @@ CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W
                   'W', 'S', 'W', 'G', 'W', 'W', 'W', 'C', 'W', 'W', 'W', 'S']
 
 CHEST_SEQUENCE_TIME = {
-    'W': 5,
+    'W': 4,
     'S': 8,
     'G': 12,
     'C': 24
