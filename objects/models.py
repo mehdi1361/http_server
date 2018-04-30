@@ -581,7 +581,11 @@ class AppConfig(Base):
 def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
-            UserCard.objects.create(user=instance, character=unit)
+            if unit.unlock:
+                UserCard.objects.create(user=instance, character=unit)
+
+            else:
+                UserCard.objects.create(user=instance, character=unit, level=0)
 
         for item in Item.objects.all():
             UserItem.objects.create(item=item, user=instance)
