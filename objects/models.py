@@ -43,6 +43,7 @@ class BenefitBox(Base):
 class Unit(BaseUnit, Base):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
+    unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     history = HistoricalRecords()
 
     @classmethod
@@ -199,6 +200,11 @@ class UserHero(Base):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
 
 
+class UnlockManager(models.Manager):
+    def get_queryset(self):
+        return super(UnlockManager, self).get_queryset().filter(character__unlock=True)
+
+
 @python_2_unicode_compatible
 class UserCard(Base):
     user = models.ForeignKey(User, verbose_name=_('username'), related_name='cards')
@@ -208,6 +214,9 @@ class UserCard(Base):
     cool_down = models.DateTimeField(_('cooldown'), null=True)
     cool_down_remaining_seconds = models.PositiveIntegerField(_('cool down remaining seconds'), default=0)
     history = HistoricalRecords()
+
+    objects = models.Manager()
+    unlock = UnlockManager()
 
     class Meta:
         verbose_name = _('user_card')

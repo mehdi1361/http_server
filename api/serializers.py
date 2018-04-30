@@ -196,7 +196,7 @@ class UserSerializer(serializers.ModelSerializer):
             data = hero_normalize_data(hero_user, serializer.data)
 
             list_unit = []
-            for unit in UserCard.objects.filter(character__heroes=hero_user.hero, user=requests):
+            for unit in UserCard.unlock.filter(character__heroes=hero_user.hero, user=requests):
                 unit_serializer = UnitSerializer(unit.character)
                 unit_data = unit_normalize_data(unit, unit_serializer.data)
                 list_unit.append(unit_data)
@@ -225,7 +225,7 @@ class UserSerializer(serializers.ModelSerializer):
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))
 
         list_unit = []
-        for unit in UserCard.objects.filter(user=requests).exclude(character_id__in=hero_units):
+        for unit in UserCard.unlock.filter(user=requests).exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
             list_unit.append(data)

@@ -74,7 +74,8 @@ class BenefitBoxAdmin(SimpleHistoryAdmin):
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
-    list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start')
+    list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start', 'unlock')
+    list_editable = ('unlock', )
     # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )
 
