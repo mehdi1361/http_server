@@ -603,7 +603,7 @@ def create_user_dependency(sender, instance, created, **kwargs):
         for hero in Hero.objects.all():
             UserHero.objects.get_or_create(user=instance, hero=hero)
 
-        UserCurrency.objects.create(user=instance)
+        UserCurrency.objects.create(user=instance, gem=100, coin=250)
 
 
 def assigned_new_card_to_user(sender, instance, created, **kwargs):

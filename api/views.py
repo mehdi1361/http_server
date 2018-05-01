@@ -60,9 +60,6 @@ class UserViewSet(viewsets.ModelViewSet):
         user = User.objects.create_user(username=player_id, password=player_id)
         chest = ChestGenerate(user)
         chest.generate_tutorial_chest()
-        user.user_currency.gem += 100
-        user.user_currency.coin += 250
-        user.save()
 
         return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
