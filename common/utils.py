@@ -147,7 +147,9 @@ class ChestGenerate:
         return data["reward_data"]
 
     def _get_card(self, count, lst_unit):
-        unit_index = random.randint(1, Unit.count())
+        # unit_index = random.randint(1, Unit.count())
+        unit_list = list(Unit.objects.filter(unlock=True).values_list('id', flat=True))
+        unit_index = random.choice(unit_list)
         unit = Unit.objects.get(pk=unit_index)
 
         data = {
