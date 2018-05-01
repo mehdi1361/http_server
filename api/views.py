@@ -92,7 +92,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         if chest.chest_monetaryType == 'free':
-            opening_date = datetime.now() + timedelta(seconds=60)
+            opening_date = datetime.now() + timedelta(seconds=10)
 
         else:
             opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])

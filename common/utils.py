@@ -152,8 +152,6 @@ class ChestGenerate:
         unit_index = random.choice(unit_list)
         unit = Unit.objects.get(pk=unit_index)
 
-        print(unit)
-
         data = {
             "unit": str(unit),
             "count": count
