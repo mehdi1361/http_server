@@ -151,6 +151,7 @@ class ChestGenerate:
         unit_list = list(Unit.objects.filter(unlock=True).values_list('id', flat=True))
         unit_index = random.choice(unit_list)
         unit = Unit.objects.get(pk=unit_index)
+	print unit
 
         data = {
             "unit": str(unit),
