@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -27,7 +27,6 @@ SECRET_KEY = 'q@+unt2eluw--4+uqdtuhi%411lfx@(^n2k3uad%39mq_620)@'
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.149', '127.0.0.1', 'ancientsrevival.ir']
-
 
 # Application definition
 
@@ -80,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ancient_server.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -102,7 +100,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -121,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -134,7 +130,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -155,10 +150,8 @@ REST_FRAMEWORK = {
     }
 }
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 
 
 DECK_COUNT = {
@@ -173,6 +166,9 @@ CRON_CLASSES = [
     "objects.crons.FreeChestCreatorJob",
     "objects.crons.Backup",
 ]
+
+# CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
+#                   'W', 'S', 'W', 'G', 'W', 'W', 'W', 'C', 'W', 'W', 'W', 'S']
 
 CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
                   'W', 'S', 'W', 'G', 'W', 'W', 'W', 'C', 'W', 'W', 'W', 'S']
@@ -189,32 +185,59 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 STATIC_URL = '/static/'
 
+# ITEM_UPDATE = {
+#     1: {'item_cards': 1, 'coins': 0, 'increase': 0.2},
+#     2: {'item_cards': 5, 'coins': 250, 'increase': 0.4},
+#     3: {'item_cards': 15, 'coins': 1000, 'increase': 0.6}
+# }
+#
+# UNIT_UPDATE = {
+#     1: {'unit_cards': 1, 'coins': 0, 'increase': 0.2},
+#     2: {'unit_cards': 5, 'coins': 250, 'increase': 0.4},
+#     3: {'unit_cards': 15, 'coins': 1000, 'increase': 0.6},
+#     4: {'unit_cards': 30, 'coins': 5000, 'increase': 0.8},
+#     5: {'unit_cards': 100, 'coins': 20000, 'increase': 1},
+# }
+#
+# HERO_UPDATE = {
+#     1: {'hero_cards': 1, 'coins': 0, 'increase': 0.2},
+#     2: {'hero_cards': 5, 'coins': 250, 'increase': 0.4},
+#     3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.6}
+# }
+
+HERO_UPDATE = {
+    1: {'hero_cards': 1, 'coins': 0, 'increase': 0.1},
+    2: {'hero_cards': 2, 'coins': 500, 'increase': 0.2},
+    3: {'hero_cards': 5, 'coins': 1000, 'increase': 0.3},
+    4: {'hero_cards': 10, 'coins': 5000, 'increase': 0.4},
+    5: {'hero_cards': 25, 'coins': 10000, 'increase': 0.5},
+    6: {'hero_cards': 50, 'coins': 20000, 'increase': 0.6},
+    7: {'hero_cards': 125, 'coins': 50000, 'increase': 0.7},
+}
 
 ITEM_UPDATE = {
-    1: {'item_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'item_cards': 5, 'coins': 250, 'increase': 0.4},
-    3: {'item_cards': 15, 'coins': 1000, 'increase': 0.6}
+    1: {'item_cards': 1, 'coins': 0, 'increase': 0.1},
+    2: {'item_cards': 10, 'coins': 2500, 'increase': 0.2},
+    3: {'item_cards': 30, 'coins': 7500, 'increase': 0.3}
 }
 
 UNIT_UPDATE = {
-    1: {'unit_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'unit_cards': 5, 'coins': 250, 'increase': 0.4},
-    3: {'unit_cards': 15, 'coins': 1000, 'increase': 0.6},
-    4: {'unit_cards': 30, 'coins': 5000, 'increase': 0.8},
-    5: {'unit_cards': 100, 'coins': 20000, 'increase': 1},
-}
-
-HERO_UPDATE = {
-    1: {'hero_cards': 1, 'coins': 0, 'increase': 0.2},
-    2: {'hero_cards': 5, 'coins': 250, 'increase': 0.4},
-    3: {'hero_cards': 15, 'coins': 1000, 'increase': 0.6}
+    1: {'unit_cards': 1, 'coins': 0, 'increase': 0.1},
+    2: {'unit_cards': 2, 'coins': 100, 'increase': 0.2},
+    3: {'unit_cards': 5, 'coins': 250, 'increase': 0.3},
+    4: {'unit_cards': 10, 'coins': 500, 'increase': 0.4},
+    5: {'unit_cards': 25, 'coins': 1000, 'increase': 0.5},
+    6: {'unit_cards': 50, 'coins': 2000, 'increase': 0.6},
+    7: {'unit_cards': 125, 'coins': 5000, 'increase': 0.7},
+    8: {'unit_cards': 250, 'coins': 10000, 'increase': 0.8},
+    9: {'unit_cards': 625, 'coins': 20000, 'increase': 0.9},
+    10: {'unit_cards': 1250, 'coins': 50000, 'increase': 1.0},
 }
 
 JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600)
 }
-
 
 # TEMPLATE_LOADERS = (
 #     ('rtl.loaders.Loader', (
