@@ -60,6 +60,10 @@ class UserViewSet(viewsets.ModelViewSet):
         user = User.objects.create_user(username=player_id, password=player_id)
         chest = ChestGenerate(user)
         chest.generate_tutorial_chest()
+        user.user_currency.gem += 100
+        user.user_currency.coin += 250
+        user.save()
+
         return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
@@ -90,8 +94,13 @@ class UserViewSet(viewsets.ModelViewSet):
         if UserChest.deck.filter(user=request.user, status='opening').count() >= 1:
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
-        chest.chest_opening_date = datetime.now() + timedelta(
-            hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
+        if chest.chest_monetaryType == 'free':
+            opening_date = datetime.now() + timedelta(seconds=60)
+
+        else:
+            opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
+
+        chest.chest_opening_date = opening_date
 
         chest.chest_status = 'opening'
         chest.save()

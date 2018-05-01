@@ -133,8 +133,8 @@ class ChestGenerate:
             "reward_data":
             {
                 "chest_type": chest.get_chest_type_display(),
-                "gems": 100,
-                "coins": 250,
+                "gems": random.randint(chest.min_gem, chest.max_gem),
+                "coins": random.randint(chest.min_coin, chest.max_coin),
                 "units": lst_unit
             },
             "chest_monetaryType": "free"
