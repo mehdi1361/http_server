@@ -57,7 +57,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         player_id = str(uuid.uuid1().int >> 32)
-        User.objects.create_user(username=player_id, password=player_id)
+        user = User.objects.create_user(username=player_id, password=player_id)
+        chest = ChestGenerate(user)
+        chest.generate_tutorial_chest()
         return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
