@@ -592,7 +592,7 @@ def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
             if unit.unlock:
-                UserCard.objects.create(user=instance, character=unit)
+                UserCard.objects.create(user=instance, character=unit, quantity=1)
 
             else:
                 UserCard.objects.create(user=instance, character=unit, level=0)
