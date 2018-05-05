@@ -60,9 +60,23 @@ class ChakraSpellEffectInline(admin.TabularInline):
 
 @admin.register(User)
 class AccountsUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'get_name']
     search_fields = ['username']
     list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
+
+    def get_name(self, obj):
+        profile = UserCurrency.objects.filter(user=obj)
+        return profile.name
+
+
+@admin.register(UserCurrency)
+class UserCurrency(admin.ModelAdmin):
+    list_display = ['name', 'gem', 'coin', 'trophy', 'player_id']
+    search_fields = ['name']
+
+    def player_id(self, obj):
+        return obj.user.username
 
 
 @admin.register(BenefitBox)
