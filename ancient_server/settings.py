@@ -206,32 +206,32 @@ STATIC_URL = '/static/'
 # }
 
 HERO_UPDATE = {
-    1: {'hero_cards': 1, 'coins': 0, 'increase': 0.1},
-    2: {'hero_cards': 2, 'coins': 500, 'increase': 0.2},
-    3: {'hero_cards': 5, 'coins': 1000, 'increase': 0.3},
-    4: {'hero_cards': 10, 'coins': 5000, 'increase': 0.4},
-    5: {'hero_cards': 25, 'coins': 10000, 'increase': 0.5},
-    6: {'hero_cards': 50, 'coins': 20000, 'increase': 0.6},
-    7: {'hero_cards': 125, 'coins': 50000, 'increase': 0.7},
+    1: {'hero_cards': 1, 'coins': 0, 'increase': 0.0},
+    2: {'hero_cards': 2, 'coins': 500, 'increase': 0.1},
+    3: {'hero_cards': 5, 'coins': 1000, 'increase': 0.21},
+    4: {'hero_cards': 10, 'coins': 5000, 'increase': 0.33},
+    5: {'hero_cards': 25, 'coins': 10000, 'increase': 0.46},
+    6: {'hero_cards': 50, 'coins': 20000, 'increase': 0.61},
+    7: {'hero_cards': 125, 'coins': 50000, 'increase': 0.77},
 }
 
 ITEM_UPDATE = {
-    1: {'item_cards': 1, 'coins': 0, 'increase': 0.1},
-    2: {'item_cards': 10, 'coins': 2500, 'increase': 0.2},
-    3: {'item_cards': 30, 'coins': 7500, 'increase': 0.3}
+    1: {'item_cards': 1, 'coins': 0, 'increase': 0.0},
+    2: {'item_cards': 10, 'coins': 2500, 'increase': 0.1},
+    3: {'item_cards': 30, 'coins': 7500, 'increase': 0.21}
 }
 
 UNIT_UPDATE = {
-    1: {'unit_cards': 1, 'coins': 0, 'increase': 0.1},
-    2: {'unit_cards': 2, 'coins': 100, 'increase': 0.2},
-    3: {'unit_cards': 5, 'coins': 250, 'increase': 0.3},
-    4: {'unit_cards': 10, 'coins': 500, 'increase': 0.4},
-    5: {'unit_cards': 25, 'coins': 1000, 'increase': 0.5},
-    6: {'unit_cards': 50, 'coins': 2000, 'increase': 0.6},
-    7: {'unit_cards': 125, 'coins': 5000, 'increase': 0.7},
-    8: {'unit_cards': 250, 'coins': 10000, 'increase': 0.8},
-    9: {'unit_cards': 625, 'coins': 20000, 'increase': 0.9},
-    10: {'unit_cards': 1250, 'coins': 50000, 'increase': 1.0},
+    1: {'unit_cards': 1, 'coins': 0, 'increase': 0.0},
+    2: {'unit_cards': 2, 'coins': 100, 'increase': 0.1},
+    3: {'unit_cards': 5, 'coins': 250, 'increase': 0.21},
+    4: {'unit_cards': 10, 'coins': 500, 'increase': 0.33},
+    5: {'unit_cards': 25, 'coins': 1000, 'increase': 0.46},
+    6: {'unit_cards': 50, 'coins': 2000, 'increase': 0.61},
+    7: {'unit_cards': 125, 'coins': 5000, 'increase': 0.77},
+    8: {'unit_cards': 250, 'coins': 10000, 'increase': 0.94},
+    9: {'unit_cards': 625, 'coins': 20000, 'increase': 1.14},
+    10: {'unit_cards': 1250, 'coins': 50000, 'increase': 1.35},
 }
 
 JWT_AUTH = {
