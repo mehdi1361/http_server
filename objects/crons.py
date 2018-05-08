@@ -21,7 +21,7 @@ class FreeChestCreatorJob(CronJobBase):
 
 
 class Backup(CronJobBase):
-    RUN_AT_TIMES = ['23:50']
+    RUN_AT_TIMES = ['03:00']
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'objects.Backup'
 
