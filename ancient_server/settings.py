@@ -247,4 +247,4 @@ JWT_AUTH = {
 # )
 
 # DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
-DBBACKUP_STORAGE_OPTIONS = {'location': '/home/mehdi/backups'}
+DBBACKUP_STORAGE_OPTIONS = {'location': 'backup'}
