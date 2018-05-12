@@ -259,9 +259,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
             CurrencyLog.objects.create(
                 user=request.user,
-                type='gem',
+                type='GEM',
                 quantity_used=store['price'],
-                type_buy='coin',
+                type_buy='COIN',
                 quantity_buy=store['amount'],
                 params=result
             )
@@ -294,9 +294,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
             CurrencyLog.objects.create(
                 user=request.user,
-                type='gem',
+                type='GEM',
                 quantity_used=store['price'],
-                type_buy='chest',
+                type_buy='CHEST',
                 quantity_buy=1,
                 params=chest_value
             )
@@ -387,9 +387,9 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         CurrencyLog.objects.create(
             user=request.user,
-            type='coin',
+            type='COIN',
             quantity_used=next_level['coins'],
-            type_buy='update_unit',
+            type_buy='UPDATE_UNIT',
             quantity_buy=1,
             params=data
         )
@@ -429,9 +429,9 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         CurrencyLog.objects.create(
             user=request.user,
-            type='coin',
+            type='COIN',
             quantity_used=next_level['coins'],
-            type_buy='update_hero',
+            type_buy='UPDATE_HERO',
             quantity_buy=1,
             params=data
         )
@@ -494,9 +494,9 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         CurrencyLog.objects.create(
             user=request.user,
-            type='coin',
+            type='COIN',
             quantity_used=next_level['coins'],
-            type_buy='update_card',
+            type_buy='UPDATE_CARD',
             quantity_buy=1,
             params=data
         )
