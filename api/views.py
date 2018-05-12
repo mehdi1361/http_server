@@ -183,7 +183,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def leader_board(self, request):
         lst_board = []
-        lst_q = list(UserCurrency.objects.filter(user__is_staff=False).exclude(name=None).order_by('-trophy')[:200])
+        lst_q = list(UserCurrency.objects.filter(user__is_staff=False).exclude(name=None, ban_user=False).order_by('-trophy')[:200])
         for i in range(len(lst_q)):
             lst_board.append({
                 'rank': i + 1,
