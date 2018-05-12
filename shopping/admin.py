@@ -17,4 +17,4 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(PurchaseLog)
 class PurchaseLogAdmin(admin.ModelAdmin):
-    list_display = ('user', 'store_purchase_token', 'params', 'created_date', 'updated_date')
+    list_display = ('user', 'store_purchase_token', 'params', 'store_params', 'created_date', 'updated_date')

@@ -3,11 +3,12 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/objects/models.py" line="243" />
     <bookmark url="file://$PROJECT_DIR$/api/views.py" line="135" />
-    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="359" />
+    <bookmark url="file://$PROJECT_DIR$/api/views.py" line="352" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/api/views.py" afterPath="$PROJECT_DIR$/api/views.py" />
+      <change beforePath="$PROJECT_DIR$/shopping/admin.py" afterPath="$PROJECT_DIR$/shopping/admin.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,8 +84,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="247" column="0" lean-forward="true" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="185" column="103" lean-forward="false" selection-start-line="185" selection-start-column="103" selection-end-line="185" selection-end-column="103" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -120,8 +121,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="113" column="35" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="35" />
+            <state relative-caret-position="80">
+              <caret line="100" column="6" lean-forward="false" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
               <folding>
                 <marker date="1526121724877" expanded="true" signature="7211:8374" ph="..." />
                 <marker date="1526121724877" expanded="true" signature="18217:18222" ph="..." />
@@ -143,8 +144,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopping/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state relative-caret-position="342">
+              <caret line="19" column="64" lean-forward="false" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -165,8 +166,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1332">
-              <caret line="74" column="76" lean-forward="false" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
+            <state relative-caret-position="-17">
+              <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -258,11 +259,11 @@
         <option value="$PROJECT_DIR$/common/utils.py" />
         <option value="$PROJECT_DIR$/objects/crons.py" />
         <option value="$PROJECT_DIR$/ancient_server/settings.py" />
-        <option value="$PROJECT_DIR$/shopping/admin.py" />
         <option value="$PROJECT_DIR$/common/payment_verification.py" />
         <option value="$PROJECT_DIR$/shopping/models.py" />
         <option value="$PROJECT_DIR$/objects/models.py" />
         <option value="$PROJECT_DIR$/objects/admin.py" />
+        <option value="$PROJECT_DIR$/shopping/admin.py" />
         <option value="$PROJECT_DIR$/api/views.py" />
       </list>
     </option>
@@ -362,7 +363,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
-    <property name="SearchEverywhereHistoryKey" value="leader_bo&#9;null&#9;null&#10;UserCa&#9;null&#9;null&#10;UserCard&#9;FILE&#9;das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.user_card&#10;UserChe&#9;null&#9;null&#10;news&#9;null&#9;null&#10;Chest&#9;null&#9;null&#10;Unit&#9;null&#9;null&#10;Item&#9;null&#9;null&#10;buy_coin&#9;null&#9;null&#10;ChestGe&#9;null&#9;null&#10;reward_data&#9;null&#9;null&#10;player_inf&#9;null&#9;null&#10;chest_ready&#9;null&#9;null&#10;UserCu&#9;null&#9;null&#10;open_chest&#9;null&#9;null&#10;skip_gem&#9;null&#9;null&#10;ItemSer&#9;null&#9;null&#10;Ite&#9;null&#9;null&#10;HeroSp&#9;null&#9;null&#10;Spell&#9;null&#9;null&#10;Spel&#9;null&#9;null&#10;Hero&#9;null&#9;null&#10;remain_time&#9;null&#9;null&#10;fixtures&#9;FILE&#9;file:///home/mehdi/python-project/Divine_Server_Python/shopping/fixtures&#10;generate_winner_chest&#9;null&#9;null&#10;get_sequence&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="leader&#9;null&#9;null&#10;leader_bo&#9;null&#9;null&#10;UserCa&#9;null&#9;null&#10;UserCard&#9;FILE&#9;das://table:/b92efd74/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/anc_db.public.user_card&#10;UserChe&#9;null&#9;null&#10;news&#9;null&#9;null&#10;Chest&#9;null&#9;null&#10;Unit&#9;null&#9;null&#10;Item&#9;null&#9;null&#10;buy_coin&#9;null&#9;null&#10;ChestGe&#9;null&#9;null&#10;reward_data&#9;null&#9;null&#10;player_inf&#9;null&#9;null&#10;chest_ready&#9;null&#9;null&#10;UserCu&#9;null&#9;null&#10;open_chest&#9;null&#9;null&#10;skip_gem&#9;null&#9;null&#10;ItemSer&#9;null&#9;null&#10;Ite&#9;null&#9;null&#10;HeroSp&#9;null&#9;null&#10;Spell&#9;null&#9;null&#10;Spel&#9;null&#9;null&#10;Hero&#9;null&#9;null&#10;remain_time&#9;null&#9;null&#10;fixtures&#9;FILE&#9;file:///home/mehdi/python-project/Divine_Server_Python/shopping/fixtures&#10;generate_winner_chest&#9;null&#9;null&#10;get_sequence&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -591,17 +592,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/views.py</url>
-          <line>307</line>
+          <line>300</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/views.py</url>
-          <line>354</line>
+          <line>347</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/views.py</url>
-          <line>384</line>
+          <line>377</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -636,7 +637,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/views.py</url>
-          <line>219</line>
+          <line>214</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -998,16 +999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shopping/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ancient_server/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
@@ -1054,10 +1045,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/objects/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopping/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="64" lean-forward="false" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/objects/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="113" column="35" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="35" />
+        <state relative-caret-position="80">
+          <caret line="100" column="6" lean-forward="false" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
           <folding>
             <marker date="1526121724877" expanded="true" signature="7211:8374" ph="..." />
             <marker date="1526121724877" expanded="true" signature="18217:18222" ph="..." />
@@ -1065,20 +1076,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1332">
-          <caret line="74" column="76" lean-forward="false" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="247" column="0" lean-forward="true" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+        <state relative-caret-position="330">
+          <caret line="185" column="103" lean-forward="false" selection-start-line="185" selection-start-column="103" selection-end-line="185" selection-end-column="103" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
