@@ -212,9 +212,13 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
+        print(request.data.get('shop_id'), request.data.get('id'), request.data.get('purchase_token'),
+              request.data.get('product_id'), request.data.get('package_name'))
+
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
+        print(store)
 
         if PurchaseLog.validate_token(request.data.get('purchase_token')):
             PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'))
@@ -228,6 +232,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         )
 
         is_verified, message = bazar_purchase.is_verified()
+        print("bazar", is_verified, message)
 
         if not is_verified:
             PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'),
