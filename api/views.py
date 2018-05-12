@@ -212,6 +212,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
+        print("mehdi")
         print(request.data.get('shop_id'), request.data.get('id'), request.data.get('purchase_token'),
               request.data.get('product_id'), request.data.get('package_name'))
 
