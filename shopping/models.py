@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
 
+from objects.models import UserCurrency
+
 
 @python_2_unicode_compatible
 class Store(Base):
@@ -54,7 +56,7 @@ class Shop(Base):
 
 @python_2_unicode_compatible
 class PurchaseLog(Base):
-    user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='purchases')
+    user = models.ForeignKey(UserCurrency, verbose_name=_('user purchase'), related_name='purchases')
     store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
     used_token = models.BooleanField(_('token used'), default=False)
     store_params = JSONField(_('store params'), null=True, blank=True)
@@ -65,7 +67,7 @@ class PurchaseLog(Base):
         db_table = 'purchase_log'
 
     def __str__(self):
-        return "{}".format(self.user.username)
+        return "{}".format(self.user.name)
 
     @classmethod
     def validate_token(cls, store_purchase_token):
@@ -94,10 +96,10 @@ class CurrencyLog(Base):
         ('UPDATE_CARD', 'update_card')
     )
 
-    user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='soft_currencies')
-    type = models.CharField(_('type currency'), max_length=5, choices=USED_CURRENCY_TYPE)
+    user = models.ForeignKey(UserCurrency, verbose_name=_('user purchase'), related_name='soft_currencies')
+    type = models.CharField(_('type currency'), max_length=15, choices=USED_CURRENCY_TYPE)
     quantity_used = models.IntegerField(_('quantity used'), default=0)
-    type_buy = models.CharField(_('buy type'), max_length=10, choices=BUY_CURRENCY_TYPE)
+    type_buy = models.CharField(_('buy type'), max_length=30, choices=BUY_CURRENCY_TYPE)
     quantity_buy = models.IntegerField(_('quantity buy'), default=0)
 
     class Meta:
@@ -106,4 +108,4 @@ class CurrencyLog(Base):
         db_table = 'currency_log'
 
     def __str__(self):
-        return "{}".format(self.user.username)
+        return "{}".format(self.user.name)

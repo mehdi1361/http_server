@@ -212,12 +212,13 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
 
         if PurchaseLog.validate_token(request.data.get('purchase_token')):
-            PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'))
+            PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'))
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -230,11 +231,11 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         is_verified, message = bazar_purchase.is_verified()
 
         if not is_verified:
-            PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'),
+            PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'),
                                        store_params=message)
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token')
+        PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token')
                                    , store_params=message, params=store, used_token=True)
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
@@ -243,6 +244,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.coins if item['id'] == request.data.get('id')).next()
@@ -258,7 +260,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             }
 
             CurrencyLog.objects.create(
-                user=request.user,
+                user=profile,
                 type='GEM',
                 quantity_used=store['price'],
                 type_buy='COIN',
@@ -271,6 +273,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_chest(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
         chest_type = {
             'wooden': 'W',
             'silver': 'S',
@@ -293,7 +296,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 UserCard.upgrade_character(request.user, character, unit['count'])
 
             CurrencyLog.objects.create(
-                user=request.user,
+                user=profile,
                 type='GEM',
                 quantity_used=store['price'],
                 type_buy='CHEST',
@@ -363,6 +366,8 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def level_up(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
+
         unit_id = request.data.get('unit_id')
         user_card = get_object_or_404(UserCard, user=request.user, character_id=unit_id)
         user_currency = get_object_or_404(UserCurrency, user=request.user)
@@ -386,7 +391,7 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         data = unit_normalize_data(user_card, serializer.data)
 
         CurrencyLog.objects.create(
-            user=request.user,
+            user=profile,
             type='COIN',
             quantity_used=next_level['coins'],
             type_buy='UPDATE_UNIT',
@@ -403,6 +408,8 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def level_up(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
+
         hero_id = request.data.get('hero_id')
         user_hero = get_object_or_404(UserHero, user=request.user, hero_id=hero_id)
         user_currency = get_object_or_404(UserCurrency, user=request.user)
@@ -428,7 +435,7 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         data = hero_normalize_data(user_hero, serializer.data)
 
         CurrencyLog.objects.create(
-            user=request.user,
+            user=profile,
             type='COIN',
             quantity_used=next_level['coins'],
             type_buy='UPDATE_HERO',

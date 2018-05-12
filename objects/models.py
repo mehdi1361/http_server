@@ -148,7 +148,7 @@ class UserCurrency(Base):
         selected_user.save()
 
     def __str__(self):
-        return '{}, gem:{}, coin:{}'.format(self.user, self.gem, self.coin)
+        return '{}'.format(self.name)
 
 
 @python_2_unicode_compatible

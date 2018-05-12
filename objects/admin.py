@@ -5,6 +5,7 @@ from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, 
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
+from shopping.models import CurrencyLog, PurchaseLog
 # from django.contrib.auth.models import User
 
 
@@ -24,6 +25,14 @@ class UserCurrencyInline(admin.StackedInline):
 
 class HeroUnitsAdmin(admin.StackedInline):
     model = HeroUnits
+
+
+class PurchaseLogAdmin(admin.TabularInline):
+    model = PurchaseLog
+
+
+class CurrencyLogAdmin(admin.TabularInline):
+    model = CurrencyLog
 
 
 class ItemInline(admin.StackedInline):
@@ -60,10 +69,16 @@ class ChakraSpellEffectInline(admin.TabularInline):
 
 @admin.register(User)
 class AccountsUserAdmin(admin.ModelAdmin):
-    list_display = ['username']
-    search_fields = ['username']
+    list_display = ['username', 'get_user_name', 'get_baned']
+    search_fields = ['username', 'get_user_name']
     list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
+
+    def get_user_name(self, obj):
+        return obj.user_currency.name
+
+    def get_baned(self, obj):
+        return obj.user_currency.ban_user
 
     # def get_name(self, obj):
     #     profile = UserCurrency.objects.filter(user=obj)
@@ -75,6 +90,7 @@ class UserCurrency(admin.ModelAdmin):
     list_display = ['name', 'gem', 'coin', 'trophy', 'player_id', 'ban_user']
     list_editable = ['ban_user']
     search_fields = ['name']
+    inlines = [PurchaseLogAdmin, CurrencyLogAdmin]
 
     def player_id(self, obj):
         return obj.user.username
