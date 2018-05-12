@@ -21,6 +21,8 @@ from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
+from shopping.models import PurchaseLog
+from common.payment_verification import CafeBazar
 
 
 class DefaultsMixin(object):
@@ -213,7 +215,27 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
-        # TODO check store api
+
+        if PurchaseLog.validate_token(request.data.get('purchase_token')):
+            PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'))
+
+            return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        bazar_purchase = CafeBazar(
+            purchase_token=request.data.get('purchase_token'),
+            product_id=request.data.get('product_id'),
+            package_name=request.data.get('package_name')
+        )
+
+        is_verified, message = bazar_purchase.is_verified()
+
+        if not is_verified:
+            PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token'),
+                                       store_params=message)
+            return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        PurchaseLog.objects.create(user=request.user, store_purchase_token=request.data.get('purchase_token')
+                                   , store_params=message, params=store)
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 

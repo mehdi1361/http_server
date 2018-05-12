@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="anc_db_devel@localhost" uuid="fa5d3d91-8962-4bb7-ab24-bb4c9e8f4167">
+    <data-source source="LOCAL" name="anc_db@localhost" uuid="ea1bbeb3-d951-40b4-bf65-2f7214e6e120">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/anc_db_devel</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/anc_db</jdbc-url>
       <driver-properties>
         <property name="ApplicationName" value="DataGrip" />
       </driver-properties>

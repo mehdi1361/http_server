@@ -12,6 +12,9 @@ from django.contrib.auth.models import User
 @python_2_unicode_compatible
 class Store(Base):
     name = models.CharField(_('store name'), max_length=50)
+    valid_name = models.CharField(_('valid name'), max_length=50, null=True, blank=True)
+    access_token = models.CharField(_('access token'), max_length=50, null=True, blank=True)
+    refresh_token = models.CharField(_('refresh token'), max_length=50, null=True, blank=True)
 
     class Meta:
         verbose_name = _('store')
@@ -53,6 +56,22 @@ class Shop(Base):
 class PurchaseLog(Base):
     user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='purchases')
     store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
+    used_token = models.BooleanField(_('token used'), default=False)
+    store_params = JSONField(_('store params'), null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('purchase log')
+        verbose_name_plural = _('purchase logs')
+        db_table = 'purchase_log'
 
     def __str__(self):
         return "{}".format(self.user.username)
+
+    @classmethod
+    def validate_token(cls, store_purchase_token):
+        result = cls.objects.filter(store_purchase_token=store_purchase_token, used_token=True)
+
+        if result:
+            return True
+
+        return False
