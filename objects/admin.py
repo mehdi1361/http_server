@@ -60,14 +60,14 @@ class ChakraSpellEffectInline(admin.TabularInline):
 
 @admin.register(User)
 class AccountsUserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'get_name']
+    list_display = ['username']
     search_fields = ['username']
     list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
 
-    def get_name(self, obj):
-        profile = UserCurrency.objects.filter(user=obj)
-        return profile.name
+    # def get_name(self, obj):
+    #     profile = UserCurrency.objects.filter(user=obj)
+    #     return profile.name
 
 
 @admin.register(UserCurrency)
@@ -88,7 +88,7 @@ class BenefitBoxAdmin(SimpleHistoryAdmin):
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
-    list_display = ('moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start', 'unlock')
+    list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start', 'unlock')
     list_editable = ('unlock', )
     # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )

@@ -6,6 +6,7 @@ from base.models import Base
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.auth.models import User
 
 
 @python_2_unicode_compatible
@@ -46,3 +47,9 @@ class Shop(Base):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+
+@python_2_unicode_compatible
+class PurchaseLog(Base):
+    user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='purchases')
+    store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
