@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Store, Shop, PurchaseLog
+from .models import Store, Shop, PurchaseLog, CurrencyLog
 
 
 class ShopInline(admin.StackedInline):
@@ -18,3 +18,8 @@ class StoreAdmin(admin.ModelAdmin):
 @admin.register(PurchaseLog)
 class PurchaseLogAdmin(admin.ModelAdmin):
     list_display = ('user', 'store_purchase_token', 'params', 'store_params', 'created_date', 'updated_date')
+
+
+@admin.register(CurrencyLog)
+class CurrencyLogAdmin(admin.ModelAdmin):
+    list_display = ('user', 'type', 'quantity_used', 'type_buy', 'quantity_buy', 'created_date', 'updated_date')

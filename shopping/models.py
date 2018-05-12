@@ -75,3 +75,35 @@ class PurchaseLog(Base):
             return True
 
         return False
+
+
+@python_2_unicode_compatible
+class CurrencyLog(Base):
+    USED_CURRENCY_TYPE = (
+        ('GEM', 'gem'),
+        ('COIN', 'coin')
+    )
+
+    BUY_CURRENCY_TYPE = (
+        ('GEM', 'gem'),
+        ('COIN', 'coin'),
+        ('CARD', 'card'),
+        ('CHEST', 'chest'),
+        ('UPDATE_UNIT', 'update_unit'),
+        ('UPDATE_HERO', 'update_hero'),
+        ('UPDATE_CARD', 'update_card')
+    )
+
+    user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='soft_currencies')
+    type = models.CharField(_('type currency'), max_length=5, choices=USED_CURRENCY_TYPE)
+    quantity_used = models.IntegerField(_('quantity used'), default=0)
+    type_buy = models.CharField(_('buy type'), max_length=10, choices=BUY_CURRENCY_TYPE)
+    quantity_buy = models.IntegerField(_('quantity buy'), default=0)
+
+    class Meta:
+        verbose_name = _('currency log')
+        verbose_name_plural = _('currency logs')
+        db_table = 'currency_log'
+
+    def __str__(self):
+        return "{}".format(self.user.username)

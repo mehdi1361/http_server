@@ -21,7 +21,7 @@ from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
-from shopping.models import PurchaseLog
+from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
 
 
@@ -250,15 +250,23 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             request.user.user_currency.gem -= store['price']
             request.user.user_currency.coin += store['amount']
             request.user.user_currency.save()
-
-            return Response({
+            result = {
                 'buy_coin': store['amount'],
                 'user_coin': request.user.user_currency.coin,
                 'used_gem': store['price'],
                 'user_gem': request.user.user_currency.gem
-                },
-                status=status.HTTP_202_ACCEPTED
+            }
+
+            CurrencyLog.objects.create(
+                user=request.user,
+                type='gem',
+                quantity_used=store['price'],
+                type_buy='coin',
+                quantity_buy=store['amount'],
+                params=result
             )
+
+            return Response(result, status=status.HTTP_202_ACCEPTED)
         return Response({'id': 400, 'message': 'gem not enough'}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
@@ -283,6 +291,15 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             for unit in chest_value['units']:
                 character = Unit.objects.get(moniker=unit['unit'])
                 UserCard.upgrade_character(request.user, character, unit['count'])
+
+            CurrencyLog.objects.create(
+                user=request.user,
+                type='gem',
+                quantity_used=store['price'],
+                type_buy='chest',
+                quantity_buy=1,
+                params=chest_value
+            )
 
             return Response(chest_value)
 
@@ -368,6 +385,15 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         serializer = UnitSerializer(user_card.character)
         data = unit_normalize_data(user_card, serializer.data)
 
+        CurrencyLog.objects.create(
+            user=request.user,
+            type='coin',
+            quantity_used=next_level['coins'],
+            type_buy='update_unit',
+            quantity_buy=1,
+            params=data
+        )
+
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -400,6 +426,15 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         serializer = HeroSerializer(user_hero.hero)
         data = hero_normalize_data(user_hero, serializer.data)
+
+        CurrencyLog.objects.create(
+            user=request.user,
+            type='coin',
+            quantity_used=next_level['coins'],
+            type_buy='update_hero',
+            quantity_buy=1,
+            params=data
+        )
 
         return Response(data, status=status.HTTP_200_OK)
 
@@ -456,6 +491,15 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         serializer = ItemSerializer(user_item.item)
         data = item_normalize_data(user_item, serializer.data)
+
+        CurrencyLog.objects.create(
+            user=request.user,
+            type='coin',
+            quantity_used=next_level['coins'],
+            type_buy='update_card',
+            quantity_buy=1,
+            params=data
+        )
 
         return Response(data, status=status.HTTP_200_OK)
 
