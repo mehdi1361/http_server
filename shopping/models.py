@@ -53,3 +53,6 @@ class Shop(Base):
 class PurchaseLog(Base):
     user = models.ForeignKey(User, verbose_name=_('user purchase'), related_name='purchases')
     store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
+
+    def __str__(self):
+        return "{}".format(self.user.username)
