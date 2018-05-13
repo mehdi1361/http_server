@@ -115,6 +115,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
         UserCurrency.subtract(request.user, chest.skip_gem, 'GEM')
 
+        profile = UserCurrency.objects.get(user=request.user)
+        CurrencyLog.objects.create(
+            user=profile,
+            type='GEM',
+            quantity_used=chest.skip_gem,
+            type_buy='SKIP_GEM',
+            quantity_buy=1
+        )
+
         chest.chest_status = 'ready'
         chest.save()
 
@@ -287,7 +296,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             request.user.user_currency.gem -= store['price']
             request.user.user_currency.save()
 
-            chest = ChestGenerate(request.user, chest_type[store['type']])
+            chest = ChestGenerate(request.user, chest_type[store['type']], 'free')
             chest_value = chest.generate_chest()
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 

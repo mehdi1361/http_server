@@ -37,15 +37,16 @@ def classproperty(func):
 
 class ChestGenerate:
 
-    def __init__(self, user, chest_type_index=None):
+    def __init__(self, user, chest_type_index=None, chest_type='non_free'):
         self.user = user
         self.chest_type_index = chest_type_index
+        self.chest_type = chest_type
 
     def generate_chest(self):
         cards_type = 4
         lst_unit = []
 
-        if not UserChest.deck_is_open(self.user, 'non_free'):
+        if not UserChest.deck_is_open(self.user, self.chest_type):
             return {"status": False, "message": "deck is full"}
 
         if self.chest_type_index is None:

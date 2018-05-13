@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
 
 
 DECK_COUNT = {
-    'free': 3,
+    'free': 10,
     'non_free': 4
 }
 SKIP_GEM = 25

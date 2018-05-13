@@ -93,7 +93,8 @@ class CurrencyLog(Base):
         ('CHEST', 'chest'),
         ('UPDATE_UNIT', 'update_unit'),
         ('UPDATE_HERO', 'update_hero'),
-        ('UPDATE_CARD', 'update_card')
+        ('UPDATE_CARD', 'update_card'),
+        ('SKIP_GEM', 'SKIP_GEM')
     )
 
     user = models.ForeignKey(UserCurrency, verbose_name=_('user purchase'), related_name='soft_currencies')
