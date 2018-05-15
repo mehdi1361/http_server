@@ -161,6 +161,7 @@ class UserHeroAdmin(SimpleHistoryAdmin):
         'level',
         'selected_item'
     )
+    search_fields = ['user']
 
 
 @admin.register(HeroSpell)

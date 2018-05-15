@@ -75,6 +75,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user_hero, created = UserHero.objects.get_or_create(user=request.user, hero=hero)
         UserHero.objects.filter(user=request.user).exclude(id=user_hero.id).update(enable_hero=False)
         user_hero.enable_hero = True
+        user_hero.level = 1
         user_hero.save()
 
         return Response(
