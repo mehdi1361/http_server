@@ -159,8 +159,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def set_player_name(self, request):
         try:
             name = request.data.get('name')
-            profile = UserCurrency.objects.get(name=name)
-            name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))
+            name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))[:18]
 
         except:
             name = request.data.get('name')

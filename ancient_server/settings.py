@@ -26,7 +26,7 @@ SECRET_KEY = 'q@+unt2eluw--4+uqdtuhi%411lfx@(^n2k3uad%39mq_620)@'
 # DEBUG = True
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.149', '127.0.0.1', 'ancientsrevival.ir']
+ALLOWED_HOSTS = ['192.168.1.149', '127.0.0.1', 'ancientsrevival.ir', 'localhost']
 
 # Application definition
 
