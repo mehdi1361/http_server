@@ -58,26 +58,13 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
-	player_id = str(uuid.uuid1().int >> 32)
+        player_id = str(uuid.uuid1().int >> 32)
         user = User.objects.create_user(username=player_id, password=player_id)
         chest = ChestGenerate(user)
         chest.generate_tutorial_chest()
 
         return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
-#        device_id = request.data['deviceUniqueID']
-#        device_name = request.data['deviceName']
-#        try:
-#            device = Device.objects.get(device_id=device_id)
-#            return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_201_CREATED)
-#
-#        except Exception:
-#            player_id = str(uuid.uuid1().int >> 32)
-#            user = User.objects.create_user(username=player_id, password=player_id)
-#            chest = ChestGenerate(user)
-#            profile = UserCurrency.objects.get(user=user)
-#            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-#            chest.generate_tutorial_chest()
-#            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
@@ -199,7 +186,8 @@ class UserViewSet(viewsets.ModelViewSet):
             try:
                 name = request.data.get('name')
                 profile = UserCurrency.objects.get(name=name)
-                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name},
+                                status=status.HTTP_400_BAD_REQUEST)
 
             except:
                 profile = UserCurrency.objects.get(user=request.user)
@@ -214,7 +202,9 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def leader_board(self, request):
         lst_board = []
-        lst_q = list(UserCurrency.objects.filter(user__is_staff=False, ban_user=False).exclude(name=None).order_by('-trophy')[:200])
+        lst_q = list(
+            UserCurrency.objects.filter(user__is_staff=False, ban_user=False).exclude(name=None).order_by('-trophy')[
+            :200])
         for i in range(len(lst_q)):
             lst_board.append({
                 'rank': i + 1,
@@ -226,7 +216,8 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(lst_board)
 
 
-class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = LeagueInfo.objects.all()
     serializer_class = LeagueInfoSerializer
 
@@ -271,7 +262,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
-        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency.gem}, status=status.HTTP_202_ACCEPTED)
+        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency.gem},
+                        status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
