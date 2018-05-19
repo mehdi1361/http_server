@@ -10,8 +10,7 @@ from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
     UnitSerializer, HeroSerializer, AppConfigSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.decorators import list_route, api_view
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
