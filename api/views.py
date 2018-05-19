@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer
-from objects.models import BenefitBox, UserBuy, UserCurrency, Hero, UserHero, \
+from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import list_route, api_view
@@ -58,12 +58,21 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
-        player_id = str(uuid.uuid1().int >> 32)
-        user = User.objects.create_user(username=player_id, password=player_id)
-        chest = ChestGenerate(user)
-        chest.generate_tutorial_chest()
+        device_id = request.data['deviceUniqueID']
+        device_name = request.data['deviceName']
+        device, create = Device.objects.get_or_create(device_model=device_name, defaults={'device_id': device_id})
 
-        return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+        if create:
+            player_id = str(uuid.uuid1().int >> 32)
+            user = User.objects.create_user(username=player_id, password=player_id)
+            chest = ChestGenerate(user)
+            chest.generate_tutorial_chest()
+            device.user = user
+            device.save()
+
+            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+
+        return Response({'id': 201, 'player_id': device.user.username}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
     def select_hero(self, request):

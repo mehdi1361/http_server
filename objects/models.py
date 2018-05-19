@@ -589,6 +589,21 @@ class AppConfig(Base):
         return '{}'.format(self.app_data)
 
 
+@python_2_unicode_compatible
+class Device(Base):
+    user = models.ForeignKey(User, verbose_name=_('user'), related_name='devices', null=True)
+    device_model = models.CharField(_('device model'), max_length=100)
+    device_id = models.CharField(_('device model'), max_length=500)
+
+    class Meta:
+        verbose_name = _('device')
+        verbose_name_plural = _('devices')
+        db_table = 'devices'
+
+    def __str__(self):
+        return '{}-{}'.format(self.device_id, self.device_id)
+
+
 def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
