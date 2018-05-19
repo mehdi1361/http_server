@@ -106,4 +106,4 @@ ENV/
 *.pyc
 .idea/workspace.xml
 
-
+ancient_server/static
