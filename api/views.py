@@ -58,20 +58,26 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
-        device_id = request.data['deviceUniqueID']
-        device_name = request.data['deviceName']
-        try:
-            device = Device.objects.get(device_id=device_id)
-            return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_201_CREATED)
+	player_id = str(uuid.uuid1().int >> 32)
+        user = User.objects.create_user(username=player_id, password=player_id)
+        chest = ChestGenerate(user)
+        chest.generate_tutorial_chest()
 
-        except Exception:
-            player_id = str(uuid.uuid1().int >> 32)
-            user = User.objects.create_user(username=player_id, password=player_id)
-            chest = ChestGenerate(user)
-            profile = UserCurrency.objects.get(user=user)
-            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-            chest.generate_tutorial_chest()
-            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+        return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+#        device_id = request.data['deviceUniqueID']
+#        device_name = request.data['deviceName']
+#        try:
+#            device = Device.objects.get(device_id=device_id)
+#            return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_201_CREATED)
+#
+#        except Exception:
+#            player_id = str(uuid.uuid1().int >> 32)
+#            user = User.objects.create_user(username=player_id, password=player_id)
+#            chest = ChestGenerate(user)
+#            profile = UserCurrency.objects.get(user=user)
+#            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+#            chest.generate_tutorial_chest()
+#            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
