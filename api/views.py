@@ -181,6 +181,14 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response({'id': 201, 'user_name': name}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
+    def set_tutorial_done(self, request):
+        profile = UserCurrency.objects.get(user=request.user)
+        profile.tutorial_done = True
+        profile.save()
+
+        return Response({'id': 201, 'tutorial_done': True}, status=status.HTTP_202_ACCEPTED)
+
+    @list_route(methods=['POST'])
     def change_player_name(self, request):
         if request.user.user_currency.can_change_name:
             try:

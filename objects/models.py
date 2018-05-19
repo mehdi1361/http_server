@@ -107,6 +107,7 @@ class UserCurrency(Base):
     session_count = models.PositiveIntegerField(_('session count'), default=0)
     need_comeback = models.BooleanField(_('nee comeback'), default=False)
     next_session_remaining_seconds = models.PositiveIntegerField(_('next session remaining seconds'), default=0)
+    tutorial_done = models.BooleanField(_('tutorial'), default=False)
     ban_user = models.BooleanField(_('ban user'), default=False)
     history = HistoricalRecords()
 
