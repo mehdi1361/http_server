@@ -69,16 +69,11 @@ class ChakraSpellEffectInline(admin.TabularInline):
 
 @admin.register(User)
 class AccountsUserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'get_user_name', 'get_baned']
-    search_fields = ['username', 'get_user_name']
+    list_display = ['username', 'last_login']
+    search_fields = ['username', ]
     list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
 
-    def get_user_name(self, obj):
-        return obj.user_currency.name
-
-    def get_baned(self, obj):
-        return obj.user_currency.ban_user
 
     # def get_name(self, obj):
     #     profile = UserCurrency.objects.filter(user=obj)
@@ -161,7 +156,7 @@ class UserHeroAdmin(SimpleHistoryAdmin):
         'level',
         'selected_item'
     )
-    search_fields = ['user']
+    search_fields = ("user__username", )
 
 
 @admin.register(HeroSpell)
