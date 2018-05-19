@@ -39,3 +39,11 @@ class BattleTransaction(Base):
     )
     battle = models.ForeignKey(Battle, verbose_name=_('battle'), related_name='transactions')
     state = models.CharField(_('state'), max_length=50, choices=STATE, default='start')
+
+    class Meta:
+        verbose_name = _('battle transaction')
+        verbose_name_plural = _('battle transactions')
+        db_table = 'battle_transaction'
+
+    def __str__(self):
+        return '{}'.format(self.id)
