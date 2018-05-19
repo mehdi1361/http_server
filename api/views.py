@@ -60,7 +60,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         device_id = request.data['deviceUniqueID']
         device_name = request.data['deviceName']
-        device, create = Device.objects.get_or_create(device_model=device_name, defaults={'device_id': device_id})
+        device, create = Device.objects.get_or_create(device_model=device_name, device_id=device_id)
 
         if create:
             player_id = str(uuid.uuid1().int >> 32)
