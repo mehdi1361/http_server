@@ -1,2 +1,2 @@
-DATABASE = 'anc_db_devel'
-DEBUG = True
+DATABASE = 'anc_db'
+DEBUG = False
