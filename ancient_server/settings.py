@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
+from local_setting import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ SECRET_KEY = 'q@+unt2eluw--4+uqdtuhi%411lfx@(^n2k3uad%39mq_620)@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['192.168.1.149', '127.0.0.1', 'ancientsrevival.ir', 'localhost']
 
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'ancient_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'anc_db',
+        'NAME': DATABASE,
         # 'NAME': 'anc_db_devel',
         'USER': 'postgres',
         'PASSWORD': '13610522',

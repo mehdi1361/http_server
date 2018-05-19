@@ -175,7 +175,7 @@ class UserHero(Base):
     enable_hero = models.BooleanField(_('enable hero'), default=False)
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
     level = models.PositiveIntegerField(_('level'), default=0)
-    selected_item = JSONField(_('selected item'), null=True, default=None)
+    selected_item = JSONField(_('selected item'), null=True, default=None, blank=True)
     history = HistoricalRecords()
 
     class Meta:
@@ -592,7 +592,7 @@ class AppConfig(Base):
 
 @python_2_unicode_compatible
 class Device(Base):
-    user = models.ForeignKey(User, verbose_name=_('user'), related_name='devices', null=True)
+    user = models.ForeignKey(UserCurrency, verbose_name=_('user'), related_name='devices', null=True)
     device_model = models.CharField(_('device model'), max_length=100)
     device_id = models.CharField(_('device model'), max_length=500)
 
