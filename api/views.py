@@ -10,8 +10,7 @@ from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
     UnitSerializer, HeroSerializer, AppConfigSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.decorators import list_route, api_view
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -193,7 +192,8 @@ class UserViewSet(viewsets.ModelViewSet):
             try:
                 name = request.data.get('name')
                 profile = UserCurrency.objects.get(name=name)
-                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name},
+                                status=status.HTTP_400_BAD_REQUEST)
 
             except:
                 profile = UserCurrency.objects.get(user=request.user)
@@ -208,7 +208,9 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def leader_board(self, request):
         lst_board = []
-        lst_q = list(UserCurrency.objects.filter(user__is_staff=False, ban_user=False).exclude(name=None).order_by('-trophy')[:200])
+        lst_q = list(
+            UserCurrency.objects.filter(user__is_staff=False, ban_user=False).exclude(name=None).order_by('-trophy')[
+            :200])
         for i in range(len(lst_q)):
             lst_board.append({
                 'rank': i + 1,
@@ -220,7 +222,8 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(lst_board)
 
 
-class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = LeagueInfo.objects.all()
     serializer_class = LeagueInfoSerializer
 
@@ -265,7 +268,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
-        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency.gem}, status=status.HTTP_202_ACCEPTED)
+        return Response({'buy_gem': store['amount'], 'user_gem': request.user.user_currency.gem},
+                        status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
