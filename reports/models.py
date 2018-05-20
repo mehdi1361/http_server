@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import uuid
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -20,6 +21,7 @@ class Battle(Base):
     player_2_bot = models.BooleanField(_('player 2 is bot'), default=False)
 
     status = models.CharField(_('status'), max_length=5, choices=STATUS, default='start')
+    battle_id = models.CharField(_('battle id'), max_length=200, unique=True, default=None, null=True)
 
     class Meta:
         verbose_name = _('battle')
