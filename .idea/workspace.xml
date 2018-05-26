@@ -16,6 +16,16 @@
     <list default="true" id="0d1c40f4-09b1-4fb1-b402-1ee129d87118" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/reports/models.py" afterPath="$PROJECT_DIR$/reports/models.py" />
+<<<<<<< HEAD
+=======
+    </list>
+    <list id="63276643-5529-405b-9db0-000b41dc77f6" name="resolve error" comment="resolve error&#10;&#10;(cherry picked from commit 57025c0)">
+      <changelist_data name="mehdi1361" email="mhd.mosavi@gmail.com" date="1526732805000">
+        <option name="date" value="1526732805000" />
+        <option name="email" value="mhd.mosavi@gmail.com" />
+        <option name="name" value="mehdi1361" />
+      </changelist_data>
+>>>>>>> 899980d... change model
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,7 +63,11 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="0">
+=======
+            <state relative-caret-position="-3280">
+>>>>>>> 899980d... change model
               <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
@@ -75,7 +89,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="1098">
+=======
+            <state relative-caret-position="720">
+>>>>>>> 899980d... change model
               <caret line="61" column="12" lean-forward="false" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -84,6 +102,21 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="devices" pinned="false" current-in-tab="false">
+        <entry file="das://table:/b92efd74/ea1bbeb3-d951-40b4-bf65-2f7214e6e120/anc_db.public.devices">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+              <column-attributes>
+                <column name="params" languageId="JSON" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 899980d... change model
       <file leaf-file-name="local_setting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ancient_server/local_setting.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,11 +142,17 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reports/models.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="378">
               <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="324">
+              <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="16" />
+              <folding />
+>>>>>>> 899980d... change model
             </state>
           </provider>
         </entry>
@@ -231,7 +270,10 @@
         <option value="$PROJECT_DIR$/objects/models.py" />
         <option value="$PROJECT_DIR$/api/views.py" />
         <option value="$PROJECT_DIR$/reports/models.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/reports/migrations/0004_battle_battle_id.py" />
+=======
+>>>>>>> 899980d... change model
       </list>
     </option>
   </component>
@@ -308,12 +350,15 @@
               <item name="Divine_Server_Python" type="b2602c69:ProjectViewProjectNode" />
               <item name="Divine_Server_Python" type="462c0819:PsiDirectoryNode" />
               <item name="reports" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="Divine_Server_Python" type="b2602c69:ProjectViewProjectNode" />
               <item name="Divine_Server_Python" type="462c0819:PsiDirectoryNode" />
               <item name="reports" type="462c0819:PsiDirectoryNode" />
               <item name="migrations" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> 899980d... change model
             </path>
           </expand>
           <select />
@@ -481,8 +526,13 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3376206" sideWeight="0.4972156" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32690248" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49303323" sideWeight="0.49522674" order="8" side_tool="false" content_ui="tabs" x="-4" y="49" width="2568" height="1036" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33226153" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1547335" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="1" y="49" width="2576" height="1041" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15234686" sideWeight="0.48405796" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> 899980d... change model
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12649165" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18377088" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -707,6 +757,16 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/venv/local/lib/python2.7/site-packages/rest_framework/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 899980d... change model
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f1d4969f-7526-4a5d-8f61-3cc25c8e3eb1/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1332">
@@ -947,6 +1007,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/local/lib/python2.7/site-packages/rest_framework/views.py">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
           <caret line="462" column="0" lean-forward="false" selection-start-line="462" selection-start-column="0" selection-end-line="462" selection-end-column="0" />
@@ -970,12 +1031,32 @@
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="462" column="0" lean-forward="false" selection-start-line="462" selection-start-column="0" selection-end-line="462" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/b92efd74/ea1bbeb3-d951-40b4-bf65-2f7214e6e120/anc_db.public.battles">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="params" languageId="JSON" />
+          </column-attributes>
+>>>>>>> 899980d... change model
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1098">
+=======
+        <state relative-caret-position="720">
+>>>>>>> 899980d... change model
           <caret line="61" column="12" lean-forward="false" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -983,10 +1064,29 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/reports/migrations/0004_battle_battle_id.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="17" column="87" lean-forward="false" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
+=======
+    <entry file="file://$PROJECT_DIR$/objects/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3280">
+          <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+            <marker date="1526730517189" expanded="true" signature="7255:8418" ph="..." />
+            <marker date="1526730517189" expanded="true" signature="18261:18266" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="16" />
+>>>>>>> 899980d... change model
           <folding />
         </state>
       </provider>

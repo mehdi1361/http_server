@@ -213,3 +213,34 @@ class AppConfig(admin.ModelAdmin):
         'app_data',
         'enable'
     )
+
+
+@admin.register(Chest)
+class ChestAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'chest_type',
+        'info',
+        'min_coin',
+        'max_coin',
+        'min_gem',
+        'max_gem',
+        'new_card_chance',
+        'hero_card',
+        'unit_card',
+        'opening_time',
+        'time_to_open'
+    )
+    list_editable = (
+        'chest_type',
+        'info',
+        'min_coin',
+        'max_coin',
+        'min_gem',
+        'max_gem',
+        'new_card_chance',
+        'hero_card',
+        'unit_card',
+        'opening_time',
+        'time_to_open'
+    )
