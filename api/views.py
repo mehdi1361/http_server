@@ -64,7 +64,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
-
     @list_route(methods=['POST'])
     def select_hero(self, request):
         if request.data.get('hero') is None:
