@@ -44,6 +44,7 @@ class Unit(BaseUnit, Base):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
+    starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
     history = HistoricalRecords()
 
     @classmethod
@@ -608,7 +609,7 @@ class Device(Base):
 def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
-            if unit.unlock:
+            if unit.starting_unit:
                 UserCard.objects.create(user=instance, character=unit, quantity=1)
 
             else:

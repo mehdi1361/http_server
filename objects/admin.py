@@ -39,7 +39,7 @@ class ItemInline(admin.StackedInline):
     model = Item
     fields = (
         'name',
-        'damage' ,
+        'damage',
         'shield',
         'health',
         'critical_ratio',
@@ -100,7 +100,7 @@ class BenefitBoxAdmin(SimpleHistoryAdmin):
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
-    list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start', 'unlock')
+    list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'starting_unit', 'unlock')
     list_editable = ('unlock', )
     # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )
