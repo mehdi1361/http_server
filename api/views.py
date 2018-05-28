@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
+from message.models import Inbox
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
-    UnitSerializer, HeroSerializer, AppConfigSerializer
+    UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
 from rest_framework.decorators import list_route
@@ -57,12 +58,20 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
-        player_id = str(uuid.uuid1().int >> 32)
-        user = User.objects.create_user(username=player_id, password=player_id)
-        chest = ChestGenerate(user)
-        chest.generate_tutorial_chest()
+        device_id = request.data['deviceUniqueID']
+        device_name = request.data['deviceName']
+        try:
+            device = Device.objects.get(device_id=device_id)
+            return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_201_CREATED)
 
-        return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+        except Exception:
+            player_id = str(uuid.uuid1().int >> 32)
+            user = User.objects.create_user(username=player_id, password=player_id)
+            chest = ChestGenerate(user)
+            profile = UserCurrency.objects.get(user=user)
+            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+            chest.generate_tutorial_chest()
+            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
@@ -535,3 +544,16 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 class AppConfigViewSet(viewsets.ModelViewSet):
     queryset = AppConfig.objects.all()
     serializer_class = AppConfigSerializer
+
+
+class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+    queryset = Inbox.objects.all()
+    serializer_class = InboxSerializer
+
+    @list_route(methods=['POST'])
+    def read(self, request):
+        message = get_object_or_404(Inbox, user=request, id=request.data.get('id'))
+        message.message_type = 'read'
+        message.save()
+
+        return Response({"id":200, "message": "change type to read"}, status=status.HTTP_200_OK)
