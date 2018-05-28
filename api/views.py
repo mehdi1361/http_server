@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
+from message.models import Inbox
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
-    UnitSerializer, HeroSerializer, AppConfigSerializer
+    UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
 from rest_framework.decorators import list_route
@@ -535,3 +536,16 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 class AppConfigViewSet(viewsets.ModelViewSet):
     queryset = AppConfig.objects.all()
     serializer_class = AppConfigSerializer
+
+
+class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+    queryset = Inbox.objects.all()
+    serializer_class = InboxSerializer
+
+    @list_route(methods=['POST'])
+    def read(self, request):
+        message = get_object_or_404(Inbox, user=request, id=request.data.get('id'))
+        message.message_type = 'read'
+        message.save()
+
+        return Response({"id":200, "message": "change type to read"}, status=status.HTTP_200_OK)

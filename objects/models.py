@@ -45,6 +45,7 @@ class Unit(BaseUnit, Base):
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
+    unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     history = HistoricalRecords()
 
     @classmethod
