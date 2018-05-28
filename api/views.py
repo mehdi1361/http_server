@@ -546,10 +546,14 @@ class AppConfigViewSet(viewsets.ModelViewSet):
     serializer_class = AppConfigSerializer
 
 
-class UserInbox(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
+class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
     queryset = Inbox.objects.all()
     serializer_class = InboxSerializer
 
     @list_route(methods=['POST'])
-    def level_up(self, request):
-        pass
+    def read(self, request):
+        message = get_object_or_404(Inbox, user=request, id=request.data.get('id'))
+        message.message_type = 'read'
+        message.save()
+
+        return Response({"id":200, "message": "change type to read"}, status=status.HTTP_200_OK)
