@@ -263,20 +263,20 @@ def unit_normalize_data(unit, data):
         shield = int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
 
         data['next_upgrade_stats'] = {
-            'card_cost': settings.UNIT_UPDATE[unit.level + 1]['coins'],
+            'card_cost': settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['coins'],
             'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
-            'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
-            'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
-            'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level + 1]['increase'])),
+            'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'])),
+            'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'])),
+            'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'])),
             'critical_chance': round(
-                data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'],
+                data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'],
                 2),
             'critical_ratio': round(
-                data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2),
+                data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2),
             'miss_chance': round(
-                data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2),
+                data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2),
             'dodge_chance': round(
-                data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level + 1]['increase'], 2)
+                data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2)
         }
 
         data['health'] = health

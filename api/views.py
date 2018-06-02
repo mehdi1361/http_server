@@ -165,11 +165,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def set_player_name(self, request):
+        name = request.data.get('name')
         try:
-            name = request.data.get('name')
+            user_profile = UserCurrency.objects.get(name=name)
             name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))[:18]
 
-        except:
+        except Exception:
+
             name = request.data.get('name')
 
         finally:
