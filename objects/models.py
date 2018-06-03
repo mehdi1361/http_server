@@ -614,6 +614,7 @@ class Bot(Base):
     sum_levels = models.IntegerField(_('sum levels'))
     min_levels = models.IntegerField(_('min levels'))
     max_levels = models.IntegerField(_('max levels'))
+    bot_ai = models.FloatField(_('bot ai'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('bot')
@@ -621,7 +622,7 @@ class Bot(Base):
         db_table = 'bots'
 
     def __str__(self):
-        return '{}-{}'.format(self.device_id, self.device_id)
+        return '{}'.format(self.bot_name)
 
 
 def create_user_dependency(sender, instance, created, **kwargs):

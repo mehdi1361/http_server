@@ -254,12 +254,14 @@ class BotAdmin(admin.ModelAdmin):
         'max_trophy',
         'sum_levels',
         'min_levels',
-        'max_levels'
+        'max_levels',
+        'bot_ai'
     )
     list_editable = (
         'min_trophy',
         'max_trophy',
         'sum_levels',
         'min_levels',
-        'max_levels'
+        'max_levels',
+        'bot_ai'
     )
