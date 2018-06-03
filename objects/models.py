@@ -606,6 +606,24 @@ class Device(Base):
         return '{}-{}'.format(self.device_id, self.device_id)
 
 
+@python_2_unicode_compatible
+class Bot(Base):
+    bot_name = models.CharField(_('bot name'), max_length=100)
+    min_trophy = models.IntegerField(_('min trophy'))
+    max_trophy = models.IntegerField(_('max trophy'))
+    sum_levels = models.IntegerField(_('sum levels'))
+    min_levels = models.IntegerField(_('min levels'))
+    max_levels = models.IntegerField(_('max levels'))
+
+    class Meta:
+        verbose_name = _('bot')
+        verbose_name_plural = _('bots')
+        db_table = 'bots'
+
+    def __str__(self):
+        return '{}-{}'.format(self.device_id, self.device_id)
+
+
 def create_user_dependency(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():

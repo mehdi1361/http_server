@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
-    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig
+    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
@@ -243,4 +243,23 @@ class ChestAdmin(admin.ModelAdmin):
         'unit_card',
         'opening_time',
         'time_to_open'
+    )
+
+
+@admin.register(Bot)
+class BotAdmin(admin.ModelAdmin):
+    list_display = (
+        'bot_name',
+        'min_trophy',
+        'max_trophy',
+        'sum_levels',
+        'min_levels',
+        'max_levels'
+    )
+    list_editable = (
+        'min_trophy',
+        'max_trophy',
+        'sum_levels',
+        'min_levels',
+        'max_levels'
     )
