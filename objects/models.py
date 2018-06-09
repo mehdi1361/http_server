@@ -615,6 +615,8 @@ class Bot(Base):
     min_levels = models.IntegerField(_('min levels'))
     max_levels = models.IntegerField(_('max levels'))
     bot_ai = models.FloatField(_('bot ai'), null=True, blank=True)
+    min_level_hero = models.IntegerField(_('min level hero'), null=True, blank=True)
+    max_level_hero = models.IntegerField(_('max level hero'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('bot')
