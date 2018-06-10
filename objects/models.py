@@ -608,12 +608,12 @@ class Device(Base):
 
 @python_2_unicode_compatible
 class Bot(Base):
-    bot_name = models.CharField(_('bot name'), max_length=100)
-    min_trophy = models.IntegerField(_('min trophy'))
-    max_trophy = models.IntegerField(_('max trophy'))
-    sum_levels = models.IntegerField(_('sum levels'))
-    min_levels = models.IntegerField(_('min levels'))
-    max_levels = models.IntegerField(_('max levels'))
+    bot_name = models.CharField(_('bot name'), max_length=100, null=True, blank=True)
+    min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
+    max_trophy = models.IntegerField(_('max trophy'), null=True, blank=True)
+    sum_levels = models.IntegerField(_('sum levels'), null=True, blank=True)
+    min_levels = models.IntegerField(_('min levels'), null=True, blank=True)
+    max_levels = models.IntegerField(_('max levels'), null=True, blank=True)
     bot_ai = models.FloatField(_('bot ai'), null=True, blank=True)
     min_level_hero = models.IntegerField(_('min level hero'), null=True, blank=True)
     max_level_hero = models.IntegerField(_('max level hero'), null=True, blank=True)
