@@ -554,8 +554,8 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def read(self, request):
-        message = get_object_or_404(Inbox, user=request.user, news_id=request.data.get('id'))
+        message = get_object_or_404(Inbox, user=request, id=request.data.get('id'))
         message.message_type = 'read'
         message.save()
 
-        return Response({"id": 200, "message": "change type to read"}, status=status.HTTP_200_OK)
+        return Response({"id":200, "message": "change type to read"}, status=status.HTTP_200_OK)

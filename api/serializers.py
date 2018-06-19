@@ -58,6 +58,16 @@ class ItemSerializer(serializers.ModelSerializer):
         )
 
 
+class InboxSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = (
+            'news',
+            'message_type',
+            'user'
+        )
+
+
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCard

@@ -15,5 +15,8 @@ class BattleAdmin(admin.ModelAdmin):
                     'created_date', 'updated_date']
     inlines = [TransactionInline, ]
 
+<<<<<<< HEAD
     list_filter = ['created_date', ]
 
+=======
+>>>>>>> 9c918644d14535bc8ac1b7e461cd7eb4fef0eb95
