@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from random import randint
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield.db.fields import MultiSelectField
@@ -7,7 +10,7 @@ from multiselectfield.db.fields import MultiSelectField
 from base.models import Base, BaseUnit, Spell, SpellEffect
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
-from django.db.models import signals
+from django.db.models import signals, Count
 from .validators import validate_percent, validate_sequence
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField, ArrayField
@@ -15,6 +18,9 @@ from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
 # from multiselectfield import MultiSelectField
+
+import uuid
+import random
 
 
 @python_2_unicode_compatible
@@ -626,6 +632,128 @@ class Bot(Base):
 
     def __str__(self):
         return '{}'.format(self.bot_name)
+
+
+@python_2_unicode_compatible
+class League(Base):
+    LEAGUE_TYPE = (
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+        ('E', 'E'),
+        ('F', 'F'),
+    )
+    league_name = models.CharField(_('league name'), max_length=250)
+    capacity = models.PositiveIntegerField(_('capacity'), default=50)
+    step_number = models.IntegerField(_('step number'), default=0, unique=True, db_index=True)
+    league_type = models.CharField(_('league type'), max_length=10, choices=LEAGUE_TYPE, default='A')
+    min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
+    playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True)
+    playoff_count = models.IntegerField(_('playoff count'), null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('league')
+        verbose_name_plural = _('leagues')
+        db_table = 'leagues'
+
+    def __str__(self):
+        return '{}'.format(self.league_name)
+
+
+class CreatedLeague(Base):
+    base_league = models.ForeignKey(League, verbose_name=_('league'), related_name='created_leagues')
+    inc_count = models.PositiveIntegerField(_('inc count'), default=0)
+    dec_count = models.PositiveIntegerField(_('dec count'), default=0)
+
+    class Meta:
+        verbose_name = _('created_league')
+        verbose_name_plural = _('created_leagues')
+        db_table = 'created_leagues'
+
+    def __str__(self):
+        return '{}'.format(self.id)
+
+    # @property
+    # def ready_inc(self):
+    #     if self.player.trophy > self.base_league.min_trophy and \
+    #             abs(self.player.trophy - self.league.max_trophy) in \
+    #             range(0, self.league.playoff_range):
+    #         return True
+    #
+    #     return False
+    #
+    # @property
+    # def ready_dec(self):
+    #     if self.player.trophy > self.league.min_trophy and \
+    #             abs(self.player.trophy - self.league.min_trophy) in \
+    #             range(0, self.league.playoff_range):
+    #         return True
+    #
+    #     return False
+    #
+    # def reset_inc_count(self):
+    #     self.inc_count = 0
+    #     self.save()
+    #
+    # def reset_dec_count(self):
+    #     self.dec_count = 0
+    #     self.save()
+
+
+class RandomManager(models.Manager):
+    def get_query_set(self):
+        return super(RandomManager, self).get_query_set().order_by('?')
+
+
+class LeagueUser(Base):
+    player = models.ForeignKey(UserCurrency, verbose_name=_('player'), related_name='leagues')
+    league = models.ForeignKey(CreatedLeague, verbose_name=_('created_leagues'), related_name='players')
+    score = models.PositiveIntegerField(_('score'), default=50)
+    close_league = models.BooleanField(_('close'), default=False)
+
+    objects = models.Manager()
+    randoms = RandomManager()
+
+    class Meta:
+        verbose_name = _('league_user')
+        verbose_name_plural = _('league_user')
+        db_table = 'league_user'
+        unique_together = ('player', 'league')
+
+    def __str__(self):
+        return '{}'.format(self.id)
+
+    @classmethod
+    def create_or_join_league(cls, player, selected_league):
+        try:
+            if cls.objects.filter(player=player, close_league=False).count() == 0:
+
+                created_leagues = CreatedLeague.objects.values('id').annotate(user_count=Count('players')).filter(
+                    user_count__lte=selected_league.capacity, base_league=selected_league)
+
+                if len(created_leagues) > 0:
+                    random_league = random.randint(0, len(created_leagues)-1)
+                    find_league = CreatedLeague.objects.get(pk=created_leagues[random_league]['id'])
+
+                    LeagueUser.objects.create(
+                        player=player,
+                        league=find_league
+                    )
+
+                else:
+                    created_league = CreatedLeague.objects.create(base_league=selected_league)
+                    LeagueUser.objects.create(
+                        player=player,
+                        league=created_league
+                    )
+
+                return True
+
+            return False
+
+        except Exception:
+            return False
 
 
 def create_user_dependency(sender, instance, created, **kwargs):

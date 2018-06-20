@@ -10,7 +10,7 @@ from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -60,18 +60,26 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         device_id = request.data['deviceUniqueID']
         device_name = request.data['deviceName']
+        return_id = 200
         try:
             device = Device.objects.get(device_id=device_id)
-            return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_201_CREATED)
+            player_id = device.user.user.username
 
         except Exception:
+
             player_id = str(uuid.uuid1().int >> 32)
             user = User.objects.create_user(username=player_id, password=player_id)
             chest = ChestGenerate(user)
-            profile = UserCurrency.objects.get(user=user)
+            profile = UserCurrency.objects.get(user_id=user.id)
             Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
             chest.generate_tutorial_chest()
-            return Response({'id': 201, 'player_id': player_id}, status=status.HTTP_201_CREATED)
+            return_id = 201
+
+        finally:
+            return Response(
+                {'id': 200, 'player_id': player_id},
+                status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
+            )
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
@@ -212,8 +220,9 @@ class UserViewSet(viewsets.ModelViewSet):
     def leader_board(self, request):
         lst_board = []
         lst_q = list(
-            UserCurrency.objects.filter(user__is_staff=False, ban_user=False).exclude(name=None).order_by('-trophy')[
-            :200])
+            UserCurrency.objects.filter(user__is_staff=False, ban_user=False)
+                .exclude(name=None).order_by('-trophy')[:200])
+
         for i in range(len(lst_q)):
             lst_board.append({
                 'rank': i + 1,
@@ -223,6 +232,19 @@ class UserViewSet(viewsets.ModelViewSet):
             })
 
         return Response(lst_board)
+
+    @list_route(methods=['POST'])
+    def first_join_league(self, request):
+        player = UserCurrency.objects.get(user=request.user)
+        first_league = League.objects.get(step_number=0)
+
+        if first_league.min_trophy > player.trophy:
+            return Response({'id': 400, 'message': 'not enough trophy'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if LeagueUser.create_or_join_league(player=player, selected_league=first_league):
+            return Response({'id': 200, 'message': 'player joined to league'}, status=status.HTTP_200_OK)
+
+        return Response({'id': 400, 'message': 'player league already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,

@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
-    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot
+    UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
+    League, LeagueUser, CreatedLeague
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
@@ -33,6 +34,10 @@ class PurchaseLogAdmin(admin.TabularInline):
 
 class CurrencyLogAdmin(admin.TabularInline):
     model = CurrencyLog
+
+
+class LeagueUserAdmin(admin.TabularInline):
+    model = LeagueUser
 
 
 class ItemInline(admin.StackedInline):
@@ -268,4 +273,49 @@ class BotAdmin(admin.ModelAdmin):
         'bot_ai',
         'min_level_hero',
         'max_level_hero'
+    )
+
+
+@admin.register(League)
+class LeagueAdmin(admin.ModelAdmin):
+    list_display = (
+        'league_name',
+        'capacity',
+        'step_number',
+        'league_type',
+        'min_trophy',
+        'playoff_range',
+        'playoff_count'
+    )
+    list_editable = (
+        'capacity',
+        'step_number',
+        'league_type',
+        'min_trophy',
+        'playoff_range',
+        'playoff_count'
+    )
+    ordering = ('step_number', )
+
+
+@admin.register(CreatedLeague)
+class CreatedLeagueAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'base_league',
+        'inc_count',
+        'dec_count',
+        'created_date',
+        'updated_date'
+    )
+    inlines = [LeagueUserAdmin, ]
+
+
+@admin.register(LeagueUser)
+class LeagueUserAdmin(admin.ModelAdmin):
+    list_display = (
+        'player',
+        'league',
+        'score',
+        'close_league'
     )

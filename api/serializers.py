@@ -165,6 +165,7 @@ class UserSerializer(serializers.ModelSerializer):
     general_units = serializers.SerializerMethodField()
     chest = serializers.SerializerMethodField()
     newsletter = serializers.SerializerMethodField()
+    league = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -267,6 +268,9 @@ class UserSerializer(serializers.ModelSerializer):
             lst_news.append(data)
 
         return lst_news
+
+    def get_league(self, requests):
+        pass
 
 
 class BenefitSerializer(serializers.ModelSerializer):
