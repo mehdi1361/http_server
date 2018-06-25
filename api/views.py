@@ -8,9 +8,10 @@ from rest_framework.permissions import AllowAny
 from message.models import Inbox
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
-    UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer
+    UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
+    LeagueSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, LeaguePrize
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -23,6 +24,7 @@ from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
+from common.utils import league_status
 
 
 class DefaultsMixin(object):
@@ -77,7 +79,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         finally:
             return Response(
-                {'id': 200, 'player_id': player_id},
+                {'id': return_id, 'player_id': player_id},
                 status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
             )
 
@@ -216,22 +218,95 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 400, 'message': 'cant change name'}, status=status.HTTP_400_BAD_REQUEST)
 
+    # @list_route(methods=['POST'])
+    # def leader_board(self, request):
+    #     lst_board = []
+    #     lst_q = list(
+    #         UserCurrency.objects.filter(user__is_staff=False, ban_user=False)
+    #             .exclude(name=None).order_by('-trophy')[:200])
+    #
+    #     for i in range(len(lst_q)):
+    #         lst_board.append({
+    #             'rank': i + 1,
+    #             'player_id': lst_q[i].user.username,
+    #             'player_name': lst_q[i].name,
+    #             'trophy': lst_q[i].trophy
+    #         })
+    #
+    #     return Response(lst_board)
+
     @list_route(methods=['POST'])
     def leader_board(self, request):
-        lst_board = []
-        lst_q = list(
-            UserCurrency.objects.filter(user__is_staff=False, ban_user=False)
-                .exclude(name=None).order_by('-trophy')[:200])
+        final_result = dict()
+        previous_rank = None
+        current_rank = None
+        try:
+            league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
+            score_board = []
+            idx = 1
 
-        for i in range(len(lst_q)):
-            lst_board.append({
-                'rank': i + 1,
-                'player_id': lst_q[i].user.username,
-                'player_name': lst_q[i].name,
-                'trophy': lst_q[i].trophy
-            })
+            for user in LeagueUser.objects.filter(league=league.league).order_by('-score'):
+                serializer = LeagueUserSerializer(user)
 
-        return Response(lst_board)
+                result = serializer.data
+                if user.player == request.user.user_currency:
+                    previous_rank = result['rank'] if result['rank'] else idx
+                    current_rank = idx
+                    user.rank = idx
+                    user.save()
+
+                result['rank'] = idx
+                result['player'] = str(user.player)
+                idx += 1
+                score_board.append(result)
+
+            prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
+
+            current_league = LeagueSerializer(league.league.base_league)
+            next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
+            next_league_serializer = LeagueSerializer(next_league)
+
+            final_result['score_board'] = score_board
+            final_result['promoting_prize'] = prize_serializer.data
+            final_result['previous_rank'] = previous_rank
+            final_result['current_rank'] = current_rank
+            final_result['current_league'] = current_league.data
+            final_result['next_league'] = next_league_serializer.data
+            final_result['league_change_status'] = league_status(request.user.user_currency, league)
+            final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
+            final_result['num_of_demoting_user'] = league.league.base_league.demoting_count
+
+            if league.score >= league.league.base_league.play_off_unlock_score:
+                if league.match_count == 0:
+                    league.play_off_status = 'not_started'
+
+                else:
+                    league.play_off_status = 'start'
+
+                league.save()
+
+            else:
+                league.play_off_status = 'disable'
+                league.save()
+
+            if league.play_off_count <= 1:
+                play_off_count = league.league.base_league.play_off_start_gem
+
+            elif league.play_off_count == 2:
+                play_off_count = league.league.base_league.play_off_start_gem_1
+
+            else:
+                play_off_count = league.league.base_league.play_off_start_gem_2
+
+            final_result['play_off_info'] = {
+                "status": league.play_off_status,
+                "start_gem_price": play_off_count,
+                "unlock_need_score": league.league.base_league.play_off_unlock_score
+            }
+            return Response(final_result)
+
+        except LeagueUser.DoesNotExist as e:
+            return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def first_join_league(self, request):

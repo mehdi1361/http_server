@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
-    League, LeagueUser, CreatedLeague
+    League, LeagueUser, CreatedLeague, LeaguePrize
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
@@ -39,6 +39,8 @@ class CurrencyLogAdmin(admin.TabularInline):
 class LeagueUserAdmin(admin.TabularInline):
     model = LeagueUser
 
+class LeaguePrizeAdmin(admin.StackedInline):
+    model = LeaguePrize
 
 class ItemInline(admin.StackedInline):
     model = Item
@@ -285,7 +287,13 @@ class LeagueAdmin(admin.ModelAdmin):
         'league_type',
         'min_trophy',
         'playoff_range',
-        'playoff_count'
+        'playoff_count',
+        'promoting_count',
+        'demoting_count',
+        'play_off_unlock_score',
+        'play_off_start_gem',
+        'play_off_start_gem_1',
+        'play_off_start_gem_2'
     )
     list_editable = (
         'capacity',
@@ -293,9 +301,16 @@ class LeagueAdmin(admin.ModelAdmin):
         'league_type',
         'min_trophy',
         'playoff_range',
-        'playoff_count'
+        'playoff_count',
+        'promoting_count',
+        'demoting_count',
+        'play_off_unlock_score',
+        'play_off_start_gem',
+        'play_off_start_gem_1',
+        'play_off_start_gem_2'
     )
     ordering = ('step_number', )
+    inlines = (LeaguePrizeAdmin, )
 
 
 @admin.register(CreatedLeague)
@@ -317,5 +332,10 @@ class LeagueUserAdmin(admin.ModelAdmin):
         'player',
         'league',
         'score',
-        'close_league'
+        'close_league',
+        'rank',
+        'play_off_count',
+        'win_count',
+        'play_off_status',
+        'match_count'
     )

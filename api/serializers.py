@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig
+    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League
 from shopping.models import Shop
 from message.models import NewsLetter, Inbox
 from django.conf import settings
@@ -93,6 +93,40 @@ class UserCurrencySerializer(serializers.ModelSerializer):
         )
 
 
+class LeagueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = League
+        fields = (
+            'league_name',
+            'capacity',
+            'step_number',
+            'league_type',
+            'min_trophy',
+            'playoff_range',
+            'playoff_count'
+        )
+
+
+class LeaguePrizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LeaguePrize
+        fields = (
+            'gem',
+            'coin',
+            'level'
+        )
+
+
+class LeagueUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = LeagueUser
+        fields = (
+            'score',
+            'rank',
+        )
+
+
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unit
@@ -165,7 +199,6 @@ class UserSerializer(serializers.ModelSerializer):
     general_units = serializers.SerializerMethodField()
     chest = serializers.SerializerMethodField()
     newsletter = serializers.SerializerMethodField()
-    league = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -190,13 +223,23 @@ class UserSerializer(serializers.ModelSerializer):
     def get_chest(self, requests):
         user_deck = UserChest.deck.filter(user=requests)
         serializer = UserChestSerializer(user_deck, many=True)
+
         return serializer.data
 
     def get_info(self, requests):
         try:
             currency = UserCurrency.objects.get(user=requests)
             serializer = UserCurrencySerializer(currency)
-            return serializer.data
+
+            result = serializer.data
+
+            if LeagueUser.has_league(requests.user_currency):
+                result['info']['in_league'] = True
+
+            else:
+                result['in_league'] = False
+
+            return result
 
         except UserCurrency.DoesNotExist as e:
             return None
@@ -269,8 +312,6 @@ class UserSerializer(serializers.ModelSerializer):
 
         return lst_news
 
-    def get_league(self, requests):
-        pass
 
 
 class BenefitSerializer(serializers.ModelSerializer):

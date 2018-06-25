@@ -4,16 +4,22 @@
   "pk": 1,
   "fields": {
     "created_date": "2018-06-18T06:53:26.098Z",
-    "updated_date": "2018-06-18T06:53:26.098Z",
+    "updated_date": "2018-06-25T11:00:15.785Z",
     "params": null,
     "league_name": "bronz 1",
     "capacity": 50,
     "step_number": 0,
     "league_type": "A",
+    "league_step": null,
     "min_trophy": null,
-    "max_trophy": null,
     "playoff_range": null,
-    "playoff_count": null
+    "playoff_count": null,
+    "promoting_count": 3,
+    "demoting_count": 5,
+    "play_off_unlock_score": 65,
+    "play_off_start_gem": 20,
+    "play_off_start_gem_1": 30,
+    "play_off_start_gem_2": 30
   }
 },
 {
@@ -21,16 +27,22 @@
   "pk": 2,
   "fields": {
     "created_date": "2018-06-18T06:53:46.203Z",
-    "updated_date": "2018-06-18T06:53:46.203Z",
+    "updated_date": "2018-06-25T06:37:46.058Z",
     "params": null,
     "league_name": "bronz 2",
     "capacity": 50,
     "step_number": 1,
     "league_type": "A",
+    "league_step": null,
     "min_trophy": null,
-    "max_trophy": null,
     "playoff_range": null,
-    "playoff_count": null
+    "playoff_count": null,
+    "promoting_count": 3,
+    "demoting_count": 5,
+    "play_off_unlock_score": null,
+    "play_off_start_gem": null,
+    "play_off_start_gem_1": null,
+    "play_off_start_gem_2": null
   }
 },
 {
@@ -38,16 +50,22 @@
   "pk": 3,
   "fields": {
     "created_date": "2018-06-18T06:55:03.865Z",
-    "updated_date": "2018-06-18T06:55:03.865Z",
+    "updated_date": "2018-06-25T06:37:46.064Z",
     "params": null,
     "league_name": "bronz 3",
     "capacity": 50,
     "step_number": 2,
     "league_type": "A",
+    "league_step": null,
     "min_trophy": null,
-    "max_trophy": null,
     "playoff_range": null,
-    "playoff_count": null
+    "playoff_count": null,
+    "promoting_count": 3,
+    "demoting_count": 5,
+    "play_off_unlock_score": null,
+    "play_off_start_gem": null,
+    "play_off_start_gem_1": null,
+    "play_off_start_gem_2": null
   }
 },
 {
@@ -55,16 +73,22 @@
   "pk": 4,
   "fields": {
     "created_date": "2018-06-18T06:55:25.402Z",
-    "updated_date": "2018-06-18T06:55:25.402Z",
+    "updated_date": "2018-06-25T06:37:46.069Z",
     "params": null,
     "league_name": "silver 1",
     "capacity": 50,
     "step_number": 3,
     "league_type": "B",
+    "league_step": null,
     "min_trophy": null,
-    "max_trophy": null,
     "playoff_range": null,
-    "playoff_count": null
+    "playoff_count": null,
+    "promoting_count": 3,
+    "demoting_count": 5,
+    "play_off_unlock_score": null,
+    "play_off_start_gem": null,
+    "play_off_start_gem_1": null,
+    "play_off_start_gem_2": null
   }
 },
 {
@@ -72,16 +96,22 @@
   "pk": 5,
   "fields": {
     "created_date": "2018-06-18T06:56:10.205Z",
-    "updated_date": "2018-06-18T06:56:10.205Z",
+    "updated_date": "2018-06-25T06:37:46.073Z",
     "params": null,
     "league_name": "silver 2",
     "capacity": 50,
     "step_number": 4,
     "league_type": "B",
+    "league_step": null,
     "min_trophy": null,
-    "max_trophy": null,
     "playoff_range": null,
-    "playoff_count": null
+    "playoff_count": null,
+    "promoting_count": 3,
+    "demoting_count": 5,
+    "play_off_unlock_score": null,
+    "play_off_start_gem": null,
+    "play_off_start_gem_1": null,
+    "play_off_start_gem_2": null
   }
 }
 ]

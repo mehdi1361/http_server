@@ -51,7 +51,6 @@ class Unit(BaseUnit, Base):
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
-    unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     history = HistoricalRecords()
 
     @classmethod
@@ -157,7 +156,7 @@ class UserCurrency(Base):
         selected_user.save()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{}'.format(self.name if self.name is not None else self.user.username)
 
 
 @python_2_unicode_compatible
@@ -648,9 +647,16 @@ class League(Base):
     capacity = models.PositiveIntegerField(_('capacity'), default=50)
     step_number = models.IntegerField(_('step number'), default=0, unique=True, db_index=True)
     league_type = models.CharField(_('league type'), max_length=10, choices=LEAGUE_TYPE, default='A')
+    league_step = models.PositiveIntegerField(_('league step'), null=True, blank=True)
     min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
     playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True)
     playoff_count = models.IntegerField(_('playoff count'), null=True, blank=True)
+    promoting_count = models.IntegerField(_('promoting count'), null=True, blank=True)
+    demoting_count = models.IntegerField(_('demoting count'), null=True, blank=True)
+    play_off_unlock_score = models.PositiveIntegerField(_('play off unlock score'), null=True, blank=True)
+    play_off_start_gem = models.PositiveIntegerField(_('play off start gem '), null=True, blank=True)
+    play_off_start_gem_1 = models.PositiveIntegerField(_('play off start gem 1'), null=True, blank=True)
+    play_off_start_gem_2 = models.PositiveIntegerField(_('play off start gem 2'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('league')
@@ -659,6 +665,23 @@ class League(Base):
 
     def __str__(self):
         return '{}'.format(self.league_name)
+
+
+@python_2_unicode_compatible
+class LeaguePrize(Base):
+    gem = models.PositiveIntegerField(_('gem'), default=0)
+    coin = models.PositiveIntegerField(_('coin'), default=0)
+    level = models.PositiveIntegerField(_('level'), default=0)
+    league = models.ForeignKey(League, verbose_name=_('league'), related_name='prizes')
+
+    class Meta:
+        verbose_name = _('prize')
+        verbose_name_plural = _('prizes')
+        db_table = 'prizes'
+        unique_together = ('level', 'league')
+
+    def __str__(self):
+        return '{}'.format(self.id)
 
 
 class CreatedLeague(Base):
@@ -674,32 +697,6 @@ class CreatedLeague(Base):
     def __str__(self):
         return '{}'.format(self.id)
 
-    # @property
-    # def ready_inc(self):
-    #     if self.player.trophy > self.base_league.min_trophy and \
-    #             abs(self.player.trophy - self.league.max_trophy) in \
-    #             range(0, self.league.playoff_range):
-    #         return True
-    #
-    #     return False
-    #
-    # @property
-    # def ready_dec(self):
-    #     if self.player.trophy > self.league.min_trophy and \
-    #             abs(self.player.trophy - self.league.min_trophy) in \
-    #             range(0, self.league.playoff_range):
-    #         return True
-    #
-    #     return False
-    #
-    # def reset_inc_count(self):
-    #     self.inc_count = 0
-    #     self.save()
-    #
-    # def reset_dec_count(self):
-    #     self.dec_count = 0
-    #     self.save()
-
 
 class RandomManager(models.Manager):
     def get_query_set(self):
@@ -707,10 +704,21 @@ class RandomManager(models.Manager):
 
 
 class LeagueUser(Base):
+    PLAY_OFF_STATUS = (
+        ('disable', 'disable'),
+        ('not_started', 'not_started'),
+        ('start', 'start'),
+    )
+
     player = models.ForeignKey(UserCurrency, verbose_name=_('player'), related_name='leagues')
     league = models.ForeignKey(CreatedLeague, verbose_name=_('created_leagues'), related_name='players')
     score = models.PositiveIntegerField(_('score'), default=50)
+    rank = models.PositiveIntegerField(_('rank'), blank=True, null=True)
     close_league = models.BooleanField(_('close'), default=False)
+    play_off_count = models.PositiveIntegerField(_('play off count'), default=0)
+    win_count = models.PositiveIntegerField(_('win count'), default=0)
+    play_off_status = models.CharField(_('play off status'), max_length=50, choices=PLAY_OFF_STATUS, default='disable')
+    match_count = models.PositiveIntegerField(_('match count'), default=0)
 
     objects = models.Manager()
     randoms = RandomManager()
@@ -723,6 +731,13 @@ class LeagueUser(Base):
 
     def __str__(self):
         return '{}'.format(self.id)
+
+    @classmethod
+    def has_league(cls, player):
+        if cls.objects.filter(player=player, close_league=False):
+            return True
+
+        return False
 
     @classmethod
     def create_or_join_league(cls, player, selected_league):
