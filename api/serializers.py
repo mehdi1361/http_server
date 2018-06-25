@@ -234,7 +234,7 @@ class UserSerializer(serializers.ModelSerializer):
             result = serializer.data
 
             if LeagueUser.has_league(requests.user_currency):
-                result['info']['in_league'] = True
+                result['in_league'] = True
 
             else:
                 result['in_league'] = False
