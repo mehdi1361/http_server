@@ -636,17 +636,18 @@ class Bot(Base):
 @python_2_unicode_compatible
 class League(Base):
     LEAGUE_TYPE = (
-        ('A', 'A'),
-        ('B', 'B'),
-        ('C', 'C'),
-        ('D', 'D'),
-        ('E', 'E'),
-        ('F', 'F'),
+        ('cooper', 'cooper'),
+        ('bronze', 'bronze'),
+        ('silver', 'silver'),
+        ('gold', 'gold'),
+        ('earth', 'earth'),
+        ('platinum', 'platinum'),
+        ('diamond', 'diamond'),
     )
     league_name = models.CharField(_('league name'), max_length=250)
     capacity = models.PositiveIntegerField(_('capacity'), default=50)
     step_number = models.IntegerField(_('step number'), default=0, unique=True, db_index=True)
-    league_type = models.CharField(_('league type'), max_length=10, choices=LEAGUE_TYPE, default='A')
+    league_type = models.CharField(_('league type'), max_length=10, choices=LEAGUE_TYPE, default='cooper')
     league_step = models.PositiveIntegerField(_('league step'), null=True, blank=True)
     min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
     playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True)

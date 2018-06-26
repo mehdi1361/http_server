@@ -263,8 +263,15 @@ class UserViewSet(viewsets.ModelViewSet):
             prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
 
             current_league = LeagueSerializer(league.league.base_league)
-            next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
-            next_league_serializer = LeagueSerializer(next_league)
+
+            max_step = League.objects.all().values('step_number').order_by('-step_number')[0]
+
+            if max_step['step_number'] > league.league.base_league.step_number + 1:
+                next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
+                next_league_serializer = LeagueSerializer(next_league)
+
+            else:
+                next_league_serializer = LeagueSerializer(current_league)
 
             final_result['score_board'] = score_board
             final_result['promoting_prize'] = prize_serializer.data
@@ -276,18 +283,15 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
             final_result['num_of_demoting_user'] = league.league.base_league.demoting_count
 
-            if league.score >= league.league.base_league.play_off_unlock_score:
-                if league.match_count == 0:
-                    league.play_off_status = 'not_started'
+            if league.score >= league.league.base_league.play_off_unlock_score \
+                    and league.play_off_status != 'start':
 
-                else:
-                    league.play_off_status = 'start'
-
-                league.save()
+                league.play_off_status = 'not_started'
 
             else:
                 league.play_off_status = 'disable'
-                league.save()
+
+            league.save()
 
             if league.play_off_count <= 1:
                 play_off_count = league.league.base_league.play_off_start_gem
@@ -320,6 +324,39 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'id': 200, 'message': 'player joined to league'}, status=status.HTTP_200_OK)
 
         return Response({'id': 400, 'message': 'player league already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=['POST'])
+    def active_playoff(self, request):
+        try:
+            league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
+
+            if league.score >= league.league.base_league.play_off_unlock_score \
+                    and league.play_off_status != 'start':
+                # pass
+                if league.league.base_league.playoff_count <= 1 and \
+                        request.user.user_currency.gem >= league.league.base_league.play_off_start_gem:
+
+                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem
+                    request.user.user_currency.save()
+
+                elif league.league.base_league.playoff_count == 2 and \
+                        request.user.user_currency.gem >= league.league.base_league.play_off_start_gem_1:
+
+                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_1
+                    request.user.user_currency.save()
+
+                else:
+                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_2
+                    request.user.user_currency.save()
+
+                league.play_off_count += 1
+                league.save()
+
+            else:
+                return Response({"id": 400, "message": "not enough score"}, status=status.HTTP_400_BAD_REQUEST)
+
+        except LeagueUser.DoesNotExist as e:
+            return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
@@ -655,4 +692,4 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         message.message_type = 'read'
         message.save()
 
-        return Response({"id":200, "message": "change type to read"}, status=status.HTTP_200_OK)
+        return Response({"id": 200, "message": "change type to read"}, status=status.HTTP_200_OK)
