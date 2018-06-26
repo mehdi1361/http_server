@@ -335,7 +335,7 @@ class LeagueUserAdmin(admin.ModelAdmin):
         'close_league',
         'rank',
         'play_off_count',
-        'win_count',
+        'lose_count',
         'play_off_status',
         'match_count'
     )

@@ -716,7 +716,7 @@ class LeagueUser(Base):
     rank = models.PositiveIntegerField(_('rank'), blank=True, null=True)
     close_league = models.BooleanField(_('close'), default=False)
     play_off_count = models.PositiveIntegerField(_('play off count'), default=0)
-    win_count = models.PositiveIntegerField(_('win count'), default=0)
+    lose_count = models.PositiveIntegerField(_('lose count'), default=0)
     play_off_status = models.CharField(_('play off status'), max_length=50, choices=PLAY_OFF_STATUS, default='disable')
     match_count = models.PositiveIntegerField(_('match count'), default=0)
 

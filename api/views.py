@@ -218,23 +218,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response({'id': 400, 'message': 'cant change name'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # @list_route(methods=['POST'])
-    # def leader_board(self, request):
-    #     lst_board = []
-    #     lst_q = list(
-    #         UserCurrency.objects.filter(user__is_staff=False, ban_user=False)
-    #             .exclude(name=None).order_by('-trophy')[:200])
-    #
-    #     for i in range(len(lst_q)):
-    #         lst_board.append({
-    #             'rank': i + 1,
-    #             'player_id': lst_q[i].user.username,
-    #             'player_name': lst_q[i].name,
-    #             'trophy': lst_q[i].trophy
-    #         })
-    #
-    #     return Response(lst_board)
-
     @list_route(methods=['POST'])
     def leader_board(self, request):
         final_result = dict()
@@ -328,35 +311,62 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def active_playoff(self, request):
         try:
-            league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
+            league = LeagueUser.objects.get(
+                player=request.user.user_currency,
+                close_league=False, play_off_status="disable"
+            )
 
             if league.score >= league.league.base_league.play_off_unlock_score \
                     and league.play_off_status != 'start':
-                # pass
-                if league.league.base_league.playoff_count <= 1 and \
-                        request.user.user_currency.gem >= league.league.base_league.play_off_start_gem:
 
-                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem
-                    request.user.user_currency.save()
+                if league.league.base_league.playoff_count <= 1:
+                    if request.user.user_currency.gem >= league.league.base_league.play_off_start_gem:
+                        request.user.user_currency.gem -= league.league.base_league.play_off_start_gem
+                        request.user.user_currency.save()
 
-                elif league.league.base_league.playoff_count == 2 and \
-                        request.user.user_currency.gem >= league.league.base_league.play_off_start_gem_1:
+                    else:
+                        return Response({"id": 400, "message": "not enough gem"}, status=status.HTTP_400_BAD_REQUEST)
 
-                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_1
-                    request.user.user_currency.save()
+                elif league.league.base_league.playoff_count == 2:
+                    if request.user.user_currency.gem >= league.league.base_league.play_off_start_gem_1:
+
+                        request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_1
+                        request.user.user_currency.save()
+
+                    else:
+                        return Response({"id": 400, "message": "not enough gem"}, status=status.HTTP_400_BAD_REQUEST)
 
                 else:
-                    request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_2
-                    request.user.user_currency.save()
+                    if request.user.user_currency.gem >= league.league.base_league.play_off_start_gem_2:
+                        request.user.user_currency.gem -= league.league.base_league.play_off_start_gem_2
+                        request.user.user_currency.save()
+
+                    else:
+                        return Response({"id": 400, "message": "not enough gem"}, status=status.HTTP_400_BAD_REQUEST)
 
                 league.play_off_count += 1
                 league.save()
+
+                return Response(
+                    {
+                        "id": 200,
+                        "message": "playoff activate",
+                        "gem_count": request.user.user_currency.gem
+                    },
+                    status=status.HTTP_200_OK
+                )
 
             else:
                 return Response({"id": 400, "message": "not enough score"}, status=status.HTTP_400_BAD_REQUEST)
 
         except LeagueUser.DoesNotExist as e:
-            return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {
+                    "id": 400,
+                    "message": "user not join to league or playoff activate"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
