@@ -640,7 +640,6 @@ class League(Base):
         ('bronze', 'bronze'),
         ('silver', 'silver'),
         ('gold', 'gold'),
-        ('earth', 'earth'),
         ('platinum', 'platinum'),
         ('diamond', 'diamond'),
     )
