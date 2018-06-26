@@ -99,7 +99,7 @@ class LeagueSerializer(serializers.ModelSerializer):
         fields = (
             'league_name',
             'capacity',
-            'step_number',
+            'league_step',
             'league_type',
             'min_trophy',
             'playoff_range',
