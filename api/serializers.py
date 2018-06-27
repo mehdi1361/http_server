@@ -1,10 +1,9 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League
+    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League, Claim
 from shopping.models import Shop
 from message.models import NewsLetter, Inbox
-from django.conf import settings
 from common.utils import hero_normalize_data, unit_normalize_data, item_normalize_data
 
 
@@ -371,3 +370,12 @@ class AppConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppConfig
         fields = ('app_data', )
+
+
+class ClaimSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Claim
+        fields = (
+            'coin',
+            'gem',
+        )

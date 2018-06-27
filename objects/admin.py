@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
-    League, LeagueUser, CreatedLeague, LeaguePrize
+    League, LeagueUser, CreatedLeague, LeaguePrize, Claim
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
@@ -39,8 +39,10 @@ class CurrencyLogAdmin(admin.TabularInline):
 class LeagueUserAdmin(admin.TabularInline):
     model = LeagueUser
 
+
 class LeaguePrizeAdmin(admin.StackedInline):
     model = LeaguePrize
+
 
 class ItemInline(admin.StackedInline):
     model = Item
@@ -56,6 +58,10 @@ class ItemInline(admin.StackedInline):
         'hero',
         'default_item'
     )
+
+
+class ClaimInline(admin.StackedInline):
+    model = Claim
 
 
 class ChestInline(admin.StackedInline):
@@ -328,6 +334,18 @@ class CreatedLeagueAdmin(admin.ModelAdmin):
 
 @admin.register(LeagueUser)
 class LeagueUserAdmin(admin.ModelAdmin):
+    # readonly_fields = (
+    #     'player',
+    #     'league',
+    #     'score',
+    #     'close_league',
+    #     'rank',
+    #     'play_off_count',
+    #     'lose_count',
+    #     'play_off_status',
+    #     'match_count',
+    #     'league_change_status'
+    # )
     list_display = (
         'player',
         'league',
@@ -337,5 +355,8 @@ class LeagueUserAdmin(admin.ModelAdmin):
         'play_off_count',
         'lose_count',
         'play_off_status',
-        'match_count'
+        'match_count',
+        'league_change_status'
     )
+    inlines = (ClaimInline, )
+

@@ -709,6 +709,11 @@ class LeagueUser(Base):
         ('not_started', 'not_started'),
         ('start', 'start'),
     )
+    LEAGUE_STATUS = (
+        ('normal', 'normal'),
+        ('promoted', 'promoted'),
+        ('demoted', 'demoted'),
+    )
 
     player = models.ForeignKey(UserCurrency, verbose_name=_('player'), related_name='leagues')
     league = models.ForeignKey(CreatedLeague, verbose_name=_('created_leagues'), related_name='players')
@@ -719,6 +724,8 @@ class LeagueUser(Base):
     lose_count = models.PositiveIntegerField(_('lose count'), default=0)
     play_off_status = models.CharField(_('play off status'), max_length=50, choices=PLAY_OFF_STATUS, default='disable')
     match_count = models.PositiveIntegerField(_('match count'), default=0)
+    league_change_status = models.CharField(_('league change status'), max_length=50,
+                                            choices=LEAGUE_STATUS, default='normal')
 
     objects = models.Manager()
     randoms = RandomManager()
@@ -769,6 +776,21 @@ class LeagueUser(Base):
 
         except Exception:
             return False
+
+
+class Claim(Base):
+    coin = models.PositiveIntegerField(_('coin'), default=10)
+    gem = models.PositiveIntegerField(_('gem'), default=10)
+    is_used = models.BooleanField(_('used'), default=False)
+    league_player = models.ForeignKey(LeagueUser, verbose_name=_('league_user'), related_name="claims")
+
+    class Meta:
+        verbose_name = _('claim')
+        verbose_name_plural = _('claims')
+        db_table = 'claims'
+
+    def __str__(self):
+        return 'claim-{}'.format(self.league_player.league.base_league.league_name)
 
 
 def create_user_dependency(sender, instance, created, **kwargs):

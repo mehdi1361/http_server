@@ -9,9 +9,9 @@ from message.models import Inbox
 from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
-    LeagueSerializer
+    LeagueSerializer, ClaimSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, LeaguePrize
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -262,9 +262,18 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['current_rank'] = current_rank
             final_result['current_league'] = current_league.data
             final_result['next_league'] = next_league_serializer.data
-            final_result['league_change_status'] = league_status(request.user.user_currency, league)
             final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
             final_result['num_of_demoting_user'] = league.league.base_league.demoting_count
+
+            final_result['league_change_status'] = league.league_change_status
+
+            if league.league_change_status == 'promoted':
+                claim = Claim.objects.get(is_used=False)
+                claim_serializer = ClaimSerializer(claim)
+                final_result['league_promoting_prizes'] = claim_serializer.data
+
+            else:
+                final_result['league_promoting_prizes'] = []
 
             if league.score >= league.league.base_league.play_off_unlock_score \
                     and league.play_off_status != 'start':
@@ -367,6 +376,18 @@ class UserViewSet(viewsets.ModelViewSet):
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+    @list_route(methods=['POST'])
+    def claim(self, request):
+        try:
+            claim = Claim.objects.get(league_player__player=request.user.user_currency, is_used=False)
+            request.user.user_currency.gem += claim.gem
+            request.user.user_currency.coin += claim.coin
+            request.user.user_currency.save()
+            return Response({'id': 200, 'message': 'claim success'}, status=status.HTTP_200_OK)
+
+        except Claim.DoesNotExist as e:
+            return Response({'id': 404, 'message': 'claim not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
