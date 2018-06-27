@@ -381,13 +381,29 @@ class UserViewSet(viewsets.ModelViewSet):
     def claim(self, request):
         try:
             claim = Claim.objects.get(league_player__player=request.user.user_currency, is_used=False)
+            league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
             request.user.user_currency.gem += claim.gem
             request.user.user_currency.coin += claim.coin
+            claim.is_used = True
+            claim.save()
+            league.league_change_status = "normal"
+            league.save()
             request.user.user_currency.save()
-            return Response({'id': 200, 'message': 'claim success'}, status=status.HTTP_200_OK)
+            return Response(
+                {
+                    'id': 200,
+                    'message': 'claim success',
+                    'gem': request.user.user_currency.gem,
+                    'coin': request.user.user_currency.coin
+                },
+                status=status.HTTP_200_OK
+            )
 
         except Claim.DoesNotExist as e:
             return Response({'id': 404, 'message': 'claim not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        except LeagueUser.DoesNotExist as e:
+            return Response({'id': 404, 'message': 'league not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
