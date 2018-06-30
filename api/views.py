@@ -422,7 +422,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(
                 {
                     'id': 200,
-                    'message': 'claim success',
+                    'message': 'skip gem success',
                     'gem': request.user.user_currency.gem,
                     'coin': request.user.user_currency.coin
                 },
