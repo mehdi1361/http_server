@@ -24,7 +24,6 @@ from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
-from common.utils import league_status
 
 
 class DefaultsMixin(object):
@@ -239,7 +238,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     user.save()
 
                 result['rank'] = idx
-                result['player'] = str(user.player)
+                result['player'] = str(user.player).encode('utf-8')
                 idx += 1
                 score_board.append(result)
 
@@ -270,10 +269,10 @@ class UserViewSet(viewsets.ModelViewSet):
             if league.league_change_status == 'promoted':
                 claim = Claim.objects.get(is_used=False)
                 claim_serializer = ClaimSerializer(claim)
-                final_result['league_promoting_prizes'] = claim_serializer.data
+                final_result['league_change_prize'] = claim_serializer.data
 
             else:
-                final_result['league_promoting_prizes'] = []
+                final_result['league_change_prize'] = ""
 
             if league.score >= league.league.base_league.play_off_unlock_score \
                     and league.play_off_status != 'start':
@@ -404,6 +403,33 @@ class UserViewSet(viewsets.ModelViewSet):
 
         except LeagueUser.DoesNotExist as e:
             return Response({'id': 404, 'message': 'league not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    @list_route(methods=['POST'])
+    def skip_gem_cool_down(self, request):
+        card_id = request.data.get('card_id')
+
+        if card_id is None:
+            return Response(
+                {'id': 400, 'message': 'no selected card'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user_card = get_object_or_404(UserCard, user=request.user, character_id=card_id, cool_down__isnull=False)
+
+        if request.user.user_currency.gem >= user_card.skip_cooldown_gem:
+            user_card.cool_down = None
+            user_card.save()
+            request.user.user_currency.gem -= user_card.skip_cooldown_gem
+
+            return Response(
+                {
+                    'id': 200,
+                    'message': 'claim success',
+                    'gem': request.user.user_currency.gem,
+                    'coin': request.user.user_currency.coin
+                },
+                status=status.HTTP_200_OK
+            )
+
+        return Response({'id': 400, 'message': 'not enough gem'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
