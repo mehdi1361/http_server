@@ -238,7 +238,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     user.save()
 
                 result['rank'] = idx
-                result['player'] = str(user.player).encode('utf-8')
+                result['player'] = str(user.player).decode('utf-8')
                 idx += 1
                 score_board.append(result)
 
