@@ -272,7 +272,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 final_result['league_change_prize'] = claim_serializer.data
 
             else:
-                final_result['league_change_prize'] = ""
+                final_result['league_change_prize'] = None
 
             if league.score >= league.league.base_league.play_off_unlock_score \
                     and league.play_off_status != 'start':
