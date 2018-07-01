@@ -18,6 +18,7 @@ from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
 from pytz import timezone as tt
+import  pytz
 # from multiselectfield import MultiSelectField
 
 import uuid
@@ -251,7 +252,7 @@ class UserCard(Base):
     @property
     def cool_down_remain_time(self):
         # tehran = tt('Asia/Tehran')
-        current_time = datetime.now()
+        current_time = pytz.UTC.localize(datetime.now())
         if self.cool_down:
             if current_time > self.cool_down:
                 return 0
