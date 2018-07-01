@@ -17,7 +17,7 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
-from pytz import timezone
+from pytz import timezone as tt
 # from multiselectfield import MultiSelectField
 
 import uuid
@@ -239,7 +239,8 @@ class UserCard(Base):
 
     @property
     def is_cool_down(self):
-        cool_down_now_date = timezone.now()
+        tehran = tt('Asia/Tehran')
+        cool_down_now_date = datetime.now(tz=tehran)
 
         if cool_down_now_date <= (self.cool_down if self.cool_down else cool_down_now_date):
             return True
@@ -249,7 +250,7 @@ class UserCard(Base):
 
     @property
     def cool_down_remain_time(self):
-        tehran = timezone('Asia/Tehran')
+        tehran = tt('Asia/Tehran')
         current_time = datetime.now(tz=tehran)
         if self.cool_down:
             if current_time > self.cool_down:
