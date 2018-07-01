@@ -170,6 +170,7 @@ class HeroSerializer(serializers.ModelSerializer):
 
 class UserCardSerializer(serializers.ModelSerializer):
     class Meta:
+        model = UserCard
         fields = (
             'user',
             'character',
@@ -310,7 +311,6 @@ class UserSerializer(serializers.ModelSerializer):
             lst_news.append(data)
 
         return lst_news
-
 
 
 class BenefitSerializer(serializers.ModelSerializer):

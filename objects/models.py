@@ -17,6 +17,7 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
+from pytz import timezone
 # from multiselectfield import MultiSelectField
 
 import uuid
@@ -240,9 +241,27 @@ class UserCard(Base):
     def is_cool_down(self):
         cool_down_now_date = timezone.now()
 
-        if cool_down_now_date < (self.cool_down if self.cool_down else cool_down_now_date):
+        if cool_down_now_date <= (self.cool_down if self.cool_down else cool_down_now_date):
             return True
+        self.cool_down = None
+        self.save()
         return False
+
+    @property
+    def cool_down_remain_time(self):
+        tehran = timezone('Asia/Tehran')
+        current_time = datetime.now(tz=tehran)
+        if self.cool_down:
+            if current_time > self.cool_down:
+                return 0
+
+            return (self.cool_down - current_time).seconds
+
+        return 0
+
+    @property
+    def skip_cooldown_gem(self):
+        return settings.COOL_DOWN_UNIT[self.level]['skip_gem']
 
     @classmethod
     def cards(cls, user):

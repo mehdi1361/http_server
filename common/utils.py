@@ -313,7 +313,7 @@ def unit_normalize_data(unit, data):
     data['max_shield'] = data['shield']
     data['level'] = unit.level
     data['cool_down'] = unit.is_cool_down
-    data['cool_down_remaining_seconds'] = 0
+    data['cool_down_remaining_seconds'] = unit.cool_down_remain_time
 
     return data
 

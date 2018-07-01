@@ -254,3 +254,18 @@ JWT_AUTH = {
 
 # DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
 DBBACKUP_STORAGE_OPTIONS = {'location': 'backup'}
+
+
+COOL_DOWN_UNIT = {
+    0: {'time': 200,  'skip_gem': 5,  'add_time': 10},
+    1: {'time': 200,  'skip_gem': 5,  'add_time': 10},
+    2: {'time': 300,  'skip_gem': 10, 'add_time': 15},
+    3: {'time': 400,  'skip_gem': 15, 'add_time': 20},
+    4: {'time': 500,  'skip_gem': 20, 'add_time': 30},
+    5: {'time': 600,  'skip_gem': 25, 'add_time': 35},
+    6: {'time': 700,  'skip_gem': 30, 'add_time': 40},
+    7: {'time': 800,  'skip_gem': 35, 'add_time': 45},
+    8: {'time': 900,  'skip_gem': 40, 'add_time': 50},
+    9: {'time': 1000, 'skip_gem': 45, 'add_time': 60},
+    10: {'time': 1100, 'skip_gem': 50, 'add_time': 65}
+}
