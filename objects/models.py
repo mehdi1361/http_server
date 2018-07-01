@@ -250,8 +250,8 @@ class UserCard(Base):
 
     @property
     def cool_down_remain_time(self):
-        tehran = tt('Asia/Tehran')
-        current_time = datetime.now(tz=tehran)
+        # tehran = tt('Asia/Tehran')
+        current_time = datetime.now()
         if self.cool_down:
             if current_time > self.cool_down:
                 return 0
