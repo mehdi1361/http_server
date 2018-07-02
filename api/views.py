@@ -415,9 +415,9 @@ class UserViewSet(viewsets.ModelViewSet):
         user_card = get_object_or_404(UserCard, user=request.user, character_id=card_id, cool_down__isnull=False)
 
         if request.user.user_currency.gem >= user_card.skip_cooldown_gem:
+            request.user.user_currency.gem -= user_card.skip_cooldown_gem
             user_card.cool_down = None
             user_card.save()
-            request.user.user_currency.gem -= user_card.skip_cooldown_gem
 
             return Response(
                 {
