@@ -274,10 +274,9 @@ class UserViewSet(viewsets.ModelViewSet):
             else:
                 final_result['league_change_prize'] = None
 
-            if league.score >= league.league.base_league.play_off_unlock_score \
-                    and league.play_off_status != 'start':
-
-                league.play_off_status = 'not_started'
+            if league.score >= league.league.base_league.play_off_unlock_score:
+                    if league.play_off_status != 'start':
+                        league.play_off_status = 'not_started'
 
             else:
                 league.play_off_status = 'disable'
