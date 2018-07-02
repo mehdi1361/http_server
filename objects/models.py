@@ -241,14 +241,12 @@ class UserCard(Base):
     @property
     def is_cool_down(self):
         try:
-            tehran = tt('Asia/Tehran')
-            cool_down_now_date = datetime.now(tz=tehran)
-            cool_down_date = self.cool_down.replace(tzinfo=tehran)
+            cool_down_now_date = datetime.now(tz=pytz.utc)
 
-            if cool_down_now_date <= cool_down_date:
+            if cool_down_now_date <= self.cool_down:
                 return True
-            self.cool_down = None
 
+            self.cool_down = None
             self.save()
             return False
         except Exception:
