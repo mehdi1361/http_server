@@ -257,15 +257,11 @@ class UserCard(Base):
     @property
     def cool_down_remain_time(self):
         try:
-            tehran = tt('Asia/Tehran')
-            current_time = datetime.now(tz=tehran)
-            dt = self.cool_down.replace(tzinfo=tehran)
-
             if self.cool_down:
-                if current_time > self.cool_down:
+                if datetime.now(tz=pytz.utc) > self.cool_down:
                     return 0
 
-                return (dt - current_time).seconds
+                return (self.cool_down - datetime.now(tz=pytz.utc)).seconds
 
             return 0
 
