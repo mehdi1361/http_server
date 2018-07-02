@@ -321,7 +321,7 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             league = LeagueUser.objects.get(
                 player=request.user.user_currency,
-                close_league=False, play_off_status="disable"
+                close_league=False, play_off_status="not_started"
             )
 
             if league.score >= league.league.base_league.play_off_unlock_score:
@@ -352,7 +352,7 @@ class UserViewSet(viewsets.ModelViewSet):
                         return Response({"id": 400, "message": "not enough gem"}, status=status.HTTP_400_BAD_REQUEST)
 
                 league.play_off_count += 1
-                league.play_off_status = 'not_started'
+                league.play_off_status = 'start'
                 league.save()
 
                 return Response(
