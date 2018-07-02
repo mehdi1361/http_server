@@ -416,6 +416,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if request.user.user_currency.gem >= user_card.skip_cooldown_gem:
             request.user.user_currency.gem -= user_card.skip_cooldown_gem
+            request.user.user_currency.save()
             user_card.cool_down = None
             user_card.save()
 
