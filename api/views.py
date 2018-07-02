@@ -296,7 +296,8 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['play_off_info'] = {
                 "status": league.play_off_status,
                 "start_gem_price": play_off_count,
-                "unlock_need_score": league.league.base_league.play_off_unlock_score
+                "unlock_need_score": league.league.base_league.play_off_unlock_score,
+                "result": [0, 1, 2]
             }
             return Response(final_result)
 
