@@ -268,7 +268,12 @@ class UserCard(Base):
 
     @property
     def skip_cooldown_gem(self):
-        return settings.COOL_DOWN_UNIT[self.level]['skip_gem']
+        if self.cool_down:
+            time_count = (self.cool_down - datetime.now(tz=pytz.utc)).seconds
+            if time_count == 0:
+                return 0
+
+            return int(time_count/settings.COOL_DOWN_TIME)
 
     @classmethod
     def cards(cls, user):

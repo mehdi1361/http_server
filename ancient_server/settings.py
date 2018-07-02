@@ -270,3 +270,5 @@ COOL_DOWN_UNIT = {
     9: {'time': 1000, 'skip_gem': 45, 'add_time': 60},
     10: {'time': 1100, 'skip_gem': 50, 'add_time': 65}
 }
+
+COOL_DOWN_TIME = 300
