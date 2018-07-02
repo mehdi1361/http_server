@@ -240,30 +240,37 @@ class UserCard(Base):
 
     @property
     def is_cool_down(self):
-        tehran = tt('Asia/Tehran')
-        cool_down_now_date = datetime.now(tz=tehran)
-        cool_down_date = self.cool_down.replace(tzinfo=tehran)
+        try:
+            tehran = tt('Asia/Tehran')
+            cool_down_now_date = datetime.now(tz=tehran)
+            cool_down_date = self.cool_down.replace(tzinfo=tehran)
 
-        if cool_down_now_date <= cool_down_date:
-            return True
-        self.cool_down = None
+            if cool_down_now_date <= cool_down_date:
+                return True
+            self.cool_down = None
 
-        self.save()
-        return False
+            self.save()
+            return False
+        except Exception:
+            return False
 
     @property
     def cool_down_remain_time(self):
-        tehran = tt('Asia/Tehran')
-        current_time = datetime.now(tz=tehran)
-        dt = self.cool_down.replace(tzinfo=tehran)
+        try:
+            tehran = tt('Asia/Tehran')
+            current_time = datetime.now(tz=tehran)
+            dt = self.cool_down.replace(tzinfo=tehran)
 
-        if self.cool_down:
-            if current_time > self.cool_down:
-                return 0
+            if self.cool_down:
+                if current_time > self.cool_down:
+                    return 0
 
-            return (dt - current_time).seconds
+                return (dt - current_time).seconds
 
-        return 0
+            return 0
+
+        except Exception:
+            return 0
 
     @property
     def skip_cooldown_gem(self):
