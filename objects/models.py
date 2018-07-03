@@ -850,26 +850,30 @@ class PlayOff(Base):
 
     @classmethod
     def log(cls, player):
-        league = LeagueUser.objects.get(player=player, play_off_status='start')
-        playoff_log = PlayOff.enabled.filter(player_league=league)
+        try:
+            league = LeagueUser.objects.get(player=player, play_off_status='start')
+            playoff_log = PlayOff.enabled.filter(player_league=league)
 
-        if playoff_log.count() > league.league.base_league.playoff_count:
-            return -1
+            if playoff_log.count() > league.league.base_league.playoff_count:
+                return -1
 
-        result = []
-        for log in playoff_log.all().order_by('id'):
-            if log.status == 'win':
-                result.append(1)
+            result = []
+            for log in playoff_log.all().order_by('id'):
+                if log.status == 'win':
+                    result.append(1)
 
-            else:
-                result.append(0)
+                else:
+                    result.append(0)
 
-        remain_playoff = league.league.base_league.playoff_count - len(result)
-        if remain_playoff > 0:
-            for i in range(0, remain_playoff):
-                result.append(2)
+            remain_playoff = league.league.base_league.playoff_count - len(result)
+            if remain_playoff > 0:
+                for i in range(0, remain_playoff):
+                    result.append(2)
 
-        return result
+            return result
+
+        except LeagueUser.DoesNotExist:
+            return []
 
     @classmethod
     def wins(cls, player):
