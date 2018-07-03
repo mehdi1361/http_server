@@ -222,88 +222,88 @@ class UserViewSet(viewsets.ModelViewSet):
         final_result = dict()
         previous_rank = None
         current_rank = None
-        try:
-            league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
-            score_board = []
-            idx = 1
+        # try:
+        league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
+        score_board = []
+        idx = 1
 
-            for user in LeagueUser.objects.filter(league=league.league).order_by('-score'):
-                serializer = LeagueUserSerializer(user)
+        for user in LeagueUser.objects.filter(league=league.league).order_by('-score'):
+            serializer = LeagueUserSerializer(user)
 
-                result = serializer.data
-                if user.player == request.user.user_currency:
-                    previous_rank = result['rank'] if result['rank'] else idx
-                    current_rank = idx
-                    user.rank = idx
-                    user.save()
+            result = serializer.data
+            if user.player == request.user.user_currency:
+                previous_rank = result['rank'] if result['rank'] else idx
+                current_rank = idx
+                user.rank = idx
+                user.save()
 
-                result['rank'] = idx
-                result['player'] = str(user.player).decode('utf-8')
-                idx += 1
-                score_board.append(result)
+            result['rank'] = idx
+            result['player'] = str(user.player).decode('utf-8')
+            idx += 1
+            score_board.append(result)
 
-            prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
+        prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
 
-            current_league = LeagueSerializer(league.league.base_league)
+        current_league = LeagueSerializer(league.league.base_league)
 
-            max_step = League.objects.all().values('step_number').order_by('-step_number')[0]
+        max_step = League.objects.all().values('step_number').order_by('-step_number')[0]
 
-            if max_step['step_number'] > league.league.base_league.step_number + 1:
-                next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
-                next_league_serializer = LeagueSerializer(next_league)
+        if max_step['step_number'] > league.league.base_league.step_number + 1:
+            next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
+            next_league_serializer = LeagueSerializer(next_league)
 
-            else:
-                next_league_serializer = LeagueSerializer(current_league)
+        else:
+            next_league_serializer = LeagueSerializer(current_league)
 
-            final_result['score_board'] = score_board
-            final_result['promoting_prize'] = prize_serializer.data
-            final_result['previous_rank'] = previous_rank
-            final_result['current_rank'] = current_rank
-            final_result['current_league'] = current_league.data
-            final_result['next_league'] = next_league_serializer.data
-            final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
-            final_result['num_of_demoting_user'] = league.league.base_league.demoting_count
+        final_result['score_board'] = score_board
+        final_result['promoting_prize'] = prize_serializer.data
+        final_result['previous_rank'] = previous_rank
+        final_result['current_rank'] = current_rank
+        final_result['current_league'] = current_league.data
+        final_result['next_league'] = next_league_serializer.data
+        final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
+        final_result['num_of_demoting_user'] = league.league.base_league.demoting_count
 
-            final_result['league_change_status'] = league.league_change_status
+        final_result['league_change_status'] = league.league_change_status
 
-            if league.league_change_status == 'promoted':
-                claim = Claim.objects.get(is_used=False)
-                claim_serializer = ClaimSerializer(claim)
-                final_result['league_change_prize'] = claim_serializer.data
+        if league.league_change_status == 'promoted':
+            claim = Claim.objects.get(is_used=False)
+            claim_serializer = ClaimSerializer(claim)
+            final_result['league_change_prize'] = claim_serializer.data
 
-            else:
-                final_result['league_change_prize'] = None
+        else:
+            final_result['league_change_prize'] = None
 
-            if league.score >= league.league.base_league.play_off_unlock_score:
-                    if league.play_off_status != 'start':
-                        league.play_off_status = 'not_started'
+        if league.score >= league.league.base_league.play_off_unlock_score:
+                if league.play_off_status != 'start':
+                    league.play_off_status = 'not_started'
 
-            else:
-                league.play_off_status = 'disable'
+        else:
+            league.play_off_status = 'disable'
 
-            league.save()
+        league.save()
 
-            if league.play_off_count <= 1:
-                play_off_count = league.league.base_league.play_off_start_gem
+        if league.play_off_count <= 1:
+            play_off_count = league.league.base_league.play_off_start_gem
 
-            elif league.play_off_count == 2:
-                play_off_count = league.league.base_league.play_off_start_gem_1
+        elif league.play_off_count == 2:
+            play_off_count = league.league.base_league.play_off_start_gem_1
 
-            else:
-                play_off_count = league.league.base_league.play_off_start_gem_2
+        else:
+            play_off_count = league.league.base_league.play_off_start_gem_2
 
-            final_result['play_off_info'] = {
-                "status": league.play_off_status,
-                "start_gem_price": play_off_count,
-                "unlock_need_score": league.league.base_league.play_off_unlock_score,
-                "result": [] if PlayOff.log(request.user.user_currency) == -1
-                else PlayOff.log(request.user.user_currency),
-                "num_wins": league.league.base_league.win_promoting_count
-            }
-            return Response(final_result)
+        final_result['play_off_info'] = {
+            "status": league.play_off_status,
+            "start_gem_price": play_off_count,
+            "unlock_need_score": league.league.base_league.play_off_unlock_score,
+            "result": [] if PlayOff.log(request.user.user_currency) == -1
+            else PlayOff.log(request.user.user_currency),
+            "num_wins": league.league.base_league.win_promoting_count
+        }
+        return Response(final_result)
 
-        except Exception:
-            return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
+        # except Exception:
+        #     return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def first_join_league(self, request):
