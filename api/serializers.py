@@ -239,6 +239,7 @@ class UserSerializer(serializers.ModelSerializer):
             else:
                 result['in_league'] = False
 
+            result['current_league'] = []
             try:
                 league = LeagueUser.objects.get(player=requests.user_currency, close_league=False)
                 current_league = LeagueSerializer(league.league.base_league)
