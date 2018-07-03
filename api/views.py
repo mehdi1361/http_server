@@ -302,7 +302,7 @@ class UserViewSet(viewsets.ModelViewSet):
             }
             return Response(final_result)
 
-        except LeagueUser.DoesNotExist as e:
+        except Exception:
             return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
