@@ -682,6 +682,7 @@ class League(Base):
     min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
     playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True)
     playoff_count = models.IntegerField(_('playoff count'), null=True, blank=True)
+    win_promoting_count = models.IntegerField(_('win promoting count'), null=True, blank=True)
     promoting_count = models.IntegerField(_('promoting count'), null=True, blank=True)
     demoting_count = models.IntegerField(_('demoting count'), null=True, blank=True)
     play_off_unlock_score = models.PositiveIntegerField(_('play off unlock score'), null=True, blank=True)
@@ -768,7 +769,7 @@ class LeagueUser(Base):
         unique_together = ('player', 'league')
 
     def __str__(self):
-        return '{}'.format(self.id)
+        return '{}-{}'.format(self.player.name, self.league.base_league.league_name)
 
     @classmethod
     def has_league(cls, player):
@@ -807,6 +808,80 @@ class LeagueUser(Base):
 
         except Exception:
             return False
+
+
+class EnableManager(models.Manager):
+    def get_queryset(self):
+        return super(EnableManager, self).get_queryset().filter(enable=True)
+
+
+class PlayOff(Base):
+    STATUS = (
+        ('win', 'win'),
+        ('lose', 'lose')
+    )
+
+    status = models.CharField(_('status'), max_length=5, choices=STATUS, default='win')
+    player_league = models.ForeignKey(LeagueUser, verbose_name=_('player'), related_name='logs')
+    enable = models.BooleanField(_('enable'), default=True)
+
+    objects = models.Manager()
+    enabled = EnableManager()
+
+    class Meta:
+        verbose_name = _('playoff')
+        verbose_name_plural = _('playoffs')
+        db_table = 'playoff'
+
+    def __str__(self):
+        return 'playoff-{}'.format(self.player_league.player.name)
+
+    @classmethod
+    def reset(cls, player):
+        try:
+            league_user = LeagueUser.objects.get(player=player, play_off_status='start')
+            league_user.play_off_count = 0
+            league_user.save()
+            cls.objects.filter(player_league=league_user).update(enable=False)
+            return True
+
+        except Exception:
+            return False
+
+    @classmethod
+    def log(cls, player):
+        league = LeagueUser.objects.get(player=player, play_off_status='start')
+        playoff_log = PlayOff.enabled.filter(player_league=league)
+
+        if playoff_log.count() > league.league.base_league.playoff_count:
+            return -1
+
+        result = []
+        for log in playoff_log.all().order_by('id'):
+            if log.status == 'win':
+                result.append(1)
+
+            else:
+                result.append(0)
+
+        remain_playoff = league.league.base_league.playoff_count - len(result)
+        if remain_playoff > 0:
+            for i in range(0, remain_playoff):
+                result.append(2)
+
+        return result
+
+    @classmethod
+    def wins(cls, player):
+        league = LeagueUser.objects.get(player=player, play_off_status='start')
+        playoff_log = PlayOff.enabled.filter(player_league=league, status='win')
+        return playoff_log.count()
+
+    @classmethod
+    def loses(cls, player):
+        league = LeagueUser.objects.get(player=player, play_off_status='start')
+        playoff_log = PlayOff.enabled.filter(player_league=league, status='lose')
+        return playoff_log.count()
 
 
 class Claim(Base):

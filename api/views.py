@@ -11,7 +11,7 @@ from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
     LeagueSerializer, ClaimSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, PlayOff
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -296,7 +296,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 "status": league.play_off_status,
                 "start_gem_price": play_off_count,
                 "unlock_need_score": league.league.base_league.play_off_unlock_score,
-                "result": [0, 1, 2]
+                "result": [] if PlayOff.log(request.user.user_currency) == -1
+                else PlayOff.log(request.user.user_currency),
+                "num_wins": league.league.base_league.win_promoting_count
             }
             return Response(final_result)
 
