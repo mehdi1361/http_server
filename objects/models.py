@@ -833,7 +833,7 @@ class PlayOff(Base):
         verbose_name_plural = _('playoffs')
         db_table = 'playoff'
 
-    def __str__(self):
+    def __unicode__(self):
         return 'playoff-{}'.format(self.player_league.player.name)
 
     @classmethod
