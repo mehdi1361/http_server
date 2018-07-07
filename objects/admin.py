@@ -309,6 +309,7 @@ class LeagueAdmin(admin.ModelAdmin):
         'min_trophy',
         'playoff_range',
         'playoff_count',
+        'win_promoting_count',
         'promoting_count',
         'demoting_count',
         'play_off_unlock_score',
