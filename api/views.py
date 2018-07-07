@@ -11,7 +11,8 @@ from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
     LeagueSerializer, ClaimSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
-    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, PlayOff
+    LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
+    PlayOff, LeagueTime, LeaguePrize
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -300,10 +301,18 @@ class UserViewSet(viewsets.ModelViewSet):
                 else PlayOff.log(request.user.user_currency),
                 "num_wins": league.league.base_league.win_promoting_count
             }
+            final_result['remain_time'] = LeagueTime.remain_time()
+
+            prizes = []
+            for prize in LeaguePrize.objects.all().order_by('league', 'level'):
+                prizes.append({"gem": prize.gem, "coin": prize.coin})
+
+            final_result['leagues_rewards'] = prizes
+
             return Response(final_result)
 
         except Exception:
-            return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"id": 400, "message": "user not join  to league"}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def has_league(self, request):

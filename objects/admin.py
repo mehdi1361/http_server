@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
-    League, LeagueUser, CreatedLeague, LeaguePrize, Claim, PlayOff
+    League, LeagueUser, CreatedLeague, LeaguePrize, Claim, PlayOff, LeagueTime
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
@@ -371,4 +371,20 @@ class PlayOffAdmin(admin.ModelAdmin):
         'created_date',
         'updated_date',
         'enable'
+    )
+
+
+@admin.register(LeagueTime)
+class LeagueTimeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'end_date',
+        'expired',
+        'created_date',
+        'updated_date'
+    )
+
+    list_editable = (
+        'end_date',
+        'expired',
     )

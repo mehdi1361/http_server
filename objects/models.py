@@ -679,16 +679,16 @@ class League(Base):
     step_number = models.IntegerField(_('step number'), default=0, unique=True, db_index=True)
     league_type = models.CharField(_('league type'), max_length=10, choices=LEAGUE_TYPE, default='cooper')
     league_step = models.PositiveIntegerField(_('league step'), null=True, blank=True)
-    min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True)
-    playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True)
-    playoff_count = models.IntegerField(_('playoff count'), null=True, blank=True)
-    win_promoting_count = models.IntegerField(_('win promoting count'), null=True, blank=True)
-    promoting_count = models.IntegerField(_('promoting count'), null=True, blank=True)
-    demoting_count = models.IntegerField(_('demoting count'), null=True, blank=True)
-    play_off_unlock_score = models.PositiveIntegerField(_('play off unlock score'), null=True, blank=True)
-    play_off_start_gem = models.PositiveIntegerField(_('play off start gem '), null=True, blank=True)
-    play_off_start_gem_1 = models.PositiveIntegerField(_('play off start gem 1'), null=True, blank=True)
-    play_off_start_gem_2 = models.PositiveIntegerField(_('play off start gem 2'), null=True, blank=True)
+    min_trophy = models.IntegerField(_('min trophy'), null=True, blank=True, default=0)
+    playoff_range = models.IntegerField(_('playoff range'), null=True, blank=True, default=0)
+    playoff_count = models.IntegerField(_('playoff count'), null=True, blank=True, default=0)
+    win_promoting_count = models.IntegerField(_('win promoting count'), null=True, blank=True, default=0)
+    promoting_count = models.IntegerField(_('promoting count'), null=True, blank=True, default=0)
+    demoting_count = models.IntegerField(_('demoting count'), null=True, blank=True, default=0)
+    play_off_unlock_score = models.PositiveIntegerField(_('play off unlock score'), null=True, blank=True, default=0)
+    play_off_start_gem = models.PositiveIntegerField(_('play off start gem '), null=True, blank=True, default=0)
+    play_off_start_gem_1 = models.PositiveIntegerField(_('play off start gem 1'), null=True, blank=True, default=0)
+    play_off_start_gem_2 = models.PositiveIntegerField(_('play off start gem 2'), null=True, blank=True, default=0)
 
     class Meta:
         verbose_name = _('league')
@@ -901,6 +901,24 @@ class Claim(Base):
 
     def __str__(self):
         return 'claim-{}'.format(self.league_player.league.base_league.league_name)
+
+
+class LeagueTime(Base):
+    end_date = models.DateTimeField(_('global end date'))
+    expired = models.BooleanField(_('leagues expired'), default=False)
+
+    class Meta:
+        verbose_name = _('league time')
+        verbose_name_plural = _('league_times')
+        db_table = 'league_times'
+
+    def __str__(self):
+        return 'league-{}'.format(self.id)
+
+    @classmethod
+    def remain_time(cls):
+        league = cls.objects.get(expired=False)
+        return (league.end_date - timezone.now()).seconds
 
 
 def create_user_dependency(sender, instance, created, **kwargs):
