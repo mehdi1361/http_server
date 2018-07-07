@@ -314,8 +314,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(final_result)
 
-        except Exception:
-            return Response({"id": 400, "message": "user not join  to league"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"id": 400, "message": e}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def has_league(self, request):
