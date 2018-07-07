@@ -306,17 +306,11 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({"id": 400, "message": "user not join to league"}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
-    def first_join_league(self, request):
-        player = UserCurrency.objects.get(user=request.user)
-        first_league = League.objects.get(step_number=0)
-
-        if first_league.min_trophy > player.trophy:
-            return Response({'id': 400, 'message': 'not enough trophy'}, status=status.HTTP_400_BAD_REQUEST)
-
-        if LeagueUser.create_or_join_league(player=player, selected_league=first_league):
+    def has_league(self, request):
+        if LeagueUser.has_league(request.user.user_currency):
             return Response({'id': 200, 'message': 'player joined to league'}, status=status.HTTP_200_OK)
 
-        return Response({'id': 400, 'message': 'player league already exists'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'id': 400, 'message': 'player not yet joined to league'}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def active_playoff(self, request):
