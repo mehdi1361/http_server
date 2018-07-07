@@ -304,8 +304,11 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['remain_time'] = LeagueTime.remain_time()
 
             prizes = []
-            for prize in LeaguePrize.objects.all().order_by('league', 'level'):
-                prizes.append({"gem": prize.gem, "coin": prize.coin})
+            for league in League.objects.all().order_by('step_number'):
+                prizes.append({
+                    "gem": league.params['play_off_reward']['gem'],
+                    "coin": league.params['play_off_reward']['coin']}
+                )
 
             final_result['leagues_rewards'] = prizes
 
