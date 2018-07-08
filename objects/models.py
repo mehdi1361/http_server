@@ -768,7 +768,7 @@ class LeagueUser(Base):
         db_table = 'league_user'
         unique_together = ('player', 'league')
 
-    def __str__(self):
+    def __unicode__(self):
         return '{}-{}'.format(self.player.name, self.league.base_league.league_name)
 
     @classmethod
