@@ -169,6 +169,7 @@ OPENING_TIME_INDEX = 4
 CRON_CLASSES = [
     "objects.crons.FreeChestCreatorJob",
     "objects.crons.Backup",
+    "objects.crons.LeagueReset",
 ]
 
 # CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',

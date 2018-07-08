@@ -43,8 +43,14 @@ class LeagueReset(CronJobBase):
     def do(self):
         if LeagueTime.remain_time() == 0:
             promoted_list = []
+            demoted_list = []
+
             for created_league in CreatedLeague.enable_leagues.all():
-                pass
+                promoted_list += created_league.promoted_list()
+                demoted_list += created_league.demoted_list()
+
+            print "promoted", promoted_list
+            print "demoted", demoted_list
 
         else:
-            pass
+            print "ok"

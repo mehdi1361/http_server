@@ -735,12 +735,52 @@ class CreatedLeague(Base):
         return '{}'.format(self.id)
 
     def promoted(self):
+        return LeagueUser.objects.filter(league=self).order_by('-score')[:LeagueTime.promoted()]
+
+    def demoted(self):
+        return LeagueUser.objects.filter(league=self).order_by('score')[:LeagueTime.promoted()]
+
+    def promoted_list(self):
+        lst_pro = []
+        for player in LeagueUser.objects.filter(league=self).in_league().order_by('-score')[:LeagueTime.promoted()]:
+            promoted_league = League.objects.get(step_number=player.league.base_league.step_number + 1)
+            lst_pro.append({"player": player.player, "league": promoted_league})
+
+        return lst_pro
+
+    def demoted_list(self):
+        lst_dmo = []
+        for player in LeagueUser.objects.filter(league=self).in_league().order_by('score')[:LeagueTime.demoted()]:
+            step_number = player.league.base_league.step_number + 1
+            if step_number < 0:
+                step_number = 0
+
+            demoted_league = League.objects.get(step_number=step_number)
+            lst_dmo.append({"player": player.player, "league": demoted_league})
+
+        return lst_dmo
+
+    @classmethod
+    def create_or_join(cls, player, league):
         pass
 
 
 class RandomManager(models.Manager):
     def get_query_set(self):
         return super(RandomManager, self).get_query_set().order_by('?')
+
+
+class LeagueUserQuerySet(models.QuerySet):
+    def in_league(self):
+        return self.filter(close_league=False)
+
+
+class LeagueUserManager(models.Manager):
+    def get_queryset(self):
+        return LeagueUserQuerySet(self.model, using=self._db)
+
+    def in_league(self):
+        return self.get_queryset().in_league()
 
 
 class LeagueUser(Base):
@@ -767,7 +807,7 @@ class LeagueUser(Base):
     league_change_status = models.CharField(_('league change status'), max_length=50,
                                             choices=LEAGUE_STATUS, default='normal')
 
-    objects = models.Manager()
+    objects = LeagueUserManager()
     randoms = RandomManager()
 
     class Meta:
