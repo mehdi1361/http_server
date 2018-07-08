@@ -2,7 +2,7 @@ import os
 from django.core import management
 from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
-from objects.models import UserChest
+from objects.models import UserChest, League, LeagueUser, CreatedLeague, LeagueTime
 from datetime import datetime
 
 
@@ -33,3 +33,18 @@ class Backup(CronJobBase):
             datetime.now().day
         )
         management.call_command('dbbackup', '-z', '-o {}'.format(file_name))
+
+
+class LeagueReset(CronJobBase):
+    RUN_AT_TIMES = ['1:00']
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    code = 'objects.Reset'
+
+    def do(self):
+        if LeagueTime.remain_time() == 0:
+            promoted_list = []
+            for created_league in CreatedLeague.enable_leagues.all():
+                pass
+
+        else:
+            pass

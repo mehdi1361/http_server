@@ -329,7 +329,15 @@ class CreatedLeagueAdmin(admin.ModelAdmin):
         'inc_count',
         'dec_count',
         'created_date',
-        'updated_date'
+        'updated_date',
+        'enable'
+    )
+
+    list_editable = (
+        'base_league',
+        'inc_count',
+        'dec_count',
+        'enable'
     )
     inlines = [LeagueUserAdmin, ]
 
@@ -380,6 +388,8 @@ class LeagueTimeAdmin(admin.ModelAdmin):
         'id',
         'end_date',
         'expired',
+        'promoting_count',
+        'demoting_count',
         'created_date',
         'updated_date'
     )
@@ -387,4 +397,6 @@ class LeagueTimeAdmin(admin.ModelAdmin):
     list_editable = (
         'end_date',
         'expired',
+        'promoting_count',
+        'demoting_count'
     )
