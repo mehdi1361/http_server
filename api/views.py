@@ -268,7 +268,12 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['league_change_status'] = league.league_change_status
 
             if league.league_change_status == 'promoted':
-                claim = Claim.objects.get(is_used=False)
+                previous_legue = LeagueUser.objects.get(
+                    player=request.user.user_currency,
+                    close_league=True,
+                    league__base_league__step_number=league.league.base_league.step_number -1
+                )
+                claim = Claim.objects.get(is_used=False, league_player=previous_legue)
                 claim_serializer = ClaimSerializer(claim)
                 final_result['league_change_prize'] = claim_serializer.data
 
