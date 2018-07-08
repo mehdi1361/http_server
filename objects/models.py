@@ -834,7 +834,7 @@ class PlayOff(Base):
         db_table = 'playoff'
 
     def __unicode__(self):
-        return 'playoff-{}'.format(self.player_league.player.name)
+        return 'playoff-{}'.format(self.player_league.player.name.encode('utf-8'))
 
     @classmethod
     def reset(cls, player):
