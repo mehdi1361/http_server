@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from random import randint
+import pytz
+import random
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from multiselectfield.db.fields import MultiSelectField
 
 from base.models import Base, BaseUnit, Spell, SpellEffect
 from django.utils.encoding import python_2_unicode_compatible
@@ -17,12 +18,7 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
-from pytz import timezone as tt
-import  pytz
-# from multiselectfield import MultiSelectField
-
-import uuid
-import random
+from django.db import transaction
 
 
 @python_2_unicode_compatible
@@ -716,10 +712,19 @@ class LeaguePrize(Base):
         return '{}'.format(self.id)
 
 
+class EnableLeagueManager(models.Manager):
+    def get_queryset(self):
+        return super(EnableLeagueManager, self).get_queryset().filter(enable=True)
+
+
 class CreatedLeague(Base):
     base_league = models.ForeignKey(League, verbose_name=_('league'), related_name='created_leagues')
     inc_count = models.PositiveIntegerField(_('inc count'), default=0)
     dec_count = models.PositiveIntegerField(_('dec count'), default=0)
+    enable = models.BooleanField(_('enable legue'), default=True)
+
+    objects = models.Manager()
+    enable_leagues = EnableLeagueManager()
 
     class Meta:
         verbose_name = _('created_league')
@@ -728,6 +733,9 @@ class CreatedLeague(Base):
 
     def __str__(self):
         return '{}'.format(self.id)
+
+    def promoted(self):
+        pass
 
 
 class RandomManager(models.Manager):
@@ -851,7 +859,7 @@ class PlayOff(Base):
     @classmethod
     def log(cls, player):
         try:
-            league = LeagueUser.objects.get(player=player, play_off_status='start')
+            league = LeagueUser.objects.get(player=player, play_off_status='start', close_league=False)
             playoff_log = PlayOff.enabled.filter(player_league=league)
 
             if playoff_log.count() > league.league.base_league.playoff_count:
@@ -906,6 +914,8 @@ class Claim(Base):
 class LeagueTime(Base):
     end_date = models.DateTimeField(_('global end date'))
     expired = models.BooleanField(_('leagues expired'), default=False)
+    promoting_count = models.PositiveIntegerField(_('promoting count'), default=3)
+    demoting_count = models.PositiveIntegerField(_('demoting count'), default=3)
 
     class Meta:
         verbose_name = _('league time')
@@ -918,7 +928,29 @@ class LeagueTime(Base):
     @classmethod
     def remain_time(cls):
         league = cls.objects.get(expired=False)
-        return (league.end_date - timezone.now()).seconds
+
+        if league.end_date > datetime.now(tz=pytz.utc):
+            return int((league.end_date - datetime.now(tz=pytz.utc)).total_seconds())
+
+        return 0
+
+    @classmethod
+    def reset(cls):
+        with transaction.atomic():
+            league = cls.objects.get(expired=False)
+            league.expired = True
+            league.save()
+            cls.objects.create(end_date=datetime.now(tz=pytz.utc) + timedelta(days=settings.LEAGUE_LENGTH))
+
+    @classmethod
+    def promoted(cls):
+        league = cls.objects.get(expired=False)
+        return league.promoting_count
+
+    @classmethod
+    def demoted(cls):
+        league = cls.objects.get(expired=False)
+        return league.demoting_count
 
 
 def create_user_dependency(sender, instance, created, **kwargs):
