@@ -4,6 +4,7 @@ from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
 from objects.models import UserChest, League, LeagueUser, CreatedLeague, LeagueTime
 from datetime import datetime
+from django.db  import transaction
 
 
 class FreeChestCreatorJob(CronJobBase):
@@ -42,15 +43,23 @@ class LeagueReset(CronJobBase):
 
     def do(self):
         if LeagueTime.remain_time() == 0:
-            promoted_list = []
-            demoted_list = []
+            result = []
 
             for created_league in CreatedLeague.enable_leagues.all():
-                promoted_list += created_league.promoted_list()
-                demoted_list += created_league.demoted_list()
+                result += created_league.promoted_list() + created_league.normal_list() \
+                          + created_league.demoted_list()
+                created_league.close()
 
-            print "promoted", promoted_list
-            print "demoted", demoted_list
+            for item in result:
+                CreatedLeague.create_or_join(
+                    player=item['player'],
+                    league=item['league'],
+                    prize=item['claim'],
+                    league_player=item['claim_league'],
+                    type=item['type']
+                )
+
+            LeagueTime.reset()
 
         else:
-            print "ok"
+            print "not yet reset leagues"

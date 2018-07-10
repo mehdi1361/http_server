@@ -368,6 +368,10 @@ class LeagueUserAdmin(admin.ModelAdmin):
         'match_count',
         'league_change_status'
     )
+
+    list_editable = (
+        'score',
+    )
     inlines = (ClaimInline, )
 
 

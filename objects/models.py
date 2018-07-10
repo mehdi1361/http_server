@@ -418,7 +418,7 @@ class UserChest(Base):
     @property
     def chest_status(self):
         return self.status
-    
+
     @property
     def initial_time(self):
         if self.chest_monetaryType == 'free':
@@ -742,32 +742,101 @@ class CreatedLeague(Base):
 
     def promoted_list(self):
         lst_pro = []
+        claim_count = 0
+        claim = self.base_league.prizes.count() - 1
+
         for player in LeagueUser.objects.filter(league=self).in_league().order_by('-score')[:LeagueTime.promoted()]:
             promoted_league = League.objects.get(step_number=player.league.base_league.step_number + 1)
-            lst_pro.append({"player": player.player, "league": promoted_league})
+
+            lst_pro.append({
+                "player": player.player,
+                "league": promoted_league,
+                "claim": self.base_league.prizes.all()[claim_count] if claim_count <= claim else None,
+                "claim_league": player if claim_count <= claim else None,
+                "type": "promoted"
+            })
+            claim_count += 1
 
         return lst_pro
 
     def demoted_list(self):
         lst_dmo = []
         for player in LeagueUser.objects.filter(league=self).in_league().order_by('score')[:LeagueTime.demoted()]:
-            step_number = player.league.base_league.step_number + 1
+            step_number = player.league.base_league.step_number - 1
             if step_number < 0:
                 step_number = 0
 
             demoted_league = League.objects.get(step_number=step_number)
-            lst_dmo.append({"player": player.player, "league": demoted_league})
+            lst_dmo.append({
+                "player": player.player,
+                "league": demoted_league,
+                "claim": None,
+                "claim_league": None,
+                "type": "normal"
+            })
 
         return lst_dmo
 
+    def normal_list(self):
+        lst_nor = []
+        hi = list(LeagueUser.objects.filter(league=self)
+                  .values_list('id', flat=True).in_league().order_by('-score')[:LeagueTime.promoted()])
+
+        low = list(LeagueUser.objects.filter(league=self)
+                   .values_list('id', flat=True).in_league().order_by('score')[:LeagueTime.demoted()])
+
+        result = hi + low
+
+        for player in LeagueUser.objects.filter(league=self).exclude(id__in=result).in_league():
+
+            normal_league = League.objects.get(step_number=player.league.base_league.step_number)
+            lst_nor.append({
+                "player": player.player,
+                "league": normal_league,
+                "claim": None,
+                "claim_league": None,
+                "type": "normal"
+            })
+
+        return lst_nor
+
+    def close(self):
+        with transaction.atomic():
+            self.enable = False
+            self.save()
+
+            for player in self.players.all():
+                player.close_league = True
+                player.save()
+
     @classmethod
-    def create_or_join(cls, player, league):
-        pass
+    def create_or_join(cls, player, league, prize=None, league_player=None, type=None):
+        leagues = cls.enable_leagues.filter(base_league=league)
+
+        if leagues is not None:
+            for selected_league in leagues:
+                if selected_league.players.count() <= selected_league.base_league.capacity:
+                    LeagueUser.objects.create(player=player, league=selected_league, league_change_status=type)
+                    break
+            else:
+                created_league = CreatedLeague.objects.create(base_league=league)
+
+                if not LeagueUser.has_league(player):
+                    LeagueUser.objects.create(player=player, league=created_league, league_change_status=type)
+
+        else:
+            created_league = CreatedLeague.objects.create(base_league=league)
+
+            if not LeagueUser.has_league(player):
+                LeagueUser.objects.create(player=player, league=created_league, league_change_status=type)
+
+        if prize is not None and league_player is not None:
+            Claim.prize(league_player=league_player, claim=prize)
 
 
 class RandomManager(models.Manager):
-    def get_query_set(self):
-        return super(RandomManager, self).get_query_set().order_by('?')
+    def get_queryset(self):
+        return super(RandomManager, self).get_queryset().order_by('?')
 
 
 class LeagueUserQuerySet(models.QuerySet):
@@ -797,7 +866,7 @@ class LeagueUser(Base):
 
     player = models.ForeignKey(UserCurrency, verbose_name=_('player'), related_name='leagues')
     league = models.ForeignKey(CreatedLeague, verbose_name=_('created_leagues'), related_name='players')
-    score = models.PositiveIntegerField(_('score'), default=50)
+    score = models.PositiveIntegerField(_('score'), default=0)
     rank = models.PositiveIntegerField(_('rank'), blank=True, null=True)
     close_league = models.BooleanField(_('close'), default=False)
     play_off_count = models.PositiveIntegerField(_('play off count'), default=0)
@@ -940,7 +1009,7 @@ class Claim(Base):
     coin = models.PositiveIntegerField(_('coin'), default=10)
     gem = models.PositiveIntegerField(_('gem'), default=10)
     is_used = models.BooleanField(_('used'), default=False)
-    league_player = models.ForeignKey(LeagueUser, verbose_name=_('league_user'), related_name="claims")
+    league_player = models.ForeignKey(LeagueUser, verbose_name=_('league_user'), related_name="claims", db_index=True)
 
     class Meta:
         verbose_name = _('claim')
@@ -949,6 +1018,12 @@ class Claim(Base):
 
     def __str__(self):
         return 'claim-{}'.format(self.league_player.league.base_league.league_name)
+
+    @classmethod
+    def prize(cls, league_player=None, claim=None):
+        if claim is not None and league_player is not None:
+            cls.objects.filter(league_player=league_player).delete()
+            cls.objects.create(league_player=league_player, gem=claim.gem, coin=claim.coin)
 
 
 class LeagueTime(Base):
