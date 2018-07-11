@@ -243,6 +243,10 @@ class UserViewSet(viewsets.ModelViewSet):
                 idx += 1
                 score_board.append(result)
 
+            if len(score_board) < league.league.base_league.capacity:
+                fake_count = league.league.base_league.capacity - len(score_board)
+
+
             prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
 
             current_league = LeagueSerializer(league.league.base_league)
@@ -268,12 +272,12 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['league_change_status'] = league.league_change_status
 
             if league.league_change_status == 'promoted':
-                previous_legue = LeagueUser.objects.get(
+                previous_league = LeagueUser.objects.get(
                     player=request.user.user_currency,
                     close_league=True,
-                    league__base_league__step_number=league.league.base_league.step_number -1
+                    league__base_league__step_number=league.league.base_league.step_number - 1
                 )
-                claim = Claim.objects.get(is_used=False, league_player=previous_legue)
+                claim = Claim.objects.get(is_used=False, league_player=previous_league)
                 claim_serializer = ClaimSerializer(claim)
                 final_result['league_change_prize'] = claim_serializer.data
 

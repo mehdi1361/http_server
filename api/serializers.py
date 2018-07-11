@@ -235,9 +235,11 @@ class UserSerializer(serializers.ModelSerializer):
 
             if LeagueUser.has_league(requests.user_currency):
                 result['in_league'] = True
+                result['trophy'] = LeagueUser.player_score(requests.user_currency)
 
             else:
                 result['in_league'] = False
+                result['trophy'] = 0
 
             result['current_league'] = None
             try:

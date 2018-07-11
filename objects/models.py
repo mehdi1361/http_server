@@ -893,6 +893,18 @@ class LeagueUser(Base):
         return False
 
     @classmethod
+    def player_score(cls, player):
+        try:
+            league_user = cls.objects.get(player=player, close_league=False)
+            if league_user:
+                return league_user.score
+
+            return 0
+
+        except:
+            return 0
+
+    @classmethod
     def create_or_join_league(cls, player, selected_league):
         try:
             if cls.objects.filter(player=player, close_league=False).count() == 0:
