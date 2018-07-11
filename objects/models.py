@@ -814,21 +814,18 @@ class CreatedLeague(Base):
         leagues = cls.enable_leagues.filter(base_league=league)
 
         if leagues is not None:
-            for selected_league in leagues:
-                if selected_league.players.count() <= selected_league.base_league.capacity:
-                    LeagueUser.objects.create(player=player, league=selected_league, league_change_status=type)
+            for find_league_league in leagues:
+                if find_league_league.players.count() <= find_league_league.base_league.capacity:
+                    selected_league = find_league_league
                     break
             else:
-                created_league = CreatedLeague.objects.create(base_league=league)
-
-                if not LeagueUser.has_league(player):
-                    LeagueUser.objects.create(player=player, league=created_league, league_change_status=type)
+                selected_league = CreatedLeague.objects.create(base_league=league)
 
         else:
-            created_league = CreatedLeague.objects.create(base_league=league)
+            selected_league = CreatedLeague.objects.create(base_league=league)
 
-            if not LeagueUser.has_league(player):
-                LeagueUser.objects.create(player=player, league=created_league, league_change_status=type)
+        if not LeagueUser.has_league(player):
+            LeagueUser.objects.create(player=player, league=selected_league, league_change_status=type)
 
         if prize is not None and league_player is not None:
             Claim.prize(league_player=league_player, claim=prize)
