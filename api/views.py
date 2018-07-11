@@ -25,6 +25,8 @@ from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
+from reports.models import Battle
+from django.db.models import Q
 
 
 class DefaultsMixin(object):
@@ -243,9 +245,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 idx += 1
                 score_board.append(result)
 
-            if len(score_board) < league.league.base_league.capacity:
-                fake_count = league.league.base_league.capacity - len(score_board)
-
+            # if len(score_board) < league.league.base_league.capacity:
+            #     fake_count = league.league.base_league.capacity - len(score_board)
 
             prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
 
@@ -448,6 +449,24 @@ class UserViewSet(viewsets.ModelViewSet):
             )
 
         return Response({'id': 400, 'message': 'not enough gem'}, status=status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=['POST'])
+    def match_count(self, request):
+        battle_count = Battle.objects.filter(
+            Q(player_1=request.user.username) | Q(player_2=request.user.username)
+        ).count()
+
+        if battle_count > settings.NUM_GAMES:
+            battle_count = 3
+
+        return Response(
+            {
+                "id": 200,
+                "num_games": settings.NUM_GAMES,
+                "num_played": battle_count
+            },
+            status=status.HTTP_200_OK
+        )
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
