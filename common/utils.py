@@ -358,8 +358,9 @@ def league_status(player, league):
     return 'normal'
 
 
-def generate_fake_user():
+def generate_fake_user(capacity):
     result = []
+    fake_user_lst = []
     lst_name = ["محمود",
                 "احمد",
                 "احمد آقا",
@@ -550,12 +551,17 @@ def generate_fake_user():
                 "ارسلان ",
                 "دلاور",
                 ]
-    random_number = random.randint(0, len(lst_name) - 1)
 
-    for i in range(0, 50):
-        random_number = random.randint(0, len(lst_name) - 1)
-        if random_number not in result:
-            result.append(random_number)
+    for i in range(0, capacity):
+        enable = True
+        while enable:
+            random_number = random.randint(0, len(lst_name) - 1)
 
-    print(len(result))
+            if random_number not in result:
+                result.append(random_number)
+                enable = False
 
+    for idx in result:
+        fake_user_lst.append(lst_name[idx].strip().decode('utf-8'))
+
+    return fake_user_lst

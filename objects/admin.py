@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from django.contrib import  messages
 from django.contrib import admin
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
-    League, LeagueUser, CreatedLeague, LeaguePrize, Claim, PlayOff, LeagueTime
+    League, LeagueUser, CreatedLeague, LeaguePrize, Claim, PlayOff, LeagueTime, Fake, FakeDetail
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
+from django.forms.models import BaseInlineFormSet
 # from django.contrib.auth.models import User
 
 
@@ -78,6 +81,40 @@ class UnitSpellEffectInline(admin.TabularInline):
 
 class ChakraSpellEffectInline(admin.TabularInline):
     model = ChakraSpellEffect
+
+
+# class FakeDetailInlineFormSet(BaseInlineFormSet):
+#     def save_new_objects(self, commit=True):
+#         save_instance = super(FakeDetailInlineFormSet, self).save_new_objects(commit)
+#         if commit:
+#             for item in save_instance:
+#                 print item
+#
+#         return save_instance
+#
+#     def save_existing_objects(self, commit=True):
+#         save_instance = super(FakeDetailInlineFormSet, self).save_existing_objects(commit)
+#         if commit:
+#             sum_val = 0
+#             exclude_lst = []
+#             fake = None
+#             for item in save_instance:
+#                 sum_val += item.quantity
+#                 exclude_lst.append(item.id)
+#                 fake = item.fake
+#
+#             if Fake.valid_quantity(fake.id, exclude_lst, sum_val):
+#                 return save_instance
+#
+#             else:
+#                 messages.add_message()
+
+
+class FakeDetailInline(admin.TabularInline):
+    model = FakeDetail
+
+    def save_formset(self, request, form, formset, change):
+        print self
 
 
 @admin.register(User)
@@ -404,3 +441,20 @@ class LeagueTimeAdmin(admin.ModelAdmin):
         'promoting_count',
         'demoting_count'
     )
+
+
+@admin.register(Fake)
+class FakeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'league',
+        'enable'
+    )
+
+    list_editable = (
+        'enable',
+    )
+
+    inlines = (FakeDetailInline, )
+

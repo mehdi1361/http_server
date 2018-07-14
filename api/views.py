@@ -312,12 +312,13 @@ class UserViewSet(viewsets.ModelViewSet):
                 "num_wins": league.league.base_league.win_promoting_count
             }
             final_result['remain_time'] = LeagueTime.remain_time()
+            final_result['fake'] = league.league.params['fake_user']
 
             prizes = []
             for league in League.objects.all().order_by('step_number'):
                 prizes.append({
-                    "gem": league.params['play_off_reward']['gem'],
-                    "coin": league.params['play_off_reward']['coin']}
+                    "gem": league.params['play_off_reward']['gem'] if league.params is not None else None,
+                    "coin": league.params['play_off_reward']['coin']} if league.params is not None else None
                 )
 
             final_result['leagues_rewards'] = prizes

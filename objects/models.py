@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from base.models import Base, BaseUnit, Spell, SpellEffect
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
-from django.db.models import signals, Count
+from django.db.models import signals, Count, Sum
 from .validators import validate_percent, validate_sequence
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField, ArrayField
@@ -1075,6 +1075,64 @@ class LeagueTime(Base):
     def demoted(cls):
         league = cls.objects.get(expired=False)
         return league.demoting_count
+
+
+@python_2_unicode_compatible
+class Fake(Base):
+    name = models.CharField(_('fake description'), max_length=50, null=True, blank=True)
+    league = models.ForeignKey(League, verbose_name=_('league'), related_name='fakes')
+    enable = models.BooleanField(_('enable'), default=True)
+
+    class Meta:
+        verbose_name = _('fake')
+        verbose_name_plural = _('fakes')
+        db_table = 'fakes'
+
+    def __str__(self):
+        return 'fake-{}'.format(self.name)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None, *args, **kwargs):
+        Fake.objects.filter(league=self.league).update(enable=False)
+        super(Fake, self).save(*args, **kwargs)
+
+    @classmethod
+    def valid_quantity(cls, fake_id, exclude_lst, value):
+        fake = cls.objects.get(pk=fake_id)
+        detail_sum = fake.details.exclude(id__in=exclude_lst).aggregate(Sum('quantity'))
+
+        if detail_sum['quantity__sum'] + value <= fake.league.capacity:
+            return True
+
+        return False
+
+
+@python_2_unicode_compatible
+class FakeDetail(Base):
+    TYPE_STATUS = (
+        ('promote', 'promote'),
+        ('normal', 'normal'),
+        ('demote', 'demote'),
+    )
+    quantity = models.PositiveIntegerField(_('quantity'), default=5)
+    win_rate_min = models.PositiveIntegerField(_('win rate min percent'))
+    win_rate_max = models.PositiveIntegerField(_('win rate max percent'))
+    type = models.CharField(_('type'), max_length=10, choices=TYPE_STATUS)
+    fake = models.ForeignKey(Fake, verbose_name=_('fake'), related_name='details')
+
+    class Meta:
+        unique_together = ('type', 'fake')
+        verbose_name = _('fake_detail')
+        verbose_name_plural = _('fake_details')
+        db_table = 'fake_details'
+
+    def __str__(self):
+        return 'fake-{}-{}-{}'.format(self.fake.name, self.type, self.quantity)
+
+    def unique_error_message(self, model_class, unique_check):
+        if model_class == type(self) and unique_check == ('field1', 'field2'):
+            return 'type duplicated !!!'
+        else:
+            return super(FakeDetail, self).unique_error_message(model_class, unique_check)
 
 
 def create_user_dependency(sender, instance, created, **kwargs):
