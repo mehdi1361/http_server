@@ -23,6 +23,7 @@ from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
 from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
+from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
 from reports.models import Battle
@@ -231,7 +232,7 @@ class UserViewSet(viewsets.ModelViewSet):
             score_board = []
             idx = 1
 
-            for user in LeagueUser.objects.filter(league=league.league).order_by('-score'):
+            for user in LeagueUser.objects.in_league().filter(league=league.league).order_by('-score'):
                 serializer = LeagueUserSerializer(user)
 
                 result = serializer.data
@@ -695,6 +696,23 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         )
 
         return Response(data, status=status.HTTP_200_OK)
+
+    @list_route(methods=['POST'])
+    def skip_video(self, request):
+        token = request.data.get('token')
+        unit_id = request.data.get('unit_id')
+        service = request.data.get('service')
+        user_card = get_object_or_404(UserCard, user=request.user, character_id=unit_id)
+
+        video_ads = VideoAdsFactory.create(service, token)
+
+        if video_ads.run() and (user_card.cool_down is not None or user_card.cool_down != 0):
+            user_card.cool_down -= timedelta(seconds=settings.SUB_COOLDOWN_TROOP)
+            user_card.save()
+
+            return Response({"id": 200, "time": user_card.cool_down_remain_time}, status=status.HTTP_200_OK)
+
+        return Response({"id": 400, "error": "video token not valid"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):

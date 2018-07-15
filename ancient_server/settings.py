@@ -279,3 +279,14 @@ COOL_DOWN_TIME = 300
 LEAGUE_LENGTH = 20
 
 NUM_GAMES = 3
+
+TAP_SELL_URL = "http://api.tapsell.ir/v2/suggestions/validate-suggestion"
+
+TAPLIGH_URL = "http://api.tapligh.com/valid/token"
+TAPLIGH_VERIFY_TOKEN = 'BO0D3I6NZM6FI8UHCYSZZBBDOLGBJS'
+TAPLIGH_SDK_VERSION = '2.0.3'
+TAPLIGH_PACKAGE_NAME = 'com.tapligh.sdk'
+
+
+SUB_COOLDOWN_TROOP = 1800
+
