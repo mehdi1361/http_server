@@ -264,6 +264,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 for idx, item in enumerate(score_board):
                     item['rank'] = idx + 1
                     if item['player'] == request.user.user_currency.name:
+                        previous_rank = league.rank
+                        current_rank = idx
                         league.rank = idx + 1
                         league.save()
 
@@ -488,6 +490,47 @@ class UserViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK
         )
 
+    @list_route(methods=['POST'])
+    def video_ads(self, request):
+        try:
+            valid_type = ['troop', 'chest']
+
+            token = request.data.get('token')
+            receieve_id = request.data.get('id')
+            service = request.data.get('service')
+            object_type = request.data.get('type')
+
+            if object_type not in valid_type:
+                raise Exception('type not valid!!!')
+
+            video_ads = VideoAdsFactory.create(service, token)
+            valid_video = not video_ads.run()
+
+            if object_type == 'troop' and valid_video:
+                user_card = get_object_or_404(UserCard, user=request.user, character_id=receieve_id)
+
+                user_card.cool_down -= timedelta(seconds=settings.SUB_COOLDOWN_TROOP)
+                user_card.save()
+
+                return Response({"id": 200, "time": user_card.cool_down_remain_time}, status=status.HTTP_200_OK)
+
+            if object_type == 'chest' and valid_video:
+                user_chest = UserChest.objects.get(user=request.user, id=receieve_id)
+                user_chest.chest_opening_date -= timedelta(seconds=settings.SUB_OPENING_CHEST)
+                user_chest.save()
+                return Response({"id": 200, "time": user_chest.remain_time}, status=status.HTTP_200_OK)
+
+            return Response({"id": 400, "error": "video token not valid"}, status=status.HTTP_400_BAD_REQUEST)
+
+        except UserChest.DoesNotExist as e:
+            return Response({"id": 400, "error": "chest does not exists!!!"}, status=status.HTTP_400_BAD_REQUEST)
+
+        except UserCard.DoesNotExist as e:
+            return Response({"id": 400, "error": "troop does not exists!!!"}, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
@@ -697,22 +740,7 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
         return Response(data, status=status.HTTP_200_OK)
 
-    @list_route(methods=['POST'])
-    def skip_video(self, request):
-        token = request.data.get('token')
-        unit_id = request.data.get('unit_id')
-        service = request.data.get('service')
-        user_card = get_object_or_404(UserCard, user=request.user, character_id=unit_id)
 
-        video_ads = VideoAdsFactory.create(service, token)
-
-        if video_ads.run() and (user_card.cool_down is not None or user_card.cool_down != 0):
-            user_card.cool_down -= timedelta(seconds=settings.SUB_COOLDOWN_TROOP)
-            user_card.save()
-
-            return Response({"id": 200, "time": user_card.cool_down_remain_time}, status=status.HTTP_200_OK)
-
-        return Response({"id": 400, "error": "video token not valid"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
