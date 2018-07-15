@@ -1,4 +1,5 @@
 import os
+import random
 from django.core import management
 from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
@@ -63,3 +64,33 @@ class LeagueReset(CronJobBase):
 
         else:
             print "not yet reset leagues"
+
+
+class FakeUserGame(CronJobBase):
+    RUN_EVERY_MINS = 10
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    code = 'objects.fak_game'
+
+    def do(self):
+        for created_league in CreatedLeague.enable_leagues.all():
+            for fake_user in created_league.params['fake_user']:
+                fake_user_chance = random.randint(0, 100)
+
+                if fake_user['win_rate'] > fake_user_chance:
+                    fake_user['score'] += random.randint(10, 18)
+                    fake_user['win_rate'] -= 1
+
+                    if fake_user['win_rate'] < fake_user['min_rate']:
+                        fake_user['win_rate'] = fake_user['min_rate']
+
+                else:
+                    fake_user['score'] -= random.randint(10, 18)
+                    if fake_user['score'] < 0:
+                        fake_user['score'] = 0
+
+                    fake_user['win_rate'] += 1
+
+                    if fake_user['win_rate'] > fake_user['max_rate']:
+                        fake_user['win_rate'] = fake_user['max_rate']
+
+            created_league.save()
