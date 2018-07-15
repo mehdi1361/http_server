@@ -19,6 +19,225 @@ from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.db import transaction
+# from common.utils import generate_fake_user_league
+
+
+def generate_fake_user_league(league):
+    lst_name = ["محمود",
+                "احمد",
+                "احمد آقا",
+                "مصطفی",
+                "میر مهدی",
+                "شب خوب",
+                "چوگاس",
+                "ولکوز",
+                "گوی بلورین",
+                "هشدرخان",
+                "تتلو",
+                "رضا",
+                "سمیه",
+                "دلار جهانگیری",
+                "خرزو خان",
+                "میر قاراشمیش",
+                "پایتون",
+                "کانتر لاجیک",
+                "رندوم لاجیک",
+                "آلفرد هیچکاک",
+                "استاد اسدی",
+                "شمائی زاده",
+                "غول مرحله آخر",
+                "صمصام",
+                "کیانو",
+                "عادل پور",
+                "فردوپوس",
+                "نتیجة الپراید",
+                "غول نارمک",
+                "پینک فلوید",
+                "پژمان",
+                "ولبورن",
+                "مارشال",
+                "پسقل",
+                "چیترا",
+                "میلاد",
+                "بابک",
+                "شعبون",
+                "سجاد",
+                "کارون",
+                "شکوفه",
+                "اقبال",
+                "فرمانده",
+                "شهرام",
+                "تریتا",
+                "یاس سفید",
+                "پارسا",
+                "مهربینا",
+                "الوند",
+                "سرو",
+                "کامبو",
+                "فازسه",
+                "شکیلا",
+                "اعظم",
+                "صلاح",
+                "شورانگیز",
+                "لواشک",
+                "گرگینه",
+                "آفتاب شرقی",
+                "پاندورا",
+                "قیمت",
+                "کروو اتانو",
+                "امیلی کالدوین",
+                "سیدر",
+                "ابن سینا",
+                "داش ابرام",
+                "گاندو",
+                "ژینوس",
+                "آلفا",
+                "رادیکال باز",
+                "کروشه به توان دو ",
+                "شاهکار",
+                "سلیمان",
+                "ونداد",
+                "هستی",
+                "همایون",
+                "بهمنیار",
+                "آگوست",
+                "بنیامین",
+                "محمدعلی",
+                "قباد",
+                "عمه ملوک",
+                "معین",
+                "آمنه",
+                "دیبا",
+                "صدرا",
+                "پوست پیاز",
+                "چنگیز ",
+                "بیژن ",
+                "امیر حسین",
+                "محمد جواد ",
+                "مش قنبر",
+                "کیکاووس",
+                "کامیار",
+                "گل بانو",
+                "کوکب",
+                "صفدر",
+                "اعلا",
+                "طهمورث",
+                "خشایار",
+                "آرش کمانگیر",
+                "غلام ",
+                "قلی",
+                "خسرو",
+                "بهنام",
+                "شکارچی شب",
+                "پلنگ صورتی",
+                "قلیدون",
+                "شایان",
+                "سیمین دخت",
+                "کوژین",
+                "نارما",
+                "کفشدوزک",
+                "قاصدک",
+                "کولبر",
+                "پاگنده",
+                "بنز",
+                "نوید",
+                "امید",
+                "چکامه",
+                "فریبرز",
+                "جواد",
+                "رامین",
+                "هرود",
+                "آنخماهو",
+                "چلیپا",
+                "لیلی",
+                "عبدعلی",
+                "ثریا",
+                "صمد",
+                "ضیا",
+                "سامانتا",
+                "پیکان",
+                "یوسف",
+                "واهیک",
+                "مه رو",
+                "مبارک",
+                "کادیلاک",
+                "سپر سیاوش",
+                "سیاووشان",
+                "قداره",
+                "دشنه",
+                "دمپایی ابری",
+                "اسفندیار",
+                "بهرام",
+                "ننه حسن",
+                "اتلو",
+                "کابوی",
+                "پدرام",
+                "پویا",
+                "نریمان",
+                "بابا طاهر عریان",
+                "رویا",
+                "وحید",
+                "طاهر",
+                "آتیلا",
+                "تیلدا",
+                "مراد",
+                "خشم ژیان",
+                "ناربیا",
+                "هیولا ",
+                "کریم",
+                "مریم",
+                "اژدر",
+                "کوروش",
+                "گرگ زخمی",
+                "بردیا",
+                "لیلا",
+                "رستم",
+                "سهراب",
+                "مرد نامرئی",
+                "تنها ",
+                "کیارش",
+                "علی",
+                "امیرعلی",
+                "ارسطو",
+                "نقی",
+                "قاتل حرفه ای",
+                "لئون",
+                "پیلتن",
+                "پلنگ سیاه ",
+                "مهدی",
+                "میثاق",
+                "بابک ",
+                "پرویز",
+                "ستاره ",
+                "خرم الدین",
+                "ارسلان ",
+                "دلاور",
+                ]
+    fake_user_lst = []
+    result = []
+
+    fake = Fake.objects.filter(league=league).enable().first()
+
+    for item in fake.details.all():
+        for i in range(0, item.quantity):
+            enable = True
+            while enable:
+                random_number = random.randint(0, len(lst_name) - 1)
+
+                if random_number not in result:
+                    result.append(random_number)
+                    selected_name = lst_name[random_number]
+                    enable = False
+
+            fake_user_lst.append({
+                "name": selected_name,
+                "score": 0,
+                "win_rate": random.randint(item.win_rate_min, item.win_rate_max),
+                "min_rate": item.win_rate_min,
+                "max_rate": item.win_rate_max
+            })
+
+    return fake_user_lst
 
 
 @python_2_unicode_compatible
@@ -731,6 +950,16 @@ class CreatedLeague(Base):
         verbose_name_plural = _('created_leagues')
         db_table = 'created_leagues'
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None, *args, **kwargs):
+
+        if self.pk is None:
+            self.params = {
+                'fake_user': generate_fake_user_league(self.base_league)
+            }
+
+        super(CreatedLeague, self).save(*args, **kwargs)
+
     def __str__(self):
         return '{}'.format(self.id)
 
@@ -1077,11 +1306,26 @@ class LeagueTime(Base):
         return league.demoting_count
 
 
+class FakeQuerySet(models.QuerySet):
+    def enable(self):
+        return self.filter(enable=True)
+
+
+class FakeManager(models.Manager):
+    def get_queryset(self):
+        return FakeQuerySet(self.model, using=self._db)
+
+    def enable(self):
+        return self.get_queryset().enable()
+
+
 @python_2_unicode_compatible
 class Fake(Base):
     name = models.CharField(_('fake description'), max_length=50, null=True, blank=True)
     league = models.ForeignKey(League, verbose_name=_('league'), related_name='fakes')
     enable = models.BooleanField(_('enable'), default=True)
+
+    objects = FakeManager()
 
     class Meta:
         verbose_name = _('fake')

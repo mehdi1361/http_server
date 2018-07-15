@@ -27,6 +27,7 @@ from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar
 from reports.models import Battle
 from django.db.models import Q
+from operator import itemgetter
 
 
 class DefaultsMixin(object):
@@ -245,8 +246,25 @@ class UserViewSet(viewsets.ModelViewSet):
                 idx += 1
                 score_board.append(result)
 
-            # if len(score_board) < league.league.base_league.capacity:
-            #     fake_count = league.league.base_league.capacity - len(score_board)
+            if len(score_board) < league.league.base_league.capacity:
+                fake_count = league.league.base_league.capacity - len(score_board)
+
+                for i in range(0, fake_count):
+                    score_board.append(
+                        {
+                            'score': league.league.params['fake_user'][i]['score'],
+                            'rank': 0,
+                            'player': league.league.params['fake_user'][i]['name']
+                        }
+                    )
+
+                score_board = sorted(score_board, key=itemgetter('score'), reverse=True)
+
+                for idx, item in enumerate(score_board):
+                    item['rank'] = idx + 1
+                    if item['player'] == request.user.user_currency.name:
+                        league.rank = idx + 1
+                        league.save()
 
             prize_serializer = LeaguePrizeSerializer(league.league.base_league.prizes, many=True)
 
@@ -312,7 +330,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 "num_wins": league.league.base_league.win_promoting_count
             }
             final_result['remain_time'] = LeagueTime.remain_time()
-            final_result['fake'] = league.league.params['fake_user']
+
 
             prizes = []
             for league in League.objects.all().order_by('step_number'):
