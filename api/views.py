@@ -504,7 +504,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 raise Exception('type not valid!!!')
 
             video_ads = VideoAdsFactory.create(service, token)
-            valid_video = not video_ads.run()
+            valid_video = video_ads.run()
 
             if object_type == 'troop' and valid_video:
                 user_card = get_object_or_404(UserCard, user=request.user, character_id=receieve_id)
