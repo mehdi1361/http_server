@@ -96,7 +96,6 @@ class LeagueSerializer(serializers.ModelSerializer):
     class Meta:
         model = League
         fields = (
-            'league_name',
             'capacity',
             'league_step',
             'league_type',

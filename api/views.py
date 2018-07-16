@@ -264,7 +264,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 for idx, item in enumerate(score_board):
                     item['rank'] = idx + 1
                     if item['player'] == request.user.user_currency.name:
-                        previous_rank = league.rank
+                        previous_rank = league.rank if league.rank else idx
                         current_rank = idx
                         league.rank = idx + 1
                         league.save()
@@ -395,11 +395,28 @@ class UserViewSet(viewsets.ModelViewSet):
                 league.play_off_status = 'start'
                 league.save()
 
+                if league.play_off_count <= 1:
+                    play_off_count = league.league.base_league.play_off_start_gem
+
+                elif league.play_off_count == 2:
+                    play_off_count = league.league.base_league.play_off_start_gem_1
+
+                else:
+                    play_off_count = league.league.base_league.play_off_start_gem_2
+
                 return Response(
                     {
                         "id": 200,
                         "message": "playoff activate",
-                        "gem_count": request.user.user_currency.gem
+                        "gem_count": request.user.user_currency.gem,
+                        "play_off_info": {
+                            "status": league.play_off_status,
+                            "start_gem_price": play_off_count,
+                            "unlock_need_score": league.league.base_league.play_off_unlock_score,
+                            "result": [] if PlayOff.log(request.user.user_currency) == -1
+                            else PlayOff.log(request.user.user_currency),
+                            "num_wins": league.league.base_league.win_promoting_count
+                        }
                     },
                     status=status.HTTP_200_OK
                 )
@@ -739,8 +756,6 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         )
 
         return Response(data, status=status.HTTP_200_OK)
-
-
 
 
 class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
