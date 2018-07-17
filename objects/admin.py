@@ -132,7 +132,7 @@ class AccountsUserAdmin(admin.ModelAdmin):
 
 @admin.register(UserCurrency)
 class UserCurrencyAdmin(admin.ModelAdmin):
-    list_display = ['name', 'gem', 'coin', 'trophy', 'player_id', 'ban_user']
+    list_display = ['name', 'gem', 'coin', 'trophy', 'player_id', 'win_count', 'lose_count', 'ban_user']
     list_editable = ['ban_user']
     search_fields = ['name']
     inlines = [PurchaseLogAdmin, CurrencyLogAdmin]

@@ -333,6 +333,9 @@ class UserCurrency(Base):
     next_session_remaining_seconds = models.PositiveIntegerField(_('next session remaining seconds'), default=0)
     tutorial_done = models.BooleanField(_('tutorial'), default=False)
     ban_user = models.BooleanField(_('ban user'), default=False)
+    win_count = models.PositiveIntegerField(_('win count'), default=0)
+    lose_count = models.PositiveIntegerField(_('lose count'), default=0)
+
     history = HistoricalRecords()
 
     class Meta:
