@@ -491,9 +491,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def match_count(self, request):
-        battle_count = Battle.objects.filter(
-            Q(player_1=request.user.username) | Q(player_2=request.user.username)
-        ).count()
+        profile = UserCurrency.objects.get(user=request.user)
+        battle_count = profile.win_count + profile.lose_count
 
         if battle_count > settings.NUM_GAMES:
             battle_count = 3
