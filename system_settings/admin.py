@@ -22,6 +22,7 @@ class CTMAdmin(admin.ModelAdmin):
         'max_hero',
         'chance_hero',
         'total',
+        'card_try',
     ]
     list_editable = [
         'chest_type',
@@ -37,4 +38,5 @@ class CTMAdmin(admin.ModelAdmin):
         'max_hero',
         'chance_hero',
         'total',
+        'card_try'
     ]
