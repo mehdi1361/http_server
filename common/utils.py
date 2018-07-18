@@ -357,3 +357,138 @@ def league_status(player, league):
 
     return 'normal'
 
+
+class CtmChestGenerate:
+
+    def __init__(self, user, chest_type_index=None, chest_type='non_free'):
+        self.user = user
+        self.chest_type_index = chest_type_index
+        self.chest_type = chest_type
+
+    def generate_chest(self):
+        cards_type = 4
+        lst_unit = []
+
+        if not UserChest.deck_is_open(self.user, self.chest_type):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type_index)
+
+        max_unit_card_count = chest.unit_card
+
+        if chest.hero_card > 0:
+            cards_type -= 1
+            # TODO create hero card
+
+        for i in range(0, cards_type):
+            if i != cards_type:
+                count = random.randint(1, max_unit_card_count)
+
+            else:
+                count = max_unit_card_count
+
+            lst_unit = self._get_card(count, lst_unit)
+
+            max_unit_card_count -= count
+            if max_unit_card_count <= 0:
+                break
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data":
+                {
+                    "chest_type": chest.get_chest_type_display(),
+                    "gems": random.randint(chest.min_gem, chest.max_gem),
+                    "coins": random.randint(chest.min_coin, chest.max_coin),
+                    "units": lst_unit
+                }
+        }
+
+        if self.chest_type_index is None:
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def generate_tutorial_chest(self):
+        cards_type = 4
+        lst_unit = []
+
+        if not UserChest.deck_is_open(self.user, 'non_free'):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type_index)
+
+        max_unit_card_count = chest.unit_card
+
+        if chest.hero_card > 0:
+            cards_type -= 1
+            # TODO create hero card
+
+        for i in range(0, cards_type):
+            if i != cards_type:
+                count = random.randint(1, max_unit_card_count)
+
+            else:
+                count = max_unit_card_count
+
+            lst_unit = self._get_card(count, lst_unit)
+
+            max_unit_card_count -= count
+            if max_unit_card_count <= 0:
+                break
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data":
+                {
+                    "chest_type": chest.get_chest_type_display(),
+                    "gems": random.randint(chest.min_gem, chest.max_gem),
+                    "coins": random.randint(chest.min_coin, chest.max_coin),
+                    "units": lst_unit
+                },
+            "chest_monetaryType": "free"
+        }
+
+        if self.chest_type_index is None:
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def _get_card(self, count, lst_unit):
+        # unit_index = random.randint(1, Unit.count())
+        unit_list = list(Unit.objects.filter(unlock=True).values_list('id', flat=True))
+        unit_index = random.choice(unit_list)
+        unit = Unit.objects.get(pk=unit_index)
+
+        data = {
+            "unit": str(unit),
+            "count": count
+        }
+
+        find_match = False
+
+        for item in lst_unit:
+            if item["unit"] == unit:
+                find_match = True
+                item["count"] += count
+
+        if not find_match:
+            lst_unit.append(data)
+
+        return lst_unit

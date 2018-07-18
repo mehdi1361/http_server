@@ -35,6 +35,7 @@ class CTM(Base):
     chance_hero = models.PositiveIntegerField(_('chance hero'), default=0)
 
     total = models.PositiveIntegerField(_('total'), default=0)
+    card_try = models.PositiveIntegerField(_('count try'), default=0)
 
     class Meta:
         verbose_name = _('ctm')
