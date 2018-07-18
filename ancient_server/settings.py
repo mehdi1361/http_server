@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'dbbackup',
     'logs',
     'reports',
+    'system_settings',
 ]
 
 MIDDLEWARE = [
