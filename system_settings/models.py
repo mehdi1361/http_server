@@ -28,11 +28,11 @@ class CTM(Base):
 
     min_troop = models.PositiveIntegerField(_('min troop'), default=0)
     max_troop = models.PositiveIntegerField(_('max troop'), default=0)
-    chance_troop = models.PositiveIntegerField(_('chance troop'), default=0)
+    chance_troop = models.FloatField(_('chance troop'), default=0)
 
     min_hero = models.PositiveIntegerField(_('min hero'), default=0)
     max_hero = models.PositiveIntegerField(_('max hero'), default=0)
-    chance_hero = models.PositiveIntegerField(_('chance hero'), default=0)
+    chance_hero = models.FloatField(_('chance hero'), default=0)
 
     total = models.PositiveIntegerField(_('total'), default=0)
     card_try = models.PositiveIntegerField(_('count try'), default=0)
