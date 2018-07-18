@@ -3,10 +3,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 from base.models import Base
-from objects.models import League, Unit, Hero
+from objects.models import League
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
-from django.db.models import signals
 
 
 @python_2_unicode_compatible
@@ -29,14 +28,13 @@ class CTM(Base):
 
     min_troop = models.PositiveIntegerField(_('min troop'), default=0)
     max_troop = models.PositiveIntegerField(_('max troop'), default=0)
-    chance_troop = models.FloatField(_('chance troop'), default=0)
+    chance_troop = models.PositiveIntegerField(_('chance troop'), default=0)
 
     min_hero = models.PositiveIntegerField(_('min hero'), default=0)
     max_hero = models.PositiveIntegerField(_('max hero'), default=0)
-    chance_hero = models.FloatField(_('chance hero'), default=0)
+    chance_hero = models.PositiveIntegerField(_('chance hero'), default=0)
 
     total = models.PositiveIntegerField(_('total'), default=0)
-    card_try = models.PositiveIntegerField(_('count try'), default=0)
 
     class Meta:
         verbose_name = _('ctm')
@@ -46,45 +44,3 @@ class CTM(Base):
 
     def __str__(self):
         return '{}-{}'.format(self.chest_type, self.league.league_name)
-
-
-class CTMUnit(Base):
-    ctm = models.ForeignKey(CTM, verbose_name=_('ctm'), related_name='units')
-    unit = models.ForeignKey(Unit, verbose_name=_('unit'), related_name='ctms')
-    enable = models.BooleanField(_('enable'), default=True)
-
-    class Meta:
-        verbose_name = _('ctm_unit')
-        verbose_name_plural = _('ctm_units')
-        db_table = 'ctm_units'
-        unique_together = ('ctm', 'unit')
-
-    def __str__(self):
-        return 'ctm-{}-{}'.format(self.ctm.id, self.unit.moniker)
-
-
-class CTMHero(Base):
-    ctm = models.ForeignKey(CTM, verbose_name=_('ctm'), related_name='heroes')
-    hero = models.ForeignKey(Hero, verbose_name=_('unit'), related_name='ctms')
-    enable = models.BooleanField(_('enable'), default=True)
-
-    class Meta:
-        verbose_name = _('ctm_hero')
-        verbose_name_plural = _('ctm_heroes')
-        db_table = 'ctm_heroes'
-        unique_together = ('ctm', 'hero')
-
-    def __str__(self):
-        return 'ctm-{}-{}'.format(self.ctm.id, self.hero.moniker)
-
-
-def assigned_item_to_ctm(sender, instance, created, **kwargs):
-    if created:
-        for unit in Unit.objects.all():
-            CTMUnit.objects.create(unit=unit, ctm=instance)
-
-        for hero in Hero.objects.all():
-            CTMHero.objects.create(hero=hero, ctm=instance)
-
-
-signals.post_save.connect(assigned_item_to_ctm, sender=CTM)

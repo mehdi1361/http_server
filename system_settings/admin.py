@@ -2,25 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import CTM, CTMUnit, CTMHero
-
-
-class CTMUnitInline(admin.StackedInline):
-    list_display = [
-        'unit',
-        'enable'
-    ]
-    readonly_fields = ['unit', 'params']
-    model = CTMUnit
-
-
-class CTMHeroInline(admin.StackedInline):
-    list_display = [
-        'hero',
-        'enable'
-    ]
-    readonly_fields = ['hero', 'params']
-    model = CTMHero
+from .models import CTM
 
 
 @admin.register(CTM)
@@ -40,7 +22,6 @@ class CTMAdmin(admin.ModelAdmin):
         'max_hero',
         'chance_hero',
         'total',
-        'card_try',
     ]
     list_editable = [
         'chest_type',
@@ -56,7 +37,4 @@ class CTMAdmin(admin.ModelAdmin):
         'max_hero',
         'chance_hero',
         'total',
-        'card_try'
     ]
-
-    inlines = (CTMUnitInline, CTMHeroInline)
