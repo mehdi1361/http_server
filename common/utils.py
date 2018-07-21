@@ -3,6 +3,7 @@ from __future__ import print_function
 import random
 from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague
 from django.conf import settings
+from system_settings.models import CTM
 
 
 class ClassPropertyDescriptor(object):
@@ -361,9 +362,11 @@ def league_status(player, league):
 class CtmChestGenerate:
 
     def __init__(self, user, chest_type_index=None, chest_type='non_free'):
+        league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
         self.user = user
         self.chest_type_index = chest_type_index
         self.chest_type = chest_type
+        self.league = league.league.base_league
 
     def generate_chest(self):
         cards_type = 4
@@ -471,6 +474,7 @@ class CtmChestGenerate:
         return data["reward_data"]
 
     def _get_card(self, count, lst_unit):
+        ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
         # unit_index = random.randint(1, Unit.count())
         unit_list = list(Unit.objects.filter(unlock=True).values_list('id', flat=True))
         unit_index = random.choice(unit_list)

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from base.models import Base
-from objects.models import League
+from objects.models import League, Unit, Hero
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -45,3 +45,33 @@ class CTM(Base):
 
     def __str__(self):
         return '{}-{}'.format(self.chest_type, self.league.league_name)
+
+
+class CTMUnit(Base):
+    ctm = models.ForeignKey(CTM, verbose_name=_('ctm'), related_name='units')
+    unit = models.ForeignKey(Unit, verbose_name=_('unit'), related_name='ctms')
+    enable = models.BooleanField(_('enable'), default=True)
+
+    class Meta:
+        verbose_name = _('ctm_unit')
+        verbose_name_plural = _('ctm_units')
+        db_table = 'ctm_units'
+        unique_together = ('ctm', 'unit')
+
+    def __str__(self):
+        return 'ctm-{}-{}'.format(self.ctm.id, self.unit.moniker)
+
+
+class CTMHero(Base):
+    ctm = models.ForeignKey(CTM, verbose_name=_('ctm'), related_name='heroes')
+    hero = models.ForeignKey(Hero, verbose_name=_('unit'), related_name='ctms')
+    enable = models.BooleanField(_('enable'), default=True)
+
+    class Meta:
+        verbose_name = _('ctm_hero')
+        verbose_name_plural = _('ctm_heroes')
+        db_table = 'ctm_heroes'
+        unique_together = ('ctm', 'hero')
+
+    def __str__(self):
+        return 'ctm-{}-{}'.format(self.ctm.id, self.hero.moniker)

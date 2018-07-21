@@ -22,11 +22,11 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
-from common.utils import hero_normalize_data, \
+from common.utils import ChestGenerate, hero_normalize_data, \
     unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
-from common.payment_verification import CafeBazar, FactoryStore
+from common.payment_verification import CafeBazar
 from reports.models import Battle
 from django.db.models import Q
 from operator import itemgetter
@@ -67,19 +67,26 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         device_id = request.data['deviceUniqueID']
         device_name = request.data['deviceName']
+        return_id = 200
+        try:
+            device = Device.objects.get(device_id=device_id)
+            player_id = device.user.user.username
 
-        player_id = str(uuid.uuid1().int >> 32)
-        user = User.objects.create_user(username=player_id, password=player_id)
-        chest = CtmChestGenerate(user)
-        profile = UserCurrency.objects.get(user_id=user.id)
-        Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-        chest.generate_tutorial_chest()
-        return_id = 201
+        except Exception:
 
-        return Response(
-            {'id': return_id, 'player_id': player_id},
-            status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
-        )
+            player_id = str(uuid.uuid1().int >> 32)
+            user = User.objects.create_user(username=player_id, password=player_id)
+            chest = ChestGenerate(user)
+            profile = UserCurrency.objects.get(user_id=user.id)
+            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+            chest.generate_tutorial_chest()
+            return_id = 201
+
+        finally:
+            return Response(
+                {'id': return_id, 'player_id': player_id},
+                status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
+            )
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
@@ -111,7 +118,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         if chest.chest_monetaryType == 'free':
-            opening_date = datetime.now() + timedelta(seconds=5)
+            opening_date = datetime.now() + timedelta(seconds=10)
 
         else:
             opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
@@ -144,14 +151,7 @@ class UserViewSet(viewsets.ModelViewSet):
         chest.chest_status = 'ready'
         chest.save()
 
-        return Response(
-            {
-                'id': 201,
-                'message': 'chest change status ready',
-                'gem': profile.gem
-            },
-            status=status.HTTP_202_ACCEPTED
-        )
+        return Response({'id': 201, 'message': 'chest change status ready'}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
@@ -522,7 +522,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
             video_ads = VideoAdsFactory.create(service, token)
             valid_video = video_ads.run()
-            valid_video = True
 
             if object_type == 'troop' and valid_video:
                 user_card = get_object_or_404(UserCard, user=request.user, character_id=receieve_id)
@@ -545,37 +544,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         except UserCard.DoesNotExist as e:
             return Response({"id": 400, "error": "troop does not exists!!!"}, status=status.HTTP_400_BAD_REQUEST)
-
-        except Exception as e:
-            return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
-
-    @list_route(methods=['POST'])
-    def register_account(self, request):
-        try:
-            token = request.data.get('token')
-            request.user.user_currency.google_id = request.data.get('google_id')
-            request.user.user_currency.google_account = request.data.get('google_account')
-            request.user.user_currency.gem += 20
-            request.user.user_currency.save()
-
-            return Response(
-                {
-                    "id": 200,
-                    "message": "google account saved",
-                    "gem": request.user.user_currency.gem
-                },
-                status=status.HTTP_200_OK
-            )
-
-        except Exception as e:
-            return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
-
-    @list_route(methods=['POST'])
-    def get_account(self, request):
-        try:
-            profile = get_object_or_404(UserCurrency, username=request.data.get('google_id'))
-
-            return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
@@ -604,31 +572,26 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
 
-        if PurchaseLog.validate_token(request.data.get('purchase_token'), request.data.get('shop_id')):
-            PurchaseLog.objects.create(
-                user=profile,
-                store_purchase_token=request.data.get('purchase_token'),
-                shop=shop
-            )
+        if PurchaseLog.validate_token(request.data.get('purchase_token')):
+            PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'))
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        purchase_store = FactoryStore.create(
-            shop=shop,
+        bazar_purchase = CafeBazar(
             purchase_token=request.data.get('purchase_token'),
             product_id=request.data.get('product_id'),
             package_name=request.data.get('package_name')
         )
 
-        is_verified, message = purchase_store.is_verified()
+        is_verified, message = bazar_purchase.is_verified()
 
         if not is_verified:
             PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'),
-                                       store_params=message, shop=shop)
+                                       store_params=message)
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
         PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token')
-                                   , store_params=message, params=store, used_token=True, shop=shop)
+                                   , store_params=message, params=store, used_token=True)
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 
@@ -680,8 +643,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             request.user.user_currency.gem -= store['price']
             request.user.user_currency.save()
 
-            # chest = ChestGenerate(request.user, chest_type[store['type']], 'free')
-            chest = CtmChestGenerate(request.user, chest_type=chest_type[store['type']])
+            chest = ChestGenerate(request.user, chest_type[store['type']], 'free')
             chest_value = chest.generate_chest()
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 
@@ -718,7 +680,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         chst_item = []
 
         for offer_chest in store['chests']:
-            chest = CtmChestGenerate(request.user, chest_type=chest_type[store['type']])
+            chest = ChestGenerate(request.user, chest_type[offer_chest['type']])
             chest_value = chest.generate_chest()
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 
@@ -749,7 +711,7 @@ class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixi
         if not UserChest.deck_is_open(request.user, 'non_free'):
             return Response({'message': 'deck is full'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        chest_gen = CtmChestGenerate(request.user, chest_type_index='chest')
+        chest_gen = ChestGenerate(request.user)
         chest_gen.generate_chest()
         return Response({'message': 'chest generated'}, status=status.HTTP_200_OK)
 
@@ -921,5 +883,3 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         message.save()
 
         return Response({"id": 200, "message": "change type to read"}, status=status.HTTP_200_OK)
-
-
