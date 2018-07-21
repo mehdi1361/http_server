@@ -22,7 +22,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
-from common.utils import ChestGenerate, hero_normalize_data, unit_normalize_data, item_normalize_data
+from common.utils import ChestGenerate, hero_normalize_data, \
+    unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import CafeBazar

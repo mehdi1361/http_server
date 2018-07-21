@@ -442,6 +442,7 @@ class UserCard(Base):
     level = models.PositiveIntegerField(_('level'), default=1)
     cool_down = models.DateTimeField(_('cooldown'), null=True)
     cool_down_remaining_seconds = models.PositiveIntegerField(_('cool down remaining seconds'), default=0)
+    used_quantity = models.PositiveIntegerField(_('used quantity'), default=0)
     history = HistoricalRecords()
 
     objects = models.Manager()
