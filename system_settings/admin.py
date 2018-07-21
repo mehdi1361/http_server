@@ -2,7 +2,15 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import CTM
+from .models import CTM, CTMUnit, CTMHero
+
+
+class CTMUnitInline(admin.StackedInline):
+    model = CTMUnit
+
+
+class CTMHeroInline(admin.StackedInline):
+    model = CTMHero
 
 
 @admin.register(CTM)
@@ -40,3 +48,5 @@ class CTMAdmin(admin.ModelAdmin):
         'total',
         'card_try'
     ]
+
+    inlines = (CTMUnitInline, CTMHeroInline)
