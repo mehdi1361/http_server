@@ -480,6 +480,8 @@ class CtmChestGenerate:
         ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
 
         lst_result = []
+        lst_exclude = []
+
         for i in range(0, ctm.card_try - 1):
             if not self.selected_hero:
                 lst_valid_hero = []
@@ -514,7 +516,6 @@ class CtmChestGenerate:
                         self.selected_hero = True
 
             lst_valid_unit = []
-            lst_exclude = []
             for unit in ctm.units.filter(enable=True):
                 lst_valid_unit.append(unit.unit.id)
 
