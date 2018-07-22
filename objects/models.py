@@ -402,6 +402,8 @@ class UserHero(Base):
     enable_hero = models.BooleanField(_('enable hero'), default=False)
     quantity = models.PositiveIntegerField(_('quantity card'), default=0)
     level = models.PositiveIntegerField(_('level'), default=0)
+    used_count = models.PositiveIntegerField(_('used count'), default=0)
+
     selected_item = JSONField(_('selected item'), null=True, default=None, blank=True)
     history = HistoricalRecords()
 

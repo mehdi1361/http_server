@@ -1,9 +1,11 @@
 # -*- encoding: utf-8 -*-
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague
+from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard
 from django.conf import settings
-from system_settings.models import CTM
+from system_settings.models import CTM, CTMHero
+from random import shuffle
+from django.conf import settings
 
 
 class ClassPropertyDescriptor(object):
@@ -351,7 +353,7 @@ def league_status(player, league):
         return 'promoting'
 
     demoting_lst = LeagueUser.objects.values_list('player', flat=True).filter(league=league.league).order_by('score')[
-                    :league.league.base_league.demoting_count]
+                   :league.league.base_league.demoting_count]
 
     if player.id in demoting_lst:
         return 'demoting'
@@ -361,12 +363,13 @@ def league_status(player, league):
 
 class CtmChestGenerate:
 
-    def __init__(self, user, chest_type_index=None, chest_type='non_free'):
+    def __init__(self, user, chest_type_index=None, chest_type='W'):
         league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
         self.user = user
         self.chest_type_index = chest_type_index
         self.chest_type = chest_type
         self.league = league.league.base_league
+        self.selected_hero = False
 
     def generate_chest(self):
         cards_type = 4
@@ -473,26 +476,75 @@ class CtmChestGenerate:
 
         return data["reward_data"]
 
-    def _get_card(self, count, lst_unit):
+    def generate(self):
         ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
-        # unit_index = random.randint(1, Unit.count())
-        unit_list = list(Unit.objects.filter(unlock=True).values_list('id', flat=True))
-        unit_index = random.choice(unit_list)
-        unit = Unit.objects.get(pk=unit_index)
 
-        data = {
-            "unit": str(unit),
-            "count": count
-        }
+        lst_result = []
+        for i in range(0, ctm.card_try - 1):
+            if not self.selected_hero:
+                lst_valid_hero = []
+                for hero in ctm.heroes.filter(enable=True):
+                    lst_valid_hero.append(hero.hero.id)
 
-        find_match = False
+                random_hero_chance = random.uniform(0, 100)
 
-        for item in lst_unit:
-            if item["unit"] == unit:
-                find_match = True
-                item["count"] += count
+                if ctm.chance_hero >= random_hero_chance:
+                    user_heroes = list(UserHero.objects.filter(user=self.user, hero_id__in=lst_valid_hero))
+                    if user_heroes is not None:
+                        random_user_hero = user_heroes[random.randint(0, len(user_heroes) - 1)]
 
-        if not find_match:
-            lst_unit.append(data)
+                        if random_user_hero.quantity > settings.HERO_UPDATE[random_user_hero.level + 1]['hero_cards']:
+                            valid_card = random_user_hero.quantity \
+                                         - settings.HERO_UPDATE[random_user_hero.level + 1]['hero_cards']
+                        else:
+                            valid_card = settings.HERO_UPDATE[random_user_hero.level + 1][
+                                             'hero_cards'] - random_user_hero.quantity
 
-        return lst_unit
+                        variance = 100 + valid_card - random_user_hero.used_count
+
+                        if variance < 20:
+                            variance = 20
+
+                        lst_result.extend(
+                            [{
+                                "name": random_user_hero.hero.moniker,
+                                "type": "hero"
+                            }] * variance
+                        )
+                        self.selected_hero = True
+
+            lst_valid_unit = []
+            lst_exclude = []
+            for unit in ctm.units.filter(enable=True):
+                lst_valid_unit.append(unit.unit.id)
+
+            user_units = list(
+                UserCard.objects.filter(user=self.user, character_id__in=lst_valid_unit)
+                    .exclude(character_id__in=lst_exclude)
+            )
+
+            if user_units is not None:
+                random_user_unit = user_units[random.randint(0, len(user_units) - 1)]
+
+                if random_user_unit.quantity > settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards']:
+                    valid_card = random_user_unit.quantity - \
+                                 settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards']
+                else:
+                    valid_card = settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards'] \
+                                 - random_user_unit.quantity
+
+                variance = 100 + valid_card - random_user_unit.used_quantity
+
+                if variance < 20:
+                    variance = 20
+
+                lst_result.extend(
+                    [{
+                        "name": random_user_unit.character.moniker,
+                        "type": "troop"
+                    }] * variance
+                )
+
+                lst_exclude.append(random_user_unit.character.id)
+
+        return lst_result
