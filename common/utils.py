@@ -517,7 +517,7 @@ class CtmChestGenerate:
         data = {
             "chest_type": ctm.get_chest_type_display(),
             "gems": random.randint(ctm.min_gem, ctm.max_gem),
-            "coins": random.randint(ctm.min_coin, ctm.max_gem),
+            "coins": random.randint(ctm.min_coin, ctm.max_coin),
             "units": self.result
         }
 
