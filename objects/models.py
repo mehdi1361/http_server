@@ -601,7 +601,7 @@ class UserChest(Base):
         cls.objects.filter(user=user).update(sequence_number=0)
 
     @classmethod
-    def deck_is_open(cls, user, chest_type):
+    def deck_is_open(cls, user, chest_type='free'):
         if cls.objects.filter(
                 user=user,
                 chest_monetaryType=chest_type,
