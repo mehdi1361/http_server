@@ -22,7 +22,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from shopping.models import Shop
 from django.conf import settings
-from common.utils import ChestGenerate, hero_normalize_data, \
+from common.utils import hero_normalize_data, \
     unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
@@ -76,7 +76,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             player_id = str(uuid.uuid1().int >> 32)
             user = User.objects.create_user(username=player_id, password=player_id)
-            chest = ChestGenerate(user)
+            chest = CtmChestGenerate(user)
             profile = UserCurrency.objects.get(user_id=user.id)
             Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
             chest.generate_tutorial_chest()
@@ -118,7 +118,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         if chest.chest_monetaryType == 'free':
-            opening_date = datetime.now() + timedelta(seconds=10)
+            opening_date = datetime.now() + timedelta(seconds=5)
 
         else:
             opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
@@ -643,7 +643,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             request.user.user_currency.gem -= store['price']
             request.user.user_currency.save()
 
-            chest = ChestGenerate(request.user, chest_type[store['type']], 'free')
+            # chest = ChestGenerate(request.user, chest_type[store['type']], 'free')
+            chest = CtmChestGenerate(request.user, chest_type=chest_type[store['type']])
             chest_value = chest.generate_chest()
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 
@@ -680,7 +681,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         chst_item = []
 
         for offer_chest in store['chests']:
-            chest = ChestGenerate(request.user, chest_type[offer_chest['type']])
+            chest = CtmChestGenerate(request.user, chest_type=chest_type[store['type']])
             chest_value = chest.generate_chest()
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 
@@ -711,7 +712,7 @@ class UserChestViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixi
         if not UserChest.deck_is_open(request.user, 'non_free'):
             return Response({'message': 'deck is full'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        chest_gen = ChestGenerate(request.user)
+        chest_gen = CtmChestGenerate(request.user, chest_type_index='chest')
         chest_gen.generate_chest()
         return Response({'message': 'chest generated'}, status=status.HTTP_200_OK)
 
