@@ -370,12 +370,11 @@ class CtmChestGenerate:
         self.chest_type = chest_type
         self.league = league.league.base_league
         self.selected_hero = False
+        self.result = []
 
     def generate_chest(self):
-        cards_type = 4
-        lst_unit = []
 
-        if not UserChest.deck_is_open(self.user, self.chest_type):
+        if not UserChest.deck_is_open(self.user):
             return {"status": False, "message": "deck is full"}
 
         if self.chest_type_index is None:
@@ -383,51 +382,24 @@ class CtmChestGenerate:
             chest = Chest.get(chest_type)
 
         else:
-            chest = Chest.get(self.chest_type_index)
-
-        max_unit_card_count = chest.unit_card
-
-        if chest.hero_card > 0:
-            cards_type -= 1
-            # TODO create hero card
-
-        for i in range(0, cards_type):
-            if i != cards_type:
-                count = random.randint(1, max_unit_card_count)
-
-            else:
-                count = max_unit_card_count
-
-            lst_unit = self._get_card(count, lst_unit)
-
-            max_unit_card_count -= count
-            if max_unit_card_count <= 0:
-                break
+            chest = Chest.get(self.chest_type)
 
         data = {
             "user": self.user,
             "chest": chest,
             "sequence_number": UserChest.next_sequence(self.user),
-            "reward_data":
-                {
-                    "chest_type": chest.get_chest_type_display(),
-                    "gems": random.randint(chest.min_gem, chest.max_gem),
-                    "coins": random.randint(chest.min_coin, chest.max_coin),
-                    "units": lst_unit
-                }
+            "reward_data": self._get_card()
         }
 
-        if self.chest_type_index is None:
+        if self.chest_type_index == 'chest':
             UserChest.objects.create(**data)
             return {"status": True, "message": "chest created"}
 
         return data["reward_data"]
 
     def generate_tutorial_chest(self):
-        cards_type = 4
-        lst_unit = []
 
-        if not UserChest.deck_is_open(self.user, 'non_free'):
+        if not UserChest.deck_is_open(self.user):
             return {"status": False, "message": "deck is full"}
 
         if self.chest_type_index is None:
@@ -437,36 +409,11 @@ class CtmChestGenerate:
         else:
             chest = Chest.get(self.chest_type_index)
 
-        max_unit_card_count = chest.unit_card
-
-        if chest.hero_card > 0:
-            cards_type -= 1
-            # TODO create hero card
-
-        for i in range(0, cards_type):
-            if i != cards_type:
-                count = random.randint(1, max_unit_card_count)
-
-            else:
-                count = max_unit_card_count
-
-            lst_unit = self._get_card(count, lst_unit)
-
-            max_unit_card_count -= count
-            if max_unit_card_count <= 0:
-                break
-
         data = {
             "user": self.user,
             "chest": chest,
             "sequence_number": UserChest.next_sequence(self.user),
-            "reward_data":
-                {
-                    "chest_type": chest.get_chest_type_display(),
-                    "gems": random.randint(chest.min_gem, chest.max_gem),
-                    "coins": random.randint(chest.min_coin, chest.max_coin),
-                    "units": lst_unit
-                },
+            "reward_data": self._get_card(),
             "chest_monetaryType": "free"
         }
 
@@ -476,13 +423,14 @@ class CtmChestGenerate:
 
         return data["reward_data"]
 
-    def generate(self):
+    def _get_card(self):
+        self.result = []
         ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
 
         lst_result = []
         lst_exclude = []
 
-        for i in range(0, ctm.card_try - 1):
+        for i in range(0, ctm.card_try):
             if not self.selected_hero:
                 lst_valid_hero = []
                 for hero in ctm.heroes.filter(enable=True):
@@ -548,4 +496,29 @@ class CtmChestGenerate:
 
                 lst_exclude.append(random_user_unit.character.id)
 
-        return lst_result
+        shuffle(lst_result)
+        tmp_lst = []
+        while len(self.result) < ctm.card_try:
+
+            lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
+            idx = random.randint(0, len(lst_result) - 1)
+
+            if lst_result[idx]['name'] not in tmp_lst:
+                self.result.append(
+                    {
+                        "unit": str(lst_result[idx]['name']),
+                        "count": random.randint(ctm.min_troop, ctm.max_troop) if lst_result[idx]['type'] == 'troop' else
+                        random.randint(ctm.min_hero, ctm.max_hero)
+                    }
+                )
+
+                tmp_lst.append(lst_result[idx]['name'])
+
+        data = {
+            "chest_type": ctm.get_chest_type_display(),
+            "gems": random.randint(ctm.min_gem, ctm.max_gem),
+            "coins": random.randint(ctm.min_coin, ctm.max_gem),
+            "units": self.result
+        }
+
+        return data
