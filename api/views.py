@@ -588,11 +588,11 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         if not is_verified:
             PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'),
-                                       store_params=message)
+                                       store_params=message, shop=shop)
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
         PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token')
-                                   , store_params=message, params=store, used_token=True)
+                                   , store_params=message, params=store, used_token=True, shop=shop)
         request.user.user_currency.gem += store['amount']
         request.user.user_currency.save()
 

@@ -60,6 +60,7 @@ class PurchaseLog(Base):
     store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
     used_token = models.BooleanField(_('token used'), default=False)
     store_params = JSONField(_('store params'), null=True, blank=True)
+    shop = models.ForeignKey(Shop, verbose_name=_('shops'), null=True, related_name='shops')
 
     class Meta:
         verbose_name = _('purchase log')
