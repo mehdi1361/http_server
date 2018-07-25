@@ -7,7 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from base.models import Base
-from objects.models import UserHero, Unit
+from objects.models import UserHero
 
 
 @python_2_unicode_compatible
@@ -57,22 +57,3 @@ class UserHeroSummary(UserHero):
         proxy = True
         verbose_name = 'UserHero Summary'
         verbose_name_plural = 'UserHeroes Summary'
-
-
-@python_2_unicode_compatible
-class TroopReport(Base):
-    troop = models.ForeignKey(Unit, verbose_name=_('troop'), related_name='fight_reports')
-    win = models.PositiveIntegerField(_('win count'), default=0)
-    lose = models.PositiveIntegerField(_('lose count'), default=0)
-
-    class Meta:
-        verbose_name = _('troop_report')
-        verbose_name_plural = _('troop_reports')
-        db_table = 'troop_reports'
-
-    def __str__(self):
-        return '{}-win:{} - lose:{}'.format(self.troop.moniker, self.win, self.lose)
-
-
-
-
