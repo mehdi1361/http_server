@@ -369,7 +369,7 @@ class CtmChestGenerate:
             self.league = league.league.base_league
 
         except LeagueUser.DoesNotExist:
-            self.league = League.objects.get(id=1)
+            self.league = League.objects.get(league_name='Cooper01')
 
         self.user = user
         self.chest_type_index = chest_type_index
