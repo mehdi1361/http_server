@@ -76,6 +76,7 @@
     <div class="results">
         <div class="bar-chart">
         {% for x in summary %}
+            <div class="bar"></div>
             <div class="bar" style="height:{{ x.total }}%">
                 <div class="bar-tooltip">
                     {{x.total | default:0  }}<br>
