@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard
+from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard, League
 from django.conf import settings
 from system_settings.models import CTM, CTMHero
 from random import shuffle
@@ -364,11 +364,16 @@ def league_status(player, league):
 class CtmChestGenerate:
 
     def __init__(self, user, chest_type_index=None, chest_type='W'):
-        league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+        try:
+            league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+            self.league = league.league.base_league
+
+        except LeagueUser.DoesNotExist:
+            self.league = League.objects.get(id=1)
+
         self.user = user
         self.chest_type_index = chest_type_index
         self.chest_type = chest_type
-        self.league = league.league.base_league
         self.selected_hero = False
         self.result = []
 
