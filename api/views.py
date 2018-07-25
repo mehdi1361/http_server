@@ -26,7 +26,7 @@ from common.utils import hero_normalize_data, \
     unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
-from common.payment_verification import CafeBazar
+from common.payment_verification import CafeBazar, FactoryStore
 from reports.models import Battle
 from django.db.models import Q
 from operator import itemgetter
@@ -577,13 +577,14 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        bazar_purchase = CafeBazar(
+        purchase_store = FactoryStore.create(
+            shop=shop,
             purchase_token=request.data.get('purchase_token'),
             product_id=request.data.get('product_id'),
             package_name=request.data.get('package_name')
         )
 
-        is_verified, message = bazar_purchase.is_verified()
+        is_verified, message = purchase_store.is_verified()
 
         if not is_verified:
             PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'),
