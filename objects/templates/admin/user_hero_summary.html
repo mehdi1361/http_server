@@ -28,9 +28,8 @@
 
     <div class="results">
 
-    ...
 
-    <h2> Sales over time </h2>
+    <h2> used </h2>
 
     <style>
 
@@ -76,11 +75,11 @@
 
     <div class="results">
         <div class="bar-chart">
-        {% for x in summary_over_time %}
-            <div class="bar" style="height:{{x.pct}}%">
+        {% for x in summary %}
+            <div class="bar" style="height:{{ x.total }}%">
                 <div class="bar-tooltip">
                     {{x.total | default:0  }}<br>
-                    {{x.period | date:"d/m/Y"}}
+                    {{x.hero__moniker }}
                 </div>
             </div>
         {% endfor %}
