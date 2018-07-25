@@ -455,3 +455,4 @@ class FakeAdmin(admin.ModelAdmin):
 
     inlines = (FakeDetailInline, )
 
+

@@ -7,6 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from base.models import Base
+from objects.models import UserHero
 
 
 @python_2_unicode_compatible
@@ -49,3 +50,10 @@ class BattleTransaction(Base):
 
     def __str__(self):
         return '{}'.format(self.id)
+
+
+class UserHeroSummary(UserHero):
+    class Meta:
+        proxy = True
+        verbose_name = 'UserHero Summary'
+        verbose_name_plural = 'UserHeroes Summary'

@@ -885,3 +885,5 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         message.save()
 
         return Response({"id": 200, "message": "change type to read"}, status=status.HTTP_200_OK)
+
+
