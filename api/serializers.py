@@ -88,7 +88,9 @@ class UserCurrencySerializer(serializers.ModelSerializer):
             'need_comeback',
             'can_change_name',
             'tutorial_done', 
-            'next_session_remaining_seconds',
+            'next_session_remaining_seconds'
+            'google_account',
+            'google_id'
         )
 
 
@@ -198,7 +200,6 @@ class UserSerializer(serializers.ModelSerializer):
     general_units = serializers.SerializerMethodField()
     chest = serializers.SerializerMethodField()
     newsletter = serializers.SerializerMethodField()
-    google_id = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
@@ -206,7 +207,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'username',
             'password',
-            'google_id',
+            'email',
             'info',
             'heroes',
             'general_units',
@@ -297,10 +298,6 @@ class UserSerializer(serializers.ModelSerializer):
             list_unit.append(data)
 
         return list_unit
-
-    def get_google_id(self, requests):
-        return requests.user_currency.google_id
-
 
     # def create(self, validated_data):
     #     # if 'email' not in validated_data:

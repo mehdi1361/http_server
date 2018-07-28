@@ -336,6 +336,9 @@ class UserCurrency(Base):
     win_count = models.PositiveIntegerField(_('win count'), default=0)
     lose_count = models.PositiveIntegerField(_('lose count'), default=0)
 
+    google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
+    google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True, unique=True)
+
     history = HistoricalRecords()
 
     class Meta:
@@ -445,6 +448,7 @@ class UserCard(Base):
     cool_down = models.DateTimeField(_('cooldown'), null=True)
     cool_down_remaining_seconds = models.PositiveIntegerField(_('cool down remaining seconds'), default=0)
     used_quantity = models.PositiveIntegerField(_('used quantity'), default=0)
+
     history = HistoricalRecords()
 
     objects = models.Manager()
