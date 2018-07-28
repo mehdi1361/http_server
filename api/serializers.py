@@ -89,6 +89,8 @@ class UserCurrencySerializer(serializers.ModelSerializer):
             'can_change_name',
             'tutorial_done', 
             'next_session_remaining_seconds'
+            'google_account',
+            'google_id'
         )
 
 
