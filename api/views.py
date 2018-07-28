@@ -551,13 +551,21 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def register_account(self, request):
         try:
+            token = request.data.get('token')
             user = get_object_or_404(User, user_name=request.data.get('player_id'))
             user.user_currency.google_id = request.data.get('google_id')
             user.user_currency.google_account = request.data.get('google_account')
             user.user_currency.gem += 20
             user.user_currency.save()
 
-            return Response({"id": 200, "message": "google account saved"}, status=status.HTTP_200_OK)
+            return Response(
+                {
+                    "id": 200,
+                    "message": "google account saved",
+                    "gem": user.user_currency.gem
+                },
+                status=status.HTTP_200_OK
+            )
 
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
