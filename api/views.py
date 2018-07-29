@@ -596,8 +596,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         result = serializer.data
-        valid_time = datetime.now() + timedelta(seconds=['special_offer'][0]['time_remaining'])
-        ['special_offer'][0]['time_remaining'] = int((valid_time - datetime.now()).total_seconds())
+        valid_time = datetime.now() + timedelta(seconds=result['special_offer'][0]['time_remaining'])
+        result['special_offer'][0]['time_remaining'] = int((valid_time - datetime.now()).total_seconds())
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
