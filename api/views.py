@@ -598,6 +598,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         serializer = self.serializer_class(shop_item)
         result = serializer.data
         result['special_offer'][0]['time_remaining'] -= int(time.mktime(datetime.now().timetuple()))
+        if result['special_offer'][0]['time_remaining'] < 0:
+            result['special_offer'][0]['time_remaining'] = 0
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
