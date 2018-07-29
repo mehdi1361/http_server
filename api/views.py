@@ -572,7 +572,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def get_account(self, request):
         try:
-            profile = get_object_or_404(UserCurrency, username=request.data.get('google_id'))
+            profile = get_object_or_404(UserCurrency, google_id=request.data.get('google_id'))
 
             return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
