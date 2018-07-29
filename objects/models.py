@@ -857,7 +857,7 @@ class AppConfig(Base):
 class Device(Base):
     user = models.ForeignKey(UserCurrency, verbose_name=_('user'), related_name='devices', null=True)
     device_model = models.CharField(_('device model'), max_length=100)
-    device_id = models.CharField(_('device model'), max_length=500, unique=True)
+    device_id = models.CharField(_('device model'), max_length=500)
 
     class Meta:
         verbose_name = _('device')

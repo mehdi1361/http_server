@@ -68,26 +68,19 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         device_id = request.data['deviceUniqueID']
         device_name = request.data['deviceName']
-        return_id = 200
-        try:
-            device = Device.objects.get(device_id=device_id)
-            player_id = device.user.user.username
 
-        except Exception:
+        player_id = str(uuid.uuid1().int >> 32)
+        user = User.objects.create_user(username=player_id, password=player_id)
+        chest = CtmChestGenerate(user)
+        profile = UserCurrency.objects.get(user_id=user.id)
+        Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+        chest.generate_tutorial_chest()
+        return_id = 201
 
-            player_id = str(uuid.uuid1().int >> 32)
-            user = User.objects.create_user(username=player_id, password=player_id)
-            chest = CtmChestGenerate(user)
-            profile = UserCurrency.objects.get(user_id=user.id)
-            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-            chest.generate_tutorial_chest()
-            return_id = 201
-
-        finally:
-            return Response(
-                {'id': return_id, 'player_id': player_id},
-                status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
-            )
+        return Response(
+            {'id': return_id, 'player_id': player_id},
+            status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
+        )
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
