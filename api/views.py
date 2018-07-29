@@ -553,17 +553,16 @@ class UserViewSet(viewsets.ModelViewSet):
     def register_account(self, request):
         try:
             token = request.data.get('token')
-            user = get_object_or_404(User, username=request.data.get('player_id'))
-            user.user_currency.google_id = request.data.get('google_id')
-            user.user_currency.google_account = request.data.get('google_account')
-            user.user_currency.gem += 20
-            user.user_currency.save()
+            request.user.user_currency.google_id = request.data.get('google_id')
+            request.user.user_currency.google_account = request.data.get('google_account')
+            request.user.user_currency.gem += 20
+            request.user.user_currency.save()
 
             return Response(
                 {
                     "id": 200,
                     "message": "google account saved",
-                    "gem": user.user_currency.gem
+                    "gem": request.user.user_currency.gem
                 },
                 status=status.HTTP_200_OK
             )
