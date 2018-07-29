@@ -1,5 +1,4 @@
 import uuid
-import time
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -68,19 +67,26 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         device_id = request.data['deviceUniqueID']
         device_name = request.data['deviceName']
+        return_id = 200
+        try:
+            device = Device.objects.get(device_id=device_id)
+            player_id = device.user.user.username
 
-        player_id = str(uuid.uuid1().int >> 32)
-        user = User.objects.create_user(username=player_id, password=player_id)
-        chest = CtmChestGenerate(user)
-        profile = UserCurrency.objects.get(user_id=user.id)
-        Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-        chest.generate_tutorial_chest()
-        return_id = 201
+        except Exception:
 
-        return Response(
-            {'id': return_id, 'player_id': player_id},
-            status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
-        )
+            player_id = str(uuid.uuid1().int >> 32)
+            user = User.objects.create_user(username=player_id, password=player_id)
+            chest = CtmChestGenerate(user)
+            profile = UserCurrency.objects.get(user_id=user.id)
+            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+            chest.generate_tutorial_chest()
+            return_id = 201
+
+        finally:
+            return Response(
+                {'id': return_id, 'player_id': player_id},
+                status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
+            )
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
@@ -145,14 +151,7 @@ class UserViewSet(viewsets.ModelViewSet):
         chest.chest_status = 'ready'
         chest.save()
 
-        return Response(
-            {
-                'id': 201,
-                'message': 'chest change status ready',
-                'gem': profile.gem
-            },
-            status=status.HTTP_202_ACCEPTED
-        )
+        return Response({'id': 201, 'message': 'chest change status ready'}, status=status.HTTP_202_ACCEPTED)
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
@@ -296,11 +295,11 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['league_change_status'] = league.league_change_status
 
             if league.league_change_status == 'promoted':
-                previous_league = LeagueUser.objects.filter(
+                previous_league = LeagueUser.objects.get(
                     player=request.user.user_currency,
                     close_league=True,
                     league__base_league__step_number=league.league.base_league.step_number - 1
-                ).order_by('-id')[:1]
+                )
                 claim = Claim.objects.get(is_used=False, league_player=previous_league)
                 claim_serializer = ClaimSerializer(claim)
                 final_result['league_change_prize'] = claim_serializer.data
@@ -523,7 +522,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
             video_ads = VideoAdsFactory.create(service, token)
             valid_video = video_ads.run()
-            valid_video = True
 
             if object_type == 'troop' and valid_video:
                 user_card = get_object_or_404(UserCard, user=request.user, character_id=receieve_id)
@@ -556,7 +554,7 @@ class UserViewSet(viewsets.ModelViewSet):
             token = request.data.get('token')
             request.user.user_currency.google_id = request.data.get('google_id')
             request.user.user_currency.google_account = request.data.get('google_account')
-            request.user.user_currency.gem += settings.ACCOUNT_REGISTER_BENEFIT
+            request.user.user_currency.gem += 20
             request.user.user_currency.save()
 
             return Response(
@@ -574,21 +572,12 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def get_account(self, request):
         try:
-            profile = get_object_or_404(UserCurrency, google_id=request.data.get('google_id'))
+            profile = get_object_or_404(UserCurrency, username=request.data.get('google_id'))
 
             return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
-
-    @list_route(methods=['POST'])
-    def test_ctm(self, request):
-        result = []
-        for item in settings.CHEST_SEQUENCE:
-            ctm = CtmChestGenerate(request.user, item)
-            result.append({"chest_type":item, "chest": ctm.generate_chest()})
-
-        return Response(result, status=status.HTT)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
@@ -603,17 +592,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def store(self, request):
-        try:
-            shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
-            serializer = self.serializer_class(shop_item)
-
-            return Response(serializer.data)
-
-        except Shop.DoesNotExist:
-            return Response({"id": 404, "message": "shop not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        except Exception as e:
-            return Response({"id": 404, "message": e}, status=status.HTTP_400_BAD_REQUEST)
+        shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
+        serializer = self.serializer_class(shop_item)
+        return Response(serializer.data)
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
@@ -622,12 +603,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
 
-        if PurchaseLog.validate_token(request.data.get('purchase_token'), request.data.get('shop_id')):
-            PurchaseLog.objects.create(
-                user=profile,
-                store_purchase_token=request.data.get('purchase_token'),
-                shop=shop
-            )
+        if PurchaseLog.validate_token(request.data.get('purchase_token')):
+            PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'))
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
