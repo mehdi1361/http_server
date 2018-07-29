@@ -1,0 +1,290 @@
+[
+{
+  "model": "reports.troopreport",
+  "pk": 1,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.256Z",
+    "updated_date": "2018-07-28T13:48:55.256Z",
+    "params": null,
+    "troop": 1,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 2,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.260Z",
+    "updated_date": "2018-07-28T13:48:55.260Z",
+    "params": null,
+    "troop": 2,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 3,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.262Z",
+    "updated_date": "2018-07-28T13:48:55.262Z",
+    "params": null,
+    "troop": 3,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 4,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.264Z",
+    "updated_date": "2018-07-28T13:48:55.264Z",
+    "params": null,
+    "troop": 4,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 5,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.266Z",
+    "updated_date": "2018-07-28T13:48:55.266Z",
+    "params": null,
+    "troop": 5,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 6,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.270Z",
+    "updated_date": "2018-07-28T13:48:55.270Z",
+    "params": null,
+    "troop": 6,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 7,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.272Z",
+    "updated_date": "2018-07-28T13:48:55.272Z",
+    "params": null,
+    "troop": 7,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 8,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.274Z",
+    "updated_date": "2018-07-28T13:48:55.274Z",
+    "params": null,
+    "troop": 8,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 9,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.276Z",
+    "updated_date": "2018-07-28T13:48:55.276Z",
+    "params": null,
+    "troop": 11,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 10,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.279Z",
+    "updated_date": "2018-07-28T13:48:55.279Z",
+    "params": null,
+    "troop": 13,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 11,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.281Z",
+    "updated_date": "2018-07-28T13:48:55.281Z",
+    "params": null,
+    "troop": 14,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 12,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.283Z",
+    "updated_date": "2018-07-28T13:48:55.283Z",
+    "params": null,
+    "troop": 15,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 13,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.286Z",
+    "updated_date": "2018-07-28T13:48:55.286Z",
+    "params": null,
+    "troop": 18,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 14,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.288Z",
+    "updated_date": "2018-07-28T13:48:55.288Z",
+    "params": null,
+    "troop": 19,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 15,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.290Z",
+    "updated_date": "2018-07-28T13:48:55.290Z",
+    "params": null,
+    "troop": 20,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 16,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.292Z",
+    "updated_date": "2018-07-28T13:48:55.292Z",
+    "params": null,
+    "troop": 21,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 17,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.294Z",
+    "updated_date": "2018-07-28T13:48:55.295Z",
+    "params": null,
+    "troop": 24,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 18,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.297Z",
+    "updated_date": "2018-07-28T13:48:55.297Z",
+    "params": null,
+    "troop": 23,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 19,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.299Z",
+    "updated_date": "2018-07-28T13:48:55.299Z",
+    "params": null,
+    "troop": 22,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 20,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.301Z",
+    "updated_date": "2018-07-28T13:48:55.301Z",
+    "params": null,
+    "troop": 17,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 21,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.303Z",
+    "updated_date": "2018-07-28T13:48:55.303Z",
+    "params": null,
+    "troop": 12,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 22,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.308Z",
+    "updated_date": "2018-07-28T13:48:55.308Z",
+    "params": null,
+    "troop": 10,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 23,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.310Z",
+    "updated_date": "2018-07-28T13:48:55.310Z",
+    "params": null,
+    "troop": 16,
+    "win": 0,
+    "lose": 0
+  }
+},
+{
+  "model": "reports.troopreport",
+  "pk": 24,
+  "fields": {
+    "created_date": "2018-07-28T13:48:55.312Z",
+    "updated_date": "2018-07-28T13:48:55.312Z",
+    "params": null,
+    "troop": 9,
+    "win": 0,
+    "lose": 0
+  }
+}
+]
