@@ -145,7 +145,14 @@ class UserViewSet(viewsets.ModelViewSet):
         chest.chest_status = 'ready'
         chest.save()
 
-        return Response({'id': 201, 'message': 'chest change status ready'}, status=status.HTTP_202_ACCEPTED)
+        return Response(
+            {
+                'id': 201,
+                'message': 'chest change status ready',
+                'gem': profile.gem
+            },
+            status=status.HTTP_202_ACCEPTED
+        )
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
