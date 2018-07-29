@@ -553,7 +553,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def register_account(self, request):
         try:
             token = request.data.get('token')
-            user = get_object_or_404(User, user_name=request.data.get('player_id'))
+            user = get_object_or_404(User, username=request.data.get('player_id'))
             user.user_currency.google_id = request.data.get('google_id')
             user.user_currency.google_account = request.data.get('google_account')
             user.user_currency.gem += 20
@@ -574,7 +574,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def get_account(self, request):
         try:
-            profile = get_object_or_404(UserCurrency, user_name=request.data.get('google_id'))
+            profile = get_object_or_404(UserCurrency, username=request.data.get('google_id'))
 
             return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
