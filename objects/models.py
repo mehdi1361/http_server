@@ -484,7 +484,7 @@ class UserCard(Base):
                 if datetime.now(tz=pytz.utc) > self.cool_down:
                     return 0
 
-                return (self.cool_down - datetime.now(tz=pytz.utc)).seconds
+                return (self.cool_down - datetime.now(tz=pytz.utc)).total_seconds()
 
             return 0
 
@@ -494,7 +494,7 @@ class UserCard(Base):
     @property
     def skip_cooldown_gem(self):
         if self.cool_down:
-            time_count = (self.cool_down - datetime.now(tz=pytz.utc)).seconds
+            time_count = (self.cool_down - datetime.now(tz=pytz.utc)).total_seconds()
             if time_count == 0:
                 return 0
 
