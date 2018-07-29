@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.db.models import Count, Sum
 
 from reports.models import UserHeroSummary
-from .models import Battle, BattleTransaction
+from .models import Battle, BattleTransaction, TroopReport
 
 
 class TransactionInline(admin.TabularInline):
@@ -49,3 +49,12 @@ class UserHeroSummaryAdmin(admin.ModelAdmin):
         )
 
         return response
+
+
+@admin.register(TroopReport)
+class TroopReportAdmin(admin.ModelAdmin):
+    actions = None
+    list_display = ['troop', 'win', 'lose']
+
+    list_editable = []
+    readonly_fields = ['troop', 'win', 'lose', 'params']
