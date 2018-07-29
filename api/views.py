@@ -1,4 +1,5 @@
 import uuid
+import time
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -596,8 +597,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
         result = serializer.data
-        valid_time = datetime.now() + timedelta(seconds=result['special_offer'][0]['time_remaining'])
-        result['special_offer'][0]['time_remaining'] = int((valid_time - datetime.now()).total_seconds())
+        result['special_offer'][0]['time_remaining'] -= int(time.mktime(datetime.now().timetuple()))
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
