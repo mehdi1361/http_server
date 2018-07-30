@@ -63,7 +63,7 @@ class Myket(object):
 
         if 'consumptionState' in result.keys() and 'purchaseState' in result.keys():
 
-            if result['consumptionState'] == 1 and result['purchaseState'] == 0:
+            if result['consumptionState'] == 0 and result['purchaseState'] == 0:
                 return True, result
 
         return False, result
