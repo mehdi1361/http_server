@@ -6,10 +6,20 @@ from .models import CTM, CTMUnit, CTMHero
 
 
 class CTMUnitInline(admin.StackedInline):
+    list_display = [
+        'unit',
+        'enable'
+    ]
+    readonly_fields = ['unit', 'params']
     model = CTMUnit
 
 
 class CTMHeroInline(admin.StackedInline):
+    list_display = [
+        'hero',
+        'enable'
+    ]
+    readonly_fields = ['hero', 'params']
     model = CTMHero
 
 

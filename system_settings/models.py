@@ -6,6 +6,7 @@ from base.models import Base
 from objects.models import League, Unit, Hero
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models import signals
 
 
 @python_2_unicode_compatible
@@ -75,3 +76,15 @@ class CTMHero(Base):
 
     def __str__(self):
         return 'ctm-{}-{}'.format(self.ctm.id, self.hero.moniker)
+
+
+def assigned_item_to_ctm(sender, instance, created, **kwargs):
+    if created:
+        for unit in Unit.objects.all():
+            CTMUnit.objects.create(unit=unit, ctm=instance)
+
+        for hero in Hero.objects.all():
+            CTMHero.objects.create(hero=hero, ctm=instance)
+
+
+signals.post_save.connect(assigned_item_to_ctm, sender=CTM)

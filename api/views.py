@@ -608,8 +608,12 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
 
-        if PurchaseLog.validate_token(request.data.get('purchase_token')):
-            PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'))
+        if PurchaseLog.validate_token(request.data.get('purchase_token'), request.data.get('shop_id')):
+            PurchaseLog.objects.create(
+                user=profile,
+                store_purchase_token=request.data.get('purchase_token'),
+                shop=shop
+            )
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
