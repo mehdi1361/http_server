@@ -71,8 +71,8 @@ class PurchaseLog(Base):
         return "{}".format(self.user.name)
 
     @classmethod
-    def validate_token(cls, store_purchase_token):
-        result = cls.objects.filter(store_purchase_token=store_purchase_token, used_token=True)
+    def validate_token(cls, store_purchase_token, shop_id):
+        result = cls.objects.filter(store_purchase_token=store_purchase_token, used_token=True, shop_id=shop_id)
 
         if result:
             return True
