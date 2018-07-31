@@ -78,6 +78,9 @@ class FakeUserGame(CronJobBase):
 
                 if fake_user['win_rate'] > fake_user_chance:
                     fake_user['score'] += random.randint(10, 18)
+                    if fake_user['score'] > 1000:
+                        fake_user['score'] = random.randint(900, 1000)
+
                     fake_user['win_rate'] -= 1
 
                     if fake_user['win_rate'] < fake_user['min_rate']:
