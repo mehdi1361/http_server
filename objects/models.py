@@ -509,8 +509,8 @@ class UserCard(Base):
         user_character = cls.objects.get(user=user, character=character)
         user_character.quantity += value
         if user_character.level == 0:
-            next_level = settings.UNIT_UPDATE[user_character.level + 1]
-            user_character.quantity -= next_level['unit_cards']
+            # next_level = settings.UNIT_UPDATE[user_character.level + 1]
+            # user_character.quantity -= next_level['unit_cards']
             user_character.level += 1
 
         user_character.save()
@@ -637,7 +637,7 @@ class UserChest(Base):
             return (self.chest_opening_date - current_time).seconds
 
         if self.chest_monetaryType == 'free':
-            init_time = (datetime.now() + timedelta(seconds=10))
+            init_time = (datetime.now() + timedelta(seconds=5))
 
         else:
             init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
@@ -651,7 +651,7 @@ class UserChest(Base):
     @property
     def initial_time(self):
         if self.chest_monetaryType == 'free':
-            init_time = (datetime.now() + timedelta(seconds=10))
+            init_time = (datetime.now() + timedelta(seconds=5))
 
         else:
             init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
