@@ -496,7 +496,7 @@ class UserCard(Base):
         if self.cool_down:
             time_count = (self.cool_down - datetime.now(tz=pytz.utc)).total_seconds()
             if time_count == 0:
-                return 0
+                return 1
 
             return int(time_count/settings.COOL_DOWN_TIME)
 
