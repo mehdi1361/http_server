@@ -594,13 +594,20 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def store(self, request):
-        shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
-        serializer = self.serializer_class(shop_item)
-        result = serializer.data
-        result['special_offer'][0]['time_remaining'] -= int(time.mktime(datetime.now().timetuple()))
-        if result['special_offer'][0]['time_remaining'] < 0:
-            result['special_offer'][0]['time_remaining'] = 0
-        return Response(serializer.data)
+        try:
+            shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
+            serializer = self.serializer_class(shop_item)
+            result = serializer.data
+            result['special_offer'][0]['time_remaining'] -= int(time.mktime(datetime.now().timetuple()))
+            if result['special_offer'][0]['time_remaining'] < 0:
+                result['special_offer'][0]['time_remaining'] = 0
+            return Response(serializer.data)
+
+        except Shop.DoesNotExist:
+            return Response({"id": 404, "message": "shop not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            return Response({"id": 404, "message": e}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
