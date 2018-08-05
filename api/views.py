@@ -580,6 +580,15 @@ class UserViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
 
+    @list_route(methods=['POST'])
+    def test_ctm(self, request):
+        result = []
+        for item in settings.CHEST_SEQUENCE:
+            ctm = CtmChestGenerate(request.user, item)
+            result.append({"chest_type":item, "chest": ctm.generate_chest()})
+
+        return Response(result, status=status.HTTP_200_OK)
+
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
