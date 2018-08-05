@@ -529,9 +529,10 @@ class CtmChestGenerate:
             diff_val = ctm.total - sum_card
 
             if diff_val > 0:
-                rand_val = random.randint(1, diff_val/ctm.card_try)
+                rnd_max = diff_val/ctm.card_try if int(diff_val/ctm.card_try) > 0 else 1
+                rand_val = random.randint(1, rnd_max)
                 self.result[rd_idx]['count'] += rand_val
-                sum_card += diff_val
+                sum_card += rand_val
 
         data = {
             "chest_type": ctm.get_chest_type_display(),
