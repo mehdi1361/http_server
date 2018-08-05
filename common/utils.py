@@ -529,7 +529,7 @@ class CtmChestGenerate:
             diff_val = ctm.total - sum_card
 
             if diff_val > 0:
-                rand_val = random.randint(1, diff_val)
+                rand_val = random.randint(1, diff_val/ctm.card_try)
                 self.result[rd_idx]['count'] += rand_val
                 sum_card += diff_val
 
