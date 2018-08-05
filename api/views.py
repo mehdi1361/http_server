@@ -296,11 +296,11 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['league_change_status'] = league.league_change_status
 
             if league.league_change_status == 'promoted':
-                previous_league = LeagueUser.objects.get(
+                previous_league = LeagueUser.objects.filter(
                     player=request.user.user_currency,
                     close_league=True,
                     league__base_league__step_number=league.league.base_league.step_number - 1
-                )
+                ).order_by('-id')[:1]
                 claim = Claim.objects.get(is_used=False, league_player=previous_league)
                 claim_serializer = ClaimSerializer(claim)
                 final_result['league_change_prize'] = claim_serializer.data
@@ -597,10 +597,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         try:
             shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
             serializer = self.serializer_class(shop_item)
-            result = serializer.data
-            result['special_offer'][0]['time_remaining'] -= int(time.mktime(datetime.now().timetuple()))
-            if result['special_offer'][0]['time_remaining'] < 0:
-                result['special_offer'][0]['time_remaining'] = 0
+
             return Response(serializer.data)
 
         except Shop.DoesNotExist:
