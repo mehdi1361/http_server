@@ -509,11 +509,24 @@ class CtmChestGenerate:
             idx = random.randint(0, len(lst_result) - 1)
 
             if lst_result[idx]['name'] not in tmp_lst:
+                candid_number = random.randint(ctm.min_troop, ctm.max_troop) if lst_result[idx]['type'] == 'troop' \
+                    else random.randint(ctm.min_hero, ctm.max_hero)
+
+                if candid_number < ctm.total:
+                    ctm.total -= candid_number
+
+                else:
+                    total_num = ctm.total - ctm.units.count()
+                    if total_num < 0:
+                        total_num = 1
+
+                    candid_number = random.randint(1, total_num)
+                    ctm.total -= candid_number
+
                 self.result.append(
                     {
                         "unit": str(lst_result[idx]['name']),
-                        "count": random.randint(ctm.min_troop, ctm.max_troop) if lst_result[idx]['type'] == 'troop' else
-                        random.randint(ctm.min_hero, ctm.max_hero)
+                        "count": candid_number
                     }
                 )
 
