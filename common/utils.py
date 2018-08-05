@@ -363,14 +363,10 @@ def league_status(player, league):
 
 class CtmChestGenerate:
 
-    def __init__(self, user, chest_type_index=None, chest_type='W', league=None):
+    def __init__(self, user, chest_type_index=None, chest_type='W'):
         try:
-            if league is None:
-                league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
-                self.league = league.league.base_league
-
-            else:
-                self.league = league
+            league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+            self.league = league.league.base_league
 
         except LeagueUser.DoesNotExist:
             self.league = League.objects.get(league_name='Cooper01')
@@ -507,36 +503,34 @@ class CtmChestGenerate:
 
         shuffle(lst_result)
         tmp_lst = []
-        sum_card = 0
         while len(self.result) < ctm.card_try:
 
             lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
             idx = random.randint(0, len(lst_result) - 1)
 
             if lst_result[idx]['name'] not in tmp_lst:
-                candid_num = random.randint(ctm.min_troop, int(ctm.total / ctm.card_try)) \
-                    if lst_result[idx]['type'] == 'troop' \
-                    else random.randint(ctm.min_hero, int(ctm.total / ctm.card_try))
+                candid_number = random.randint(ctm.min_troop, ctm.max_troop) if lst_result[idx]['type'] == 'troop' \
+                    else random.randint(ctm.min_hero, ctm.max_hero)
 
-                sum_card += candid_num
+                if candid_number < ctm.total:
+                    ctm.total -= candid_number
+
+                else:
+                    total_num = ctm.total - ctm.units.count()
+                    if total_num < 0:
+                        total_num = 1
+
+                    candid_number = random.randint(1, total_num)
+                    ctm.total -= candid_number
+
                 self.result.append(
                     {
                         "unit": str(lst_result[idx]['name']),
-                        "count": candid_num
+                        "count": candid_number
                     }
                 )
 
                 tmp_lst.append(lst_result[idx]['name'])
-
-        while sum_card < ctm.total:
-            rd_idx = random.randint(0, len(self.result) - 1)
-            diff_val = ctm.total - sum_card
-
-            if diff_val > 0:
-                rnd_max = diff_val/ctm.card_try if int(diff_val/ctm.card_try) > 0 else 1
-                rand_val = random.randint(1, rnd_max)
-                self.result[rd_idx]['count'] += rand_val
-                sum_card += rand_val
 
         data = {
             "chest_type": ctm.get_chest_type_display(),
