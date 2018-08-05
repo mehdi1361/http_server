@@ -503,34 +503,35 @@ class CtmChestGenerate:
 
         shuffle(lst_result)
         tmp_lst = []
+        sum_card = 0
         while len(self.result) < ctm.card_try:
 
             lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
             idx = random.randint(0, len(lst_result) - 1)
 
             if lst_result[idx]['name'] not in tmp_lst:
-                candid_number = random.randint(ctm.min_troop, ctm.max_troop) if lst_result[idx]['type'] == 'troop' \
-                    else random.randint(ctm.min_hero, ctm.max_hero)
+                candid_num = random.randint(ctm.min_troop, int(ctm.total / ctm.card_try)) \
+                    if lst_result[idx]['type'] == 'troop' \
+                    else random.randint(ctm.min_hero, int(ctm.total / ctm.card_try))
 
-                if candid_number < ctm.total:
-                    ctm.total -= candid_number
-
-                else:
-                    total_num = ctm.total - ctm.units.count()
-                    if total_num < 0:
-                        total_num = 1
-
-                    candid_number = random.randint(1, total_num)
-                    ctm.total -= candid_number
-
+                sum_card += candid_num
                 self.result.append(
                     {
                         "unit": str(lst_result[idx]['name']),
-                        "count": candid_number
+                        "count": candid_num
                     }
                 )
 
                 tmp_lst.append(lst_result[idx]['name'])
+
+        while sum_card < ctm.total:
+            rd_idx = random.randint(0, len(self.result) - 1)
+            diff_val = ctm.total - sum_card
+
+            if diff_val > 0:
+                rand_val = random.randint(1, diff_val)
+                self.result[rd_idx]['count'] += rand_val
+                sum_card += diff_val
 
         data = {
             "chest_type": ctm.get_chest_type_display(),
