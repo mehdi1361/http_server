@@ -17,10 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from api.urls import router
 from rest_framework_jwt.views import obtain_jwt_token
-
+from system_settings import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'^admin/system_settings/test_ctm/$', views.test_ctm, name='test_ctm'),
     url(r'^api/', include(router.urls)),
     url(r'^login/', obtain_jwt_token),
 ]

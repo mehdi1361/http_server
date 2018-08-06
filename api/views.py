@@ -556,7 +556,7 @@ class UserViewSet(viewsets.ModelViewSet):
             token = request.data.get('token')
             request.user.user_currency.google_id = request.data.get('google_id')
             request.user.user_currency.google_account = request.data.get('google_account')
-            request.user.user_currency.gem += 20
+            request.user.user_currency.gem += settings.ACCOUNT_REGISTER_BENEFIT
             request.user.user_currency.save()
 
             return Response(
@@ -588,7 +588,7 @@ class UserViewSet(viewsets.ModelViewSet):
             ctm = CtmChestGenerate(request.user, item)
             result.append({"chest_type":item, "chest": ctm.generate_chest()})
 
-        return Response(result, status=status.HTTP_200_OK)
+        return Response(result, status=status.HTT)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
