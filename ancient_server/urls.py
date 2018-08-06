@@ -21,7 +21,7 @@ from system_settings import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^system_settings/test_ctm/$', views.test_ctm, name='test_ctm'),
+    # url(r'^admin/system_settings/test_ctm/$', views.test_ctm, name='test_ctm'),
     url(r'^api/', include(router.urls)),
     url(r'^login/', obtain_jwt_token),
 ]
