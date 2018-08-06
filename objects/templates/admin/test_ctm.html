@@ -1,0 +1,95 @@
+{% extends "admin/change_list.html" %}
+
+{% block content_title %}
+    <h1> Sales Summary </h1>
+{% endblock %}
+
+{% block result_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="sortable column-user">
+                    <div class="text"><a href="?o=1">enable Hero</a></div>
+                </th>
+                <th scope="col" class="sortable column-user">
+                    <div class="text"><a href="?o=2">summary</a></div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for row in summary %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> {{ row.hero__moniker }} </td>
+                    <td> {{ row.total }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="results">
+
+
+    <h2> used </h2>
+
+    <style>
+
+    .bar-chart {
+      display: flex;
+      justify-content: space-around;
+      height: 160px;
+      padding-top: 60px;
+      overflow: hidden;
+    }
+    .bar-chart .bar {
+        flex: 100%;
+        align-self: flex-end;
+        margin-right: 2px;
+        position: relative;
+        background-color: #79aec8;
+    }
+    .bar-chart .bar:last-child {
+        margin: 0;
+    }
+    .bar-chart .bar:hover {
+        background-color: #417690;
+    }
+
+    .bar-chart .bar .bar-tooltip {
+        position: relative;
+        z-index: 999;
+    }
+    .bar-chart .bar .bar-tooltip {
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-weight: bold;
+        opacity: 0;
+    }
+    .bar-chart .bar:hover .bar-tooltip {
+        opacity: 1;
+    }
+
+    </style>
+
+    <div class="results">
+        <div class="bar-chart">
+        {% for x in summary %}
+            <div class="bar"></div>
+            <div class="bar" style="height:{{ x.total }}%">
+                <div class="bar-tooltip">
+                    {{x.total | default:0  }}<br>
+                    {{x.hero__moniker }}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+{% block pagination %}{% endblock %}
