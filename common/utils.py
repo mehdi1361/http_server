@@ -363,10 +363,14 @@ def league_status(player, league):
 
 class CtmChestGenerate:
 
-    def __init__(self, user, chest_type_index=None, chest_type='W'):
+    def __init__(self, user, chest_type_index=None, chest_type='W', league=None):
         try:
-            league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
-            self.league = league.league.base_league
+            if league is None:
+                league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+                self.league = league.league.base_league
+
+            else:
+                self.league = league
 
         except LeagueUser.DoesNotExist:
             self.league = League.objects.get(league_name='Cooper01')

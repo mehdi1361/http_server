@@ -6,6 +6,7 @@ from django.db.models import Count, Sum
 
 from reports.models import UserHeroSummary
 from .models import Battle, BattleTransaction, TroopReport
+from django.contrib.admin import SimpleListFilter
 
 
 class TransactionInline(admin.TabularInline):
