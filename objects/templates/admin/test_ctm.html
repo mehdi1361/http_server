@@ -1,95 +1,104 @@
-{% extends "admin/change_list.html" %}
+{% load dict_load %}
+<form method="post">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" value="create">
 
-{% block content_title %}
-    <h1> Sales Summary </h1>
-{% endblock %}
-
-{% block result_list %}
-    <table class="table table-striped">
+</form>
+    <table style="border: #2C2C2C solid 1px">
         <thead>
             <tr>
-                <th scope="col" class="sortable column-user">
-                    <div class="text"><a href="?o=1">enable Hero</a></div>
+                <th style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px">
+                    coin
                 </th>
-                <th scope="col" class="sortable column-user">
-                    <div class="text"><a href="?o=2">summary</a></div>
+                <th style="border: #2C2C2C solid 1px">
+                    gem
                 </th>
+
+                <!-- For example, iterate from 0 to 3 -->
+                {% for i in "x"|ljust:len_header %}
+                    <th style="border: #2C2C2C solid 1px">
+                        unit{{ forloop.counter }}
+                    </th>
+                    <th style="border: #2C2C2C solid 1px">
+                        count{{ forloop.counter }}
+                    </th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {%  for row in summary %}
+            {%  for item in result %}
                 <tr class="{% cycle 'row1' 'row2' %}">
-                    <td> {{ row.hero__moniker }} </td>
-                    <td> {{ row.total }} </td>
+                    <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ item.coins }} </td>
+                    <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ item.gems }} </td>
+                    {% for unit in item.units %}
+                        <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ unit.unit }} </td>
+                        <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ unit.count }} </td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <div class="results">
-
-
-    <h2> used </h2>
-
-    <style>
-
-    .bar-chart {
-      display: flex;
-      justify-content: space-around;
-      height: 160px;
-      padding-top: 60px;
-      overflow: hidden;
-    }
-    .bar-chart .bar {
-        flex: 100%;
-        align-self: flex-end;
-        margin-right: 2px;
-        position: relative;
-        background-color: #79aec8;
-    }
-    .bar-chart .bar:last-child {
-        margin: 0;
-    }
-    .bar-chart .bar:hover {
-        background-color: #417690;
-    }
-
-    .bar-chart .bar .bar-tooltip {
-        position: relative;
-        z-index: 999;
-    }
-    .bar-chart .bar .bar-tooltip {
-        position: absolute;
-        top: -60px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        font-weight: bold;
-        opacity: 0;
-    }
-    .bar-chart .bar:hover .bar-tooltip {
-        opacity: 1;
-    }
-
-    </style>
-
-    <div class="results">
-        <div class="bar-chart">
-        {% for x in summary %}
-            <div class="bar"></div>
-            <div class="bar" style="height:{{ x.total }}%">
-                <div class="bar-tooltip">
-                    {{x.total | default:0  }}<br>
-                    {{x.hero__moniker }}
-                </div>
-            </div>
-        {% endfor %}
-        </div>
-    </div>
-
-</div>
-{% endblock %}
-
-
-
-{% block pagination %}{% endblock %}
+{#    <div class="results">#}
+{##}
+{##}
+{#    <h2> used </h2>#}
+{##}
+{#    <style>#}
+{##}
+{#    .bar-chart {#}
+{#      display: flex;#}
+{#      justify-content: space-around;#}
+{#      height: 160px;#}
+{#      padding-top: 60px;#}
+{#      overflow: hidden;#}
+{#    }#}
+{#    .bar-chart .bar {#}
+{#        flex: 100%;#}
+{#        align-self: flex-end;#}
+{#        margin-right: 2px;#}
+{#        position: relative;#}
+{#        background-color: #79aec8;#}
+{#    }#}
+{#    .bar-chart .bar:last-child {#}
+{#        margin: 0;#}
+{#    }#}
+{#    .bar-chart .bar:hover {#}
+{#        background-color: #417690;#}
+{#    }#}
+{##}
+{#    .bar-chart .bar .bar-tooltip {#}
+{#        position: relative;#}
+{#        z-index: 999;#}
+{#    }#}
+{#    .bar-chart .bar .bar-tooltip {#}
+{#        position: absolute;#}
+{#        top: -60px;#}
+{#        left: 50%;#}
+{#        transform: translateX(-50%);#}
+{#        text-align: center;#}
+{#        font-weight: bold;#}
+{#        opacity: 0;#}
+{#    }#}
+{#    .bar-chart .bar:hover .bar-tooltip {#}
+{#        opacity: 1;#}
+{#    }#}
+{##}
+{#    </style>#}
+{##}
+{#    <div class="results">#}
+{#        <div class="bar-chart">#}
+{#        {% for x in summary %}#}
+{#            <div class="bar"></div>#}
+{#            <div class="bar" style="height:{{ x.total }}%">#}
+{#                <div class="bar-tooltip">#}
+{#                    {{x.total | default:0  }}<br>#}
+{#                    {{x.hero__moniker }}#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</div>#}
