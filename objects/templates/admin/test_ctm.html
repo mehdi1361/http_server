@@ -1,0 +1,141 @@
+{% load dict_load %}
+<script type="text/javascript">
+    function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('headerTable'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++)
+    {
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus();
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+    return (sa);
+}
+</script>
+<form method="post">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" value="create">
+
+</form>
+    <iframe id="txtArea1" style="display:none"></iframe>
+    <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
+    <table id="headerTable" style="border: #2C2C2C solid 1px">
+        <thead>
+            <tr>
+                <th style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px">
+                    coin
+                </th>
+                <th style="border: #2C2C2C solid 1px">
+                    gem
+                </th>
+
+                <!-- For example, iterate from 0 to 3 -->
+                {% for i in "x"|ljust:len_header %}
+                    <th style="border: #2C2C2C solid 1px">
+                        unit{{ forloop.counter }}
+                    </th>
+                    <th style="border: #2C2C2C solid 1px">
+                        count{{ forloop.counter }}
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {%  for item in result %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ item.coins }} </td>
+                    <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ item.gems }} </td>
+                    {% for unit in item.units %}
+                        <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ unit.unit }} </td>
+                        <td style="border: #2C2C2C solid 1px; margin: 0px; padding: 0px"> {{ unit.count }} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{#    <div class="results">#}
+{##}
+{##}
+{#    <h2> used </h2>#}
+{##}
+{#    <style>#}
+{##}
+{#    .bar-chart {#}
+{#      display: flex;#}
+{#      justify-content: space-around;#}
+{#      height: 160px;#}
+{#      padding-top: 60px;#}
+{#      overflow: hidden;#}
+{#    }#}
+{#    .bar-chart .bar {#}
+{#        flex: 100%;#}
+{#        align-self: flex-end;#}
+{#        margin-right: 2px;#}
+{#        position: relative;#}
+{#        background-color: #79aec8;#}
+{#    }#}
+{#    .bar-chart .bar:last-child {#}
+{#        margin: 0;#}
+{#    }#}
+{#    .bar-chart .bar:hover {#}
+{#        background-color: #417690;#}
+{#    }#}
+{##}
+{#    .bar-chart .bar .bar-tooltip {#}
+{#        position: relative;#}
+{#        z-index: 999;#}
+{#    }#}
+{#    .bar-chart .bar .bar-tooltip {#}
+{#        position: absolute;#}
+{#        top: -60px;#}
+{#        left: 50%;#}
+{#        transform: translateX(-50%);#}
+{#        text-align: center;#}
+{#        font-weight: bold;#}
+{#        opacity: 0;#}
+{#    }#}
+{#    .bar-chart .bar:hover .bar-tooltip {#}
+{#        opacity: 1;#}
+{#    }#}
+{##}
+{#    </style>#}
+{##}
+{#    <div class="results">#}
+{#        <div class="bar-chart">#}
+{#        {% for x in summary %}#}
+{#            <div class="bar"></div>#}
+{#            <div class="bar" style="height:{{ x.total }}%">#}
+{#                <div class="bar-tooltip">#}
+{#                    {{x.total | default:0  }}<br>#}
+{#                    {{x.hero__moniker }}#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</div>#}

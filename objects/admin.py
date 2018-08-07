@@ -145,14 +145,12 @@ class UserCurrencyAdmin(admin.ModelAdmin):
 class BenefitBoxAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'box', 'quantity', 'flag_api')
     list_filter = ('flag_api', 'box')
-    # history_list_display = ['name', 'box', 'quantity', 'flag_api']
 
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'starting_unit', 'unlock')
     list_editable = ('unlock', 'starting_unit')
-    # history_list_display = ['moniker', 'health', 'shield', 'attack', 'dexterity', 'enable_in_start']
     list_filter = ('dexterity', )
 
     def get_form(self, request, obj=None, **kwargs):
@@ -172,7 +170,6 @@ class HeroAdmin(SimpleHistoryAdmin):
 @admin.register(LeagueInfo)
 class LeagueInfoAdmin(SimpleHistoryAdmin):
     list_display = ('name', 'min_score', 'description', 'created_date', 'updated_date')
-    # history_list_display = ['name', 'min_score', 'description', 'created_date', 'updated_date']
     inlines = (ChestInline, )
 
 
@@ -457,4 +454,5 @@ class FakeAdmin(admin.ModelAdmin):
     )
 
     inlines = (FakeDetailInline, )
+
 

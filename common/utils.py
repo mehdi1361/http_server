@@ -1,7 +1,10 @@
 # -*- encoding: utf-8 -*-
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague
+from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard, League
+from django.conf import settings
+from system_settings.models import CTM, CTMHero
+from random import shuffle
 from django.conf import settings
 
 
@@ -350,10 +353,196 @@ def league_status(player, league):
         return 'promoting'
 
     demoting_lst = LeagueUser.objects.values_list('player', flat=True).filter(league=league.league).order_by('score')[
-                    :league.league.base_league.demoting_count]
+                   :league.league.base_league.demoting_count]
 
     if player.id in demoting_lst:
         return 'demoting'
 
     return 'normal'
 
+
+class CtmChestGenerate:
+
+    def __init__(self, user, chest_type_index=None, chest_type='W', league=None):
+        try:
+            if league is None:
+                league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+                self.league = league.league.base_league
+
+            else:
+                self.league = league
+
+        except LeagueUser.DoesNotExist:
+            self.league = League.objects.get(league_name='Cooper01')
+
+        self.user = user
+        self.chest_type_index = chest_type_index
+        self.chest_type = chest_type
+        self.selected_hero = False
+        self.result = []
+
+    def generate_chest(self):
+
+        if not UserChest.deck_is_open(self.user):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type)
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data": self._get_card()
+        }
+
+        if self.chest_type_index == 'chest':
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def generate_tutorial_chest(self):
+
+        if not UserChest.deck_is_open(self.user):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type_index)
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data": self._get_card(),
+            "chest_monetaryType": "free"
+        }
+
+        if self.chest_type_index is None:
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def _get_card(self):
+        self.result = []
+        ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
+
+        lst_result = []
+        lst_exclude = []
+
+        for i in range(0, ctm.card_try):
+            if not self.selected_hero:
+                lst_valid_hero = []
+                for hero in ctm.heroes.filter(enable=True):
+                    lst_valid_hero.append(hero.hero.id)
+
+                random_hero_chance = random.uniform(0, 100)
+
+                if ctm.chance_hero >= random_hero_chance:
+                    user_heroes = list(UserHero.objects.filter(user=self.user, hero_id__in=lst_valid_hero))
+                    if user_heroes is not None:
+                        random_user_hero = user_heroes[random.randint(0, len(user_heroes) - 1)]
+
+                        if random_user_hero.quantity > settings.HERO_UPDATE[random_user_hero.level + 1]['hero_cards']:
+                            valid_card = random_user_hero.quantity \
+                                         - settings.HERO_UPDATE[random_user_hero.level + 1]['hero_cards']
+                        else:
+                            valid_card = settings.HERO_UPDATE[random_user_hero.level + 1][
+                                             'hero_cards'] - random_user_hero.quantity
+
+                        variance = 100 + valid_card - random_user_hero.used_count
+
+                        if variance < 20:
+                            variance = 20
+
+                        lst_result.extend(
+                            [{
+                                "name": random_user_hero.hero.moniker,
+                                "type": "hero"
+                            }] * variance
+                        )
+                        self.selected_hero = True
+
+            lst_valid_unit = []
+            for unit in ctm.units.filter(enable=True):
+                lst_valid_unit.append(unit.unit.id)
+
+            user_units = list(
+                UserCard.objects.filter(user=self.user, character_id__in=lst_valid_unit)
+                    .exclude(character_id__in=lst_exclude)
+            )
+
+            if user_units is not None:
+                random_user_unit = user_units[random.randint(0, len(user_units) - 1)]
+
+                if random_user_unit.quantity > settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards']:
+                    valid_card = random_user_unit.quantity - \
+                                 settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards']
+                else:
+                    valid_card = settings.UNIT_UPDATE[random_user_unit.level + 1]['unit_cards'] \
+                                 - random_user_unit.quantity
+
+                variance = 100 + valid_card - random_user_unit.used_quantity
+
+                if variance < 20:
+                    variance = 20
+
+                lst_result.extend(
+                    [{
+                        "name": random_user_unit.character.moniker,
+                        "type": "troop"
+                    }] * variance
+                )
+
+                lst_exclude.append(random_user_unit.character.id)
+
+        shuffle(lst_result)
+        tmp_lst = []
+        sum_card = 0
+        while len(self.result) < ctm.card_try:
+
+            lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
+            idx = random.randint(0, len(lst_result) - 1)
+
+            if lst_result[idx]['name'] not in tmp_lst:
+                candid_num = random.randint(ctm.min_troop, int(ctm.total / ctm.card_try)) \
+                    if lst_result[idx]['type'] == 'troop' \
+                    else random.randint(ctm.min_hero, int(ctm.total / ctm.card_try))
+
+                sum_card += candid_num
+                self.result.append(
+                    {
+                        "unit": str(lst_result[idx]['name']),
+                        "count": candid_num
+                    }
+                )
+
+                tmp_lst.append(lst_result[idx]['name'])
+
+        while sum_card < ctm.total:
+            rd_idx = random.randint(0, len(self.result) - 1)
+            diff_val = ctm.total - sum_card
+
+            if diff_val > 0:
+                rnd_max = diff_val/ctm.card_try if int(diff_val/ctm.card_try) > 0 else 1
+                rand_val = random.randint(1, rnd_max)
+                self.result[rd_idx]['count'] += rand_val
+                sum_card += rand_val
+
+        data = {
+            "chest_type": ctm.get_chest_type_display(),
+            "gems": random.randint(ctm.min_gem, ctm.max_gem),
+            "coins": random.randint(ctm.min_coin, ctm.max_coin),
+            "units": self.result
+        }
+
+        return data

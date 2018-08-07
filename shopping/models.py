@@ -60,6 +60,7 @@ class PurchaseLog(Base):
     store_purchase_token = models.CharField(_('store purchase token'), max_length=50)
     used_token = models.BooleanField(_('token used'), default=False)
     store_params = JSONField(_('store params'), null=True, blank=True)
+    shop = models.ForeignKey(Shop, verbose_name=_('shops'), null=True, related_name='shops')
 
     class Meta:
         verbose_name = _('purchase log')
@@ -70,8 +71,8 @@ class PurchaseLog(Base):
         return "{}".format(self.user.name)
 
     @classmethod
-    def validate_token(cls, store_purchase_token):
-        result = cls.objects.filter(store_purchase_token=store_purchase_token, used_token=True)
+    def validate_token(cls, store_purchase_token, shop_id):
+        result = cls.objects.filter(store_purchase_token=store_purchase_token, used_token=True, shop_id=shop_id)
 
         if result:
             return True
