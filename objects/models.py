@@ -323,7 +323,7 @@ class UserCard(Base):
             # next_level = settings.UNIT_UPDATE[user_character.level + 1]
             # user_character.quantity -= next_level['unit_cards']
             user_character.level += 1
-            user_character.quantity += 1
+            # user_character.quantity += 1
 
         user_character.save()
 

@@ -335,7 +335,6 @@ class UserViewSet(viewsets.ModelViewSet):
             }
             final_result['remain_time'] = LeagueTime.remain_time()
 
-
             prizes = []
             for league in League.objects.all().order_by('step_number'):
                 prizes.append({
