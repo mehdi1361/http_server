@@ -268,7 +268,7 @@ def unit_normalize_data(unit, data):
 
         data['next_upgrade_stats'] = {
             'card_cost': settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['coins'],
-            'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
+            'card_count': settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['unit_cards'],
             'attack': int(round(data['attack'] + data['attack'] *
                                 settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2][
                                     'increase'])),
