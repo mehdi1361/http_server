@@ -72,13 +72,22 @@ class BenefitBox(Base):
         return '{}'.format(self.name)
 
 
+class CommingSoonManager(models.Manager):
+    def get_queryset(self):
+        return super(CommingSoonManager, self).get_queryset().filter(coming_soon=True)
+
+
 @python_2_unicode_compatible
 class Unit(BaseUnit, Base):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
+    coming_soon = models.BooleanField(_('coming soon'), default=False, blank=True)
     starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
     history = HistoricalRecords()
+
+    objects = models.Manager()
+    unlock_coming_soon = CommingSoonManager()
 
     @classmethod
     def count(cls):
