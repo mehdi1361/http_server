@@ -299,7 +299,7 @@ class UserSerializer(serializers.ModelSerializer):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
             league = unlock_league(unit.character)
-            data['unlock_league'] = league.league_name
+            data['unlock_league'] = league.league_type
             data['unlock_league_step_number'] = league.step_number
             list_unit.append(data)
 
