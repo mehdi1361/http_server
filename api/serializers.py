@@ -7,6 +7,11 @@ from message.models import NewsLetter, Inbox
 from common.utils import hero_normalize_data, unit_normalize_data, item_normalize_data
 
 
+def unlock_league(unit):
+    league = League.objects.filter(ctm_chests__units__unit=unit).order_by('step_number').first()
+    return league
+
+
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
@@ -140,7 +145,6 @@ class UnitSerializer(serializers.ModelSerializer):
             'dodge_chance',
             'enable_in_start',
             'health',
-            # 'max_health',
             'shield',
             'unlock'
         )
@@ -294,6 +298,9 @@ class UserSerializer(serializers.ModelSerializer):
         for unit in UserCard.objects.filter(user=requests).exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
+            league = unlock_league(unit.character)
+            data['unlock_league'] = league.league_name
+            data['unlock_league_step_number'] = league.step_number
             list_unit.append(data)
 
         return list_unit
