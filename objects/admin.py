@@ -149,8 +149,18 @@ class BenefitBoxAdmin(SimpleHistoryAdmin):
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
-    list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'starting_unit', 'unlock')
-    list_editable = ('unlock', 'starting_unit')
+    list_display = (
+        'id',
+        'moniker',
+        'health',
+        'shield',
+        'attack',
+        'dexterity',
+        'starting_unit',
+        'unlock',
+        'coming_soon'
+    )
+    list_editable = ('unlock', 'starting_unit', 'coming_soon')
     list_filter = ('dexterity', )
 
     def get_form(self, request, obj=None, **kwargs):
