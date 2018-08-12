@@ -315,6 +315,16 @@ class UserSerializer(serializers.ModelSerializer):
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))
 
         list_unit = []
+        for unit in UserCard.objects.filter(user=requests, character__unlock=True)\
+                .exclude(character_id__in=hero_units):
+            serializer = UnitSerializer(unit.character)
+            data = unit_normalize_data(unit, serializer.data)
+            league = unlock_league(unit.character)
+            data['unlock_league'] = league['league']
+            data['unlock_league_step_number'] = league['step_number']
+            data['used_status'] = 'unlock'
+            list_unit.append(data)
+
         for unit in UserCard.objects.filter(user=requests, character__coming_soon=True)\
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
@@ -322,6 +332,7 @@ class UserSerializer(serializers.ModelSerializer):
             league = unlock_league(unit.character)
             data['unlock_league'] = league['league']
             data['unlock_league_step_number'] = league['step_number']
+            data['used_status'] = 'coming_soon'
             list_unit.append(data)
 
         return list_unit
