@@ -65,8 +65,15 @@ class CTMAdmin(admin.ModelAdmin):
 @admin.register(BotMatchMaking)
 class BotMatchMakingAdmin(admin.ModelAdmin):
     list_display = [
-        'bot_ai',
         'strike_number',
+        'bot_ai',
+        'min_level',
+        'max_level',
+        'step_forward',
+        'step_backward'
+    ]
+    list_editable = [
+        'bot_ai',
         'min_level',
         'max_level',
         'step_forward',

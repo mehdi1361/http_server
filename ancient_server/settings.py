@@ -173,6 +173,7 @@ CRON_CLASSES = [
     "objects.crons.Backup",
     "objects.crons.LeagueReset",
     "objects.crons.FakeUserGame",
+    "objects.crons.CafeBazarRefreshToken",
 ]
 
 # CHEST_SEQUENCE = ['W', 'W', 'W', 'W', 'S', 'W', 'W', 'W', 'W', 'S', 'W', 'G', 'W', 'W', 'W', 'W', 'S', 'W', 'W', 'W',
@@ -579,3 +580,7 @@ FAKE_USER = ["محمود",
              "ماهیرخ",
              "بابای آیدین"
              ]
+
+CAFE_BAZAR_CLIENT_ID = 'ySK9GZE7hfrXP5rukViMmsGSCpg2dBJsQDhtzLzQ'
+CAFE_BAZAR_CLIENT_SECRET = 'mVgkvbLFPjog2mw3o9LjefNBxenSh6bgUS8EYwCVNz1fh3FSipzXqmqPZuf9'
+CAFE_BAZAR_REFRESH_TOKEN_URL = "https://pardakht.cafebazaar.ir/devapi/v2/auth/token/"
