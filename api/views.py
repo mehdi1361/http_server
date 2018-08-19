@@ -7,13 +7,13 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from message.models import Inbox
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
+from .serializers import UserSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
     LeagueSerializer, ClaimSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
-    PlayOff, LeagueTime, LeaguePrize
+    PlayOff, LeagueTime
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -27,9 +27,7 @@ from common.utils import hero_normalize_data, \
     unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
-from common.payment_verification import CafeBazar, FactoryStore
-from reports.models import Battle
-from django.db.models import Q
+from common.payment_verification import FactoryStore
 from operator import itemgetter
 
 
