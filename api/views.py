@@ -273,7 +273,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             current_league = LeagueSerializer(league.league.base_league)
 
-            max_step = League.objects.all().values('step_number').order_by('-step_number')[0]
+            max_step = League.league_real.all().values('step_number').order_by('-step_number')[0]
 
             if max_step['step_number'] > league.league.base_league.step_number + 1:
                 next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
@@ -336,7 +336,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
             prizes = []
-            for league in League.objects.all().order_by('step_number'):
+            for league in League.league_real.all().order_by('step_number'):
                 prizes.append({
                     "gem": league.params['play_off_reward']['gem'] if league.params is not None else None,
                     "coin": league.params['play_off_reward']['coin']} if league.params is not None else None
