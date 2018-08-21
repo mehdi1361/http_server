@@ -422,7 +422,7 @@ class CtmChestGenerate:
             "user": self.user,
             "chest": chest,
             "sequence_number": UserChest.next_sequence(self.user),
-            "reward_data": self._get_card(),
+            "reward_data": self._get_card(is_tutorial=True),
             "chest_monetaryType": "free"
         }
 
@@ -432,9 +432,13 @@ class CtmChestGenerate:
 
         return data["reward_data"]
 
-    def _get_card(self):
+    def _get_card(self, is_tutorial=False):
         self.result = []
-        ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
+        if is_tutorial:
+            ctm = CTM.objects.get(params__is_tutorial='True')
+
+        else:
+            ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
 
         lst_result = []
         lst_exclude = []
