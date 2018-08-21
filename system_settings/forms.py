@@ -19,7 +19,7 @@ CHEST_STATUS = (
     ('C', 'crystal'),
 )
 
-LEAGUE = ((item.id, item.league_name) for item in League.objects.all())
+LEAGUE = ((item.id, item.league_name) for item in League.league_real.all())
 
 
 class CtmTestForm(forms.Form):

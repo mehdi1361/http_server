@@ -708,6 +708,11 @@ class Bot(Base):
         return '{}'.format(self.bot_name)
 
 
+class LeagueManager(models.Manager):
+    def get_queryset(self):
+        return super(LeagueManager, self).get_queryset().exclude(league_name='Tutorial')
+
+
 @python_2_unicode_compatible
 class League(Base):
     LEAGUE_TYPE = (
@@ -733,6 +738,9 @@ class League(Base):
     play_off_start_gem = models.PositiveIntegerField(_('play off start gem '), null=True, blank=True, default=0)
     play_off_start_gem_1 = models.PositiveIntegerField(_('play off start gem 1'), null=True, blank=True, default=0)
     play_off_start_gem_2 = models.PositiveIntegerField(_('play off start gem 2'), null=True, blank=True, default=0)
+
+    objects = models.Manager()
+    league_real = LeagueManager()
 
     class Meta:
         verbose_name = _('league')
