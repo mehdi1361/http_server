@@ -699,7 +699,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             'wooden': 'W',
             'silver': 'S',
             'gold': 'G',
-            'crystal': 'C'
+            'crystal': 'C',
+            'magical': 'M',
+            'legendary': 'L'
         }
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
