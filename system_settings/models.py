@@ -17,6 +17,8 @@ class CTM(Base):
         ('S', 'silver'),
         ('G', 'gold'),
         ('C', 'crystal'),
+        ('M', 'magical'),
+        ('L', 'Legendary'),
     )
 
     chest_type = models.CharField(_('chest type'), max_length=50, default='W', choices=CHEST_TYPE)

@@ -408,6 +408,8 @@ class LeagueInfoSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
+    reward_data = serializers.SerializerMethodField()
+
     class Meta:
         model = Shop
         fields = (
@@ -416,8 +418,12 @@ class ShopSerializer(serializers.ModelSerializer):
             'coins',
             'gems',
             'chests',
-            'special_offer'
+            'special_offer',
+            'reward_data'
         )
+
+    def get_reward_data(self, request):
+        return "ok"
 
 
 class AppConfigSerializer(serializers.ModelSerializer):

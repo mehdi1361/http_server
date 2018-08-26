@@ -1,5 +1,4 @@
 import uuid
-import time
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -29,6 +28,7 @@ from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import FactoryStore
 from operator import itemgetter
+from system_settings.models import CTM
 
 
 class DefaultsMixin(object):
@@ -334,7 +334,6 @@ class UserViewSet(viewsets.ModelViewSet):
             }
             final_result['remain_time'] = LeagueTime.remain_time()
 
-
             prizes = []
             for league in League.league_real.all().order_by('step_number'):
                 prizes.append({
@@ -601,17 +600,25 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def store(self, request):
-        try:
-            shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
-            serializer = self.serializer_class(shop_item)
+        shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
+        serializer = self.serializer_class(shop_item)
+        league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
+        result = serializer.data
 
-            return Response(serializer.data)
+        for chest in result['chests']:
+            type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
+            ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
+            chest['reward_data'] = {
+                "type": chest['type'],
+                "min_coin": ctm.min_coin,
+                "max_coin": ctm.max_coin,
+                "min_gem": ctm.min_gem,
+                "max_gem": ctm.max_gem,
+                "card_count": ctm.total
+            }
+            del chest['type']
 
-        except Shop.DoesNotExist:
-            return Response({"id": 404, "message": "shop not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        except Exception as e:
-            return Response({"id": 404, "message": e}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data)
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
