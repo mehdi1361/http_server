@@ -602,7 +602,12 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
     def store(self, request):
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
-        league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
+        try:
+            league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
+
+        except:
+            league_name = League.objects.get(step_number=0)
+
         result = serializer.data
 
         for chest in result['chests']:
