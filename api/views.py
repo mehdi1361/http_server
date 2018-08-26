@@ -28,6 +28,7 @@ from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import FactoryStore
 from operator import itemgetter
+from system_settings.models import CTM
 
 
 class DefaultsMixin(object):
@@ -601,6 +602,22 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
     def store(self, request):
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
+        league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
+        result = serializer.data
+
+        for chest in result['chests']:
+            type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
+            ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
+            chest['reward_data'] = {
+                "type": chest['type'],
+                "min_coin": ctm.min_coin,
+                "max_coin": ctm.max_coin,
+                "min_gem": ctm.min_gem,
+                "max_gem": ctm.max_gem,
+                "card_count": ctm.total
+            }
+            del chest['type']
+
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
