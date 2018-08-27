@@ -19,6 +19,7 @@ from local_setting import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -189,10 +190,10 @@ CHEST_SEQUENCE_TIME = {
     'C': 24
 }
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-
-STATIC_URL = '/static/'
+# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+#
+# STATIC_URL = '/static/'
 
 # ITEM_UPDATE = {
 #     1: {'item_cards': 1, 'coins': 0, 'increase': 0.2},
@@ -279,7 +280,7 @@ COOL_DOWN_UNIT = {
 
 COOL_DOWN_TIME = 300
 
-LEAGUE_LENGTH = 20
+LEAGUE_LENGTH = 7
 
 NUM_GAMES = 3
 
@@ -292,7 +293,7 @@ TAPLIGH_PACKAGE_NAME = 'com.tapligh.sdk'
 
 
 SUB_COOLDOWN_TROOP = 1800
-SUB_OPENING_CHEST = 1800
+SUB_OPENING_CHEST = 3600
 
 ACCOUNT_REGISTER_BENEFIT = 100
 
@@ -584,3 +585,14 @@ FAKE_USER = ["محمود",
 CAFE_BAZAR_CLIENT_ID = 'ySK9GZE7hfrXP5rukViMmsGSCpg2dBJsQDhtzLzQ'
 CAFE_BAZAR_CLIENT_SECRET = 'mVgkvbLFPjog2mw3o9LjefNBxenSh6bgUS8EYwCVNz1fh3FSipzXqmqPZuf9'
 CAFE_BAZAR_REFRESH_TOKEN_URL = "https://pardakht.cafebazaar.ir/devapi/v2/auth/token/"
+
+STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     # '/var/www/static/',
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+USE_THOUSAND_SEPARATOR = True
+
+# LOGIN_REDIRECT_URL = '/employee/login'
