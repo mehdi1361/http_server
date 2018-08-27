@@ -330,7 +330,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 "unlock_need_score": league.league.base_league.play_off_unlock_score,
                 "result": [] if PlayOff.log(request.user.user_currency) == -1
                 else PlayOff.log(request.user.user_currency),
-                "num_wins": league.league.base_league.win_promoting_count
+                "num_wins": league.league.base_league.win_promoting_count,
+                "league_time": LeagueTime.remain_time()
             }
             final_result['remain_time'] = LeagueTime.remain_time()
 
