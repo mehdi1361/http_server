@@ -107,3 +107,6 @@ ENV/
 .idea/workspace.xml
 
 ancient_server/static
+
+/static
+/static/*
