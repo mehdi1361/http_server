@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League, Claim
+    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League, Claim, LeagueTime
 from shopping.models import Shop
 from message.models import NewsLetter, Inbox
 from common.utils import hero_normalize_data, unit_normalize_data, item_normalize_data
+
 
 
 def unlock_league(unit):
@@ -270,6 +271,7 @@ class UserSerializer(serializers.ModelSerializer):
             except LeagueUser.DoesNotExist:
                 result['current_league'] = None
 
+            result['league_time'] = LeagueTime.remain_time()
             return result
 
         except UserCurrency.DoesNotExist as e:
