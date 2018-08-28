@@ -266,31 +266,27 @@ def unit_normalize_data(unit, data):
         health = int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level]['increase']))
         shield = int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
 
+        if unit.level == 0:
+            next_stats = unit.level + 2
+        else:
+            next_stats = unit.level + 1
+
         data['next_upgrade_stats'] = {
-            'card_cost': settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['coins'],
-            'card_count': settings.UNIT_UPDATE[unit.level + 1]['unit_cards'],
-            'attack': int(round(data['attack'] + data['attack'] *
-                                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2][
-                                    'increase'])),
-            'health': int(round(data['health'] + data['health'] *
-                                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2][
-                                    'increase'])),
-            'shield': int(round(data['shield'] + data['shield'] *
-                                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2][
-                                    'increase'])),
-            'critical_chance': round(
-                data['critical_chance'] + data['critical_chance'] *
-                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'],
-                2),
-            'critical_ratio': round(
-                data['critical_ratio'] + data['critical_ratio'] *
-                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2),
+            'card_cost': settings.UNIT_UPDATE[next_stats]['coins'],
+            'card_count': settings.UNIT_UPDATE[next_stats]['unit_cards'],
+            'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[next_stats]['increase'])),
+            'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[next_stats]['increase'])),
+            'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[next_stats]['increase'])),
+            'critical_chance': round(data['critical_chance'] + data['critical_chance']
+                                     * settings.UNIT_UPDATE[next_stats]['increase'], 2),
+            'critical_ratio': round(data['critical_ratio'] + data['critical_ratio'] *
+                                    settings.UNIT_UPDATE[next_stats]['increase'], 2),
             'miss_chance': round(
                 data['miss_chance'] + data['miss_chance'] *
-                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2),
+                settings.UNIT_UPDATE[next_stats]['increase'], 2),
             'dodge_chance': round(
                 data['dodge_chance'] + data['dodge_chance'] *
-                settings.UNIT_UPDATE[unit.level + 1 if unit.level > 0 else unit.level + 2]['increase'], 2)
+                settings.UNIT_UPDATE[next_stats]['increase'], 2)
         }
 
         data['health'] = health
