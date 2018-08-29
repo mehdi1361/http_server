@@ -344,7 +344,7 @@ class UserCurrency(Base):
     ban_user = models.BooleanField(_('ban user'), default=False)
     win_count = models.PositiveIntegerField(_('win count'), default=0)
     lose_count = models.PositiveIntegerField(_('lose count'), default=0)
-    strike = models.IntegerField(_('strike'), default=0, null=True)
+    strike = models.IntegerField(_('strike'), default=0)
 
     google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
     google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True, unique=True)
@@ -1422,7 +1422,7 @@ def create_user_dependency(sender, instance, created, **kwargs):
         for hero in Hero.objects.all():
             UserHero.objects.get_or_create(user=instance, hero=hero)
 
-        UserCurrency.objects.create(user=instance, gem=100, coin=250)
+        UserCurrency.objects.create(user=instance, gem=100, coin=250, strike=0)
 
 
 def assigned_new_card_to_user(sender, instance, created, **kwargs):
