@@ -595,7 +595,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         serializer = self.serializer_class(shop_item)
 
         result = serializer.data
-        if len(result['special_offer']) > 0:
+        if 'special_offer' in result.keys() and len(result['special_offer']) > 0:
             valid_time = datetime.now() + timedelta(seconds=result['special_offer'][0]['time_remaining'])
             result['special_offer'][0]['time_remaining'] = int((valid_time - datetime.now()).total_seconds())
 
