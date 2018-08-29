@@ -570,14 +570,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def get_account(self, request):
-        # try:
-            # print request.data.get('google_id')
-            profile = get_object_or_404(UserCurrency, username=request.data.get('google_id'))
+        try:
+            print request.data.get('google_id')
+            profile = get_object_or_404(UserCurrency, google_id=request.data.get('google_id'))
 
             return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
-        # except Exception as e:
-        #     return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
