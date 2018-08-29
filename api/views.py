@@ -76,7 +76,7 @@ class UserViewSet(viewsets.ModelViewSet):
             player_id = str(uuid.uuid1().int >> 32)
             user = User.objects.create_user(username=player_id, password=player_id)
             chest = CtmChestGenerate(user)
-            profile = UserCurrency.objects.get(user_id=user.id)
+            profile = UserCurrency.objects.get(user_id=user.id, strike=0)
             Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
             chest.generate_tutorial_chest()
             return_id = 201
