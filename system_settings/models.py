@@ -6,11 +6,9 @@ from base.models import Base
 from objects.models import League, Unit, Hero
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
-<<<<<<< HEAD
-=======
+
 from django.db.models import signals
 from  base import fields
->>>>>>> prerealese
 
 
 @python_2_unicode_compatible
@@ -83,9 +81,6 @@ class CTMHero(Base):
         unique_together = ('ctm', 'hero')
 
     def __str__(self):
-<<<<<<< HEAD
-        return 'ctm-{}-{}'.format(self.ctm.id, self.hero.moniker)
-=======
         return 'ctm-{}-{}'.format(self.ctm.id, self.hero.moniker)
 
 
@@ -117,4 +112,3 @@ def assigned_item_to_ctm(sender, instance, created, **kwargs):
 
 
 signals.post_save.connect(assigned_item_to_ctm, sender=CTM)
->>>>>>> prerealese
