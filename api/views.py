@@ -548,7 +548,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def register_account(self, request):
-        try:
+        # try:
             token = request.data.get('token')
             user = get_object_or_404(User, username=request.data.get('player_id'))
             user.user_currency.google_id = request.data.get('google_id')
@@ -565,8 +565,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_200_OK
             )
 
-        except Exception as e:
-            return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
+        # except Exception as e:
+        #     return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def get_account(self, request):
