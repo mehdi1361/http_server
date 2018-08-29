@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import CTM, CTMUnit, CTMHero
+from .models import CTM, CTMUnit, CTMHero, BotMatchMaking
 
 
 class CTMUnitInline(admin.StackedInline):
@@ -50,3 +50,22 @@ class CTMAdmin(admin.ModelAdmin):
     ]
 
     inlines = (CTMUnitInline, CTMHeroInline)
+
+
+@admin.register(BotMatchMaking)
+class BotMatchMakingAdmin(admin.ModelAdmin):
+    list_display = [
+        'strike_number',
+        'bot_ai',
+        'min_level',
+        'max_level',
+        'step_forward',
+        'step_backward'
+    ]
+    list_editable = [
+        'bot_ai',
+        'min_level',
+        'max_level',
+        'step_forward',
+        'step_backward'
+    ]

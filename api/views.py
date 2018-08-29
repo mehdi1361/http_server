@@ -6,13 +6,13 @@ from rest_framework import viewsets, status, filters, mixins
 from rest_framework.permissions import AllowAny
 
 from message.models import Inbox
-from .serializers import UserSerializer, BenefitSerializer, LeagueInfoSerializer, \
+from .serializers import UserSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
     LeagueSerializer, ClaimSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
-    PlayOff, LeagueTime, LeaguePrize
+    PlayOff, LeagueTime
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -26,10 +26,9 @@ from common.utils import hero_normalize_data, \
     unit_normalize_data, item_normalize_data, CtmChestGenerate
 from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
-from common.payment_verification import CafeBazar, FactoryStore
-from reports.models import Battle
-from django.db.models import Q
+from common.payment_verification import FactoryStore
 from operator import itemgetter
+from system_settings.models import CTM
 
 
 class DefaultsMixin(object):
@@ -274,7 +273,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             current_league = LeagueSerializer(league.league.base_league)
 
-            max_step = League.objects.all().values('step_number').order_by('-step_number')[0]
+            max_step = League.league_real.all().values('step_number').order_by('-step_number')[0]
 
             if max_step['step_number'] > league.league.base_league.step_number + 1:
                 next_league = League.objects.get(step_number=league.league.base_league.step_number + 1)
@@ -335,9 +334,8 @@ class UserViewSet(viewsets.ModelViewSet):
             }
             final_result['remain_time'] = LeagueTime.remain_time()
 
-
             prizes = []
-            for league in League.objects.all().order_by('step_number'):
+            for league in League.league_real.all().order_by('step_number'):
                 prizes.append({
                     "gem": league.params['play_off_reward']['gem'] if league.params is not None else None,
                     "coin": league.params['play_off_reward']['coin']} if league.params is not None else None
@@ -595,9 +593,31 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
     def store(self, request):
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
+
         result = serializer.data
         valid_time = datetime.now() + timedelta(seconds=result['special_offer'][0]['time_remaining'])
         result['special_offer'][0]['time_remaining'] = int((valid_time - datetime.now()).total_seconds())
+        try:
+            league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
+
+        except:
+            league_name = League.objects.get(step_number=0)
+
+        result = serializer.data
+
+        for chest in result['chests']:
+            type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
+            ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
+            chest['reward_data'] = {
+                "type": chest['type'],
+                "min_coin": ctm.min_coin,
+                "max_coin": ctm.max_coin,
+                "min_gem": ctm.min_gem,
+                "max_gem": ctm.max_gem,
+                "card_count": ctm.total
+            }
+            del chest['type']
+
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
@@ -670,7 +690,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             'wooden': 'W',
             'silver': 'S',
             'gold': 'G',
-            'crystal': 'C'
+            'crystal': 'C',
+            'magical': 'M',
+            'legendary': 'L'
         }
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 

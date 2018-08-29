@@ -262,13 +262,22 @@ class BenefitBox(Base):
         return '{}'.format(self.name)
 
 
+class CommingSoonManager(models.Manager):
+    def get_queryset(self):
+        return super(CommingSoonManager, self).get_queryset().filter(coming_soon=True)
+
+
 @python_2_unicode_compatible
 class Unit(BaseUnit, Base):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
+    coming_soon = models.BooleanField(_('coming soon'), default=False, blank=True)
     starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
     history = HistoricalRecords()
+
+    objects = models.Manager()
+    unlock_coming_soon = CommingSoonManager()
 
     @classmethod
     def count(cls):
@@ -335,6 +344,7 @@ class UserCurrency(Base):
     ban_user = models.BooleanField(_('ban user'), default=False)
     win_count = models.PositiveIntegerField(_('win count'), default=0)
     lose_count = models.PositiveIntegerField(_('lose count'), default=0)
+    strike = models.IntegerField(_('strike'), default=0)
 
     google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
     google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True, unique=True)
@@ -889,6 +899,11 @@ class Bot(Base):
         return '{}'.format(self.bot_name)
 
 
+class LeagueManager(models.Manager):
+    def get_queryset(self):
+        return super(LeagueManager, self).get_queryset().exclude(league_name='Tutorial')
+
+
 @python_2_unicode_compatible
 class League(Base):
     LEAGUE_TYPE = (
@@ -914,6 +929,9 @@ class League(Base):
     play_off_start_gem = models.PositiveIntegerField(_('play off start gem '), null=True, blank=True, default=0)
     play_off_start_gem_1 = models.PositiveIntegerField(_('play off start gem 1'), null=True, blank=True, default=0)
     play_off_start_gem_2 = models.PositiveIntegerField(_('play off start gem 2'), null=True, blank=True, default=0)
+
+    objects = models.Manager()
+    league_real = LeagueManager()
 
     class Meta:
         verbose_name = _('league')

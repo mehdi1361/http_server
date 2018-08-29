@@ -1,10 +1,32 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from objects.models import BenefitBox, UserCurrency, Hero, Unit, UserHero, HeroUnits, UserCard, \
-    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League, Claim
+    LeagueInfo, Chest, UserChest, Item, UserItem, AppConfig, LeagueUser, LeaguePrize, League, Claim, LeagueTime
 from shopping.models import Shop
 from message.models import NewsLetter, Inbox
 from common.utils import hero_normalize_data, unit_normalize_data, item_normalize_data
+
+
+
+def unlock_league(unit):
+    league = League.objects.filter(ctm_chests__units__unit=unit, ctm_chests__units__enable=True)\
+        .order_by('step_number').first()
+
+    step_number = 0
+    if league.league_name in ['Cooper01', 'Bronze03', 'Silver03', 'Gold03', 'Platinum03', 'Diamond03']:
+        step_number = 0
+
+    if league.league_name in ['Cooper02', 'Bronze02', 'Silver02', 'Gold02', 'Platinum02', 'Diamond02']:
+        step_number = 1
+
+    if league.league_name in ['Cooper03', 'Bronze01', 'Silver01', 'Gold01', 'Platinum01', 'Diamond01']:
+        step_number = 2
+
+    result = {
+        'league': league.league_type,
+        'step_number': step_number
+    }
+    return result
 
 
 class NewsLetterSerializer(serializers.ModelSerializer):
@@ -142,7 +164,6 @@ class UnitSerializer(serializers.ModelSerializer):
             'dodge_chance',
             'enable_in_start',
             'health',
-            # 'max_health',
             'shield',
             'unlock'
         )
@@ -251,6 +272,7 @@ class UserSerializer(serializers.ModelSerializer):
             except LeagueUser.DoesNotExist:
                 result['current_league'] = None
 
+            result['league_time'] = LeagueTime.remain_time()
             return result
 
         except UserCurrency.DoesNotExist as e:
@@ -263,7 +285,11 @@ class UserSerializer(serializers.ModelSerializer):
             data = hero_normalize_data(hero_user, serializer.data)
 
             list_unit = []
-            for unit in UserCard.objects.filter(character__heroes=hero_user.hero, user=requests):
+            for unit in UserCard.objects.filter(
+                    character__heroes=hero_user.hero,
+                    user=requests,
+                    character__coming_soon=True
+            ):
                 unit_serializer = UnitSerializer(unit.character)
                 unit_data = unit_normalize_data(unit, unit_serializer.data)
                 list_unit.append(unit_data)
@@ -292,9 +318,24 @@ class UserSerializer(serializers.ModelSerializer):
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))
 
         list_unit = []
-        for unit in UserCard.objects.filter(user=requests).exclude(character_id__in=hero_units):
+        for unit in UserCard.objects.filter(user=requests, character__unlock=True)\
+                .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
+            league = unlock_league(unit.character)
+            data['unlock_league'] = league['league']
+            data['unlock_league_step_number'] = league['step_number']
+            data['used_status'] = 'unlock'
+            list_unit.append(data)
+
+        for unit in UserCard.objects.filter(user=requests, character__coming_soon=True)\
+                .exclude(character_id__in=hero_units):
+            serializer = UnitSerializer(unit.character)
+            data = unit_normalize_data(unit, serializer.data)
+            league = unlock_league(unit.character)
+            data['unlock_league'] = league['league']
+            data['unlock_league_step_number'] = league['step_number']
+            data['used_status'] = 'coming_soon'
             list_unit.append(data)
 
         return list_unit
@@ -366,6 +407,7 @@ class LeagueInfoSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Shop
         fields = (
@@ -373,8 +415,7 @@ class ShopSerializer(serializers.ModelSerializer):
             'name',
             'coins',
             'gems',
-            'chests',
-            'special_offer'
+            'chests'
         )
 
 

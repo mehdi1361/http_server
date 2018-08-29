@@ -132,9 +132,10 @@ class AccountsUserAdmin(admin.ModelAdmin):
 
 @admin.register(UserCurrency)
 class UserCurrencyAdmin(admin.ModelAdmin):
-    list_display = ['name', 'gem', 'coin', 'trophy', 'player_id', 'win_count', 'lose_count', 'ban_user']
+    list_display = ['name', 'gem', 'coin', 'trophy', 'player_id', 'win_count', 'lose_count', 'ban_user', 'strike']
     list_editable = ['ban_user']
     search_fields = ['name']
+    readonly_fields = ['strike', ]
     inlines = [PurchaseLogAdmin, CurrencyLogAdmin]
 
     def player_id(self, obj):
@@ -149,8 +150,18 @@ class BenefitBoxAdmin(SimpleHistoryAdmin):
 
 @admin.register(Unit)
 class UnitAdmin(SimpleHistoryAdmin):
-    list_display = ('id', 'moniker', 'health', 'shield', 'attack', 'dexterity', 'starting_unit', 'unlock')
-    list_editable = ('unlock', 'starting_unit')
+    list_display = (
+        'id',
+        'moniker',
+        'health',
+        'shield',
+        'attack',
+        'dexterity',
+        'starting_unit',
+        'unlock',
+        'coming_soon'
+    )
+    list_editable = ('unlock', 'starting_unit', 'coming_soon')
     list_filter = ('dexterity', )
 
     def get_form(self, request, obj=None, **kwargs):

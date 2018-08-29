@@ -1,11 +1,14 @@
 import os
+import requests
 import random
+import json
 from django.core import management
 from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
 from objects.models import UserChest, League, LeagueUser, CreatedLeague, LeagueTime
 from datetime import datetime
-from django.db  import transaction
+from shopping.models import Store
+from django.conf import settings
 
 
 class FreeChestCreatorJob(CronJobBase):
@@ -97,3 +100,41 @@ class FakeUserGame(CronJobBase):
                         fake_user['win_rate'] = fake_user['max_rate']
 
             created_league.save()
+
+
+class CafeBazarRefreshToken(CronJobBase):
+    RUN_AT_TIMES = ['01:00']
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    code = 'objects.cafe_bazar_refresh_token'
+
+    def do(self):
+        store = Store.objects.get(valid_name='cafe_bazar')
+
+        querystring = {
+            "grant_type": "refresh_token",
+            "client_id": settings.CAFE_BAZAR_CLIENT_ID,
+            "client_secret": settings.CAFE_BAZAR_CLIENT_SECRET,
+            "refresh_token": store.refresh_token
+        }
+
+        headers = {
+            'grant_type': "refresh_token",
+            'client_id': settings.CAFE_BAZAR_CLIENT_ID,
+            'client_secret': settings.CAFE_BAZAR_CLIENT_SECRET,
+            'refresh_token': store.refresh_token,
+            'cache-control': "no-cache"
+        }
+
+        response = requests.request(
+            "POST",
+            settings.CAFE_BAZAR_REFRESH_TOKEN_URL,
+            headers=headers,
+            params=querystring
+        )
+        result = json.loads(response.text)
+
+        if response.status_code == 200:
+            store.access_token = result['access_token']
+            store.save()
+
+        print(result)
