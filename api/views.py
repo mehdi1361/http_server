@@ -630,7 +630,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 shop=shop
             )
 
-            return Response({'id': 200, 'message': 'not found'}, status=status.HTTP_200_OK)
+            return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
         purchase_store = FactoryStore.create(
             shop=shop,
