@@ -551,16 +551,19 @@ class UserViewSet(viewsets.ModelViewSet):
     def register_account(self, request):
         try:
             token = request.data.get('token')
-            request.user.user_currency.google_id = request.data.get('google_id')
-            request.user.user_currency.google_account = request.data.get('google_account')
-            request.user.user_currency.gem += settings.ACCOUNT_REGISTER_BENEFIT
-            request.user.user_currency.save()
+
+            profile = UserCurrency.objects.get(user=request.user)
+            profile.google_id = request.data.get('google_id')
+            profile.google_account = request.data.get('google_account')
+            profile.gem += settings.ACCOUNT_REGISTER_BENEFIT
+
+            profile.save()
 
             return Response(
                 {
                     "id": 200,
                     "message": "google account saved",
-                    "gem": request.user.user_currency.gem
+                    "gem": profile.gem
                 },
                 status=status.HTTP_200_OK
             )
