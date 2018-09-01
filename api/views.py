@@ -619,6 +619,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
     @list_route(methods=['POST'])
     def buy_gem(self, request):
         profile = UserCurrency.objects.get(user=request.user)
+        print "request data", request.data.get('shop_id')
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
@@ -629,6 +630,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 store_purchase_token=request.data.get('purchase_token'),
                 shop=shop
             )
+            print "error validation token"
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
