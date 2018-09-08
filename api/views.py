@@ -519,7 +519,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 raise Exception('type not valid!!!')
 
             video_ads = VideoAdsFactory.create(service, token)
-            #valid_video = video_ads.run()
+            valid_video = video_ads.run()
             valid_video = True
 
             if object_type == 'troop' and valid_video:
@@ -551,16 +551,19 @@ class UserViewSet(viewsets.ModelViewSet):
     def register_account(self, request):
         try:
             token = request.data.get('token')
-            request.user.user_currency.google_id = request.data.get('google_id')
-            request.user.user_currency.google_account = request.data.get('google_account')
-            request.user.user_currency.gem += settings.ACCOUNT_REGISTER_BENEFIT
-            request.user.user_currency.save()
+
+            profile = UserCurrency.objects.get(user=request.user)
+            profile.google_id = request.data.get('google_id')
+            profile.google_account = request.data.get('google_account')
+            profile.gem += settings.ACCOUNT_REGISTER_BENEFIT
+
+            profile.save()
 
             return Response(
                 {
                     "id": 200,
                     "message": "google account saved",
-                    "gem": request.user.user_currency.gem
+                    "gem": profile.gem
                 },
                 status=status.HTTP_200_OK
             )
@@ -578,6 +581,18 @@ class UserViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
 
+<<<<<<< HEAD
+=======
+    @list_route(methods=['POST'])
+    def test_ctm(self, request):
+        result = []
+        for item in settings.CHEST_SEQUENCE:
+            ctm = CtmChestGenerate(request.user, item)
+            result.append({"chest_type":item, "chest": ctm.generate_chest()})
+
+        return Response(result, status=status.HTT)
+
+>>>>>>> develop
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
@@ -630,7 +645,10 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 store_purchase_token=request.data.get('purchase_token'),
                 shop=shop
             )
+<<<<<<< HEAD
             print "error validation token"
+=======
+>>>>>>> develop
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 

@@ -23,196 +23,6 @@ from django.db import transaction
 
 
 def generate_fake_user_league(league):
-    lst_name = ["محمود",
-                "احمد",
-                "احمد آقا",
-                "مصطفی",
-                "میر مهدی",
-                "شب خوب",
-                "چوگاس",
-                "ولکوز",
-                "گوی بلورین",
-                "هشدرخان",
-                "تتلو",
-                "رضا",
-                "سمیه",
-                "دلار جهانگیری",
-                "خرزو خان",
-                "میر قاراشمیش",
-                "پایتون",
-                "کانتر لاجیک",
-                "رندوم لاجیک",
-                "آلفرد هیچکاک",
-                "استاد اسدی",
-                "شمائی زاده",
-                "غول مرحله آخر",
-                "صمصام",
-                "کیانو",
-                "عادل پور",
-                "فردوپوس",
-                "نتیجة الپراید",
-                "غول نارمک",
-                "پینک فلوید",
-                "پژمان",
-                "ولبورن",
-                "مارشال",
-                "پسقل",
-                "چیترا",
-                "میلاد",
-                "بابک",
-                "شعبون",
-                "سجاد",
-                "کارون",
-                "شکوفه",
-                "اقبال",
-                "فرمانده",
-                "شهرام",
-                "تریتا",
-                "یاس سفید",
-                "پارسا",
-                "مهربینا",
-                "الوند",
-                "سرو",
-                "کامبو",
-                "فازسه",
-                "شکیلا",
-                "اعظم",
-                "صلاح",
-                "شورانگیز",
-                "لواشک",
-                "گرگینه",
-                "آفتاب شرقی",
-                "پاندورا",
-                "قیمت",
-                "کروو اتانو",
-                "امیلی کالدوین",
-                "سیدر",
-                "ابن سینا",
-                "داش ابرام",
-                "گاندو",
-                "ژینوس",
-                "آلفا",
-                "رادیکال باز",
-                "کروشه به توان دو ",
-                "شاهکار",
-                "سلیمان",
-                "ونداد",
-                "هستی",
-                "همایون",
-                "بهمنیار",
-                "آگوست",
-                "بنیامین",
-                "محمدعلی",
-                "قباد",
-                "عمه ملوک",
-                "معین",
-                "آمنه",
-                "دیبا",
-                "صدرا",
-                "پوست پیاز",
-                "چنگیز ",
-                "بیژن ",
-                "امیر حسین",
-                "محمد جواد ",
-                "مش قنبر",
-                "کیکاووس",
-                "کامیار",
-                "گل بانو",
-                "کوکب",
-                "صفدر",
-                "اعلا",
-                "طهمورث",
-                "خشایار",
-                "آرش کمانگیر",
-                "غلام ",
-                "قلی",
-                "خسرو",
-                "بهنام",
-                "شکارچی شب",
-                "پلنگ صورتی",
-                "قلیدون",
-                "شایان",
-                "سیمین دخت",
-                "کوژین",
-                "نارما",
-                "کفشدوزک",
-                "قاصدک",
-                "کولبر",
-                "پاگنده",
-                "بنز",
-                "نوید",
-                "امید",
-                "چکامه",
-                "فریبرز",
-                "جواد",
-                "رامین",
-                "هرود",
-                "آنخماهو",
-                "چلیپا",
-                "لیلی",
-                "عبدعلی",
-                "ثریا",
-                "صمد",
-                "ضیا",
-                "سامانتا",
-                "پیکان",
-                "یوسف",
-                "واهیک",
-                "مه رو",
-                "مبارک",
-                "کادیلاک",
-                "سپر سیاوش",
-                "سیاووشان",
-                "قداره",
-                "دشنه",
-                "دمپایی ابری",
-                "اسفندیار",
-                "بهرام",
-                "ننه حسن",
-                "اتلو",
-                "کابوی",
-                "پدرام",
-                "پویا",
-                "نریمان",
-                "بابا طاهر عریان",
-                "رویا",
-                "وحید",
-                "طاهر",
-                "آتیلا",
-                "تیلدا",
-                "مراد",
-                "خشم ژیان",
-                "ناربیا",
-                "هیولا ",
-                "کریم",
-                "مریم",
-                "اژدر",
-                "کوروش",
-                "گرگ زخمی",
-                "بردیا",
-                "لیلا",
-                "رستم",
-                "سهراب",
-                "مرد نامرئی",
-                "تنها ",
-                "کیارش",
-                "علی",
-                "امیرعلی",
-                "ارسطو",
-                "نقی",
-                "قاتل حرفه ای",
-                "لئون",
-                "پیلتن",
-                "پلنگ سیاه ",
-                "مهدی",
-                "میثاق",
-                "بابک ",
-                "پرویز",
-                "ستاره ",
-                "خرم الدین",
-                "ارسلان ",
-                "دلاور",
-                ]
     fake_user_lst = []
     result = []
 
@@ -222,11 +32,11 @@ def generate_fake_user_league(league):
         for i in range(0, item.quantity):
             enable = True
             while enable:
-                random_number = random.randint(0, len(lst_name) - 1)
+                random_number = random.randint(0, len(settings.FAKE_USER) - 1)
 
                 if random_number not in result:
                     result.append(random_number)
-                    selected_name = lst_name[random_number]
+                    selected_name = settings.FAKE_USER[random_number]
                     enable = False
 
             fake_user_lst.append({
@@ -344,10 +154,11 @@ class UserCurrency(Base):
     ban_user = models.BooleanField(_('ban user'), default=False)
     win_count = models.PositiveIntegerField(_('win count'), default=0)
     lose_count = models.PositiveIntegerField(_('lose count'), default=0)
-    strike = models.IntegerField(_('strike'), default=0, null=True)
+
+    strike = models.IntegerField(_('strike'), default=0)
 
     google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
-    google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True, unique=True)
+    google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True)
 
     history = HistoricalRecords()
 
@@ -494,7 +305,7 @@ class UserCard(Base):
                 if datetime.now(tz=pytz.utc) > self.cool_down:
                     return 0
 
-                return (self.cool_down - datetime.now(tz=pytz.utc)).seconds
+                return (self.cool_down - datetime.now(tz=pytz.utc)).total_seconds()
 
             return 0
 
@@ -504,11 +315,12 @@ class UserCard(Base):
     @property
     def skip_cooldown_gem(self):
         if self.cool_down:
-            time_count = (self.cool_down - datetime.now(tz=pytz.utc)).seconds
+            time_count = (self.cool_down - datetime.now(tz=pytz.utc)).total_seconds()
             if time_count == 0:
                 return 0
 
-            return int(time_count/settings.COOL_DOWN_TIME)
+            result = int(time_count / settings.COOL_DOWN_TIME)
+            return 1 if result == 0 else result
 
     @classmethod
     def cards(cls, user):
@@ -519,8 +331,6 @@ class UserCard(Base):
         user_character = cls.objects.get(user=user, character=character)
         user_character.quantity += value
         if user_character.level == 0:
-            next_level = settings.UNIT_UPDATE[user_character.level + 1]
-            user_character.quantity -= next_level['unit_cards']
             user_character.level += 1
 
         user_character.save()
@@ -647,7 +457,7 @@ class UserChest(Base):
             return (self.chest_opening_date - current_time).seconds
 
         if self.chest_monetaryType == 'free':
-            init_time = (datetime.now() + timedelta(seconds=10))
+            init_time = (datetime.now() + timedelta(seconds=5))
 
         else:
             init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
@@ -661,7 +471,7 @@ class UserChest(Base):
     @property
     def initial_time(self):
         if self.chest_monetaryType == 'free':
-            init_time = (datetime.now() + timedelta(seconds=10))
+            init_time = (datetime.now() + timedelta(seconds=5))
 
         else:
             init_time = (datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[self.chest.chest_type]))
@@ -867,7 +677,7 @@ class AppConfig(Base):
 class Device(Base):
     user = models.ForeignKey(UserCurrency, verbose_name=_('user'), related_name='devices', null=True)
     device_model = models.CharField(_('device model'), max_length=100)
-    device_id = models.CharField(_('device model'), max_length=500, unique=True)
+    device_id = models.CharField(_('device model'), max_length=500)
 
     class Meta:
         verbose_name = _('device')

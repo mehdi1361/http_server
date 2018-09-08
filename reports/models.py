@@ -72,3 +72,4 @@ class TroopReport(Base):
 
     def __str__(self):
         return '{}-win:{} - lose:{}'.format(self.troop.moniker, self.win, self.lose)
+
