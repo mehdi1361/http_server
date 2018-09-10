@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='device',
             name='device_id',
-            field=models.CharField(max_length=500, unique=True, verbose_name='device model'),
+            field=models.CharField(max_length=500, verbose_name='device model'),
         ),
         migrations.AlterField(
             model_name='historicalusercurrency',
