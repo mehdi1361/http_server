@@ -7,5 +7,24 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/anc_db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="release" uuid="0182bc72-133b-4637-b5aa-4feaf32360d9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://130.185.74.237:5432/anc_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="prerelease" uuid="7d6fe850-d281-49f2-a5a2-a213ae23ffe1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://130.185.74.237:5432/anc_db_pre</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="develop" uuid="3f4de582-eb3f-4430-b0a1-e3c93a26e412">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>developer database</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://130.185.74.237:5432/anc_db_devel</jdbc-url>
+    </data-source>
   </component>
 </project>

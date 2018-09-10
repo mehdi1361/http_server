@@ -511,6 +511,15 @@ class UserChest(Base):
         else:
             return last_chest.sequence_number + 1
 
+    @classmethod
+    def chest_count(cls, user, status):
+        count = 0
+        for chest in cls.objects.filter(user=user, status=status):
+            if chest.status == 'opening' and chest.remain_time > 0:
+                count += 1
+
+        return count
+
     class Meta:
         verbose_name = _('user_chest')
         verbose_name_plural = _('user_chest')

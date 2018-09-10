@@ -106,7 +106,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def open_chest(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='close')
 
-        if UserChest.deck.filter(user=request.user, status='opening').count() >= 2:
+        if UserChest.chest_count(user=request.user, status='opening') >= 1:
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         if chest.chest_monetaryType == 'free':
@@ -156,7 +156,6 @@ class UserViewSet(viewsets.ModelViewSet):
     def chest_ready(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
         if chest.status != 'ready':
-            print(chest.remain_time)
             if chest.remain_time <= 0:
                 chest.status = 'ready'
                 chest.save()
