@@ -113,7 +113,9 @@ class UserViewSet(viewsets.ModelViewSet):
             opening_date = datetime.now() + timedelta(seconds=5)
 
         else:
-            opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
+            # TODO in develop mode use 10 second
+            # opening_date = datetime.now() + timedelta(hours=settings.CHEST_SEQUENCE_TIME[chest.chest.chest_type])
+            opening_date = datetime.now() + timedelta(seconds=10)
 
         chest.chest_opening_date = opening_date
 
