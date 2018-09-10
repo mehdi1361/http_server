@@ -106,7 +106,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def open_chest(self, request):
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='close')
 
-        if UserChest.deck.filter(user=request.user, status='opening').count() >= 1:
+        if UserChest.deck.filter(user=request.user, status='opening').count() >= 2:
             return Response({'id': 404, 'message': 'deck is full'}, status=status.HTTP_400_BAD_REQUEST)
 
         if chest.chest_monetaryType == 'free':
@@ -581,8 +581,7 @@ class UserViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< HEAD
-=======
+
     @list_route(methods=['POST'])
     def test_ctm(self, request):
         result = []
@@ -592,7 +591,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(result, status=status.HTT)
 
->>>>>>> develop
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
@@ -645,10 +643,6 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 store_purchase_token=request.data.get('purchase_token'),
                 shop=shop
             )
-<<<<<<< HEAD
-            print "error validation token"
-=======
->>>>>>> develop
 
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
