@@ -181,18 +181,14 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def set_player_name(self, request):
         name = request.data.get('name')
-        try:
-            user_profile = UserCurrency.objects.get(name=name)
+        user_profile = UserCurrency.objects.all(name=name)
+
+        if user_profile.count() > 0:
             name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))[:18]
 
-        except Exception:
-
-            name = request.data.get('name')
-
-        finally:
-            profile = UserCurrency.objects.get(user=request.user)
-            profile.name = name
-            profile.save()
+        profile = UserCurrency.objects.get(user=request.user)
+        profile.name = name
+        profile.save()
 
         return Response({'id': 201, 'user_name': name}, status=status.HTTP_202_ACCEPTED)
 
@@ -207,17 +203,16 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def change_player_name(self, request):
         if request.user.user_currency.can_change_name:
-            try:
-                name = request.data.get('name')
-                profile = UserCurrency.objects.get(name=name)
-                return Response({'id': 400, 'message': 'name already exists', 'name': profile.name},
+            name = request.data.get('name')
+            user_profile = UserCurrency.objects.all(name=name)
+
+            if user_profile.count() > 0:
+                return Response({'id': 400, 'message': 'name already exists', 'name': name},
                                 status=status.HTTP_400_BAD_REQUEST)
 
-            except:
-                profile = UserCurrency.objects.get(user=request.user)
-                profile.name = name
-                profile.can_change_name = False
-                profile.save()
+            profile = UserCurrency.objects.get(user=request.user)
+            profile.name = name
+            profile.save()
 
             return Response({'id': 200, 'message': 'name changed', 'name': profile.name}, status=status.HTTP_200_OK)
 
