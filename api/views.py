@@ -181,7 +181,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def set_player_name(self, request):
         name = request.data.get('name')
-        user_profile = UserCurrency.objects.all(name=name)
+        user_profile = UserCurrency.objects.filter(name=name)
 
         if user_profile.count() > 0:
             name = '{}{}'.format(name, str(uuid.uuid1().int >> 5))[:18]
@@ -204,7 +204,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def change_player_name(self, request):
         if request.user.user_currency.can_change_name:
             name = request.data.get('name')
-            user_profile = UserCurrency.objects.all(name=name)
+            user_profile = UserCurrency.objects.filter(name=name)
 
             if user_profile.count() > 0:
                 return Response({'id': 400, 'message': 'name already exists', 'name': name},
