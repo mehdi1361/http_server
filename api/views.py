@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import uuid
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
