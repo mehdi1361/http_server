@@ -186,7 +186,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user_profile = UserCurrency.objects.filter(name=name)
 
         if user_profile.count() > 0:
-            name = '{}{}'.format(str(name).decode('utf8').encode('utf8'), str(uuid.uuid1().int >> 5))[:18]
+            name = '{}{}'.format(str(name).decode('utf8'), str(uuid.uuid1().int >> 5))[:18]
 
         profile = UserCurrency.objects.get(user=request.user)
         profile.name = name
@@ -630,7 +630,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
     @list_route(methods=['POST'])
     def buy_gem(self, request):
         profile = UserCurrency.objects.get(user=request.user)
-        print "request data", request.data.get('shop_id')
+        print("request data", request.data.get('shop_id'))
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
