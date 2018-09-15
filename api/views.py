@@ -186,7 +186,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user_profile = UserCurrency.objects.filter(name=name)
 
         if user_profile.count() > 0:
-            name = '{}{}'.format(str(name).encode('utf8'), str(uuid.uuid1().int >> 5))[:18]
+            name = '{}{}'.format(str(name).decode('utf8').encode('utf8'), str(uuid.uuid1().int >> 5))[:18]
 
         profile = UserCurrency.objects.get(user=request.user)
         profile.name = name
