@@ -184,9 +184,12 @@ class UserViewSet(viewsets.ModelViewSet):
     def set_player_name(self, request):
         name = request.data.get('name')
         user_profile = UserCurrency.objects.filter(name=name)
+        print "after filter"
 
         if user_profile.count() > 0:
+            print "t1"
             name = '{}{}'.format(str(name).decode('utf8'), str(uuid.uuid1().int >> 5))[:18]
+            print "t2"
 
         profile = UserCurrency.objects.get(user=request.user)
         profile.name = name
