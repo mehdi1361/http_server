@@ -263,7 +263,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     item['rank'] = idx + 1
                     if item['player'] == request.user.user_currency.name:
                         previous_rank = league.rank if league.rank else idx
-                        current_rank = idx
+                        current_rank = idx +1
                         league.rank = idx + 1
                         league.save()
 
