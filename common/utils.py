@@ -278,11 +278,11 @@ def unit_normalize_data(unit, data):
             'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[next_stats]['increase'])),
             'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[next_stats]['increase'])),
 
-            'critical_chance': data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[next_stats]
-            ['increase'],
+            'critical_chance': data['critical_chance'] + data['critical_chance'] *
+                               settings.UNIT_UPDATE[next_stats]['increase'],
 
-            'critical_ratio': data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[next_stats]
-            ['increase'],
+            'critical_ratio': data['critical_ratio'] + data['critical_ratio'] *
+                              settings.UNIT_UPDATE[next_stats]['increase'],
 
             'miss_chance': data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[next_stats]['increase'],
             'dodge_chance': data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[next_stats]['increase']
@@ -295,11 +295,12 @@ def unit_normalize_data(unit, data):
 
         data['attack'] = int(
             round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
-        data['critical_chance'] = data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level]
-        ['increase']
 
-        data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level]
-        ['increase']
+        data['critical_chance'] = data['critical_chance'] + data['critical_chance'] * \
+                                  settings.UNIT_UPDATE[unit.level]['increase']
+
+        data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio'] * \
+                                 settings.UNIT_UPDATE[unit.level]['increase']
 
         data['miss_chance'] = data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level]['increase']
 
