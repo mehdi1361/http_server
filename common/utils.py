@@ -277,16 +277,15 @@ def unit_normalize_data(unit, data):
             'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[next_stats]['increase'])),
             'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[next_stats]['increase'])),
             'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[next_stats]['increase'])),
-            'critical_chance': round(data['critical_chance'] + data['critical_chance']
-                                     * settings.UNIT_UPDATE[next_stats]['increase'], 2),
-            'critical_ratio': round(data['critical_ratio'] + data['critical_ratio'] *
-                                    settings.UNIT_UPDATE[next_stats]['increase'], 2),
-            'miss_chance': round(
-                data['miss_chance'] + data['miss_chance'] *
-                settings.UNIT_UPDATE[next_stats]['increase'], 2),
-            'dodge_chance': round(
-                data['dodge_chance'] + data['dodge_chance'] *
-                settings.UNIT_UPDATE[next_stats]['increase'], 2)
+
+            'critical_chance': data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[next_stats]
+            ['increase'],
+
+            'critical_ratio': data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[next_stats]
+            ['increase'],
+
+            'miss_chance': data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[next_stats]['increase'],
+            'dodge_chance': data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[next_stats]['increase']
         }
 
         data['health'] = health
@@ -296,17 +295,16 @@ def unit_normalize_data(unit, data):
 
         data['attack'] = int(
             round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
-        data['critical_chance'] = round(
-            data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+        data['critical_chance'] = data['critical_chance'] + data['critical_chance'] * settings.UNIT_UPDATE[unit.level]
+        ['increase']
 
-        data['critical_ratio'] = round(
-            data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level]['increase'])
+        data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio'] * settings.UNIT_UPDATE[unit.level]
+        ['increase']
 
-        data['miss_chance'] = round(
-            data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+        data['miss_chance'] = data['miss_chance'] + data['miss_chance'] * settings.UNIT_UPDATE[unit.level]['increase']
 
-        data['dodge_chance'] = round(
-            data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level]['increase'])
+        data['dodge_chance'] = data['dodge_chance'] + data['dodge_chance'] * settings.UNIT_UPDATE[unit.level][
+            'increase']
 
     data['quantity'] = unit.quantity
     data['max_health'] = data['health']
@@ -534,7 +532,7 @@ class CtmChestGenerate:
             diff_val = ctm.total - sum_card
 
             if diff_val > 0:
-                rnd_max = diff_val/ctm.card_try if int(diff_val/ctm.card_try) > 0 else 1
+                rnd_max = diff_val / ctm.card_try if int(diff_val / ctm.card_try) > 0 else 1
                 rand_val = random.randint(1, rnd_max)
                 self.result[rd_idx]['count'] += rand_val
                 sum_card += rand_val
