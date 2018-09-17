@@ -532,7 +532,17 @@ class CtmChestGenerate:
             "chest_type": ctm.get_chest_type_display(),
             "gems": random.randint(ctm.min_gem, ctm.max_gem),
             "coins": random.randint(ctm.min_coin, ctm.max_coin),
-            "units": self.result
+            "units": self.result,
+            "reward_range": {
+                "type": ctm.get_chest_type_display(),
+                "min_coin": ctm.min_coin,
+                "max_coin": ctm.max_coin,
+                "min_gem": ctm.min_gem,
+                "max_gem": ctm.max_gem,
+                "card_count": ctm.total,
+                "min_hero": ctm.min_hero,
+                "max_hero": ctm.max_hero
+            }
         }
 
         return data
