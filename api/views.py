@@ -263,7 +263,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     item['rank'] = idx + 1
                     if item['player'] == request.user.user_currency.name:
                         previous_rank = league.rank if league.rank else idx
-                        current_rank = idx +1
+                        current_rank = idx + 1
                         league.rank = idx + 1
                         league.save()
 
@@ -621,7 +621,9 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 "max_coin": ctm.max_coin,
                 "min_gem": ctm.min_gem,
                 "max_gem": ctm.max_gem,
-                "card_count": ctm.total
+                "card_count": ctm.total,
+                "min_hero": ctm.min_hero,
+                ",ax_hero": ctm.max_hero
             }
             del chest['type']
 
