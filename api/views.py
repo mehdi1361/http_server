@@ -623,7 +623,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
                 "max_gem": ctm.max_gem,
                 "card_count": ctm.total,
                 "min_hero": ctm.min_hero,
-                ",ax_hero": ctm.max_hero
+                "max_hero": ctm.max_hero
             }
             del chest['type']
 
