@@ -185,14 +185,6 @@ def hero_normalize_data(hero_user, data):
         data['shield'] = shield
         data['max_shield'] = shield
         data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase']
-        data['critical_chance'] = round(
-            data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
-        data['critical_ratio'] = round(
-            data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
-        data['miss_chance'] = round(
-            data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
-        data['dodge_chance'] = round(
-            data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level]['increase'], 2)
 
     data['max_health'] = data['health']
     data['shield'] = data['shield']
@@ -209,19 +201,11 @@ def hero_normalize_data(hero_user, data):
 
         'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
 
-        'critical_chance': round(
-            data['critical_chance'] + data['critical_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'],
-            2),
+        'critical_chance': data['critical_chance'],
 
-        'critical_ratio': round(
-            data['critical_ratio'] + data['critical_ratio'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-
-        'miss_chance': round(
-            data['miss_chance'] + data['miss_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-
-        'dodge_chance': round(
-            data['dodge_chance'] + data['dodge_chance'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
-
+        'critical_ratio': data['critical_ratio'],
+        'miss_chance': data['miss_chance'],
+        'dodge_chance': data['dodge_chance']
     }
 
     data['level'] = hero_user.level if hero_user.hero and hero_user else 0
@@ -247,14 +231,10 @@ def hero_normalize_data(hero_user, data):
             'shield': int(round(
                 hero_user.hero.chakra_shield + hero_user.hero.chakra_shield * settings.HERO_UPDATE[hero_user.level + 1][
                     'increase'])),
-            'critical_chance': round(hero_user.hero.chakra_critical_chance + hero_user.hero.chakra_critical_chance *
-                                     settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-            'critical_ratio': round(hero_user.hero.chakra_critical_ratio + hero_user.hero.chakra_critical_ratio *
-                                    settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-            'miss_chance': round(hero_user.hero.chakra_miss_chance + hero_user.hero.chakra_miss_chance *
-                                 settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2),
-            'dodge_chance': round(hero_user.hero.chakra_dodge_chance + hero_user.hero.chakra_dodge_chance *
-                                  settings.HERO_UPDATE[hero_user.level + 1]['increase'], 2)
+            'critical_chance': hero_user.hero.chakra_critical_chance,
+            'critical_ratio': hero_user.hero.chakra_critical_ratio,
+            'miss_chance': hero_user.hero.chakra_miss_chance,
+            'dodge_chance': hero_user.hero.chakra_dodge_chance
 
         }
     }
@@ -278,7 +258,7 @@ def unit_normalize_data(unit, data):
             'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[next_stats]['increase'])),
             'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[next_stats]['increase'])),
 
-            'critical_chance': data['critical_chance'] + data['critical_chance'],
+            'critical_chance': data['critical_chance'],
             'critical_ratio': data['critical_ratio'],
             'miss_chance': data['miss_chance'],
             'dodge_chance': data['dodge_chance']
@@ -291,11 +271,6 @@ def unit_normalize_data(unit, data):
 
         data['attack'] = int(
             round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
-
-        data['critical_chance'] = data['critical_chance'] + data['critical_chance']
-        data['critical_ratio'] = data['critical_ratio'] + data['critical_ratio']
-        data['miss_chance'] = data['miss_chance'] + data['miss_chance']
-        data['dodge_chance'] = data['dodge_chance'] + data['dodge_chance']
 
     data['quantity'] = unit.quantity
     data['max_health'] = data['health']
