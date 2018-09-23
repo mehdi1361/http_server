@@ -586,12 +586,11 @@ class UserViewSet(viewsets.ModelViewSet):
             google_id = request.data.get('google_id')
 
             if google_id is None:
-                raise Exception('google id not found!!!')
+                raise Exception('google id not found')
 
-            if profile.google_id == request.data.get('google_id'):
-                return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
+            profile = get_object_or_404(UserCurrency, google_id=request.data.get('google_id'))
 
-            return Response({"id": 400, "error": 'google id not found!!!'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
 
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
@@ -603,7 +602,7 @@ class UserViewSet(viewsets.ModelViewSet):
             ctm = CtmChestGenerate(request.user, item)
             result.append({"chest_type":item, "chest": ctm.generate_chest()})
 
-        return Response(result, status=status.HTTP_200_OK)
+        return Response(result, status=status.HTT)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
