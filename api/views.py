@@ -548,11 +548,21 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def register_account(self, request):
         try:
-            token = request.data.get('token')
-
             profile = UserCurrency.objects.get(user=request.user)
-            profile.google_id = request.data.get('google_id')
-            profile.google_account = request.data.get('google_account')
+            google_id = request.data.get('google_id')
+            google_account = request.data.get('google_account')
+
+            if google_id is None:
+                raise Exception('google id not found!!!')
+
+            if google_account is None:
+                raise Exception('google account not found!!!')
+
+            if profile.google_id is not None:
+                raise Exception('set google id for profile!!!')
+
+            profile.google_id = google_id
+            profile.google_account = google_account
             profile.gem += settings.ACCOUNT_REGISTER_BENEFIT
 
             profile.save()
@@ -572,13 +582,19 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['POST'])
     def get_account(self, request):
         try:
-            profile = get_object_or_404(UserCurrency, google_id=request.data.get('google_id'))
+            profile = get_object_or_404(UserCurrency, user=request.user)
+            google_id = request.data.get('google_id')
 
-            return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
+            if google_id is None:
+                raise Exception('google id not found!!!')
+
+            if profile.google_id == request.data.get('google_id'):
+                return Response({"id": 200, "player_id": profile.user.username}, status=status.HTTP_200_OK)
+
+            return Response({"id": 400, "error": 'google id not found!!!'}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
             return Response({"id": 400, "error": e.message}, status=status.HTTP_400_BAD_REQUEST)
-
 
     @list_route(methods=['POST'])
     def test_ctm(self, request):
@@ -587,7 +603,7 @@ class UserViewSet(viewsets.ModelViewSet):
             ctm = CtmChestGenerate(request.user, item)
             result.append({"chest_type":item, "chest": ctm.generate_chest()})
 
-        return Response(result, status=status.HTT)
+        return Response(result, status=status.HTTP_200_OK)
 
 
 class LeagueViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
