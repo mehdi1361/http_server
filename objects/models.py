@@ -251,6 +251,15 @@ class UserHero(Base):
         except:
             return lst_item
 
+    @classmethod
+    def upgrade(cls, user, hero, value):
+        user_hero = cls.objects.get(user=user, hero=hero)
+        user_hero.quantity += value
+        if user_hero.level == 0:
+            user_hero.level += 1
+
+        user_hero.save()
+
     def __str__(self):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
 

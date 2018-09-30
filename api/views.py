@@ -158,6 +158,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
+        hero_moniker = list(Hero.objects.all().values_list('moniker', flat=True))
+
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
         if chest.status != 'ready':
             if chest.remain_time <= 0:
@@ -168,11 +170,16 @@ class UserViewSet(viewsets.ModelViewSet):
 
         serializer = UserChestSerializer(chest)
         UserCurrency.update_currency(request.user, chest.reward_data['gems'], chest.reward_data['coins'])
-        for unit in chest.reward_data['units']:
-            character = Unit.objects.get(moniker=unit['unit'])
-            UserCard.upgrade_character(request.user, character, unit['count'])
 
-        # TODO add hero card
+        for unit in chest.reward_data['units']:
+            if unit['unit'] in hero_moniker:
+                hero = Hero.objects.get(moniker=unit['unit'])
+                UserHero.upgrade(user=request.user, hero=hero, value=unit['count'])
+
+            else:
+                character = Unit.objects.get(moniker=unit['unit'])
+                UserCard.upgrade_character(request.user, character, unit['count'])
+
         # TODO add item card
 
         chest.status = 'used'
