@@ -12,10 +12,10 @@ def unlock_league(unit):
         .order_by('step_number').first()
 
     step_number = 0
-    if league.league_name in ['Cooper01', 'Silver01', 'Gold01']:
+    if league.league_name in ['Cooper01', 'Silver01']:
         step_number = 0
 
-    if league.league_name in ['Cooper02', 'Silver02', 'Gold02']:
+    if league.league_name in ['Cooper02', 'Silver02']:
         step_number = 1
 
     # if league.league_name in ['Cooper03', 'Silver01', 'Gold01']:
