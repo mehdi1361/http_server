@@ -8,18 +8,19 @@ from common.utils import hero_normalize_data, unit_normalize_data, item_normaliz
 
 
 def unlock_league(unit):
+    print "unit", unit
     league = League.objects.filter(ctm_chests__units__unit=unit, ctm_chests__units__enable=True)\
         .order_by('step_number').first()
 
     step_number = 0
-    if league.league_name in ['Cooper01', 'Silver01']:
+    if league.league_name in ['Cooper01', 'Silver03', 'Gold03', 'Platinum03', 'Diamond03']:
         step_number = 0
 
-    if league.league_name in ['Cooper02', 'Silver02']:
+    if league.league_name in ['Cooper02', 'Bronze02', 'Silver02', 'Gold02', 'Platinum02', 'Diamond02']:
         step_number = 1
 
-    # if league.league_name in ['Cooper03', 'Silver01', 'Gold01']:
-    #     step_number = 2
+    if league.league_name in ['Cooper03', 'Bronze01', 'Silver01', 'Gold01', 'Platinum01', 'Diamond01']:
+        step_number = 2
 
     result = {
         'league': league.league_type,
