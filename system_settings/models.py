@@ -8,7 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db.models import signals
-from  base import fields
+from base import fields
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 @python_2_unicode_compatible
@@ -50,6 +51,14 @@ class CTM(Base):
 
     def __str__(self):
         return '{}-{}'.format(self.chest_type, self.league.league_name)
+
+    @classmethod
+    def chest_total_card(cls, league):
+        result = {}
+        for item in cls.objects.filter(league=league):
+            result[item.get_chest_type_display()] = item.total
+
+        return result
 
 
 @python_2_unicode_compatible
@@ -100,6 +109,44 @@ class BotMatchMaking(Base):
 
     def __str__(self):
         return 'match_making-{}-{}'.format(self.bot_ai, self.strike_number)
+
+
+@python_2_unicode_compatible
+class CustomBot(Base):
+    bot_name = models.CharField(_('bot name'), max_length=200)
+    enable = models.BooleanField(_('enable'), default=False)
+
+    class Meta:
+        verbose_name = _('custom_bot')
+        verbose_name_plural = _('custom_bots')
+        db_table = 'custom_bots'
+
+    def __str__(self):
+        return '{}'.format(self.bot_name)
+
+    @property
+    def troops(self):
+        result = None
+
+        for troop in self.troops:
+            result = "{},".join(troop)
+
+        return result
+
+
+class CustomBotTroop(Base):
+    troop = models.ForeignKey(Unit, verbose_name=_('troop'), related_name='custom_bots')
+    bot = models.ForeignKey(CustomBot, verbose_name=_('bot'), related_name='troops')
+    level = models.PositiveIntegerField(_('level'), validators=[MaxValueValidator(10), MinValueValidator(0)])
+
+    class Meta:
+        verbose_name = _('custom_bot_troop')
+        verbose_name_plural = _('custom_bot_troops')
+        db_table = 'custom_bot_troops'
+        unique_together = ('troop', 'bot')
+
+    def __str__(self):
+        return '{}'.format(self.bot.bot_name)
 
 
 def assigned_item_to_ctm(sender, instance, created, **kwargs):

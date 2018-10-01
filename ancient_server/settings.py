@@ -13,8 +13,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import raven
 import datetime
 from local_setting import *
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,6 +40,7 @@ ALLOWED_HOSTS = ['192.168.1.149', '127.0.0.1', 'ancientsrevival.ir', 'localhost'
 # Application definition
 
 INSTALLED_APPS = [
+    'raven.contrib.django.raven_compat',
     'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -586,13 +591,26 @@ CAFE_BAZAR_CLIENT_ID = 'ySK9GZE7hfrXP5rukViMmsGSCpg2dBJsQDhtzLzQ'
 CAFE_BAZAR_CLIENT_SECRET = 'mVgkvbLFPjog2mw3o9LjefNBxenSh6bgUS8EYwCVNz1fh3FSipzXqmqPZuf9'
 CAFE_BAZAR_REFRESH_TOKEN_URL = "https://pardakht.cafebazaar.ir/devapi/v2/auth/token/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-#     # '/var/www/static/',
-# ]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 USE_THOUSAND_SEPARATOR = True
 
 # LOGIN_REDIRECT_URL = '/employee/login'
+
+# RAVEN_CONFIG = {
+#     'dsn': 'http://04b4cd46b70647d5a5a2978fa7ab3b59:6a60ad3b565241b8815f33bd95f9c1a7@localhost:9000/2',
+#     # 'dsn': 'https://58789adf55154818abb7eea11a637c4b@sentry.io/1287768',
+#     # If you are using git, you can also automatically configure the
+#     # release based on the git info.
+#     # 'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+# }
+
+RAVEN_CONFIG = {
+    'dsn': 'http://3d878383b4e14d3e99dc42c1602256f6:06cdeaa346ef4a299907d93bcbd738dd@130.185.74.237:9001/1',
+
+}
+# sentry_sdk.init(
+#     dsn="https://58789adf55154818abb7eea11a637c4b@sentry.io/1287768",
+#     integrations=[DjangoIntegration()]
+# )

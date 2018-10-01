@@ -8,7 +8,6 @@ from common.utils import hero_normalize_data, unit_normalize_data, item_normaliz
 
 
 def unlock_league(unit):
-    print "unit", unit
     league = League.objects.filter(ctm_chests__units__unit=unit, ctm_chests__units__enable=True)\
         .order_by('step_number').first()
 

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import CTM, CTMUnit, CTMHero, BotMatchMaking
+from .models import CTM, CTMUnit, CTMHero, BotMatchMaking, CustomBot, CustomBotTroop
 
 
 class CTMUnitInline(admin.StackedInline):
@@ -79,3 +79,16 @@ class BotMatchMakingAdmin(admin.ModelAdmin):
         'step_forward',
         'step_backward'
     ]
+
+
+class CustomBotTroopAdmin(admin.StackedInline):
+    model = CustomBotTroop
+
+
+@admin.register(CustomBot)
+class CustomBotAdmin(admin.ModelAdmin):
+    list_display = ['bot_name', 'enable']
+    list_editable = ['enable', ]
+    inlines = [CustomBotTroopAdmin, ]
+    
+

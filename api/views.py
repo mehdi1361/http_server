@@ -341,9 +341,12 @@ class UserViewSet(viewsets.ModelViewSet):
 
             prizes = []
             for league in League.league_real.all().order_by('step_number'):
-                prizes.append({
-                    "gem": league.params['play_off_reward']['gem'] if league.params is not None else None,
-                    "coin": league.params['play_off_reward']['coin']} if league.params is not None else None
+                prizes.append(
+                    {
+                        "gem": league.params['play_off_reward']['gem'] if league.params is not None else None,
+                        "coin": league.params['play_off_reward']['coin'],
+                        "card_counts": CTM.chest_total_card(league)
+                    } if league.params is not None else None
                 )
 
             final_result['leagues_rewards'] = prizes
