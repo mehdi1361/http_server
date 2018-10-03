@@ -87,8 +87,16 @@ class CustomBotTroopAdmin(admin.StackedInline):
 
 @admin.register(CustomBot)
 class CustomBotAdmin(admin.ModelAdmin):
-    list_display = ['bot_name', 'enable']
+    list_display = ['bot_name', 'enable', 'troops']
     list_editable = ['enable', ]
     inlines = [CustomBotTroopAdmin, ]
-    
+
+    def troops(self, bot):
+        lst_troops = []
+
+        for troop in bot.troops.all():
+            lst_troops.append(troop.troop.moniker)
+
+        return ', '.join(lst_troops)
+
 

@@ -124,7 +124,6 @@ class AccountsUserAdmin(admin.ModelAdmin):
     list_filter = ['is_staff']
     inlines = [UserCurrencyInline]
 
-
     # def get_name(self, obj):
     #     profile = UserCurrency.objects.filter(user=obj)
     #     return profile.name
@@ -389,18 +388,6 @@ class CreatedLeagueAdmin(admin.ModelAdmin):
 
 @admin.register(LeagueUser)
 class LeagueUserAdmin(admin.ModelAdmin):
-    # readonly_fields = (
-    #     'player',
-    #     'league',
-    #     'score',
-    #     'close_league',
-    #     'rank',
-    #     'play_off_count',
-    #     'lose_count',
-    #     'play_off_status',
-    #     'match_count',
-    #     'league_change_status'
-    # )
     list_display = (
         'player',
         'league',
