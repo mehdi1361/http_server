@@ -190,16 +190,23 @@ def hero_normalize_data(hero_user, data):
     data['shield'] = data['shield']
     data['quantity'] = hero_user.quantity if hero_user else 0
 
+    if hero_user.level == 0:
+        next_stats = hero_user.level + 2
+    else:
+        next_stats = hero_user.level + 1
+
+    data['level'] = hero_user.level if hero_user.hero and hero_user else 0
+
     data['next_upgrade_stats'] = {
-        'card_cost': settings.HERO_UPDATE[hero_user.level + 1]['coins'],
+        'card_cost': settings.HERO_UPDATE[next_stats]['coins'],
 
-        'card_count': settings.HERO_UPDATE[hero_user.level + 1]['hero_cards'],
+        'card_count': settings.HERO_UPDATE[next_stats]['hero_cards'],
 
-        'attack': int(round(data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+        'attack': int(round(data['attack'] + data['attack'] * settings.HERO_UPDATE[next_stats]['increase'])),
 
-        'health': int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+        'health': int(round(data['health'] + data['health'] * settings.HERO_UPDATE[next_stats]['increase'])),
 
-        'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level + 1]['increase'])),
+        'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[next_stats]['increase'])),
 
         'critical_chance': data['critical_chance'],
 
@@ -207,8 +214,6 @@ def hero_normalize_data(hero_user, data):
         'miss_chance': data['miss_chance'],
         'dodge_chance': data['dodge_chance']
     }
-
-    data['level'] = hero_user.level if hero_user.hero and hero_user else 0
 
     data['chakra'] = {
         'chakra_moniker': hero_user.hero.chakra_moniker,
