@@ -66,21 +66,30 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
-        device_id = request.data['deviceUniqueID']
-        device_name = request.data['deviceName']
+        try:
+            device_id = request.data['deviceUniqueID']
+            device_name = request.data['deviceName']
 
-        player_id = str(uuid.uuid1().int >> 32)
-        user = User.objects.create_user(username=player_id, password=player_id)
-        chest = CtmChestGenerate(user)
-        profile = UserCurrency.objects.get(user_id=user.id)
-        Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
-        chest.generate_tutorial_chest()
-        return_id = 201
+            device = Device.objects.filter(device_id='e37b06591a23fba01182636963c3e092').order_by('created_date').first()
 
-        return Response(
-            {'id': return_id, 'player_id': player_id},
-            status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
-        )
+            if device is not None:
+                return Response({'id': 200, 'player_id': device.user.user.username }, status=status.HTTP_200_OK)
+
+            player_id = str(uuid.uuid1().int >> 32)
+            user = User.objects.create_user(username=player_id, password=player_id)
+            chest = CtmChestGenerate(user)
+            profile = UserCurrency.objects.get(user_id=user.id)
+            Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
+            chest.generate_tutorial_chest()
+            return_id = 201
+
+            return Response(
+                {'id': return_id, 'player_id': player_id},
+                status=status.HTTP_201_CREATED if return_id == 201 else status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            return Response({'id': 400, 'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
