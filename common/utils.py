@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard, League
+from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard, League, Hero
 from django.conf import settings
 from system_settings.models import CTM, CTMHero
 from random import shuffle
@@ -408,6 +408,7 @@ class CtmChestGenerate:
         lst_result = []
         hero_result = None
         lst_exclude = []
+        lst_hero_name = list(Hero.objects.all().values_list('moniker', flat=True))
 
         for i in range(0, ctm.card_try):
             if not self.selected_hero:
@@ -491,8 +492,7 @@ class CtmChestGenerate:
                         "count": random.randint(ctm.min_hero, ctm.max_hero)
                     }
                 )
-                print(ctm.min_hero, ctm.max_hero)
-                print("result", self.result)
+
                 tmp_lst.append(hero_result.moniker)
 
             lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
@@ -520,8 +520,10 @@ class CtmChestGenerate:
             if diff_val > 0:
                 rnd_max = diff_val / ctm.card_try if int(diff_val / ctm.card_try) > 0 else 1
                 rand_val = random.randint(1, rnd_max)
-                self.result[rd_idx]['count'] += rand_val
-                sum_card += rand_val
+
+                if self.result[rd_idx]['unit'] not in lst_hero_name:
+                    self.result[rd_idx]['count'] += rand_val
+                    sum_card += rand_val
 
         data = {
             "chest_type": ctm.get_chest_type_display(),
