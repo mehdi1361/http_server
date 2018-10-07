@@ -734,6 +734,8 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_chest(self, request):
+        hero_moniker = list(Hero.objects.all().values_list('moniker', flat=True))
+
         profile = UserCurrency.objects.get(user=request.user)
         chest_type = {
             'wooden': 'W',
@@ -756,8 +758,13 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             UserCurrency.update_currency(request.user, chest_value['gems'], chest_value['coins'])
 
             for unit in chest_value['units']:
-                character = Unit.objects.get(moniker=unit['unit'])
-                UserCard.upgrade_character(request.user, character, unit['count'])
+                if unit['unit'] in hero_moniker:
+                    hero = Hero.objects.get(moniker=unit['unit'])
+                    UserHero.upgrade(user=request.user, hero=hero, value=unit['count'])
+
+                else:
+                    character = Unit.objects.get(moniker=unit['unit'])
+                    UserCard.upgrade_character(request.user, character, unit['count'])
 
             CurrencyLog.objects.create(
                 user=profile,
