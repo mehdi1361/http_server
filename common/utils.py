@@ -491,6 +491,8 @@ class CtmChestGenerate:
                         "count": random.randint(ctm.min_hero, ctm.max_hero)
                     }
                 )
+                print(ctm.min_hero, ctm.max_hero)
+                print("result", self.result)
                 tmp_lst.append(hero_result.moniker)
 
             lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
