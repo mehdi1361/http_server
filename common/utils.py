@@ -406,6 +406,7 @@ class CtmChestGenerate:
             ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
 
         lst_result = []
+        hero_result = None
         lst_exclude = []
 
         for i in range(0, ctm.card_try):
@@ -414,7 +415,7 @@ class CtmChestGenerate:
                 for hero in ctm.heroes.filter(enable=True):
                     lst_valid_hero.append(hero.hero.id)
 
-                random_hero_chance = random.uniform(0, 100)
+                random_hero_chance = random.uniform(1, 100)
 
                 if ctm.chance_hero >= random_hero_chance:
                     user_heroes = list(UserHero.objects.filter(user=self.user, hero_id__in=lst_valid_hero))
@@ -433,12 +434,16 @@ class CtmChestGenerate:
                         if variance < 20:
                             variance = 20
 
-                        lst_result.extend(
-                            [{
-                                "name": random_user_hero.hero.moniker,
-                                "type": "hero"
-                            }] * variance
-                        )
+                        if ctm.chance_hero != 100:
+                            lst_result.extend(
+                                [{
+                                    "name": random_user_hero.hero.moniker,
+                                    "type": "hero"
+                                }] * variance
+                            )
+
+                        hero_result = random_user_hero.hero
+
                         self.selected_hero = True
 
             lst_valid_unit = []
@@ -479,6 +484,14 @@ class CtmChestGenerate:
 
         sum_card = 0
         while len(self.result) < ctm.card_try:
+            if ctm.chance_hero == 100 and hero_result.moniker not in tmp_lst:
+                self.result.append(
+                    {
+                        "unit": str(hero_result.moniker),
+                        "count": random.randint(ctm.min_hero, ctm.max_hero)
+                    }
+                )
+                tmp_lst.append(hero_result.moniker)
 
             lst_result = [k for k in lst_result if k['name'] not in tmp_lst]
             idx = random.randint(0, len(lst_result) - 1)
