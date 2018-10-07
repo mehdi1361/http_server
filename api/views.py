@@ -760,7 +760,7 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
             for unit in chest_value['units']:
                 if unit['unit'] in hero_moniker:
                     hero = Hero.objects.get(moniker=unit['unit'])
-                    UserHero.upgrade(user=request.user, hero=hero, value=unit['count'])
+                    UserHero.upgrade_hero(user=request.user, hero=hero, value=unit['count'])
 
                 else:
                     character = Unit.objects.get(moniker=unit['unit'])

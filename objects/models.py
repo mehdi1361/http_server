@@ -252,7 +252,7 @@ class UserHero(Base):
             return lst_item
 
     @classmethod
-    def upgrade(cls, user, hero, value):
+    def upgrade_hero(cls, user, hero, value):
         user_hero = cls.objects.get(user=user, hero=hero)
         user_hero.quantity += value
         if user_hero.level == 0:
