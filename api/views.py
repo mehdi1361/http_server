@@ -70,10 +70,10 @@ class UserViewSet(viewsets.ModelViewSet):
             device_id = request.data['deviceUniqueID']
             device_name = request.data['deviceName']
 
-            device = Device.objects.filter(device_id='e37b06591a23fba01182636963c3e092').order_by('created_date').first()
+            device = Device.objects.filter(device_id=device_id).order_by('created_date').first()
 
             if device is not None:
-                return Response({'id': 200, 'player_id': device.user.user.username }, status=status.HTTP_200_OK)
+                return Response({'id': 200, 'player_id': device.user.user.username}, status=status.HTTP_200_OK)
 
             player_id = str(uuid.uuid1().int >> 32)
             user = User.objects.create_user(username=player_id, password=player_id)
