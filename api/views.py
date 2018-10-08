@@ -183,7 +183,7 @@ class UserViewSet(viewsets.ModelViewSet):
         for unit in chest.reward_data['units']:
             if unit['unit'] in hero_moniker:
                 hero = Hero.objects.get(moniker=unit['unit'])
-                UserHero.upgrade(user=request.user, hero=hero, value=unit['count'])
+                UserHero.upgrade_hero(user=request.user, hero=hero, value=unit['count'])
 
             else:
                 character = Unit.objects.get(moniker=unit['unit'])
