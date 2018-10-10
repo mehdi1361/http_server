@@ -309,7 +309,6 @@ class UserViewSet(viewsets.ModelViewSet):
                 final_result['current_league']['league_step'] = 1
 
             final_result['next_league'] = next_league_serializer.data
-            final_result['current_league'] = current_league.data
             if final_result['next_league']['league_name'] in ['Cooper00', 'Silver00', 'Gold00', 'Platinum00',
                                                                  'Diamond00']:
                 final_result['next_league']['league_step'] = 0
