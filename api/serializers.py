@@ -7,24 +7,6 @@ from message.models import NewsLetter, Inbox
 from common.utils import hero_normalize_data, unit_normalize_data, item_normalize_data
 
 
-def unlock_league(unit):
-    league = League.objects.filter(ctm_chests__units__unit=unit, ctm_chests__units__enable=True)\
-        .order_by('step_number').first()
-
-    step_number = 0
-    if league.league_name in ['Cooper00', 'Silver00', 'Gold00', 'Platinum00', 'Diamond00']:
-        step_number = 0
-
-    if league.league_name in ['Cooper01', 'Bronze01', 'Silver01', 'Gold01', 'Platinum01', 'Diamond01']:
-        step_number = 1
-
-    result = {
-        'league': league.league_type,
-        'step_number': step_number
-    }
-    return result
-
-
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
@@ -321,9 +303,8 @@ class UserSerializer(serializers.ModelSerializer):
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            league = unlock_league(unit.character)
-            data['unlock_league'] = league['league']
-            data['unlock_league_step_number'] = league['step_number']
+            data['unlock_league'] = unit.character.unlock_league.league_type
+            data['unlock_league_step_number'] = unit.character.unlock_league.league_step
             data['used_status'] = 'unlock'
             list_unit.append(data)
 
@@ -331,9 +312,8 @@ class UserSerializer(serializers.ModelSerializer):
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            league = unlock_league(unit.character)
-            data['unlock_league'] = league['league']
-            data['unlock_league_step_number'] = league['step_number']
+            data['unlock_league'] = unit.character.unlock_league.league_type
+            data['unlock_league_step_number'] = unit.character.unlock_league.league_step
             data['used_status'] = 'coming_soon'
             list_unit.append(data)
 
