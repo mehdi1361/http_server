@@ -87,7 +87,7 @@ class UserCurrencySerializer(serializers.ModelSerializer):
             'session_count',
             'need_comeback',
             'can_change_name',
-            'tutorial_done', 
+            'tutorial_done',
             'next_session_remaining_seconds',
             'google_account',
             'google_id'
@@ -120,7 +120,6 @@ class LeaguePrizeSerializer(serializers.ModelSerializer):
 
 
 class LeagueUserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = LeagueUser
         fields = (
@@ -284,7 +283,7 @@ class UserSerializer(serializers.ModelSerializer):
 
                 if data['selected_hero']:
                     item_data['selected_item'] = True if item.item.id in \
-                                                    UserHero.get_selected_item(requests, hero_user.hero) else False
+                                                         UserHero.get_selected_item(requests, hero_user.hero) else False
                 else:
                     data['selected_item'] = False
                 list_item.append(item_data)
@@ -299,21 +298,26 @@ class UserSerializer(serializers.ModelSerializer):
         hero_units = list(HeroUnits.objects.all().values_list('unit_id', flat=True))
 
         list_unit = []
-        for unit in UserCard.objects.filter(user=requests, character__unlock=True)\
+        for unit in UserCard.objects.filter(user=requests, character__unlock=True) \
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            data['unlock_league'] = unit.character.unlock_league.league_type
-            data['unlock_league_step_number'] = unit.character.unlock_league.league_step
+            data['unlock_league'] = None if unit.character.unlock_league is None else \
+                unit.character.unlock_league.league_type
+
+            data['unlock_league_step_number'] = None if unit.character.unlock_league is None else \
+                unit.character.unlock_league.league_step
             data['used_status'] = 'unlock'
             list_unit.append(data)
 
-        for unit in UserCard.objects.filter(user=requests, character__coming_soon=True)\
+        for unit in UserCard.objects.filter(user=requests, character__coming_soon=True) \
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            data['unlock_league'] = unit.character.unlock_league.league_type
-            data['unlock_league_step_number'] = unit.character.unlock_league.league_step
+            data['unlock_league'] = None if unit.character.unlock_league is None else \
+                unit.character.unlock_league.league_type
+            data['unlock_league_step_number'] = None if unit.character.unlock_league is None else \
+                unit.character.unlock_league.league_step
             data['used_status'] = 'coming_soon'
             list_unit.append(data)
 
@@ -321,7 +325,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_google_id(self, requests):
         return requests.user_currency.google_id
-
 
     # def create(self, validated_data):
     #     # if 'email' not in validated_data:
@@ -390,7 +393,6 @@ class LeagueInfoSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Shop
         fields = (
@@ -405,7 +407,7 @@ class ShopSerializer(serializers.ModelSerializer):
 class AppConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppConfig
-        fields = ('app_data', )
+        fields = ('app_data',)
 
 
 class ClaimSerializer(serializers.ModelSerializer):
