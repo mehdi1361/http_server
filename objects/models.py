@@ -97,8 +97,10 @@ class Unit(BaseUnit, Base):
 
     @classmethod
     def valid_units_id(cls, league):
-        valid_units = list(cls.objects.filter(unlock_league__step_number__lte=league.step_number).
-                           values_list('id', flat=True))
+        valid_units = list(cls.objects.filter(
+            unlock_league__step_number__lte=league.step_number,
+            unlock_league__step_number__gt=0
+        ).values_list('id', flat=True))
 
         return valid_units
 
