@@ -447,9 +447,13 @@ class CtmChestGenerate:
 
                         self.selected_hero = True
 
-            lst_valid_unit = []
-            for unit in ctm.units.filter(enable=True):
-                lst_valid_unit.append(unit.unit.id)
+            if is_tutorial:
+                lst_valid_unit = Unit.valid_units_id(ctm.league)
+                for unit in ctm.units.filter(enable=True):
+                    lst_valid_unit.append(unit.unit.id)
+
+            else:
+                lst_valid_unit = Unit.valid_units_id(ctm.league)
 
             user_units = list(
                 UserCard.objects.filter(user=self.user, character_id__in=lst_valid_unit)

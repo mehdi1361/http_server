@@ -301,20 +301,7 @@ class UserViewSet(viewsets.ModelViewSet):
             final_result['previous_rank'] = previous_rank
             final_result['current_rank'] = current_rank
             final_result['current_league'] = current_league.data
-            if final_result['current_league']['league_name'] in ['Cooper00', 'Silver00', 'Gold00', 'Platinum00'
-                , 'Diamond00']:
-                final_result['current_league']['league_step'] = 0
-
-            else:
-                final_result['current_league']['league_step'] = 1
-
             final_result['next_league'] = next_league_serializer.data
-            if final_result['next_league']['league_name'] in ['Cooper00', 'Silver00', 'Gold00', 'Platinum00',
-                                                                 'Diamond00']:
-                final_result['next_league']['league_step'] = 0
-
-            else:
-                final_result['next_league']['league_step'] = 1
 
             final_result['num_of_promoting_user'] = league.league.base_league.promoting_count
             final_result['num_of_demoting_user'] = league.league.base_league.demoting_count

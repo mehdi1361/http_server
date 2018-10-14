@@ -84,6 +84,8 @@ class Unit(BaseUnit, Base):
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
     coming_soon = models.BooleanField(_('coming soon'), default=False, blank=True)
     starting_unit = models.BooleanField(_('starting unit'), default=False, blank=True)
+    unlock_league = models.ForeignKey('League', verbose_name=_('unlock league'), related_name='units',
+                                      null=True, blank=True)
     history = HistoricalRecords()
 
     objects = models.Manager()
@@ -92,6 +94,13 @@ class Unit(BaseUnit, Base):
     @classmethod
     def count(cls):
         return cls.objects.all().count()
+
+    @classmethod
+    def valid_units_id(cls, league):
+        valid_units = list(cls.objects.filter(unlock_league__step_number__lte=league.step_number).
+                           values_list('id', flat=True))
+
+        return valid_units
 
     class Meta:
         verbose_name = _('unit')

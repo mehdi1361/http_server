@@ -158,9 +158,10 @@ class UnitAdmin(SimpleHistoryAdmin):
         'dexterity',
         'starting_unit',
         'unlock',
-        'coming_soon'
+        'coming_soon',
+        'unlock_league'
     )
-    list_editable = ('unlock', 'starting_unit', 'coming_soon')
+    list_editable = ('unlock', 'starting_unit', 'coming_soon', 'unlock_league')
     list_filter = ('dexterity', )
 
     def get_form(self, request, obj=None, **kwargs):
@@ -334,6 +335,7 @@ class LeagueAdmin(admin.ModelAdmin):
         'league_name',
         'capacity',
         'step_number',
+        'league_step',
         'league_type',
         'min_trophy',
         'playoff_range',
@@ -350,6 +352,7 @@ class LeagueAdmin(admin.ModelAdmin):
         'capacity',
         'step_number',
         'league_type',
+        'league_step',
         'min_trophy',
         'playoff_range',
         'playoff_count',
