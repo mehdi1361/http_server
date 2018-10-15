@@ -302,7 +302,7 @@ class UserSerializer(serializers.ModelSerializer):
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            data['unlock_league'] = "gold" if unit.character.unlock_league is None else \
+            data['unlock_league'] = "not_define" if unit.character.unlock_league is None else \
                 unit.character.unlock_league.league_type
 
             data['unlock_league_step_number'] = -1 if unit.character.unlock_league is None else \
@@ -314,7 +314,7 @@ class UserSerializer(serializers.ModelSerializer):
                 .exclude(character_id__in=hero_units):
             serializer = UnitSerializer(unit.character)
             data = unit_normalize_data(unit, serializer.data)
-            data['unlock_league'] = "gold" if unit.character.unlock_league is None else \
+            data['unlock_league'] = "not_define" if unit.character.unlock_league is None else \
                 unit.character.unlock_league.league_type
             data['unlock_league_step_number'] = -1 if unit.character.unlock_league is None else \
                 unit.character.unlock_league.league_step
