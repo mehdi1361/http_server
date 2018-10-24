@@ -115,6 +115,9 @@ class BotMatchMaking(Base):
 class CustomBot(Base):
     bot_name = models.CharField(_('bot name'), max_length=200)
     enable = models.BooleanField(_('enable'), default=False)
+    hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='bots', null=True, blank=True)
+    level = models.PositiveIntegerField(_('level'), default=1)
+
     units = models.ManyToManyField(Unit, verbose_name=_('units'), through='CustomBotTroop', related_name='bots')
 
     class Meta:

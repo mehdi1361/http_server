@@ -452,6 +452,7 @@ class FakeAdmin(admin.ModelAdmin):
 
     list_editable = (
         'enable',
+
     )
 
     inlines = (FakeDetailInline, )
