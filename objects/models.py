@@ -170,6 +170,7 @@ class UserCurrency(Base):
 
     google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
     google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True)
+    reward_token = models.CharField(verbose_name=_('reward token'), max_length=100,  null=True, blank=True)
 
     history = HistoricalRecords()
 

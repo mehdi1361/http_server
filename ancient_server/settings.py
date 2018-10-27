@@ -596,6 +596,8 @@ STATIC_URL = '/static/'
 
 USE_THOUSAND_SEPARATOR = True
 
+TOKEN_ADDITIONAL_TIME = 30
+
 # LOGIN_REDIRECT_URL = '/employee/login'
 
 # RAVEN_CONFIG = {

@@ -10,7 +10,11 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db.models import signals
 from base import fields
 from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import datetime, timedelta
+from django.conf import settings
 
+import uuid
+import pytz
 
 @python_2_unicode_compatible
 class CTM(Base):
@@ -151,6 +155,61 @@ class CustomBotTroop(Base):
 
     def __str__(self):
         return '{}'.format(self.bot.bot_name)
+
+
+class CustomTokenQuerySet(models.QuerySet):
+    def enable(self):
+        return self.filter(enable=True)
+
+
+class CustomTokenManager(models.Manager):
+    def get_queryset(self):
+        return CustomTokenQuerySet(self.model, using=self._db)
+
+    def enable(self):
+        return self.get_queryset().enable()
+
+
+class CustomToken(Base):
+    token_desc = models.CharField(_('token description'), max_length=50, blank=True, null=True)
+    gem_reward = models.PositiveIntegerField(_('gem reward'), default=1000)
+    coin_reward = models.PositiveIntegerField(_('coin reward'), default=1000)
+    token = models.CharField(_('token'), max_length=200, unique=True, blank=True)
+    expire_date = models.DateTimeField(_('expire date'), blank=True, null=True)
+    enable = models.BooleanField(_('enable'), default=False)
+
+    objects = CustomTokenManager()
+
+    class Meta:
+        verbose_name = _('custom_token')
+        verbose_name_plural = _('custom_tokens')
+        db_table = 'custom_tokens'
+
+    def __str__(self):
+        return '{}'.format(self.token)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        if self.pk is None:
+            self.token = str(uuid.uuid4())
+            self.expire_date = datetime.now() + timedelta(days=settings.TOKEN_ADDITIONAL_TIME)
+            
+        super(CustomToken, self).save()
+
+    @classmethod
+    def is_valid(cls, token):
+        custom_token = cls.objects.enable().filter(token=token).first()
+
+        if custom_token is None:
+            return False
+
+        else:
+
+            if custom_token.expire_date > datetime.now(tz=pytz.utc):
+                return True
+
+            return False
 
 
 def assigned_item_to_ctm(sender, instance, created, **kwargs):

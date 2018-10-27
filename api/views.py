@@ -30,7 +30,7 @@ from common.video_ads import VideoAdsFactory
 from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import FactoryStore
 from operator import itemgetter
-from system_settings.models import CTM
+from system_settings.models import CTM, CustomToken
 
 
 class DefaultsMixin(object):
@@ -69,6 +69,7 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             device_id = request.data['deviceUniqueID']
             device_name = request.data['deviceName']
+            token = request.data['token']
 
             device = Device.objects.filter(device_id=device_id).order_by('created_date').first()
 
@@ -79,6 +80,14 @@ class UserViewSet(viewsets.ModelViewSet):
             user = User.objects.create_user(username=player_id, password=player_id)
             chest = CtmChestGenerate(user)
             profile = UserCurrency.objects.get(user_id=user.id)
+
+            if token is not None and CustomToken.is_valid(token):
+                custom_token = CustomToken.objects.get(token=token)
+                profile.gem = custom_token.gem_reward
+                profile.coin = custom_token.coin_reward
+                profile.reward_token = token
+                profile.save()
+
             Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
             chest.generate_tutorial_chest()
             return_id = 201

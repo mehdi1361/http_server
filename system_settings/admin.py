@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import CTM, CTMUnit, CTMHero, BotMatchMaking, CustomBot, CustomBotTroop
+from .models import CTM, CTMUnit, CTMHero, BotMatchMaking, CustomBot, CustomBotTroop, CustomToken
 
 
 class CTMUnitInline(admin.StackedInline):
@@ -100,3 +100,8 @@ class CustomBotAdmin(admin.ModelAdmin):
         return ', '.join(lst_troops)
 
 
+@admin.register(CustomToken)
+class CustomTokenAdmin(admin.ModelAdmin):
+    list_display = ['id', 'token_desc', 'gem_reward', 'coin_reward', 'token', 'expire_date', 'enable']
+    list_editable = ['token_desc', 'gem_reward', 'coin_reward', 'expire_date', 'enable']
+    readonly_fields = ['token', 'expire_date', 'enable']
