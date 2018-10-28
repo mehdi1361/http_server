@@ -67,9 +67,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            device_id = request.data['deviceUniqueID']
-            device_name = request.data['deviceName']
-            token = request.data['token']
+            device_id = request.data.get('deviceUniqueID')
+            device_name = request.data.get('deviceName')
+            token = request.data.get('token')
 
             device = Device.objects.filter(device_id=device_id).order_by('created_date').first()
 
