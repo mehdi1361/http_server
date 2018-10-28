@@ -81,12 +81,17 @@ class UserViewSet(viewsets.ModelViewSet):
             chest = CtmChestGenerate(user)
             profile = UserCurrency.objects.get(user_id=user.id)
 
+            print "before if and token:", token
             if token is not None and CustomToken.is_valid(token):
+                print "in if"
                 custom_token = CustomToken.objects.get(token=token)
                 profile.gem = custom_token.gem_reward
                 profile.coin = custom_token.coin_reward
                 profile.reward_token = token
                 profile.save()
+                print "end if"
+
+            print "after if"
 
             Device.objects.create(device_model=device_name, device_id=device_id, user=profile)
             chest.generate_tutorial_chest()

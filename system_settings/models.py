@@ -202,11 +202,13 @@ class CustomToken(Base):
         custom_token = cls.objects.enable().filter(token=token).first()
 
         if custom_token is None:
+            print"in first if"
             return False
 
         else:
-
+            print "in else"
             if custom_token.expire_date > datetime.now(tz=pytz.utc):
+                print "in else 2"
                 return True
 
             return False
