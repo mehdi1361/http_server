@@ -6,20 +6,18 @@ import random
 
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
+from django.db import transaction
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
+from django.db.models import signals, Count, Sum
+from django.contrib.postgres.fields import JSONField, ArrayField
 
 from base.models import Base, BaseUnit, Spell, SpellEffect
-from django.utils.encoding import python_2_unicode_compatible
-from django.contrib.auth.models import User
-from django.db.models import signals, Count, Sum
 from .validators import validate_percent, validate_sequence
-from django.conf import settings
-from django.contrib.postgres.fields import JSONField, ArrayField
 from simple_history.models import HistoricalRecords
-from django.utils import timezone
 from datetime import datetime, timedelta
-from django.db import transaction
-# from common.utils import generate_fake_user_league
 
 
 def generate_fake_user_league(league):
@@ -178,6 +176,18 @@ class UserCurrency(Base):
         verbose_name = _('profile')
         verbose_name_plural = _('profile')
         db_table = 'profiles'
+
+    @property
+    def is_active(self):
+        last_login = self.login_logs.filter(player=self).order_by('-id').first()
+        if last_login is None:
+            return False
+
+        diff = datetime.now(tz=pytz.UTC) - last_login.login_datetime
+        if diff.days < settings.ACTIVE_USER_TIME:
+            return True
+
+        return False
 
     @classmethod
     def hard_currency(cls, user):
@@ -937,6 +947,9 @@ class LeagueUserQuerySet(models.QuerySet):
     def in_league(self):
         return self.filter(close_league=False)
 
+    def active(self):
+        pass
+
 
 class LeagueUserManager(models.Manager):
     def get_queryset(self):
@@ -1272,5 +1285,4 @@ def assigned_new_card_to_user(sender, instance, created, **kwargs):
 
 
 signals.post_save.connect(create_user_dependency, sender=User)
-
 signals.post_save.connect(assigned_new_card_to_user, sender=Item)

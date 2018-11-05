@@ -18,6 +18,7 @@ from django.contrib import admin
 from api.urls import router
 from rest_framework_jwt.views import obtain_jwt_token
 from system_settings import views
+from api.views import ObtainJWTView
 
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     url(r'^system_settings/test_ctm/$', views.test_ctm, name='test_ctm'),
     url(r'^api/', include(router.urls)),
     url(r'^panel/', include('panel.urls', namespace='panel', app_name='panel')),
-    url(r'^login/', obtain_jwt_token),
+    url(r'^login/', ObtainJWTView.as_view()),
+    # url(r'^login/', obtain_jwt_token),
 ]

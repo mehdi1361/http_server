@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from base.models import Base
-from objects.models import League, Unit, Hero
+from objects.models import League, Unit, Hero, UserCurrency
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -12,9 +12,13 @@ from base import fields
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime, timedelta
 from django.conf import settings
+from django.contrib.auth import user_logged_in
+from common.network import get_client_ip
+from django.dispatch import receiver
 
 import uuid
 import pytz
+
 
 @python_2_unicode_compatible
 class CTM(Base):
@@ -188,8 +192,7 @@ class CustomToken(Base):
     def __str__(self):
         return '{}'.format(self.token)
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
 
         if self.pk is None:
             self.token = str(uuid.uuid4())
@@ -211,6 +214,41 @@ class CustomToken(Base):
             return False
 
 
+@python_2_unicode_compatible
+class UserLoginActivity(models.Model):
+    SUCCESS = 'S'
+    FAILED = 'F'
+
+    LOGIN_STATUS = (
+        (SUCCESS, 'Success'),
+        (FAILED, 'Failed')
+    )
+
+    login_IP = models.GenericIPAddressField(null=True, blank=True)
+    login_datetime = models.DateTimeField(auto_now=True)
+    login_username = models.CharField(max_length=40, null=True, blank=True)
+    status = models.CharField(max_length=1, default=SUCCESS, choices=LOGIN_STATUS, null=True, blank=True)
+    user_agent_info = models.CharField(max_length=255)
+    player = models.ForeignKey(UserCurrency, verbose_name=_('player'), null=True, blank=True, related_name='login_logs')
+
+    class Meta:
+        verbose_name = 'user_login_activity'
+        verbose_name_plural = 'user_login_activities'
+        db_table = 'user_login_activities'
+
+    def __str__(self):
+        return "{}-{}".format(self.login_IP, self.login_username)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None, *args, **kwargs):
+
+        if self.pk is None:
+            player = UserCurrency.objects.get(user__username=self.login_username)
+            self.player = player
+
+        super(UserLoginActivity, self).save(*args, **kwargs)
+
+
 def assigned_item_to_ctm(sender, instance, created, **kwargs):
     if created:
         for unit in Unit.objects.all():
@@ -218,6 +256,19 @@ def assigned_item_to_ctm(sender, instance, created, **kwargs):
 
         for hero in Hero.objects.all():
             CTMHero.objects.create(hero=hero, ctm=instance)
+
+
+@receiver(user_logged_in)
+def log_user_logged_in_success(sender, user, request, **kwargs):
+    try:
+        user_agent_info = request.META.get('HTTP_USER_AGENT', '<unknown>')[:255],
+        user_login_activity_log = UserLoginActivity(login_IP=get_client_ip(request),
+                                                    login_username=user.username,
+                                                    user_agent_info=user_agent_info,
+                                                    status=UserLoginActivity.SUCCESS)
+        user_login_activity_log.save()
+    except Exception as e:
+        print "log_user_logged_in request: {}, error: {}".format(request, e)
 
 
 signals.post_save.connect(assigned_item_to_ctm, sender=CTM)

@@ -616,3 +616,6 @@ RAVEN_CONFIG = {
 #     dsn="https://58789adf55154818abb7eea11a637c4b@sentry.io/1287768",
 #     integrations=[DjangoIntegration()]
 # )
+
+
+ACTIVE_USER_TIME = 20

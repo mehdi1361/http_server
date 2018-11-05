@@ -11,7 +11,7 @@ from message.models import Inbox
 from .serializers import UserSerializer, LeagueInfoSerializer, \
     ShopSerializer, UserChestSerializer, UserCardSerializer, UserHeroSerializer, ItemSerializer, UserCurrencySerializer, \
     UnitSerializer, HeroSerializer, AppConfigSerializer, InboxSerializer, LeaguePrizeSerializer, LeagueUserSerializer, \
-    LeagueSerializer, ClaimSerializer
+    LeagueSerializer, ClaimSerializer, JWTSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
     PlayOff, LeagueTime
@@ -31,6 +31,7 @@ from shopping.models import PurchaseLog, CurrencyLog
 from common.payment_verification import FactoryStore
 from operator import itemgetter
 from system_settings.models import CTM, CustomToken
+from rest_framework_jwt.views import ObtainJSONWebToken
 
 
 class DefaultsMixin(object):
@@ -256,19 +257,20 @@ class UserViewSet(viewsets.ModelViewSet):
             idx = 1
 
             for user in LeagueUser.objects.in_league().filter(league=league.league).order_by('-score'):
-                serializer = LeagueUserSerializer(user)
+                if user.player.is_active:
+                    serializer = LeagueUserSerializer(user)
 
-                result = serializer.data
-                if user.player == request.user.user_currency:
-                    previous_rank = result['rank'] if result['rank'] else idx
-                    current_rank = idx
-                    user.rank = idx
-                    user.save()
+                    result = serializer.data
+                    if user.player == request.user.user_currency:
+                        previous_rank = result['rank'] if result['rank'] else idx
+                        current_rank = idx
+                        user.rank = idx
+                        user.save()
 
-                result['rank'] = idx
-                result['player'] = str(user.player).decode('utf-8')
-                idx += 1
-                score_board.append(result)
+                    result['rank'] = idx
+                    result['player'] = str(user.player).decode('utf-8')
+                    idx += 1
+                    score_board.append(result)
 
             if len(score_board) < league.league.base_league.capacity:
                 fake_count = league.league.base_league.capacity - len(score_board)
@@ -1010,3 +1012,5 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         return Response({"id": 200, "message": "change type to read"}, status=status.HTTP_200_OK)
 
 
+class ObtainJWTView(ObtainJSONWebToken):
+    serializer_class = JWTSerializer
