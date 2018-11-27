@@ -157,9 +157,10 @@ class UnitAdmin(SimpleHistoryAdmin):
         'starting_unit',
         'unlock',
         'coming_soon',
-        'unlock_league'
+        'unlock_league',
+        'rarity'
     )
-    list_editable = ('unlock', 'starting_unit', 'coming_soon', 'unlock_league')
+    list_editable = ('unlock', 'starting_unit', 'coming_soon', 'unlock_league', 'rarity')
     list_filter = ('dexterity', )
 
     def get_form(self, request, obj=None, **kwargs):
@@ -226,6 +227,17 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
         'cool_down_duration',
         'char_spells_index',
         'generated_action_point',
+        'rarity'
+    )
+
+    list_editable = (
+        'spell_type',
+        'action_type',
+        'need_action_point',
+        'cool_down_duration',
+        'char_spells_index',
+        'generated_action_point',
+        'rarity'
     )
 
 
@@ -241,6 +253,17 @@ class UnitSpellAdmin(SimpleHistoryAdmin):
         'cool_down_duration',
         'char_spells_index',
         'generated_action_point',
+        'rarity'
+    )
+
+    list_editable = (
+        'spell_type',
+        'action_type',
+        'need_action_point',
+        'cool_down_duration',
+        'char_spells_index',
+        'generated_action_point',
+        'rarity'
     )
 
 
@@ -255,6 +278,17 @@ class ChakraSpellAdmin(SimpleHistoryAdmin):
         'cool_down_duration',
         'char_spells_index',
         'generated_action_point',
+        'rarity'
+    )
+
+    list_editable = (
+        'spell_type',
+        'action_type',
+        'need_action_point',
+        'cool_down_duration',
+        'char_spells_index',
+        'generated_action_point',
+        'rarity'
     )
 
     inlines = (ChakraSpellEffectInline, )
