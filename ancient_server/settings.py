@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'logs',
     'reports',
     'system_settings',
+    'prettyjson',
 ]
 
 MIDDLEWARE = [

@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.contrib import  messages
 from django.contrib import admin
+
 from .models import BenefitBox, Unit, Hero, HeroUnits, LeagueInfo, Chest, Item, UserHero, HeroSpell, HeroSpellEffect, \
     UnitSpell, UnitSpellEffect, ChakraSpell, ChakraSpellEffect, UserCurrency, AppConfig, Bot, \
     League, LeagueUser, CreatedLeague, LeaguePrize, Claim, PlayOff, LeagueTime, Fake, FakeDetail
 from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.auth.models import User
 from shopping.models import CurrencyLog, PurchaseLog
-from django.forms.models import BaseInlineFormSet
-# from django.contrib.auth.models import User
+from .forms import UnitSpellForm
 
 
 # @admin.register(User)
@@ -230,11 +228,10 @@ class HeroSpellAdmin(SimpleHistoryAdmin):
         'generated_action_point',
     )
 
-    inlines = (HeroSpellEffectInline, )
-
 
 @admin.register(UnitSpell)
 class UnitSpellAdmin(SimpleHistoryAdmin):
+    form = UnitSpellForm
     list_display = (
         'spell_name',
         'unit',
@@ -245,8 +242,6 @@ class UnitSpellAdmin(SimpleHistoryAdmin):
         'char_spells_index',
         'generated_action_point',
     )
-
-    inlines = (UnitSpellEffectInline, )
 
 
 @admin.register(ChakraSpell)

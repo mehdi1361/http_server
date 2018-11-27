@@ -11,7 +11,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://130.185.74.237:5432/anc_db</jdbc-url>
+      <jdbc-url>jdbc:postgresql://130.185.74.237:5432/anc_db_release</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="prerelease" uuid="7d6fe850-d281-49f2-a5a2-a213ae23ffe1">
       <driver-ref>postgresql</driver-ref>

@@ -305,7 +305,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 next_league_serializer = LeagueSerializer(next_league)
 
             else:
-                next_league_serializer = LeagueSerializer(current_league)
+                next_league_serializer = current_league
 
             final_result['score_board'] = score_board
             final_result['promoting_prize'] = prize_serializer.data
