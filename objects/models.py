@@ -14,7 +14,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db.models import signals, Count, Sum
 from django.contrib.postgres.fields import JSONField, ArrayField
 
-from base.models import Base, BaseUnit, Spell, SpellEffect
+from base.models import Base, BaseUnit, Spell, SpellEffect, Rarity
 from .validators import validate_percent, validate_sequence
 from simple_history.models import HistoricalRecords
 from datetime import datetime, timedelta
@@ -76,7 +76,7 @@ class CommingSoonManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class Unit(BaseUnit, Base):
+class Unit(BaseUnit, Base, Rarity):
     user = models.ManyToManyField(User, through='UserCard', related_name='units')
     heroes = models.ManyToManyField('Hero', through='HeroUnits', related_name='hero')
     unlock = models.BooleanField(_('unlock'), default=False, blank=True)
@@ -622,7 +622,7 @@ class UserItem(Base):
 
 
 @python_2_unicode_compatible
-class HeroSpell(Base, Spell):
+class HeroSpell(Base, Spell, Rarity):
     hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='spells')
 
     class Meta:
@@ -635,7 +635,7 @@ class HeroSpell(Base, Spell):
 
 
 @python_2_unicode_compatible
-class ChakraSpell(Base, Spell):
+class ChakraSpell(Base, Spell, Rarity):
     hero = models.ForeignKey(Hero, verbose_name=_('hero'), related_name='chakra_spells')
 
     class Meta:
@@ -648,7 +648,7 @@ class ChakraSpell(Base, Spell):
 
 
 @python_2_unicode_compatible
-class UnitSpell(Base, Spell):
+class UnitSpell(Base, Spell, Rarity):
     unit = models.ForeignKey(Unit, verbose_name=_('unit'), related_name='spells')
 
     class Meta:

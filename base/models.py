@@ -101,3 +101,16 @@ class SpellEffect(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Rarity(models.Model):
+    RARITY_VALUE = (
+        ('common', 'common'),
+        ('rare', 'rare'),
+        ('epic', 'epic')
+    )
+
+    rarity = models.CharField(_('rarity'), max_length=10, default='common', choices=RARITY_VALUE)
+
+    class Meta:
+        abstract = True
