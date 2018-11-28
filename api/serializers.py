@@ -276,6 +276,7 @@ class UserSerializer(serializers.ModelSerializer):
             ):
                 unit_serializer = UnitSerializer(unit.character)
                 unit_data = unit_normalize_data(unit, unit_serializer.data)
+                unit_data['spells'] = unit.spell_data
                 list_unit.append(unit_data)
 
             data['units'] = list_unit
@@ -312,6 +313,8 @@ class UserSerializer(serializers.ModelSerializer):
             data['unlock_league_step_number'] = -1 if unit.character.unlock_league is None else \
                 unit.character.unlock_league.league_step
             data['used_status'] = 'unlock'
+            data['spells'] = unit.spell_data
+
             list_unit.append(data)
 
         for unit in UserCard.objects.filter(user=requests, character__coming_soon=True) \
@@ -323,6 +326,7 @@ class UserSerializer(serializers.ModelSerializer):
             data['unlock_league_step_number'] = -1 if unit.character.unlock_league is None else \
                 unit.character.unlock_league.league_step
             data['used_status'] = 'coming_soon'
+            data['spells'] = unit.spell_data
             list_unit.append(data)
 
         return list_unit
