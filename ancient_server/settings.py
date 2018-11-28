@@ -239,6 +239,13 @@ ITEM_UPDATE = {
     3: {'item_cards': 30, 'coins': 7500, 'increase': 0.21}
 }
 
+SPELL_UPDATE = {
+    0: {'spell_cards': 1, 'coins': 0, 'increase': 0.0},
+    1: {'spell_cards': 1, 'coins': 0, 'increase': 0.0},
+    2: {'spell_cards': 10, 'coins': 2500, 'increase': 0.1},
+    3: {'spell_cards': 30, 'coins': 7500, 'increase': 0.21}
+}
+
 UNIT_UPDATE = {
     0: {'unit_cards': 1, 'coins': 0, 'increase': 0.0},
     1: {'unit_cards': 1, 'coins': 0, 'increase': 0.0},
