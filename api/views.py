@@ -14,7 +14,7 @@ from .serializers import UserSerializer, LeagueInfoSerializer, \
     LeagueSerializer, ClaimSerializer, JWTSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
-    PlayOff, LeagueTime
+    PlayOff, LeagueTime, UnitSpell
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -883,6 +883,31 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         )
 
         return Response(data, status=status.HTTP_200_OK)
+
+    @list_route(methods=['POST'])
+    def spell_level_up(self, request):
+        spell_id = request.data.get('spell_id')
+        spell = UnitSpell.objects.get(pk=spell_id)
+
+        user_card = UserCard.objects.get(user=request.user, character=spell.unit)
+        unit_spell_level = user_card.spell_levels.get(spell_id=spell_id)
+
+        next_level = settings.SPELL_UPDATE[unit_spell_level.spell_level + 1]
+
+        if unit_spell_level.spell_card_count < next_level['spell_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if request.user.user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        request.user.user_currency.coin -= next_level['coins']
+        request.user.user_currency.save()
+
+        unit_spell_level.spell_card_count -= next_level['spell_cards']
+        unit_spell_level.spell_level += 1
+        unit_spell_level.save()
+
+        return Response({'message': 'test spell level up'}, status=status.HTTP_200_OK)
 
 
 class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
