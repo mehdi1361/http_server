@@ -17,3 +17,13 @@ def validate_sequence(value):
             _('%(value)s is not in sequence'),
             params={'value': value},
         )
+
+
+def validate_unit_spell(value):
+    from .models import UnitSpell
+
+    if not UnitSpell.objects.filter(pk=value).exists():
+        raise ValidationError(
+            _('%(value)s is not spell id'),
+            params={'value': value},
+        )
