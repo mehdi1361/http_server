@@ -71,6 +71,7 @@ class Spell(models.Model):
     need_action_point = models.PositiveIntegerField(_('need action point'), default=0)
     cool_down_duration = models.PositiveIntegerField(_('cool down duration'), default=0)
     action_type = models.CharField(_('action type'), max_length=20, choices=SPELL_ACTION_TYPE, default='Normal')
+    base_update_level_coin = models.PositiveIntegerField(_('base update level coin'), default=0)
 
     class Meta:
         abstract = True
