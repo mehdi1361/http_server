@@ -15,7 +15,7 @@ from django.db.models import signals, Count, Sum
 from django.contrib.postgres.fields import JSONField, ArrayField
 
 from base.models import Base, BaseUnit, Spell, SpellEffect, Rarity
-from .validators import validate_percent, validate_sequence
+from .validators import validate_percent, validate_sequence, validate_unit_spell
 from simple_history.models import HistoricalRecords
 from datetime import datetime, timedelta
 
@@ -365,6 +365,45 @@ class UserCard(Base):
             user_character.level += 1
 
         user_character.save()
+
+    @property
+    def spell_data(self):
+        result = []
+
+        for spell in self.character.spells.all():
+            user_spell_data = self.spell_levels.get(spell_id=spell.id)
+
+            result.append({
+                "spell_name": spell.spell_name,
+                "char_spells_index": spell.char_spells_index,
+                "spell_type": spell.spell_type,
+                "generated_action_point": spell.generated_action_point,
+                "need_action_point": spell.need_action_point,
+                "cool_down_duration": spell.cool_down_duration,
+                "action_type": spell.action_type,
+                "params": spell.params,
+                "level": user_spell_data.spell_level,
+                "card_count": user_spell_data.spell_card_count
+            })
+
+        return result
+
+
+@python_2_unicode_compatible
+class UserCardSpell(Base):
+    user_card = models.ForeignKey(UserCard, verbose_name=_('user card'), related_name='spell_levels')
+    spell_id = models.IntegerField(_('spell id'), validators=[validate_unit_spell])
+    spell_level = models.IntegerField(_('spell level'), default=1)
+    spell_card_count = models.IntegerField(_('spell card count'), default=0)
+
+    class Meta:
+        verbose_name = _('user_card_spell')
+        verbose_name_plural = _('user_card_spells')
+        db_table = 'user_card_spells'
+
+    def __str__(self):
+        spell = Spell.objects.get(pk=self.spell_id)
+        return '{}-{}-{}'.format(self.user_card.user, self.user_card.character, spell.spell_name)
 
 
 @python_2_unicode_compatible
