@@ -138,8 +138,6 @@ class UnitSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'moniker',
-            'dexterity',
-            'attack_type',
             'attack',
             'critical_chance',
             'critical_ratio',

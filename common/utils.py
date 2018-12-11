@@ -178,76 +178,138 @@ class ChestGenerate:
 
 def hero_normalize_data(hero_user, data):
     data['selected_hero'] = True if hero_user.enable_hero else False
-    if hero_user.level in settings.HERO_UPDATE.keys():
-        health = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
-        shield = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
-        data['health'] = health
-        data['max_health'] = health
-        data['shield'] = shield
-        data['max_shield'] = shield
-        data['attack'] = data['attack'] + data['attack'] * settings.HERO_UPDATE[hero_user.level]['increase']
-
-    data['max_health'] = data['health']
-    data['shield'] = data['shield']
-    data['quantity'] = hero_user.quantity if hero_user else 0
+    lst_stat = []
 
     if hero_user.level == 0:
         next_stats = hero_user.level + 2
     else:
         next_stats = hero_user.level + 1
 
+    health = int(round(data['health'] + data['health'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+    shield = int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[hero_user.level]['increase']))
+
+    if hero_user.level in settings.HERO_UPDATE.keys():
+        for key in ['attack', 'health',
+                    'shield', 'critical_chance',
+                    'critical_ratio', 'miss_chance', 'dodge_chance'
+                    ]:
+            if key in ['attack', 'health', 'shield']:
+                val = int(round(data[key] + data[key] * settings.HERO_UPDATE[hero_user.level]['increase']))
+                nval = int(round(data[key] + data[key] * settings.HERO_UPDATE[next_stats]['increase']))
+
+            else:
+                val = data[key]
+                nval = data[key]
+
+            lst_stat.append(
+                {
+                    "name": key,
+                    "val": val,
+                    "nval": nval
+                }
+            )
+
+            if key in ['health', 'shield']:
+                lst_stat.append(
+                    {
+                        "name": "max_{}".format(key),
+                        "val": val,
+                        "nval": nval
+                    }
+                )
+
+            data.pop(key, None)
+
+    data['lst_stat'] = lst_stat
+    data['max_health'] = health
+    data['max_shield'] = shield
+    data['quantity'] = hero_user.quantity if hero_user else 0
+
     data['level'] = hero_user.level if hero_user.hero and hero_user else 0
-
-    data['next_upgrade_stats'] = {
-        'card_cost': settings.HERO_UPDATE[next_stats]['coins'],
-
-        'card_count': settings.HERO_UPDATE[next_stats]['hero_cards'],
-
-        'attack': int(round(data['attack'] + data['attack'] * settings.HERO_UPDATE[next_stats]['increase'])),
-
-        'health': int(round(data['health'] + data['health'] * settings.HERO_UPDATE[next_stats]['increase'])),
-
-        'shield': int(round(data['shield'] + data['shield'] * settings.HERO_UPDATE[next_stats]['increase'])),
-
-        'critical_chance': data['critical_chance'],
-
-        'critical_ratio': data['critical_ratio'],
-        'miss_chance': data['miss_chance'],
-        'dodge_chance': data['dodge_chance']
-    }
+    data['next_card_count'] = settings.HERO_UPDATE[next_stats]['hero_cards']
+    data['card_cost'] = settings.HERO_UPDATE[next_stats]['coins']
 
     data['chakra'] = {
         'chakra_moniker': hero_user.hero.chakra_moniker,
-        'chakra_health': hero_user.hero.chakra_health,
-        'chakra_shield': hero_user.hero.chakra_shield,
-        'chakra_attack': hero_user.hero.chakra_attack,
-        'chakra_critical_chance': hero_user.hero.chakra_critical_chance,
-        'chakra_critical_ratio': hero_user.hero.chakra_critical_ratio,
-        'chakra_miss_chance': hero_user.hero.chakra_miss_chance,
-        'chakra_dodge_chance': hero_user.hero.chakra_dodge_chance,
-        'chakra_max_health': hero_user.hero.chakra_max_health,
-        'chakra_max_shield': hero_user.hero.chakra_max_shield,
-        'next_upgrade_stats': {
-            'attack': int(round(
-                hero_user.hero.chakra_attack + hero_user.hero.chakra_attack * settings.HERO_UPDATE[hero_user.level + 1][
-                    'increase'])),
-            'health': int(round(
-                hero_user.hero.chakra_health + hero_user.hero.chakra_health * settings.HERO_UPDATE[hero_user.level + 1][
-                    'increase'])),
-            'shield': int(round(
-                hero_user.hero.chakra_shield + hero_user.hero.chakra_shield * settings.HERO_UPDATE[hero_user.level + 1][
-                    'increase'])),
-            'critical_chance': hero_user.hero.chakra_critical_chance,
-            'critical_ratio': hero_user.hero.chakra_critical_ratio,
-            'miss_chance': hero_user.hero.chakra_miss_chance,
-            'dodge_chance': hero_user.hero.chakra_dodge_chance
-
-        }
+        'lst_stat': [
+            {
+                "name": "health",
+                "val": hero_user.hero.chakra_health,
+                "nval": int(
+                    round(hero_user.hero.chakra_health + hero_user.hero.chakra_health *
+                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
+                )
+            },
+            {
+                "name": "shield",
+                "val": hero_user.hero.chakra_shield,
+                "nval": int(
+                    round(hero_user.hero.chakra_shield + hero_user.hero.chakra_shield *
+                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
+                )
+            },
+            {
+                "name": "max_health",
+                "val": hero_user.hero.chakra_health,
+                "nval": int(
+                    round(hero_user.hero.chakra_health + hero_user.hero.chakra_health *
+                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
+                )
+            },
+            {
+                "name": "max_shield",
+                "val": hero_user.hero.chakra_shield,
+                "nval": int(
+                    round(hero_user.hero.chakra_shield + hero_user.hero.chakra_shield *
+                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
+                )
+            },
+            {
+                "name": "attack",
+                "val": hero_user.hero.chakra_attack,
+                "nval": int(
+                    round(hero_user.hero.chakra_attack + hero_user.hero.chakra_attack *
+                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
+                )
+            },
+            {
+                "name": "critical_chance",
+                "val": hero_user.hero.chakra_critical_chance,
+                "nval": hero_user.hero.chakra_critical_chance
+            },
+            {
+                "name": "critical_ratio",
+                "val": hero_user.hero.chakra_critical_ratio,
+                "nval": hero_user.hero.chakra_critical_ratio
+            },
+            {
+                "name": "critical_ratio",
+                "val": hero_user.hero.chakra_critical_ratio,
+                "nval": hero_user.hero.chakra_critical_ratio
+            },
+            {
+                "name": "critical_chance",
+                "val": hero_user.hero.chakra_miss_chance,
+                "nval": hero_user.hero.chakra_miss_chance
+            },
+            {
+                "name": "miss_chance",
+                "val": hero_user.hero.chakra_miss_chance,
+                "nval": hero_user.hero.chakra_miss_chance
+            },
+            {
+                "name": "dodge_chance",
+                "val": hero_user.hero.chakra_dodge_chance,
+                "nval": hero_user.hero.chakra_dodge_chance
+            }
+        ]
     }
+
     return data
 
 
 def unit_normalize_data(unit, data):
+    lst_stat = []
     if unit.level in settings.UNIT_UPDATE.keys():
         health = int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[unit.level]['increase']))
         shield = int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[unit.level]['increase']))
@@ -257,30 +319,45 @@ def unit_normalize_data(unit, data):
         else:
             next_stats = unit.level + 1
 
-        data['next_upgrade_stats'] = {
-            'card_cost': settings.UNIT_UPDATE[next_stats]['coins'],
-            'card_count': settings.UNIT_UPDATE[next_stats]['unit_cards'],
-            'attack': int(round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[next_stats]['increase'])),
-            'health': int(round(data['health'] + data['health'] * settings.UNIT_UPDATE[next_stats]['increase'])),
-            'shield': int(round(data['shield'] + data['shield'] * settings.UNIT_UPDATE[next_stats]['increase'])),
+        for key in ['attack', 'health',
+                    'shield', 'critical_chance',
+                    'critical_ratio', 'miss_chance', 'dodge_chance'
+                    ]:
+            if key in ['attack', 'health', 'shield']:
+                val = int(round(data[key] + data[key] * settings.UNIT_UPDATE[unit.level]['increase']))
+                nval = int(round(data[key] + data[key] * settings.UNIT_UPDATE[next_stats]['increase']))
 
-            'critical_chance': data['critical_chance'],
-            'critical_ratio': data['critical_ratio'],
-            'miss_chance': data['miss_chance'],
-            'dodge_chance': data['dodge_chance']
-        }
+            else:
+                val = data[key]
+                nval = data[key]
 
-        data['health'] = health
+            lst_stat.append(
+                {
+                    "name": key,
+                    "val": val,
+                    "nval": nval
+                }
+            )
+
+            if key in ['health', 'shield']:
+                lst_stat.append(
+                    {
+                        "name": "max_{}".format(key),
+                        "val": val,
+                        "nval": nval
+                    }
+                )
+
+            data.pop(key, None)
+
+        data['lst_stat'] = lst_stat
+
         data['max_health'] = health
-        data['shield'] = shield
         data['max_shield'] = shield
-
-        data['attack'] = int(
-            round(data['attack'] + data['attack'] * settings.UNIT_UPDATE[unit.level]['increase']))
+        data['next_card_count'] = settings.UNIT_UPDATE[next_stats]['unit_cards']
+        data['next_card_cost'] = settings.UNIT_UPDATE[next_stats]['coins']
 
     data['quantity'] = unit.quantity
-    data['max_health'] = data['health']
-    data['max_shield'] = data['shield']
     data['level'] = unit.level
     data['cool_down'] = unit.is_cool_down
     data['cool_down_remaining_seconds'] = unit.cool_down_remain_time
