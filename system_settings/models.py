@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from base.models import Base
-from objects.models import League, Unit, Hero, UserCurrency
+from objects.models import League, Unit, Hero, UserCurrency, UnitSpell
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -31,6 +31,11 @@ class CTM(Base):
         ('L', 'Legendary'),
     )
 
+    MUST_HAVE_TYPE = (
+        ('random', 'random'),
+        ('all', 'all')
+    )
+
     chest_type = models.CharField(_('chest type'), max_length=50, default='W', choices=CHEST_TYPE)
     league = models.ForeignKey(League, verbose_name=_('league'), related_name='ctm_chests')
 
@@ -40,16 +45,37 @@ class CTM(Base):
     min_gem = models.PositiveIntegerField(_('min gem'), default=0)
     max_gem = models.PositiveIntegerField(_('max gem'), default=0)
 
-    min_troop = models.PositiveIntegerField(_('min troop'), default=0)
-    max_troop = models.PositiveIntegerField(_('max troop'), default=0)
-    chance_troop = models.FloatField(_('chance troop'), default=0)
-
-    min_hero = models.PositiveIntegerField(_('min hero'), default=0)
-    max_hero = models.PositiveIntegerField(_('max hero'), default=0)
-    chance_hero = models.FloatField(_('chance hero'), default=0)
-
     total = models.PositiveIntegerField(_('total'), default=0)
     card_try = models.PositiveIntegerField(_('count try'), default=0)
+
+    epic_chance = models.PositiveIntegerField(_('epic chance'), default=0)
+    min_epic = models.PositiveIntegerField(_('min epic'), default=0)
+    max_epic = models.PositiveIntegerField(_('max epic'), default=0)
+
+    rare_chance = models.PositiveIntegerField(_('rare chance'), default=0)
+    min_rare = models.PositiveIntegerField(_('min rare'), default=0)
+    max_rare = models.PositiveIntegerField(_('max rare'), default=0)
+
+    is_must_have_hero = models.BooleanField(_('is must have hero'), default=False)
+    must_have_hero_type = models.CharField(_('must have hero type'), max_length=10, default='random',
+                                           choices=MUST_HAVE_TYPE)
+    min_have_hero = models.PositiveIntegerField(_('min have hero'), default=0)
+    max_have_hero = models.PositiveIntegerField(_('max have hero'), default=0)
+    must_have_hero = models.ManyToManyField(Hero, verbose_name=_('must have hero'), blank=True)
+
+    is_must_have_spell = models.BooleanField(_('is must have spell'), default=False)
+    must_have_spell_type = models.CharField(_('must have spell type'), max_length=10, default='random',
+                                            choices=MUST_HAVE_TYPE)
+    min_have_spell = models.PositiveIntegerField(_('min have spell'), default=0)
+    max_have_spell = models.PositiveIntegerField(_('max have spell'), default=0)
+    must_have_spell = models.ManyToManyField(UnitSpell, verbose_name=_('must have unit spell'), blank=True)
+
+    is_must_have_troop = models.BooleanField(_('is must have troop'), default=False)
+    min_have_troop = models.PositiveIntegerField(_('min have spell'), default=0)
+    max_have_troop = models.PositiveIntegerField(_('max have spell'), default=0)
+    must_have_troop = models.ManyToManyField(Unit, verbose_name=_('must have troop'), blank=True)
+    must_have_troop_type = models.CharField(_('must have troop type'), max_length=10, default='random',
+                                            choices=MUST_HAVE_TYPE)
 
     class Meta:
         verbose_name = _('ctm')
@@ -67,6 +93,36 @@ class CTM(Base):
             result[item.get_chest_type_display()] = item.total
 
         return result
+
+
+# @python_2_unicode_compatible
+# class CtmMustHaveHero(Base):
+#     ctm = models.ForeignKey(CTM, verbose_name=_('ctm'))
+#     hero = models.ForeignKey(Hero, verbose_name=_('hero'))
+#
+#     class Meta:
+#         verbose_name = _('ctm_must_have_hero')
+#         verbose_name_plural = _('ctm_must_have_heroes')
+#         db_table = 'ctm_must_have_heroes'
+#         unique_together = ('ctm', 'hero')
+#
+#     def __str__(self):
+#         return '{}-{}'.format(self.ctm, self.hero)
+#
+#
+# @python_2_unicode_compatible
+# class CtmMustHaveSpell(Base):
+#     ctm = models.ForeignKey(CTM, verbose_name=_('ctm'))
+#     spell = models.ForeignKey(Spell, verbose_name=_('spell'))
+#
+#     class Meta:
+#         verbose_name = _('ctm_must_have_spell')
+#         verbose_name_plural = _('ctm_must_have_spells')
+#         db_table = 'ctm_must_have_spells'
+#         unique_together = ('ctm', 'spell')
+#
+#     def __str__(self):
+#         return '{}-{}'.format(self.ctm, self.spell)
 
 
 @python_2_unicode_compatible
@@ -197,7 +253,7 @@ class CustomToken(Base):
         if self.pk is None:
             self.token = str(uuid.uuid4())
             self.expire_date = datetime.now() + timedelta(days=settings.TOKEN_ADDITIONAL_TIME)
-            
+
         super(CustomToken, self).save()
 
     @classmethod
@@ -241,7 +297,6 @@ class UserLoginActivity(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None, *args, **kwargs):
-
         if self.pk is None:
             player = UserCurrency.objects.get(user__username=self.login_username)
             self.player = player

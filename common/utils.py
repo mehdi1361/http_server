@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 from __future__ import print_function
 import random
-from objects.models import UserChest, Chest, Unit, Item, UserHero, LeagueUser, CreatedLeague, UserCard, League, Hero
+from objects.models import UserChest, Chest, Unit, Item, UserHero, \
+    LeagueUser, CreatedLeague, UserCard, League, Hero, UnitSpell, HeroSpell, ChakraSpell
 from django.conf import settings
 from system_settings.models import CTM, CTMHero
 from random import shuffle
@@ -397,7 +398,7 @@ class CtmChestGenerate:
 
         return data["reward_data"]
 
-    def _get_card(self, is_tutorial=False):
+    def __get_card(self, is_tutorial=False):
         self.result = []
         if is_tutorial:
             ctm = CTM.objects.get(params__is_tutorial='True')
@@ -456,8 +457,8 @@ class CtmChestGenerate:
                 lst_valid_unit = Unit.valid_units_id(ctm.league)
 
             user_units = list(
-                UserCard.objects.filter(user=self.user, character_id__in=lst_valid_unit)
-                    .exclude(character_id__in=lst_exclude)
+                UserCard.objects.filter(user=self.user, character_id__in=lst_valid_unit).exclude
+                (character_id__in=lst_exclude)
             )
 
             if user_units is not None:
@@ -549,3 +550,459 @@ class CtmChestGenerate:
 
         return data
 
+    def _get_card(self, is_tutorial=False):
+        if is_tutorial:
+            ctm = CTM.objects.get(params__is_tutorial='True')
+
+        else:
+            ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
+
+        for i in range(0, ctm.card_try):
+            pass
+
+        data = {
+            "chest_type": ctm.get_chest_type_display(),
+            "gems": random.randint(ctm.min_gem, ctm.max_gem),
+            "coins": random.randint(ctm.min_coin, ctm.max_coin),
+            "units": self.result,
+            "reward_range": {
+                "type": ctm.get_chest_type_display(),
+                "min_coin": ctm.min_coin,
+                "max_coin": ctm.max_coin,
+                "min_gem": ctm.min_gem,
+                "max_gem": ctm.max_gem,
+                "card_count": ctm.total,
+                "min_hero": ctm.min_hero,
+                "max_hero": ctm.max_hero,
+                "hero_card_chance": ctm.chance_hero
+            }
+        }
+
+        return data
+
+
+class QCtmChestGenerate(object):
+
+    def __init__(self, user, chest_type_index=None, chest_type='W', league=None, is_tutorial=None):
+        try:
+            if league is None:
+                league = LeagueUser.objects.get(player=user.user_currency, close_league=False)
+                self.league = league.league.base_league
+
+            else:
+                self.league = league
+
+        except LeagueUser.DoesNotExist:
+            self.league = League.objects.get(league_name='Cooper00')
+
+        finally:
+            self.user = user
+            self.chest_type_index = chest_type_index
+            self.chest_type = chest_type
+            self.selected_hero = False
+            self.result = []
+            self.is_tutorial = is_tutorial
+
+            if self.is_tutorial:
+                self.ctm = CTM.objects.get(params__is_tutorial='True')
+            else:
+                self.ctm = CTM.objects.get(league=self.league, chest_type=self.chest_type)
+
+            self.lst_hero_name = list(Hero.objects.all().values_list('moniker', flat=True))
+            self.sum_card = 0
+
+    def _calc_data(foo):
+
+        def magic(self, *args, **kwargs):
+            self.__reset()
+            self.__must_have()
+            while len(self.result) < self.ctm.card_try:
+                self.__epic()
+                self.__rare()
+                self.__common()
+
+            self.__normal()
+
+            return foo(self, *args, **kwargs)
+
+        return magic
+
+    def __reset(self):
+        self.result = []
+        self.sum_card = 0
+
+    def generate_chest(self):
+
+        if not UserChest.deck_is_open(self.user):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type)
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data": self.get_card()
+        }
+
+        if self.chest_type_index == 'chest':
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def generate_tutorial_chest(self):
+
+        if not UserChest.deck_is_open(self.user):
+            return {"status": False, "message": "deck is full"}
+
+        if self.chest_type_index is None:
+            index, chest_type = UserChest.get_sequence(self.user)
+            chest = Chest.get(chest_type)
+
+        else:
+            chest = Chest.get(self.chest_type_index)
+
+        data = {
+            "user": self.user,
+            "chest": chest,
+            "sequence_number": UserChest.next_sequence(self.user),
+            "reward_data": self._get_card(is_tutorial=True),
+            "chest_monetaryType": "free"
+        }
+
+        if self.chest_type_index is None:
+            UserChest.objects.create(**data)
+            return {"status": True, "message": "chest created"}
+
+        return data["reward_data"]
+
+    def __must_have(self):
+        if self.ctm.is_must_have_hero:
+
+            if self.ctm.must_have_hero_type == 'random':
+                count_hero = self.ctm.must_have_hero.count()
+
+                if count_hero < 1:
+                    raise Exception("no hero choice")
+
+                rand_index = random.randint(0, count_hero - 1)
+                random_hero = self.ctm.must_have_hero.all()[rand_index]
+
+                count_card = random.randint(self.ctm.min_have_hero, self.ctm.max_have_hero)
+                self.result.append({
+                    "name": str(random_hero),
+                    "type": "hero",
+                    "rarity": "epic",
+                    "count": count_card
+                })
+
+                self.sum_card += count_card
+
+            else:
+                for hero in self.ctm.must_have_hero.all():
+                    count_card = random.randint(self.ctm.min_have_hero, self.ctm.max_have_hero)
+                    self.result.append({
+                        "name": str(hero),
+                        "type": "hero",
+                        "rarity": "epic",
+                        "count": count_card
+                    })
+
+                    self.sum_card += count_card
+
+        if self.ctm.is_must_have_spell:
+            if self.ctm.must_have_spell_type == 'random':
+
+                count_spell = self.ctm.must_have_spell.count()
+                if count_spell < 1:
+                    raise Exception("no spell choice")
+
+                rand_index = random.randint(0, count_spell - 1)
+                random_spell = self.ctm.must_have_spell.all()[rand_index]
+                count_card = random.randint(self.ctm.min_have_spell, self.ctm.max_have_spell)
+                self.result.append({
+                    "name": str(random_spell),
+                    "type": "spell",
+                    "rarity": random_spell.rarity,
+                    "count": count_card
+                })
+
+                self.sum_card += count_card
+
+            else:
+                for spell in self.ctm.must_have_spell.all():
+                    count_card = random.randint(self.ctm.min_have_spell, self.ctm.max_have_spell)
+                    self.result.append({
+                        "name": str(spell),
+                        "type": "spell",
+                        "rarity": spell.rarity,
+                        "count": count_card
+                    })
+
+                    self.sum_card += count_card
+
+        if self.ctm.is_must_have_troop:
+            if self.ctm.must_have_troop_type == 'random':
+
+                count_troop = self.ctm.must_have_troop.count()
+                if count_troop < 1:
+                    raise Exception("no troop choice")
+
+                rand_index = random.randint(0, count_troop - 1)
+                random_troop = self.ctm.must_have_troop.all()[rand_index]
+                count_card = random.randint(self.ctm.min_have_troop, self.ctm.max_have_troop)
+
+                self.result.append({
+                    "name": str(random_troop),
+                    "type": "troop",
+                    "rarity": random_troop.rarity,
+                    "count": count_card
+                })
+
+                self.sum_card += count_card
+
+            else:
+                count_card = random.randint(self.ctm.min_have_troop, self.ctm.max_have_troop)
+                for troop in self.ctm.must_have_troop.all():
+                    self.result.append({
+                        "name": str(troop),
+                        "type": "troop",
+                        "rarity": troop.rarity,
+                        "count": count_card
+                    })
+
+                    self.sum_card += count_card
+
+    def __normal(self):
+        while self.sum_card < self.ctm.total:
+            rd_idx = random.randint(0, len(self.result) - 1)
+            diff_val = self.ctm.total - self.sum_card
+
+            if diff_val > 0:
+                rnd_max = diff_val / self.ctm.card_try if int(diff_val / self.ctm.card_try) > 0 else 1
+                rand_val = random.randint(1, rnd_max)
+
+                if self.result[rd_idx]['name'] not in self.lst_hero_name:
+                    self.result[rd_idx]['count'] += rand_val
+                    self.sum_card += rand_val
+
+    def __epic(self):
+
+        lst_epic_card = []
+        epic_chance = random.randint(0, 100)
+
+        if self.ctm.epic_chance > epic_chance:
+            '''add hero card in epic chance'''
+            for user_hero in self.user.user_hero.all():
+                if user_hero.quantity > settings.HERO_UPDATE[user_hero.level + 1]['hero_cards']:
+                    valid_card = user_hero.quantity - settings.HERO_UPDATE[user_hero.level + 1]['hero_cards']
+
+                else:
+                    valid_card = settings.HERO_UPDATE[user_hero.level + 1]['hero_cards'] - user_hero.quantity
+
+                lst_epic_card.extend([{
+                    "name": user_hero.hero.moniker,
+                    "type": "hero",
+                    "rarity": "epic"
+                }] * (100 + valid_card - user_hero.used_count)
+                                     )
+
+            '''add unit card in epic chance'''
+            for user_card in self.user.cards.filter(character__unlock=True, character__rarity='epic'):
+                if user_card.quantity > settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']:
+                    valid_card = user_card.quantity - \
+                                 settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']
+                else:
+                    valid_card = settings.UNIT_UPDATE[user_card.level + 1]['unit_cards'] \
+                                 - user_card.quantity
+
+                lst_epic_card.extend([{
+                    "name": str(user_card.character),
+                    "type": "unit",
+                    "rarity": "epic"
+                }] * (100 + valid_card - user_card.used_quantity)
+                                     )
+
+            for spell in UnitSpell.objects.filter(rarity='epic'):
+                lst_epic_card.extend(
+                    [{
+                        "name": str(spell),
+                        "type": "unit_spell",
+                        "rarity": "epic"
+                    }] * 100
+                )
+
+            for spell in HeroSpell.objects.filter(rarity='epic'):
+                lst_epic_card.extend(
+                    [{
+                        "name": str(spell),
+                        "type": "hero_spell",
+                        "rarity": "epic"
+                    }] * 100
+                )
+
+            for spell in ChakraSpell.objects.filter(rarity='epic'):
+                lst_epic_card.extend(
+                    [{
+                        "name": str(spell),
+                        "type": "chakra_spell",
+                        "rarity": "epic"
+                    }] * 100
+                )
+
+            if len(lst_epic_card) > 0:
+                random_idx = random.randint(0, len(lst_epic_card) - 1)
+                shuffle(lst_epic_card)
+                epic_result = lst_epic_card[random_idx]
+
+                count_card = random.randint(self.ctm.min_epic, self.ctm.max_epic)
+                epic_result['count'] = count_card
+                self.sum_card += count_card
+
+                self.result.append(epic_result)
+
+    def __rare(self):
+
+        # add unit card in epic chance
+
+        lst_rare_card = []
+
+        for user_card in self.user.cards.filter(character__unlock=True, character__rarity='rare'):
+            if user_card.quantity > settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']:
+                valid_card = user_card.quantity - \
+                             settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']
+            else:
+                valid_card = settings.UNIT_UPDATE[user_card.level + 1]['unit_cards'] \
+                             - user_card.quantity
+
+            lst_rare_card.extend(
+                [{
+                    "name": str(user_card.character),
+                    "type": "unit",
+                    "rarity": "rare"
+                }] * (100 + valid_card - user_card.used_quantity)
+            )
+
+        for spell in UnitSpell.objects.filter(rarity='rare'):
+            lst_rare_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "unit_spell",
+                    "rarity": "rare"
+                }] * 100
+            )
+
+        for spell in HeroSpell.objects.filter(rarity='rare'):
+            lst_rare_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "hero_spell",
+                    "rarity": "rare"
+                }] * 100
+            )
+
+        for spell in ChakraSpell.objects.filter(rarity='rare'):
+            lst_rare_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "chakra_spell",
+                    "rarity": "rare"
+                }] * 100
+            )
+
+        if len(lst_rare_card) > 0:
+            random_idx = random.randint(0, len(lst_rare_card) - 1)
+            shuffle(lst_rare_card)
+            rare_result = lst_rare_card[random_idx]
+
+            count_card = random.randint(self.ctm.min_epic, self.ctm.max_epic)
+            rare_result['count'] = count_card
+            self.sum_card += count_card
+
+            self.result.append(rare_result)
+
+    def __common(self):
+
+        # add unit card in epic chance
+
+        lst_common_card = []
+
+        for user_card in self.user.cards.filter(character__unlock=True, character__rarity='common'):
+            if user_card.quantity > settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']:
+                valid_card = user_card.quantity - \
+                             settings.UNIT_UPDATE[user_card.level + 1]['unit_cards']
+            else:
+                valid_card = settings.UNIT_UPDATE[user_card.level + 1]['unit_cards'] \
+                             - user_card.quantity
+
+            lst_common_card.extend(
+                [{
+                    "name": str(user_card.character),
+                    "type": "unit",
+                    "rarity": "common"
+                }] * (100 + valid_card - user_card.used_quantity)
+            )
+
+        for spell in UnitSpell.objects.filter(rarity='common'):
+            lst_common_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "unit_spell",
+                    "rarity": "common"
+                }] * 100
+            )
+
+        for spell in HeroSpell.objects.filter(rarity='common'):
+            lst_common_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "hero_spell",
+                    "rarity": "common"
+                }] * 100
+            )
+
+        for spell in ChakraSpell.objects.filter(rarity='common'):
+            lst_common_card.extend(
+                [{
+                    "name": str(spell),
+                    "type": "chakra_spell",
+                    "rarity": "common"
+                }] * 100
+            )
+
+        if len(lst_common_card) > 0:
+            random_idx = random.randint(0, len(lst_common_card) - 1)
+            shuffle(lst_common_card)
+            common_result = lst_common_card[random_idx]
+
+            count_card = random.randint(self.ctm.min_epic, self.ctm.max_epic)
+            common_result['count'] = count_card
+
+            self.sum_card += count_card
+            self.result.append(common_result)
+
+    @_calc_data
+    def get_card(self):
+        return {
+            "chest_type": self.ctm.get_chest_type_display(),
+            "gems": random.randint(self.ctm.min_gem, self.ctm.max_gem),
+            "coins": random.randint(self.ctm.min_coin, self.ctm.max_coin),
+            "units": self.result,
+            "reward_range": {
+                "type": self.ctm.get_chest_type_display(),
+                "min_coin": self.ctm.min_coin,
+                "max_coin": self.ctm.max_coin,
+                "min_gem": self.ctm.min_gem,
+                "max_gem": self.ctm.max_gem,
+                "card_count": self.ctm.total  # ,
+                # "min_hero": ctm.min_hero,
+                # "max_hero": ctm.max_hero,
+                # "hero_card_chance": ctm.chance_hero
+            }
+        }

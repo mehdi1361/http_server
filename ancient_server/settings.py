@@ -616,10 +616,10 @@ TOKEN_ADDITIONAL_TIME = 30
 #     # 'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
 # }
 
-RAVEN_CONFIG = {
-    'dsn': 'http://3d878383b4e14d3e99dc42c1602256f6:06cdeaa346ef4a299907d93bcbd738dd@130.185.74.237:9001/1',
-
-}
+# RAVEN_CONFIG = {
+#     'dsn': 'http://3d878383b4e14d3e99dc42c1602256f6:06cdeaa346ef4a299907d93bcbd738dd@130.185.74.237:9001/1',
+#
+# }
 # sentry_sdk.init(
 #     dsn="https://58789adf55154818abb7eea11a637c4b@sentry.io/1287768",
 #     integrations=[DjangoIntegration()]

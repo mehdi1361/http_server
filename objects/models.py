@@ -15,7 +15,7 @@ from django.db.models import signals, Count, Sum
 from django.contrib.postgres.fields import JSONField, ArrayField
 
 from base.models import Base, BaseUnit, Spell, SpellEffect, Rarity
-from .validators import validate_percent, validate_sequence, validate_unit_spell
+from common.validators import validate_percent, validate_sequence, validate_unit_spell
 from simple_history.models import HistoricalRecords
 from datetime import datetime, timedelta
 

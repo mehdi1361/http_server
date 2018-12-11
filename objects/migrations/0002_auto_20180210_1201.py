@@ -6,7 +6,7 @@ from django.conf import settings
 import django.contrib.postgres.fields.jsonb
 from django.db import migrations, models
 import django.db.models.deletion
-import objects.validators
+import common.validators
 import uuid
 
 
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('max_coin', models.PositiveIntegerField(default=0, verbose_name='max coin')),
                 ('min_gem', models.PositiveIntegerField(default=0, verbose_name='min gem')),
                 ('max_gem', models.PositiveIntegerField(default=0, verbose_name='max gem')),
-                ('new_card_chance', models.PositiveIntegerField(default=1, validators=[objects.validators.validate_percent], verbose_name='new card chance percentage')),
+                ('new_card_chance', models.PositiveIntegerField(default=1, validators=[common.validators.validate_percent], verbose_name='new card chance percentage')),
                 ('hero_card', models.PositiveIntegerField(default=0, verbose_name='hero card count')),
                 ('unit_card', models.PositiveIntegerField(default=3, verbose_name='unit card count')),
                 ('opening_time', models.PositiveIntegerField(default=5, verbose_name='opening time')),
@@ -91,7 +91,7 @@ class Migration(migrations.Migration):
                 ('max_coin', models.PositiveIntegerField(default=0, verbose_name='max coin')),
                 ('min_gem', models.PositiveIntegerField(default=0, verbose_name='min gem')),
                 ('max_gem', models.PositiveIntegerField(default=0, verbose_name='max gem')),
-                ('new_card_chance', models.PositiveIntegerField(default=1, validators=[objects.validators.validate_percent], verbose_name='new card chance percentage')),
+                ('new_card_chance', models.PositiveIntegerField(default=1, validators=[common.validators.validate_percent], verbose_name='new card chance percentage')),
                 ('hero_card', models.PositiveIntegerField(default=0, verbose_name='hero card count')),
                 ('unit_card', models.PositiveIntegerField(default=3, verbose_name='unit card count')),
                 ('opening_time', models.PositiveIntegerField(default=5, verbose_name='opening time')),
@@ -265,7 +265,7 @@ class Migration(migrations.Migration):
                 ('params', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True, verbose_name='params')),
                 ('chest_type', models.CharField(choices=[('free', 'FREE'), ('non_free', 'NON_FREE')], default='non_free', max_length=50, verbose_name='chest type')),
                 ('status', models.CharField(choices=[('close', 'close'), ('opening', 'opening'), ('ready', 'ready'), ('used', 'used')], default='close', max_length=50, verbose_name='status')),
-                ('sequence_number', models.PositiveIntegerField(default=0, validators=[objects.validators.validate_sequence], verbose_name='sequence number')),
+                ('sequence_number', models.PositiveIntegerField(default=0, validators=[common.validators.validate_sequence], verbose_name='sequence number')),
                 ('cards', django.contrib.postgres.fields.jsonb.JSONField(default=None, null=True, verbose_name='cards')),
                 ('chest_opening_date', models.DateTimeField(default=None, null=True, verbose_name='chest opening time')),
                 ('history_id', models.AutoField(primary_key=True, serialize=False)),
@@ -468,7 +468,7 @@ class Migration(migrations.Migration):
                 ('params', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True, verbose_name='params')),
                 ('chest_type', models.CharField(choices=[('free', 'FREE'), ('non_free', 'NON_FREE')], default='non_free', max_length=50, verbose_name='chest type')),
                 ('status', models.CharField(choices=[('close', 'close'), ('opening', 'opening'), ('ready', 'ready'), ('used', 'used')], default='close', max_length=50, verbose_name='status')),
-                ('sequence_number', models.PositiveIntegerField(default=0, validators=[objects.validators.validate_sequence], verbose_name='sequence number')),
+                ('sequence_number', models.PositiveIntegerField(default=0, validators=[common.validators.validate_sequence], verbose_name='sequence number')),
                 ('cards', django.contrib.postgres.fields.jsonb.JSONField(default=None, null=True, verbose_name='cards')),
                 ('chest_opening_date', models.DateTimeField(default=None, null=True, verbose_name='chest opening time')),
                 ('chest', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='users', to='objects.Chest', verbose_name='chest')),
