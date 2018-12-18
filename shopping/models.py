@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
+
+import pytz
 from django.db import models
 from base.models import Base
 from django.contrib.postgres.fields import JSONField
@@ -39,6 +42,7 @@ class Shop(Base):
     gems = JSONField(_('gems'))
     chests = JSONField(_('chests'))
     special_offer = JSONField(_('special offer'), null=True, default=None, blank=True)
+    special_offer_time = models.DateTimeField(_('special offer time'))
     store = models.ForeignKey(Store, verbose_name=_('store'))
     enable = models.BooleanField(_('enable shop item'), default=False)
 
@@ -52,6 +56,17 @@ class Shop(Base):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    @property
+    def time_remaining(self):
+        try:
+            if datetime.now(tz=pytz.utc) > self.special_offer_time:
+                return 0
+
+            return int((self.special_offer_time - datetime.now(tz=pytz.utc)).total_seconds())
+
+        except:
+            return 0
 
 
 @python_2_unicode_compatible

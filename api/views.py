@@ -658,23 +658,26 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
         result = serializer.data
 
-        for chest in result['chests']:
-            type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
-            ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
-            chest['reward_data'] = {
-                "type": chest['type'],
-                "min_coin": ctm.min_coin,
-                "max_coin": ctm.max_coin,
-                "min_gem": ctm.min_gem,
-                "max_gem": ctm.max_gem,
-                "card_count": ctm.total,
-                "min_hero": ctm.min_hero,
-                "max_hero": ctm.max_hero,
-                "hero_card_chance": ctm.chance_hero
-            }
-            del chest['type']
+        if len(result['special_offer'])> 0:
+            result['special_offer'][0]['time_remaining'] = shop_item.time_remaining
 
-        return Response(serializer.data)
+        # for chest in result['chests']:
+        #     type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
+        #     ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
+        #     chest['reward_data'] = {
+        #         "type": chest['type'],
+        #         "min_coin": ctm.min_coin,
+        #         "max_coin": ctm.max_coin,
+        #         "min_gem": ctm.min_gem,
+        #         "max_gem": ctm.max_gem,
+        #         "card_count": ctm.total,
+        #         "min_hero": ctm.min_hero,
+        #         "max_hero": ctm.max_hero,
+        #         "hero_card_chance": ctm.chance_hero
+        #     }
+        #     del chest['type']
+
+        return Response(result)
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):

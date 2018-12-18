@@ -406,7 +406,8 @@ class ShopSerializer(serializers.ModelSerializer):
             'name',
             'coins',
             'gems',
-            'chests'
+            'chests',
+            'special_offer',
         )
 
 
