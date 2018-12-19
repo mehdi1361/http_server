@@ -404,7 +404,7 @@ def league_status(player, league):
     return 'normal'
 
 
-class CtmChestGenerate:
+class MCtmChestGenerate:
 
     def __init__(self, user, chest_type_index=None, chest_type='W', league=None):
         try:
@@ -658,7 +658,7 @@ class CtmChestGenerate:
         return data
 
 
-class QCtmChestGenerate(object):
+class CtmChestGenerate(object):
 
     def __init__(self, user, chest_type_index=None, chest_type='W', league=None, is_tutorial=None):
         try:

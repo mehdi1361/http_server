@@ -3,6 +3,9 @@ from objects.models import League
 
 
 COUNT_STATUS = (
+    (1, '1'),
+    (2, '2'),
+    (5, '5'),
     (10, '10'),
     (20, '20'),
     (50, '50'),
@@ -17,6 +20,7 @@ CHEST_STATUS = (
     ('S', 'silver'),
     ('G', 'gold'),
     ('C', 'crystal'),
+    ('M', 'magical'),
 )
 
 LEAGUE = ((item.id, item.league_name) for item in League.league_real.all())
