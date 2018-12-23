@@ -1,5 +1,5 @@
 from django import forms
-from objects.models import League
+from objects.models import League, UserCurrency
 
 
 COUNT_STATUS = (
@@ -24,9 +24,15 @@ CHEST_STATUS = (
 )
 
 LEAGUE = ((item.id, item.league_name) for item in League.league_real.all())
+PLAYERS = ((player.user_id, player.name) for player in UserCurrency.objects.all())
 
 
 class CtmTestForm(forms.Form):
     count = forms.ChoiceField(choices=COUNT_STATUS)
     chest = forms.ChoiceField(choices=CHEST_STATUS)
     league = forms.ChoiceField(choices=LEAGUE)
+    player = forms.ChoiceField(choices=PLAYERS)
+
+    # def __init__(self, *args, **kwargs):
+    #     super(CtmTestForm, self).__init__(*args, **kwargs)
+    #     self.fields['player'].queryset = UserCurrency.objects.all()

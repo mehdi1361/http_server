@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .forms import CtmTestForm
 from objects.models import League
 from common.utils import CtmChestGenerate
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -21,7 +22,8 @@ def test_ctm(request):
             league = League.objects.get(pk=int(cd['league']))
 
             for i in range(1, int(cd['count'])):
-                chest = CtmChestGenerate(request.user, chest_type=str(cd['chest']), league=league)
+                user = User.objects.get(pk=cd['player'])
+                chest = CtmChestGenerate(user, chest_type=str(cd['chest']), league=league)
                 result = chest.generate_chest()
                 lst_result.append(result)
                 len_header = len(result['units'])
