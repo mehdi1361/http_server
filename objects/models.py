@@ -892,7 +892,11 @@ class CreatedLeague(Base):
         claim = self.base_league.prizes.count() - 1
 
         for player in LeagueUser.objects.filter(league=self).in_league().order_by('-score')[:LeagueTime.promoted()]:
-            promoted_league = League.objects.get(step_number=player.league.base_league.step_number + 1)
+            step_number = player.league.base_league.step_number + 1
+
+            if step_number > 5:
+                step_number = 5
+            promoted_league = League.objects.get(step_number=step_number)
 
             lst_pro.append({
                 "player": player.player,
