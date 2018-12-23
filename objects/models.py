@@ -168,7 +168,7 @@ class UserCurrency(Base):
 
     google_account = models.CharField(_('google account'), max_length=200, null=True, blank=True, unique=True)
     google_id = models.CharField(_('google id'), max_length=200, null=True, blank=True)
-    reward_token = models.CharField(verbose_name=_('reward token'), max_length=100,  null=True, blank=True)
+    reward_token = models.CharField(verbose_name=_('reward token'), max_length=100, null=True, blank=True)
 
     history = HistoricalRecords()
 
@@ -560,7 +560,7 @@ class UserChest(Base):
             sequence_number = 0
             sequence_type = settings.CHEST_SEQUENCE[0]
 
-        elif last_chest.sequence_number > len(settings.CHEST_SEQUENCE) -1:
+        elif last_chest.sequence_number > len(settings.CHEST_SEQUENCE) - 1:
             sequence_number = 0
             sequence_type = settings.CHEST_SEQUENCE[0]
             # cls.reset_sequence(user)
@@ -938,7 +938,6 @@ class CreatedLeague(Base):
         result = hi + low
 
         for player in LeagueUser.objects.filter(league=self).exclude(id__in=result).in_league():
-
             normal_league = League.objects.get(step_number=player.league.base_league.step_number)
             lst_nor.append({
                 "player": player.player,
@@ -1066,7 +1065,7 @@ class LeagueUser(Base):
                     user_count__lte=selected_league.capacity, base_league=selected_league)
 
                 if len(created_leagues) > 0:
-                    random_league = random.randint(0, len(created_leagues)-1)
+                    random_league = random.randint(0, len(created_leagues) - 1)
                     find_league = CreatedLeague.objects.get(pk=created_leagues[random_league]['id'])
 
                     LeagueUser.objects.create(
@@ -1327,5 +1326,12 @@ def assigned_new_card_to_user(sender, instance, created, **kwargs):
             UserItem.objects.create(user=user, item=instance)
 
 
+def create_user_card_spell(sender, instance, created, **kwargs):
+    if created:
+        for spell in UnitSpell.objects.filter(unit=instance.character):
+            UserCardSpell.objects.create(user_card=instance, spell_id=spell.id)
+
+
 signals.post_save.connect(create_user_dependency, sender=User)
 signals.post_save.connect(assigned_new_card_to_user, sender=Item)
+signals.post_save.connect(create_user_card_spell, sender=UserCard)
