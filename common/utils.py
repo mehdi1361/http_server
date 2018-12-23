@@ -749,7 +749,7 @@ class CtmChestGenerate(object):
             "user": self.user,
             "chest": chest,
             "sequence_number": UserChest.next_sequence(self.user),
-            "reward_data": self._get_card(is_tutorial=True),
+            "reward_data": self.get_card(is_tutorial=True),
             "chest_monetaryType": "free"
         }
 
