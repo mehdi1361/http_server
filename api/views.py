@@ -191,12 +191,12 @@ class UserViewSet(viewsets.ModelViewSet):
         UserCurrency.update_currency(request.user, chest.reward_data['gems'], chest.reward_data['coins'])
 
         for unit in chest.reward_data['units']:
-            if unit['unit'] in hero_moniker:
-                hero = Hero.objects.get(moniker=unit['unit'])
+            if unit['name'] in hero_moniker:
+                hero = Hero.objects.get(moniker=unit['name'])
                 UserHero.upgrade_hero(user=request.user, hero=hero, value=unit['count'])
 
             else:
-                character = Unit.objects.get(moniker=unit['unit'])
+                character = Unit.objects.get(moniker=unit['name'])
                 UserCard.upgrade_character(request.user, character, unit['count'])
 
         # TODO add item card
