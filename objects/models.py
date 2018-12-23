@@ -402,8 +402,14 @@ class UserCardSpell(Base):
         db_table = 'user_card_spells'
 
     def __str__(self):
-        spell = Spell.objects.get(pk=self.spell_id)
-        return '{}-{}-{}'.format(self.user_card.user, self.user_card.character, spell.spell_name)
+        try:
+            spell = Spell.objects.get(pk=self.spell_id)
+            spell_name = spell.spell_name
+
+        except:
+            spell_name = None
+
+        return '{}-{}-{}'.format(self.user_card.user, self.user_card.character, spell_name)
 
 
 @python_2_unicode_compatible
