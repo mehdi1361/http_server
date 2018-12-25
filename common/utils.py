@@ -218,7 +218,8 @@ def hero_normalize_data(hero_user, data):
                     }
                 )
 
-            data.pop(key, None)
+            if key not in ['attack']:
+                data.pop(key, None)
 
     lst_stat[:] = [d for d in lst_stat if d.get('name') not in ['health', 'shield']]
     data['lst_stat'] = lst_stat
@@ -342,7 +343,8 @@ def unit_normalize_data(unit, data):
                     }
                 )
 
-            data.pop(key, None)
+            if key not in ['attack']:
+                data.pop(key, None)
 
         lst_stat[:] = [d for d in lst_stat if d.get('name') not in ['health', 'shield']]
 
