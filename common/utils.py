@@ -235,6 +235,7 @@ def hero_normalize_data(hero_user, data):
 
     data['chakra'] = {
         'moniker': hero_user.hero.chakra_moniker,
+        'attack': hero_user.hero.chakra_attack,
         'health': hero_user.hero.chakra_health,
         "shield": hero_user.hero.chakra_shield,
         "max_health": hero_user.hero.chakra_health,
