@@ -220,34 +220,26 @@ def hero_normalize_data(hero_user, data):
 
             data.pop(key, None)
 
+    lst_stat[:] = [d for d in lst_stat if d.get('name') not in ['health', 'shield']]
     data['lst_stat'] = lst_stat
     data['max_health'] = health
     data['max_shield'] = shield
+    data['health'] = health
+    data['shield'] = shield
     data['quantity'] = hero_user.quantity if hero_user else 0
 
     data['level'] = hero_user.level if hero_user.hero and hero_user else 0
     data['next_card_count'] = settings.HERO_UPDATE[next_stats]['hero_cards']
     data['card_cost'] = settings.HERO_UPDATE[next_stats]['coins']
+    data['spells'] = hero_user.spell_data
 
     data['chakra'] = {
-        'chakra_moniker': hero_user.hero.chakra_moniker,
+        'moniker': hero_user.hero.chakra_moniker,
+        'health': hero_user.hero.chakra_health,
+        "shield": hero_user.hero.chakra_shield,
+        "max_health": hero_user.hero.chakra_health,
+        "max_shield": hero_user.hero.chakra_shield,
         'lst_stat': [
-            {
-                "name": "health",
-                "val": hero_user.hero.chakra_health,
-                "nval": int(
-                    round(hero_user.hero.chakra_health + hero_user.hero.chakra_health *
-                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
-                )
-            },
-            {
-                "name": "shield",
-                "val": hero_user.hero.chakra_shield,
-                "nval": int(
-                    round(hero_user.hero.chakra_shield + hero_user.hero.chakra_shield *
-                          settings.HERO_UPDATE[hero_user.level + 1]['increase'])
-                )
-            },
             {
                 "name": "max_health",
                 "val": hero_user.hero.chakra_health,
@@ -302,7 +294,8 @@ def hero_normalize_data(hero_user, data):
                 "val": hero_user.hero.chakra_dodge_chance,
                 "nval": hero_user.hero.chakra_dodge_chance
             }
-        ]
+        ],
+        'spells': hero_user.chakra_spell_data
     }
 
     return data
@@ -350,10 +343,15 @@ def unit_normalize_data(unit, data):
 
             data.pop(key, None)
 
+        lst_stat[:] = [d for d in lst_stat if d.get('name') not in ['health', 'shield']]
+
         data['lst_stat'] = lst_stat
 
         data['max_health'] = health
         data['max_shield'] = shield
+        data['health'] = health
+        data['shield'] = shield
+
         data['next_card_count'] = settings.UNIT_UPDATE[next_stats]['unit_cards']
         data['next_card_cost'] = settings.UNIT_UPDATE[next_stats]['coins']
 

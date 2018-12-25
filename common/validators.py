@@ -29,3 +29,21 @@ def validate_unit_spell(value):
         )
 
 
+def validate_hero_spell(value):
+    from objects.models import HeroSpell
+
+    if not HeroSpell.objects.filter(pk=value).exists():
+        raise ValidationError(
+            _('%(value)s is not spell id'),
+            params={'value': value},
+        )
+
+
+def validate_chakra_spell(value):
+    from objects.models import ChakraSpell
+
+    if not ChakraSpell.objects.filter(pk=value).exists():
+        raise ValidationError(
+            _('%(value)s is not spell id'),
+            params={'value': value},
+        )

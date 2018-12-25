@@ -15,7 +15,8 @@ from django.db.models import signals, Count, Sum
 from django.contrib.postgres.fields import JSONField, ArrayField
 
 from base.models import Base, BaseUnit, Spell, SpellEffect, Rarity
-from common.validators import validate_percent, validate_sequence, validate_unit_spell
+from common.validators import validate_percent, validate_sequence, validate_unit_spell, validate_hero_spell, \
+    validate_chakra_spell
 from simple_history.models import HistoricalRecords
 from datetime import datetime, timedelta
 
@@ -285,6 +286,50 @@ class UserHero(Base):
     def __str__(self):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
 
+    @property
+    def spell_data(self):
+        result = []
+
+        for spell in self.hero.spells.all():
+            user_spell_data = self.hero_spell_levels.get(spell_id=spell.id, user_hero=self)
+
+            result.append({
+                "id": spell.id,
+                "name": spell.spell_name,
+                "index": spell.char_spells_index,
+                "gen_ap": spell.generated_action_point,
+                "needed_ap": spell.need_action_point,
+                "spell_params": spell.params,
+                "level": user_spell_data.spell_level,
+                "card_count": user_spell_data.spell_card_count,
+                "next_card_cost": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['spell_cards'],
+                "next_card_count": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['coins']
+            })
+
+        return result
+
+    @property
+    def chakra_spell_data(self):
+        result = []
+
+        for spell in self.hero.chakra_spells.all():
+            user_spell_data = self.chakra_spell_levels.get(spell_id=spell.id, user_hero=self)
+
+            result.append({
+                "id": spell.id,
+                "name": spell.spell_name,
+                "index": spell.char_spells_index,
+                "gen_ap": spell.generated_action_point,
+                "needed_ap": spell.need_action_point,
+                "spell_params": spell.params,
+                "level": user_spell_data.spell_level,
+                "card_count": user_spell_data.spell_card_count,
+                "next_card_cost": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['spell_cards'],
+                "next_card_count": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['coins']
+            })
+
+        return result
+
 
 class UnlockManager(models.Manager):
     def get_queryset(self):
@@ -371,19 +416,19 @@ class UserCard(Base):
         result = []
 
         for spell in self.character.spells.all():
-            user_spell_data = self.spell_levels.get(spell_id=spell.id)
+            user_spell_data = self.spell_levels.get(spell_id=spell.id, user_card=self)
 
             result.append({
-                "spell_name": spell.spell_name,
-                "char_spells_index": spell.char_spells_index,
-                "spell_type": spell.spell_type,
-                "generated_action_point": spell.generated_action_point,
-                "need_action_point": spell.need_action_point,
-                "cool_down_duration": spell.cool_down_duration,
-                "action_type": spell.action_type,
-                "params": spell.params,
+                "id": spell.id,
+                "name": spell.spell_name,
+                "index": spell.char_spells_index,
+                "gen_ap": spell.generated_action_point,
+                "needed_ap": spell.need_action_point,
+                "spell_params": spell.params,
                 "level": user_spell_data.spell_level,
-                "card_count": user_spell_data.spell_card_count
+                "card_count": user_spell_data.spell_card_count,
+                "next_card_cost": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['spell_cards'],
+                "next_card_count": settings.SPELL_UPDATE[user_spell_data.spell_level + 1]['coins']
             })
 
         return result
@@ -403,7 +448,53 @@ class UserCardSpell(Base):
 
     def __str__(self):
         try:
-            spell = Spell.objects.get(pk=self.spell_id)
+            spell = UnitSpell.objects.get(pk=self.spell_id)
+            spell_name = spell.spell_name
+
+        except:
+            spell_name = None
+
+        return '{}-{}-{}'.format(self.user_card.user, self.user_card.character, spell_name)
+
+
+@python_2_unicode_compatible
+class UserHeroSpell(Base):
+    user_hero = models.ForeignKey(UserHero, verbose_name=_('user hero'), related_name='hero_spell_levels')
+    spell_id = models.IntegerField(_('spell id'), validators=[validate_hero_spell])
+    spell_level = models.IntegerField(_('spell level'), default=1)
+    spell_card_count = models.IntegerField(_('spell card count'), default=0)
+
+    class Meta:
+        verbose_name = _('user_hero_spell')
+        verbose_name_plural = _('user_hero_spells')
+        db_table = 'user_hero_spells'
+
+    def __str__(self):
+        try:
+            spell = HeroSpell.objects.get(pk=self.spell_id)
+            spell_name = spell.spell_name
+
+        except:
+            spell_name = None
+
+        return '{}-{}-{}'.format(self.user_card.user, self.user_card.character, spell_name)
+
+
+@python_2_unicode_compatible
+class UserChakraSpell(Base):
+    user_hero = models.ForeignKey(UserHero, verbose_name=_('user hero'), related_name='chakra_spell_levels')
+    spell_id = models.IntegerField(_('spell id'), validators=[validate_chakra_spell])
+    spell_level = models.IntegerField(_('spell level'), default=1)
+    spell_card_count = models.IntegerField(_('spell card count'), default=0)
+
+    class Meta:
+        verbose_name = _('user_chakra_spell')
+        verbose_name_plural = _('user_chakra_spells')
+        db_table = 'user_chakra_spells'
+
+    def __str__(self):
+        try:
+            spell = ChakraSpell.objects.get(pk=self.spell_id)
             spell_name = spell.spell_name
 
         except:
@@ -1338,6 +1429,20 @@ def create_user_card_spell(sender, instance, created, **kwargs):
             UserCardSpell.objects.create(user_card=instance, spell_id=spell.id)
 
 
+def create_hero_card_spell(sender, instance, created, **kwargs):
+    if created:
+        for spell in HeroSpell.objects.filter(hero=instance.hero):
+            UserHeroSpell.objects.create(user_hero=instance, spell_id=spell.id)
+
+
+def create_chakra_card_spell(sender, instance, created, **kwargs):
+    if created:
+        for spell in ChakraSpell.objects.filter(hero=instance.hero):
+            UserChakraSpell.objects.create(user_hero=instance, spell_id=spell.id)
+
+
 signals.post_save.connect(create_user_dependency, sender=User)
 signals.post_save.connect(assigned_new_card_to_user, sender=Item)
 signals.post_save.connect(create_user_card_spell, sender=UserCard)
+signals.post_save.connect(create_hero_card_spell, sender=UserHero)
+signals.post_save.connect(create_chakra_card_spell, sender=UserHero)
