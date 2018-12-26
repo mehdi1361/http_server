@@ -14,7 +14,7 @@ from .serializers import UserSerializer, LeagueInfoSerializer, \
     LeagueSerializer, ClaimSerializer, JWTSerializer
 from objects.models import Device, UserCurrency, Hero, UserHero, \
     LeagueInfo, UserChest, UserCard, Unit, UserItem, Item, AppConfig, LeagueUser, League, Claim, \
-    PlayOff, LeagueTime, UnitSpell
+    PlayOff, LeagueTime, UnitSpell, HeroSpell, ChakraSpell
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -177,8 +177,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
-        hero_moniker = list(Hero.objects.all().values_list('moniker', flat=True))
-
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
         if chest.status != 'ready':
             if chest.remain_time <= 0:
@@ -191,9 +189,18 @@ class UserViewSet(viewsets.ModelViewSet):
         UserCurrency.update_currency(request.user, chest.reward_data['gems'], chest.reward_data['coins'])
 
         for unit in chest.reward_data['units']:
-            if unit['name'] in hero_moniker:
+            if unit['name'] in list(Hero.objects.all().values_list('moniker', flat=True)):
                 hero = Hero.objects.get(moniker=unit['name'])
                 UserHero.upgrade_hero(user=request.user, hero=hero, value=unit['count'])
+
+            elif unit['name'] in list(UnitSpell.objects.all().values_list('spell_name', flat=True)):
+                UserCard.upgrade_spell_card_count(user=request.user, spell_name=unit['name'], value=unit['count'])
+
+            elif unit['name'] in list(HeroSpell.objects.all().values_list('spell_name', flat=True)):
+                UserHero.upgrade_hero_spell_card_count(user=request.user, spell_name=unit['name'])
+
+            elif unit['name'] in list(ChakraSpell.objects.all().values_list('spell_name', flat=True)):
+                UserHero.upgrade_chakra_spell_card_count(user=request.user, spell_name=unit['name'])
 
             else:
                 character = Unit.objects.get(moniker=unit['name'])
@@ -955,6 +962,56 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
         )
 
         return Response(data, status=status.HTTP_200_OK)
+
+    @list_route(methods=['POST'])
+    def spell_level_up(self, request):
+        spell_id = request.data.get('spell_id')
+        spell = HeroSpell.objects.get(pk=spell_id)
+
+        user_hero = UserHero.objects.get(user=request.user, hero=spell.hero)
+        hero_spell_level = user_hero.hero_spell_levels.get(spell_id=spell_id)
+
+        next_level = settings.SPELL_UPDATE[hero_spell_level.spell_level + 1]
+
+        if hero_spell_level.spell_card_count < next_level['spell_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if request.user.user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        request.user.user_currency.coin -= next_level['coins']
+        request.user.user_currency.save()
+
+        hero_spell_level.spell_card_count -= next_level['spell_cards']
+        hero_spell_level.spell_level += 1
+        hero_spell_level.save()
+
+        return Response({'message': 'test spell level up'}, status=status.HTTP_200_OK)
+
+    @list_route(methods=['POST'])
+    def chakra_spell_level_up(self, request):
+        spell_id = request.data.get('spell_id')
+        spell = ChakraSpell.objects.get(pk=spell_id)
+
+        user_hero = UserHero.objects.get(user=request.user, hero=spell.hero)
+        chakra_spell_level = user_hero.chakra_spell_levels.get(spell_id=spell_id)
+
+        next_level = settings.SPELL_UPDATE[chakra_spell_level.spell_level + 1]
+
+        if chakra_spell_level.spell_card_count < next_level['spell_cards']:
+            return Response({'message': 'card not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if request.user.user_currency.coin < next_level['coins']:
+            return Response({'message': 'coins not enough'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        request.user.user_currency.coin -= next_level['coins']
+        request.user.user_currency.save()
+
+        chakra_spell_level.spell_card_count -= next_level['spell_cards']
+        chakra_spell_level.spell_level += 1
+        chakra_spell_level.save()
+
+        return Response({'message': 'test spell level up'}, status=status.HTTP_200_OK)
 
     @list_route(methods=['POST'])
     def selected_items(self, request):

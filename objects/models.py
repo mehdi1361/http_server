@@ -283,6 +283,36 @@ class UserHero(Base):
 
         user_hero.save()
 
+    @classmethod
+    def upgrade_hero_spell_card_count(cls, user, spell_name, value):
+        try:
+            user_hero = cls.objects.get(user=user, hero__spells__spell_name=spell_name)
+            spell = HeroSpell.objects.get(spell_name=spell_name)
+
+            user_hero_spell = UserHeroSpell.objects.get(user_hero=user_hero, spell_id=spell.id)
+
+            user_hero_spell.spell_card_count += value
+            user_hero_spell.save()
+            return True
+
+        except:
+            return False
+
+    @classmethod
+    def upgrade_chakra_spell_card_count(cls, user, spell_name, value):
+        try:
+            user_hero = cls.objects.get(user=user, hero__chakra_spells__spell_name=spell_name)
+            spell = ChakraSpell.objects.get(spell_name=spell_name)
+
+            user_chakra_spell = UserChakraSpell.objects.get(user_hero=user_hero, spell_id=spell.id)
+
+            user_chakra_spell.spell_card_count += value
+            user_chakra_spell.save()
+            return True
+
+        except:
+            return False
+
     def __str__(self):
         return 'user:{}, hero:{}'.format(self.user.username, self.hero.moniker)
 
@@ -410,6 +440,24 @@ class UserCard(Base):
             user_character.level += 1
 
         user_character.save()
+
+    @classmethod
+    def upgrade_spell_card_count(cls, user, spell_name, value):
+        try:
+            user_character = cls.objects.get(
+                user=user,
+                character__spells__spell_name=spell_name
+            )
+            spell = UnitSpell.objects.get(spell_name=spell_name)
+
+            user_card_spell = UserCardSpell.objects.get(user_card=user_character, spell_id=spell.id)
+
+            user_card_spell.spell_card_count += value
+            user_card_spell.save()
+            return True
+
+        except:
+            return False
 
     @property
     def spell_data(self):
