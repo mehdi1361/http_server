@@ -20,12 +20,12 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. pip install virtualenv
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. run **virtaulenv venv -p python2.7**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. run ```virtaulenv venv -p python2.7```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run **source venv/bin/activate**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run ```source venv/bin/activate```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run **source venv/bin/activate**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run ```source venv/bin/activate```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. run **pip install -r requirements.txt**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. run ```pip install -r requirements.txt```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. run **createdb -h localhost -U postgres -E UTF8 anc_db**
