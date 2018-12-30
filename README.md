@@ -28,4 +28,11 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. run ```pip install -r requirements.txt```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. run **createdb -h localhost -U postgres -E UTF8 anc_db**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. run ```psql ``` to login psql command line .run ```psql>\password``` to set password for postgres user
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. run ```vim(or nano) ancient_server/settings.py``` and set postgres password in database section
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. run ```createdb -h localhost -U postgres -E UTF8 anc_db```. enter password you set before.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. run ```python manage.py migrate```
