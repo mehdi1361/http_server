@@ -45,9 +45,9 @@ initd linux server visit [config django app in ubuntu](https://www.digitalocean.
 
 #### Api's
 
-|  name | url | method  |  return/format  | description  |
-|---|---|---|---|---|
-|register |   |   |   |   |
-|   |   |   |   |   |
+|   | url              |method|return/format|description  |
+|---|------------------|------|-------------|-------------|
+| 1 |BASE_URL/api/user |POST  |json         |create player|
+| 2 |BASE_URL/api/login|POST  |json         |login player |
 |   |   |   |   |   |
 
