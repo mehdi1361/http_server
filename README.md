@@ -38,8 +38,8 @@
  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12. run ```python manage.py run server 0.0.0.0:8000``` 
 
-> if deploy in systemd linux server visit [config django app in centos 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7). if use
-initd linux server visit [config django app in ubuntu](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
+> if deploy in systemd linux server visit [config django in centos7](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7). if use
+initd linux server visit [config django in ubuntu](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
  
 
