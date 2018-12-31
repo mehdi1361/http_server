@@ -1,6 +1,6 @@
 # Divine server http request
 
-##### Server requirements
+#### Server requirements
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.linux server like centos  or ubuntu
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.install DataBase postgresql **version 10**
@@ -12,7 +12,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. install **python2.7-pip**
 
 
-##### Application requirements
+#### Application requirements
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.clone project in directory
 
@@ -21,8 +21,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. pip install virtualenv
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. run ```virtaulenv venv -p python2.7```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run ```source venv/bin/activate```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. run ```source venv/bin/activate```
 
@@ -37,15 +35,19 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10. run ```python manage.py migrate```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11. run ```python manage.py loaddata objects/fixtures/*``` and ```python manage.py loaddata shopping/fixtures/*```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11. run ```python manage.py loaddata objects/fixtures/*```
  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11. run ```python manage.py run server 0.0.0.0:8000``` 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12. run ```python manage.py run server 0.0.0.0:8000``` 
 
 > if deploy in systemd linux server visit [config django app in centos 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7). if use
 initd linux server visit [config django app in ubuntu](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
  
 
+#### Api's
 
+|  name | url | method  |  return/format  | description  |
+|---|---|---|---|---|
+|register |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
