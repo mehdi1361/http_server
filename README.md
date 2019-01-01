@@ -45,9 +45,19 @@ initd linux server visit [config django in ubuntu](https://www.digitalocean.com/
 
 #### Api's
 
-|   | url              |method|return/format|description  |
-|---|------------------|------|-------------|-------------|
-| 1 |BASE_URL/api/user |POST  |json         |create player|
-| 2 |BASE_URL/api/login|POST  |json         |login player |
-|   |   |   |   |   |
+|    | url                                   |method|return/format|description                            |
+|----|---------------------------------------|------|-------------|---------------------------------------|
+| 1  |BASE_URL/api/user                      |POST  |json         |create player                          |
+| 2  |BASE_URL/api/login                     |POST  |json         |login player                           |
+| 3  |BASE_URL/api/user/select_hero/         |POST  |json         |select hero for player                 |
+| 4  |BASE_URL/api/user/player_info/         |POST  |json         |fetch user data                        |
+| 5  |BASE_URL/api/user/open_chest/          |POST  |json         |open chest                             |
+| 6  |BASE_URL/api/user/use_skip_gem/        |POST  |json         |skip remaining time for open chest     |
+| 7  |BASE_URL/api/user/chest_ready/         |POST  |json         |open chest and use items in chest      |
+| 8  |BASE_URL/api/user/set_player_name/     |POST  |json         |set player name for first time         |
+| 9  |BASE_URL/api/user/change_player_name/  |POST  |json         |change player name for for second      |
+| 10 |BASE_URL/api/user/set_tutorial_done/   |POST  |json         |set tutorial done                      |
+| 11 |BASE_URL/api/user/leader_board/        |POST  |json         |show leaderboard if user join to league|
+
+
 
