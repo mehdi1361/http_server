@@ -45,22 +45,43 @@ initd linux server visit [config django in ubuntu](https://www.digitalocean.com/
 
 #### Api's
 
-|    | url                                   |method|description                                       |
-|----|---------------------------------------|------|--------------------------------------------------|
-| 1  |BASE_URL/api/user                      |POST  |create player                                     |
-| 2  |BASE_URL/api/login                     |POST  |login player                                      |
-| 3  |BASE_URL/api/user/select_hero/         |POST  |select hero for player                            |
-| 4  |BASE_URL/api/user/player_info/         |POST  |fetch user data                                   |
-| 5  |BASE_URL/api/user/open_chest/          |POST  |open chest                                        |
-| 6  |BASE_URL/api/user/use_skip_gem/        |POST  |skip remaining time for open chest                |
-| 7  |BASE_URL/api/user/chest_ready/         |POST  |open chest and use items in chest                 |
-| 8  |BASE_URL/api/user/set_player_name/     |POST  |set player name for first time                    |
-| 9  |BASE_URL/api/user/change_player_name/  |POST  |change player name for for second                 |
-| 10 |BASE_URL/api/user/set_tutorial_done/   |POST  |set tutorial done                                 |
-| 11 |BASE_URL/api/user/leader_board/        |POST  |show leaderboard if user join to league           |
-| 12 |BASE_URL/api/user/has_league/          |POST  |return true if user join to league else false     |
-| 13 |BASE_URL/api/user/claim/               |POST  |if user league improved claim add to user currency|
+> use  BASE_URL before all api
+
+|    | url                            |method|description                                             |
+|----|--------------------------------|------|--------------------------------------------------------|
+| 1  |/api/user                       |POST  |create player                                           |
+| 2  |/api/login                      |POST  |login player                                            |
+| 3  |/api/user/select_hero/          |POST  |select hero for player                                  |
+| 4  |/api/user/player_info/          |POST  |fetch user data                                         |
+| 5  |/api/user/open_chest/           |POST  |open chest                                              |
+| 6  |/api/user/use_skip_gem/         |POST  |skip remaining time for open chest                      |
+| 7  |/api/user/chest_ready/          |POST  |open chest and use items in chest                       |
+| 8  |/api/user/set_player_name/      |POST  |set player name for first time                          |
+| 9  |/api/user/change_player_name/   |POST  |change player name for for second                       |
+| 10 |/api/user/set_tutorial_done/    |POST  |set tutorial done                                       |
+| 11 |/api/user/leader_board/         |POST  |show leaderboard if user join to league                 |
+| 12 |/api/user/has_league/           |POST  |return true if user join to league else false           |
+| 13 |/api/user/claim/                |POST  |if user league improved claim add to user currency      |
+| 14 |/api/user/active_playoff/       |POST  |active playoff                                          |
+| 15 |/api/user/skip_gem_cool_down/   |POST  |if troop cooldown skip cooldown with gem                |
+| 16 |/api/user/match_count/          |POST  |user games count                                        |
+| 17 |/api/user/video_ads/            |POST  |decrease user troop cooldown                            |
+| 18 |/api/user/register_account/     |POST  |register google account if ok add benefit to user       |
+| 19 |/api/shop/store/                |POST  |return store data                                       |
+| 20 |/api/shop/buy_gem/              |POST  |if ok from store add gem to user gem                    |
+| 21 |/api/shop/buy_coin/             |POST  |if ok decrease gem and increase coin                    |
+| 22 |/api/shop/buy_chest/            |POST  |if ok decrease gem and buy chest                        |
+| 23 |/api/troop/level_up/            |POST  |if card is enough update user troop card level          |
+| 24 |/api/troop/spell_level_up/      |POST  |if card is enough update user troop spell card level    |
+| 25 |/api/hero/level_up/             |POST  |if card is enough update user hero card level           |
+| 26 |/api/hero/spell_level_up/       |POST  |if card is enough update user hero spell card level     |
+| 27 |/api/hero/chakra_spell_level_up/|POST  |if card is enough update user chakra spell card level   |
+| 28 |/api/hero/selected_items/       |POST  |if ok hero selected item updated                        |
+| 29 |/api/item/level_up/             |POST  |if card is enough update item card level                |
+| 30 |/api/message/read/              |POST  |if ok return 200 and change message status to ready     |
 
 
+
+#### database class model
 
 

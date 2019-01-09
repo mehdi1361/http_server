@@ -67,6 +67,13 @@ class UserViewSet(viewsets.ModelViewSet):
         return super(UserViewSet, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
+        """
+        :param request: {"deviceUniqueID":36478971123, "deviceName": device name,
+                         "token": custom token for custom build}
+        :param args:
+        :param kwargs:
+        :return: {'id': return_id, 'player_id': player_id}
+        """
         try:
             device_id = request.data.get('deviceUniqueID')
             device_name = request.data.get('deviceName')
@@ -103,6 +110,16 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def select_hero(self, request):
+        """
+        :param request:
+            header:
+                Authorization:JWT token returned in login
+                Content-Type:application/json
+            body:
+                {"hero": hero id}
+
+        :return:  {'id': 200, 'message': 'ok'} if ok else {'id': 400, 'message': 'no selected hero'}
+        """
         if request.data.get('hero') is None:
             return Response(
                 {'id': 400, 'message': 'no selected hero'}, status=status.HTTP_400_BAD_REQUEST)
@@ -119,12 +136,31 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def player_info(self, request):
+        """
+        :param request:
+            header:
+                Authorization:JWT token returned in login
+                Content-Type:application/json
+
+        :return: player info json
+        """
         user = get_object_or_404(User, id=request.user.id)
         serializer = self.serializer_class(user)
         return Response(serializer.data)
 
     @list_route(methods=['POST'])
     def open_chest(self, request):
+        """
+        :param request:
+            header:
+                Authorization:JWT token returned in login
+                Content-Type:application/json
+
+            body:
+                {"id": user chest id}
+        :return:
+            if ok return {'id': 201, 'message': 'chest change status opening'}
+        """
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='close')
 
         if UserChest.chest_count(user=request.user, status='opening') >= 1:
@@ -147,6 +183,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def use_skip_gem(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"id": user chest id}
+            :return:
+                if ok return {'id': 201, 'message': 'chest change status ready'}
+        """
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user, status='opening')
 
         if chest.skip_gem > UserCurrency.hard_currency(request.user):
@@ -177,6 +224,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def chest_ready(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"id": user chest id}
+            :return:
+                if ok return {'id': 201, 'message': 'chest change status ready'}
+        """
         chest = get_object_or_404(UserChest, pk=request.data.get('id'), user=request.user)
         if chest.status != 'ready':
             if chest.remain_time <= 0:
@@ -215,6 +273,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def set_player_name(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"name": profile name}
+            :return:
+                if ok return {'id': 201, 'user_name': if name exists set name else set name concat with uuid len 18}
+        """
         name = request.data.get('name')
         user_profile = UserCurrency.objects.filter(name=name)
 
@@ -229,6 +298,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def set_tutorial_done(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+            :return:
+                {'id': 201, 'tutorial_done': True}
+        """
         profile = UserCurrency.objects.get(user=request.user)
         profile.tutorial_done = True
         profile.save()
@@ -237,6 +315,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def change_player_name(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"name": profile name}
+            :return:
+                if ok return {'id': 201, 'user_name': if name exists set name else return error 400}
+        """
         if request.user.user_currency.can_change_name:
             name = request.data.get('name')
             user_profile = UserCurrency.objects.filter(name=name)
@@ -255,6 +344,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def leader_board(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+            :return:
+                if user join in league return league leader board
+        """
         final_result = dict()
         previous_rank = None
         current_rank = None
@@ -386,6 +484,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def has_league(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+            :return:
+                if user join in league return league leader board
+        """
         if LeagueUser.has_league(request.user.user_currency):
             return Response({'id': 200, 'message': 'player joined to league'}, status=status.HTTP_200_OK)
 
@@ -393,6 +500,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def active_playoff(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+            :return:
+                if user join in league active playoff return playoff data
+        """
         try:
             league = LeagueUser.objects.get(
                 player=request.user.user_currency,
@@ -470,6 +586,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def claim(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+            :return:
+                if user has any claim use claim
+        """
         try:
             claim = Claim.objects.get(league_player__player=request.user.user_currency, is_used=False)
             league = LeagueUser.objects.get(player=request.user.user_currency, close_league=False)
@@ -498,6 +623,18 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def skip_gem_cool_down(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"card_id": user card id}
+
+            :return:
+                if troop cooldown skip cooldown with gem
+        """
         card_id = request.data.get('card_id')
 
         if card_id is None:
@@ -526,6 +663,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def match_count(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+
+            :return:
+                {
+                    "id": 200,
+                    "num_games": need games to join to league,
+                    "num_played": user games count if gte 3 return 3
+                }
+        """
         profile = UserCurrency.objects.get(user=request.user)
         battle_count = profile.win_count + profile.lose_count
 
@@ -543,6 +694,16 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def video_ads(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+
+            :return:
+                if return 200 decrease troop cooldown
+        """
         try:
             valid_type = ['troop', 'chest']
 
@@ -585,6 +746,19 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def register_account(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"google_id": google_id, "google_account": google account}
+
+
+            :return:
+                if ok add benefit to user else return error 400 with error message
+        """
         try:
             profile = UserCurrency.objects.get(user=request.user)
             google_id = request.data.get('google_id')
@@ -619,6 +793,19 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['POST'])
     def get_account(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"google_id": google_id}
+
+
+            :return:
+                if ok return recover user profile
+        """
         try:
             profile = get_object_or_404(UserCurrency, user=request.user)
             google_id = request.data.get('google_id')
@@ -655,41 +842,48 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def store(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {"store_id": store id}
+
+
+            :return:
+                return store data
+        """
         shop_item = Shop.objects.filter(store_id=request.data.get('store_id'), enable=True).first()
         serializer = self.serializer_class(shop_item)
-        try:
-            league_name = request.user.user_currency.leagues.get(close_league=False).league.base_league
-
-        except:
-            league_name = League.objects.get(step_number=0)
 
         result = serializer.data
 
-        if len(result['special_offer'])> 0:
+        if len(result['special_offer']) > 0:
             result['special_offer'][0]['time_remaining'] = shop_item.time_remaining
-
-        # for chest in result['chests']:
-        #     type_reverse = dict((v, k) for k, v in CTM.CHEST_TYPE)
-        #     ctm = CTM.objects.get(league=league_name, chest_type=type_reverse[chest['type']])
-        #     chest['reward_data'] = {
-        #         "type": chest['type'],
-        #         "min_coin": ctm.min_coin,
-        #         "max_coin": ctm.max_coin,
-        #         "min_gem": ctm.min_gem,
-        #         "max_gem": ctm.max_gem,
-        #         "card_count": ctm.total,
-        #         "min_hero": ctm.min_hero,
-        #         "max_hero": ctm.max_hero,
-        #         "hero_card_chance": ctm.chance_hero
-        #     }
-        #     del chest['type']
 
         return Response(result)
 
     @list_route(methods=['POST'])
     def buy_gem(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "shop_id": shop id,
+                        "purchase_token": token from store like caffebazzar
+                    }
+
+
+            :return:
+                if ok from store add gem to user gem
+        """
         profile = UserCurrency.objects.get(user=request.user)
-        print("request data", request.data.get('shop_id'))
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
         store = (item for item in shop.gems if item['id'] == request.data.get('id')).next()
@@ -713,10 +907,12 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
         is_verified, message = purchase_store.is_verified()
 
         if not is_verified:
+            # log user purchase data
             PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token'),
                                        store_params=message, shop=shop)
             return Response({'id': 404, 'message': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
+        # log user purchase data
         PurchaseLog.objects.create(user=profile, store_purchase_token=request.data.get('purchase_token')
                                    , store_params=message, params=store, used_token=True, shop=shop)
         request.user.user_currency.gem += store['amount']
@@ -727,6 +923,21 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_coin(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "shop_id": shop id
+                    }
+
+
+            :return:
+                if ok decrease gem and increase coin
+        """
         profile = UserCurrency.objects.get(user=request.user)
         shop = get_object_or_404(Shop, pk=request.data.get('shop_id'), enable=True)
 
@@ -756,6 +967,21 @@ class ShopViewSet(DefaultsMixin, AuthMixin, mixins.RetrieveModelMixin, mixins.Li
 
     @list_route(methods=['POST'])
     def buy_chest(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "shop_id": shop id
+                    }
+
+
+            :return:
+                if ok decrease gem and buy chest
+        """
         hero_moniker = list(Hero.objects.all().values_list('moniker', flat=True))
 
         profile = UserCurrency.objects.get(user=request.user)
@@ -859,6 +1085,21 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "unit_id": unit id
+                    }
+
+
+            :return:
+                if card is enough update user troop card level
+        """
         profile = UserCurrency.objects.get(user=request.user)
 
         unit_id = request.data.get('unit_id')
@@ -896,6 +1137,21 @@ class UserCardViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def spell_level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "spell_id": spell id
+                    }
+
+
+            :return:
+                if card is enough update user troop spell card level
+        """
         spell_id = request.data.get('spell_id')
         spell = UnitSpell.objects.get(pk=spell_id)
 
@@ -926,6 +1182,21 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "hero_id": hero id
+                    }
+
+
+            :return:
+                if card is enough update user hero card level
+        """
         profile = UserCurrency.objects.get(user=request.user)
 
         hero_id = request.data.get('hero_id')
@@ -965,6 +1236,21 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def spell_level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "spell_id": spell id
+                    }
+
+
+            :return:
+                if card is enough update user hero spell card level
+        """
         spell_id = request.data.get('spell_id')
         spell = HeroSpell.objects.get(pk=spell_id)
 
@@ -990,6 +1276,21 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def chakra_spell_level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "spell_id": chakra spell id
+                    }
+
+
+            :return:
+                if card is enough update user chakra spell card level
+        """
         spell_id = request.data.get('spell_id')
         spell = ChakraSpell.objects.get(pk=spell_id)
 
@@ -1015,6 +1316,21 @@ class UserHeroViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def selected_items(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "list_items": hero list_items
+                    }
+
+
+            :return:
+                if ok hero selected item updated
+        """
         list_items = request.data.get('list_items')
         user_hero = get_object_or_404(UserHero, user=request.user, enable_hero=True)
 
@@ -1043,6 +1359,21 @@ class UserItemViewset(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def level_up(self, request):
+        """
+            :param request:
+                header:
+                    Authorization:JWT token returned in login
+                    Content-Type:application/json
+
+                body:
+                    {
+                        "item_id": chakra spell id
+                    }
+
+
+            :return:
+                if card is enough update user chakra spell card level
+        """
         item_id = request.data.get('item_id')
         user_item = get_object_or_404(UserItem, user=request.user, item_id=item_id)
         user_currency = get_object_or_404(UserCurrency, user=request.user)
@@ -1090,6 +1421,21 @@ class UserInboxViewSet(DefaultsMixin, AuthMixin, viewsets.GenericViewSet):
 
     @list_route(methods=['POST'])
     def read(self, request):
+        """
+                    :param request:
+                        header:
+                            Authorization:JWT token returned in login
+                            Content-Type:application/json
+
+                        body:
+                            {
+                                "id": message id
+                            }
+
+
+                    :return:
+                        if ok return 200 and change message status to ready
+                """
         message = get_object_or_404(Inbox, user=request, id=request.data.get('id'))
         message.message_type = 'read'
         message.save()
