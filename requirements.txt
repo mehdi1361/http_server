@@ -19,7 +19,7 @@ django-multiselectfield==0.1.8
 django-prettyjson==0.4.1
 django-right-to-left==0.1.1
 django-simple-history==1.9.0
-djangorestframework==3.4.0
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 enum34==1.1.6
 gunicorn==19.7.1
